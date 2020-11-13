@@ -1,4 +1,5 @@
-@extends('layout')
+@extends('layouts.layout')
+@section('title','Dashboard')
 @section('content')
 <!--==================================
 =            User Profile            =
@@ -14,27 +15,26 @@
             <div class="widget user-dashboard-profile">
               <!-- User Image -->
               <div class="profile-thumb">
-                <img src="{!! asset('theme/images/user/user-thumb.jpg') !!}" alt="" class="rounded-circle">
+                <img src="{{ Auth::user()->avatar }}" alt="" class="rounded-circle">
               </div>
               <!-- User Name -->
-              <h5 class="text-center">Samanta Doe</h5>
-              <p>Joined February 06, 2017</p>
+              <h5 class="text-center">{{ Auth::user()->name }}</h5>
+              <p>Joined {{ Auth::user()->created_at }}</p>
               <a href="{{route('user.profile')}}" class="btn btn-main-sm">Edit Profile</a>
             </div>
             <!-- Dashboard Links -->
             <div class="widget user-dashboard-menu">
               <ul>
-                <li class="active"><a href="{{route('dashboard.ads')}}"><i class="fa fa-user"></i> My Ads</a></li>
-                <li><a href="{{route('dashboard.favourite-ads')}}"><i class="fa fa-bookmark-o"></i> Favourite Ads <span>5</span></a></li>
-                <li><a href="{{route('dashboard.archived-ads')}}"><i class="fa fa-file-archive-o"></i>Archived Ads <span>12</span></a></li>
-                <li><a href="{{route('dashboard.pending-ads')}}"><i class="fa fa-bolt"></i> Pending Approval<span>23</span></a></li>
+                <li class="active"><a href="{{route('user.dashboard')}}"><i class="fa fa-user"></i> My Ads</a></li>
+                {{-- <li><a href="{{route('dashboard.favourite-ads')}}"><i class="fa fa-bookmark-o"></i> Favourite Ads <span>5</span></a></li> --}}
+                {{-- <li><a href="{{route('dashboard.archived-ads')}}"><i class="fa fa-file-archive-o"></i>Archived Ads <span>12</span></a></li> --}}
+                {{-- <li><a href="{{route('dashboard.pending-ads')}}"><i class="fa fa-bolt"></i> Pending Approval<span>23</span></a></li> --}}
               <li><a href="{{route('user.logout')}}"><i class="fa fa-cog"></i> Logout</a></li>
-                <li><a href="" data-toggle="modal" data-target="#deleteaccount"><i class="fa fa-power-off"></i>Delete
-                    Account</a></li>
+                {{-- <li><a href="" data-toggle="modal" data-target="#deleteaccount"><i class="fa fa-power-off"></i>Delete
+                    Account</a></li> --}}
               </ul>
             </div>
-  
-            <!-- delete-account modal -->
+            {{-- <!-- delete-account modal -->
                                       <!-- delete account popup modal start-->
                   <!-- Modal -->
                   <div class="modal fade" id="deleteaccount" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
@@ -50,7 +50,7 @@
                           <img src="images/account/Account1.png" class="img-fluid mb-2" alt="">
                           <h6 class="py-2">Are you sure you want to delete your account?</h6>
                           <p>Do you really want to delete these records? This process cannot be undone.</p>
-                          <textarea name="message" id="" cols="40" rows="4" class="w-100 rounded"></textarea>
+                          <textarea name="message" id="" cols="40" rows="4" class="w-100 rounded" placeholder="Please let us know what you didn't liked?"></textarea>
                         </div>
                         <div class="modal-footer border-top-0 mb-3 mx-5 justify-content-lg-between justify-content-center">
                           <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
@@ -60,7 +60,7 @@
                     </div>
                   </div>
                   <!-- delete account popup modal end-->
-            <!-- delete-account modal -->
+            <!-- delete-account modal --> --}}
   
           </div>
         </div>

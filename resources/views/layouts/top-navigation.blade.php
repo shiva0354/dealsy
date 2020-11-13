@@ -4,7 +4,7 @@
 			<div class="col-md-12">
 				<nav class="navbar navbar-expand-lg navbar-light navigation">
 					<a class="navbar-brand" href="{{route('home')}}">
-						<img src="{!! ('theme/images/logo.png') !!}" width="140px" height="40px" alt="">
+						<img src="{!! asset('theme/images/logo.png') !!}" width="140px" height="40px" alt="">
                     </a>
                     <select class="" style="border: 2px solid #dedede !important;">
                         <option>English</option>
@@ -15,7 +15,7 @@
 						<span class="navbar-toggler-icon"></span>
 					</button>
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
-              @if (session()->has('email'))
+              @if (Auth::check())
               <ul class="navbar-nav ml-auto main-nav ">
                 <li class="nav-item dropdown dropdown-slide">
                   <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="/dashboard">Dashboard<span><i class="fa fa-angle-down"></i></span>

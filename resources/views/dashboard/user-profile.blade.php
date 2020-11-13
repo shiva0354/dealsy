@@ -1,9 +1,8 @@
-@extends('layout')
+@extends('layouts.layout')
 @section('content')
     <!--==================================
 =            User Profile            =
 ===================================-->
-
 <section class="user-profile section">
 	<div class="container">
 		<div class="row">
@@ -13,7 +12,7 @@
 					<div class="widget user">
 						<!-- User Image -->
 						<div class="image d-flex justify-content-center">
-							<img src="images/user/user-thumb.jpg" alt="" class="">
+							<img src="{!! asset('theme/images/user/user-thumb.jpg') !!}" alt="" class="">
 						</div>
 						<!-- User Name -->
 						<h5 class="text-center">Samanta Doe</h5>
@@ -128,5 +127,5 @@
 		</div>
 	</div>
 </section>
-
+@include('layouts.footer-main')
 @endsection

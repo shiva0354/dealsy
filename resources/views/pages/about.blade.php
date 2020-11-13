@@ -1,7 +1,7 @@
-@extends('layout')
+@extends('layouts.layout')
+@section('title', 'About Us')
 @section('content')
-<x-page-title  title="About Us"/>
-
+<x-page-heading title="About Us"/>
 <section class="section">
     <div class="container">
         <div class="row">
@@ -113,4 +113,6 @@
         </div>
     </div>
 </section>
+@include('layouts.footer-call-to-action')
+@include('layouts.footer-main')
 @endsection

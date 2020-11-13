@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   {{-- getting page title from the individual page --}}
-  <title>@yield('title')</title>
+  <title>@yield('title') - Dealsy</title>
   <!-- FAVICON -->
   <link href="{!! asset('/theme/images/favicon.png') !!}" rel="shortcut icon">
   <!-- PLUGINS CSS STYLE -->
@@ -24,15 +24,12 @@
   <link href="{!! asset('theme/plugins/jquery-nice-select/css/nice-select.css') !!}" rel="stylesheet">
   <!-- CUSTOM CSS -->
   <link href="{!! asset('theme/css/style.css') !!}" rel="stylesheet">
-
-  <style>
-      a{
-          cursor: pointer !important;
-      }
-  </style>
   </head>
 <body class="body-wrapper">
 @include('layouts.top-navigation')
+<div class="container">
+  @include('layouts.message')
+</div>
 @yield('content')
 @include('layouts.footer')
   <!-- JAVASCRIPTS -->
