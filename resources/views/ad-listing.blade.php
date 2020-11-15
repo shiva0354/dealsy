@@ -1,4 +1,5 @@
 @extends('layouts.layout')
+@section('title','Post Your Ad')
 @section('content')
 <section class="bg-gray py-5">
     {{-- <script src="{!! url('theme/plugins/ckeditor/ckeditor.js') !!}"></script> --}}
@@ -19,13 +20,17 @@
                                 <div class="col-lg-6 mr-lg-auto my-2">
                                     <select name="category" id="inputGroupSelect" class="w-100">
                                         <option value="" selected disabled hidden>Select category</option>
-                                        <option value="2">Laptops & Computers</option>
+                                        @foreach (DB::table('categories')->get() as $item)
+                                         <option value="{{$item->id}}">{{$item->category_name}}</option>                                            
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-lg-6 mr-lg-auto my-2">
-                                    <select name="sub_category" id="inputGroupSelect" class="w-100">
-                                        <option hidden disabled selected>Sub category</option>
-                                        <option value="2">Laptops</option>
+                                    <select name="sub_category" id="inputGroupSelect" class="w-100" size="5" style="width: auto; height:200px;">
+                                            <option hidden disabled selected>Sub category</option>
+                                            @foreach (DB::table('sub_categories')->where('category_id','3')->get() as $item)
+                                            <option value="{{$item->id}}">{{$item->sub_category}}</option>     
+                                            @endforeach
                                     </select>
                                 </div>
                             </div>

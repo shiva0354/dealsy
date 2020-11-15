@@ -27,7 +27,7 @@ class ContactController extends Controller
             ]);
         }
         DB::commit();
-        return redirect()->intended('home')->with([
+        return redirect()->route('home')->with([
             'success' => 'Message sent successfully!',
         ]);
     }

@@ -4,7 +4,7 @@
 			<div class="col-md-12">
 				<nav class="navbar navbar-expand-lg navbar-light navigation">
 					<a class="navbar-brand" href="{{route('home')}}">
-						<img src="{!! asset('theme/images/logo.png') !!}" width="140px" height="40px" alt="">
+						<img src="{!! asset('theme/images/classimax_logo.jpg') !!}" width="140px" height="40px" alt="">
                     </a>
                     <select class="" style="border: 2px solid #dedede !important;">
                         <option>English</option>

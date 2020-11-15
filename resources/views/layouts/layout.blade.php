@@ -8,7 +8,7 @@
   {{-- getting page title from the individual page --}}
   <title>@yield('title') - Dealsy</title>
   <!-- FAVICON -->
-  <link href="{!! asset('/theme/images/favicon.png') !!}" rel="shortcut icon">
+  <link href="{!! asset('/theme/images/classimax_favicon.jpg') !!}" rel="shortcut icon">
   <!-- PLUGINS CSS STYLE -->
   <!-- <link href="plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet"> -->
   <!-- Bootstrap -->
