@@ -24,14 +24,4 @@ class Post extends Model
         'city',
         'state',
     ];
-    //defining one to many relationship with post_images table
-    public function image()
-    {
-        return $this->hasMany(PostImage::class);
-    }
-    //defining one to one relationship with post_videos table
-    public function video()
-    {
-        return $this->hasOne(PostVideo::class);
-    }
 }

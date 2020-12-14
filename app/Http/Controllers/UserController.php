@@ -16,7 +16,7 @@ class UserController extends Controller
     public function index()
     {
         $user = auth()->user();
-        return route('user-profile', ['user' => $user]);
+        return route('user-profile', compact('user'));
     }
     //update profile of user
     public function updateUser(Request $request)
@@ -30,7 +30,7 @@ class UserController extends Controller
     {
         //compare old password
         $request->validate([
-            'old_password' => 'min:6|string|required',
+            'old_password' => 'required|password|min:6|string|',
             'password' => 'min:6|string|required|confirmed',
         ]);
         DB::beginTransaction();
@@ -41,9 +41,7 @@ class UserController extends Controller
                     'password' => Hash::make($request->password),
                 ]);
             } else {
-                return redirect()->intended()->with([
-                    'message' => 'Old password not matched',
-                ]);
+                return redirect()->intended()->with('message','Old password not matched');
             }
         } catch (Exception $e) {
             DB::rollback();
@@ -100,13 +98,9 @@ class UserController extends Controller
             User::destroy(auth()->user()->id);
         } catch (Exception $e) {
             DB::rollback();
-            return redirect()->intended(route('home'))->with([
-                'message' => 'Something went wrong!',
-            ]);
+            return redirect()->intended(route('home'))->with('message','Something went wrong!');
         }
         DB::commit();
-        return redirect()->route('home')->with([
-            'message' => 'Account and all related data deleted successfully',
-        ]);
+        return redirect()->route('home')->with('message','Account and all related data deleted successfully',);
     }
 }

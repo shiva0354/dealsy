@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
@@ -16,28 +16,13 @@ class RegisterController extends Controller
         return view('auth.signup');
     }
 
-    public function create(Request $request)
+    public function create(UserRegisterRequest $request)
     {
-        $validateData = $request->validate([
-            'name' => 'required|string|max:100',
-            'email' => 'required|email|max:100|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-        ]);
-        $validateData['password'] = Hash::make($request->password);
-        if (User::where('email', $request->email)->exists()) {
-            session()->flash('warning', 'This email is already registered with us!');
-            return redirect()->back();
-        }
-        DB::beginTransaction();
-        try {
-            $user = User::create($validateData);
-        } catch (\Throwable $th) {
-            DB::rollback();
-            throw $th;
-        }
-        DB::commit();
+        $input = $request->input();
+        $input['password'] = Hash::make($input->password);
+
+        $user = User::create($input);
         Auth::login($user);
-        session()->flash('success', 'Account created successfully');
-        return redirect()->route('home');
+        return redirect()->intended('home')->with('success', 'Account created successfully');
     }
 }

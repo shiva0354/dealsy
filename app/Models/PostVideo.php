@@ -8,13 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class PostVideo extends Model
 {
     use HasFactory;
-    protected $table='post_videos';
+    protected $table = 'post_videos';
 
-    protected $fillable=[
-        'video','post_id',
+    protected $fillable = [
+        'video', 'post_id',
     ];
-    //defining one to one relationship with posts table
-    public function post(){
-        return $this->belongsTo(Post::class);
-    }
 }

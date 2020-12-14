@@ -38,21 +38,17 @@ class PasswordController extends Controller
                 ]);
             } catch (Exception $e) {
                 DB::rollback();
-                $request->session()->flash('error', $e->getMessage());
-                return redirect()->back();
+                return redirect()->back()->with('error', $e->getMessage());
             }
             if (!MailController::sendResetEmail($request->email, $token)) {
                 DB::rollback();
-                $request->session()->flash('error', 'A Network Error occurred. Please try again.');
-                return redirect()->back();
+                return redirect()->back()->with('error', 'A Network Error occurred. Please try again.');
             }
             DB::commit();
-            $request->session()->flash('info', 'A reset link has been sent to your email address.');
-            return redirect()->route('login');
+            return redirect()->route('login')->with('info', 'A reset link has been sent to your email address.');
 
         } else {
-            $request->session()->flash('error', 'This email does not exists!');
-            return redirect()->back();
+            return redirect()->back()->with('error', 'This email does not exists!');
         }
     }
     //show reset password view
@@ -74,8 +70,7 @@ class PasswordController extends Controller
             ->where('token', $request->token)->first();
         // Redirect the user back to the password reset request form if the token is invalid
         if (!$tokenData) {
-            $request->session()->flash('error', 'Invalid token! Please request new one');
-            return redirect()->route('forgot.password');
+            return redirect()->route('forgot.password')->with('error', 'Invalid token! Please request new one');
         }
         $user = User::where('email', $tokenData->email)->first();
         // Redirect the user back if the email is invalid
@@ -93,11 +88,9 @@ class PasswordController extends Controller
                 ->delete();
         } catch (Exception $e) {
             DB::rollback();
-            $request->session()->flash('error', $e->getMessage());
-            return redirect()->back();
+            return redirect()->back()->with('error',$e->getMessage());
         }
         DB::commit();
-        $request->session()->flash('success', 'Password changed successfully!');
-        return redirect()->route('login');
+        return redirect()->route('login')-with('success', 'Password changed successfully!');
     }
 }

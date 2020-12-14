@@ -13,9 +13,4 @@ class SubCategory extends Model
     protected $fillable = [
         'sub_category', 'category_id', 'sub_category_slug',
     ];
-//defining that it ha many to one relationship with categories table
-    public function categories()
-    {
-        return $this->belongsTo(Category::class);
-    }
 }
