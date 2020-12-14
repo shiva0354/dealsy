@@ -15,14 +15,10 @@ class CreateSubCategoriesTable extends Migration
     {
         Schema::create('sub_categories', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('sub_category');
-            $table->integer('category_id')->unsigned();
-            $table->string('sub_category_slug');
+            $table->string('sub_category')->nullable();
+            $table->string('sub_category_slug')->nullable();
+            $table->foreignId('category_id')->constrained();
             $table->timestamps();
-            $table->foreign('category_id')
-                ->references('id')
-                ->on('categories')
-                ->onDelete('cascade');
         });
     }
 

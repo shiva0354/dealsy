@@ -14,18 +14,10 @@ class CreateSavedPostsTable extends Migration
     public function up()
     {
         Schema::create('saved_posts', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('user_id')->unsigned();
-            $table->bigInteger('post_id')->unsigned();
+            $table->id()->autoIncrement();
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('post_id')->constrained();
             $table->timestamps();
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
-            $table->foreign('post_id')
-                ->references('post_id')
-                ->on('posts')
-                ->onDelete('cascade');
         });
     }
 

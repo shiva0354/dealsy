@@ -14,11 +14,10 @@ class CreatePostImagesTable extends Migration
     public function up()
     {
         Schema::create('post_images', function (Blueprint $table) {
-            $table->id();
+            $table->id()->autoIncrement();
             $table->string('image',500);
-            $table->bigInteger('post_id')->unsigned();
+            $table->foreignId('post_id')->constrained();
             $table->timestamps();
-            $table->foreign('post_id')->references('post_id')->on('posts')->onDelete('cascade');
         });
     }
 

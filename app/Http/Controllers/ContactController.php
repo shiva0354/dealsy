@@ -7,6 +7,11 @@ use App\Models\Contact;
 
 class ContactController extends Controller
 {
+
+    public function index(){
+        return view('pages.contact');
+    }
+
     //storing user message in database
     public function store(ContactRequest $request)
     {

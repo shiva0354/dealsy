@@ -8,18 +8,9 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserDashboardController;
+use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
- */
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
 //manual signup
@@ -42,13 +33,13 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('user.logout');
 //pages that user can access after login
 Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('user.dashboard');
 Route::get('/add-listing', [ProductController::class, 'create'])->name('ad.listing');
-Route::view('user-profile', [UserController::class, 'index'])->name('user.profile');
+Route::get('user-profile', [UserController::class, 'index'])->name('user.profile');
 
 Route::view('/category', 'category')->name('category');
-Route::view('/single-product', 'single-product')->name('single-product');
+Route::view('/single-product', 'item')->name('single-product');
 //miscellaneous pages
-Route::view('/pricing', 'pages.pricing')->name('pricing.package');
-Route::view('/terms', 'pages.terms')->name('terms');
-Route::view('/contact', 'pages.contact')->name('contact-us');
+Route::get('/pricing', [PageController::class, 'pricing'])->name('pricing.package');
+Route::get('/terms', [PageController::class, 'terms'])->name('terms');
+Route::get('/contact', [ContactController::class, 'index'])->name('contact-us');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact');
-Route::view('/about', 'pages.about')->name('about-us');
+Route::get('/about', [PageController::class, 'about'])->name('about-us');
