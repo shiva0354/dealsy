@@ -19,7 +19,9 @@ class ProductController extends Controller
      */
     public function index()
     {
+        $posts = Post::paginate(10);
 
+        return view('products', compact('posts'));
     }
 
     /**
@@ -40,9 +42,10 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $user = auth()->user()->id;
         //create and store the newly ads
         $request->validate([
-            'ad_title'=>'string|required|max:80'
+            'ad_title' => 'string|required|max:80',
         ]);
     }
 
@@ -55,10 +58,12 @@ class ProductController extends Controller
     public function show($id)
     {
         // show the particular ad
+        $post = Post::findOrFail($id);
+        return view('item', compact('post'));
     }
     //show ad edit form view
     public function edit($id)
-    { 
+    {
         return view('item');
     }
 
@@ -75,7 +80,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified resource from storage. softdelete
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -83,24 +88,18 @@ class ProductController extends Controller
     public function destroy($id)
     {
         if (!Auth::check()) {
-            return redirect()->route('login')->with([
-                'message' => 'Please Login!',
-            ]);
+            return redirect()->route('login')->with('warning', 'Please Login!');
         } else {
             DB::beginTransaction();
             try {
-                Post::where('post_id', $id, '&', 'user_id', auth()->user()->id) //user can only delete their own post
-                    ->destroy();
+                $post = Post::findOrFail($id); //user can only delete their own post
+                $post->destroy();
             } catch (Exception $e) {
                 DB::rollback();
-                return redirect()->intended()->with([
-                    'message' => $e,
-                ]);
+                return redirect()->intended()->with('error', $e->getMessage());
             }
             DB::commit();
-            return redirect()->intended()->with([
-                'message' => 'Post Deleted Successfully',
-            ]);
+            return redirect()->intended()->with('success', 'Post Deleted Successfully');
         }
     }
 }

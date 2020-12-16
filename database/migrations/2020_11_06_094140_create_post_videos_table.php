@@ -15,8 +15,9 @@ class CreatePostVideosTable extends Migration
     {
         Schema::create('post_videos', function (Blueprint $table) {
             $table->id()->autoIncrement();
-            $table->string('video',500);
+            $table->string('video', 500);
             $table->foreignId('post_id')->constrained();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

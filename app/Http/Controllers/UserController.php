@@ -31,7 +31,7 @@ class UserController extends Controller
         //compare old password
         $request->validate([
             'old_password' => 'required|password|min:6|string|',
-            'password' => 'min:6|string|required|confirmed',
+            'password' => 'required|min:6|string|confirmed',
         ]);
         DB::beginTransaction();
         try {
@@ -41,7 +41,7 @@ class UserController extends Controller
                     'password' => Hash::make($request->password),
                 ]);
             } else {
-                return redirect()->intended()->with('message','Old password not matched');
+                return redirect()->intended()->with('message', 'Old password not matched');
             }
         } catch (Exception $e) {
             DB::rollback();
@@ -98,9 +98,9 @@ class UserController extends Controller
             User::destroy(auth()->user()->id);
         } catch (Exception $e) {
             DB::rollback();
-            return redirect()->intended(route('home'))->with('message','Something went wrong!');
+            return redirect()->intended(route('home'))->with('error', 'Something went wrong!');
         }
         DB::commit();
-        return redirect()->route('home')->with('message','Account and all related data deleted successfully',);
+        return redirect()->route('home')->with('info', 'Account and all related data deleted successfully', );
     }
 }

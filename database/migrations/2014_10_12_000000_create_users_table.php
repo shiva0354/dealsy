@@ -22,9 +22,9 @@ class CreateUsersTable extends Migration
             $table->string('avatar', 500)->nullable();
             $table->string('provider', 20)->nullable();
             $table->string('provider_id', 50)->nullable();
-            $table->string('welcome_mail_at')->nullable();
-            $table->rememberToken();
+            $table->rememberToken()->nullable();
             $table->timestamp('email_verified_at')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -2,22 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="09cc1abc-5c16-49e9-b681-502c4e5cd74a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/PageController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ContactController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ContactController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Requests/ContactRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/ContactRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/UserRegisterRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/UserRegisterRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Category.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Comment.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Comment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Contact.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Contact.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Post.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Post.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/PostImage.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/PostImage.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/PostVideo.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/PostVideo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/SavedPost.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/SavedPost.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/SubCategory.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/SubCategory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_06_091153_create_categories_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_11_06_091153_create_categories_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_06_091412_create_sub_categories_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_11_06_091412_create_sub_categories_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_06_094058_create_posts_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_11_06_094058_create_posts_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_06_094127_create_post_images_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_11_06_094127_create_post_images_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_06_094140_create_post_videos_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_11_06_094140_create_post_videos_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_06_094233_create_saved_posts_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_11_06_094233_create_saved_posts_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_06_160353_create_comments_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_11_06_160353_create_comments_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_11_205853_create_contacts_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_11_11_205853_create_contacts_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeders/Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/Category.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/ad-listing.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/ad-listing.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -178,7 +184,8 @@
       <updated>1607965945801</updated>
       <workItem from="1607965957880" duration="626000" />
       <workItem from="1607966829725" duration="4765000" />
-      <workItem from="1607973612617" duration="1401000" />
+      <workItem from="1607973612617" duration="5330000" />
+      <workItem from="1608139468650" duration="3921000" />
     </task>
     <servers />
   </component>

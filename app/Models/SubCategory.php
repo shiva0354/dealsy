@@ -4,13 +4,27 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class SubCategory extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
+
     protected $table = 'sub_categories';
-    public $timestamps = false;
-    protected $fillable = [
-        'sub_category', 'category_id', 'sub_category_slug',
-    ];
+
+    protected $fillable = ([
+        'sub_category', 'category_id', 'slug',
+    ]);
+
+    //this defines subcategory belongs to some category
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    // this defines sub categoris can have many posts
+    public function post()
+    {
+        return $this->hasMany(Post::class);
+    }
 }

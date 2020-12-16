@@ -15,8 +15,9 @@ class CreatePostImagesTable extends Migration
     {
         Schema::create('post_images', function (Blueprint $table) {
             $table->id()->autoIncrement();
-            $table->string('image',500);
+            $table->string('image', 500);
             $table->foreignId('post_id')->constrained();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

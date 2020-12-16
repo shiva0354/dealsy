@@ -17,6 +17,7 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id()->autoIncrement();
             $table->foreignId('user_id')->constrained();
+            $table->foreignId('category_id')->nullable()->constrained();
             $table->foreignId('sub_category_id')->nullable();
             $table->string('post_title')->nullable();
             $table->longText('post_detail')->nullable();
@@ -28,7 +29,8 @@ class CreatePostsTable extends Migration
             $table->timestamp('last_renewed_on')->nullable();
             $table->string('locality')->nullable();
             $table->string('city')->nullable();
-            $table->string('state',30)->nullable();
+            $table->string('state', 30)->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
 

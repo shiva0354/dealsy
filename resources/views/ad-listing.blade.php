@@ -14,22 +14,22 @@
                         </div>
                         <div class="col-lg-6">
                             <h6 class="font-weight-bold pt-4 pb-1">Title Of Ad:</h6>
-                            <input type="text" name="ad_title" class="border w-100 p-2 bg-white text-capitalize" placeholder="Ad title go There">
+                            <input type="text" name="post_title" class="border w-100 p-2 bg-white text-capitalize" placeholder="Ad title go There">
                             <h6 class="font-weight-bold pt-4 pb-1">Select Ad Category:</h6>
                             <div class="row">
                                 <div class="col-lg-6 mr-lg-auto my-2">
                                     <select name="category" id="inputGroupSelect" class="w-100">
                                         <option value="" selected disabled hidden>Select category</option>
                                         @foreach (DB::table('categories')->get() as $item)
-                                         <option value="{{$item->id}}">{{$item->category_name}}</option>                                            
+                                         <option value="{{$item->id}}">{{$item->category_name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="col-lg-6 mr-lg-auto my-2">
-                                    <select name="sub_category" id="inputGroupSelect" class="w-100" size="5" style="width: auto; height:200px;">
+                                    <select name="sub_category_id" id="inputGroupSelect" class="w-100" size="5" style="width: auto; height:200px;">
                                             <option hidden disabled selected>Sub category</option>
                                             @foreach (DB::table('sub_categories')->where('category_id','3')->get() as $item)
-                                            <option value="{{$item->id}}">{{$item->sub_category}}</option>     
+                                            <option value="{{$item->id}}">{{$item->sub_category}}</option>
                                             @endforeach
                                     </select>
                                 </div>
@@ -37,11 +37,11 @@
                             <h6 class="font-weight-bold pt-4 pb-1">Ad Type:</h6>
                             <div class="row px-3">
                                 <div class="col-lg-4 mr-lg-4 my-2 rounded bg-white">
-                                    <input type="radio" name="itemName" value="personal" id="personal">
+                                    <input type="radio" name="ad_type" value="personal" id="personal">
                                     <label for="personal" class="py-2">Personal</label>
                                 </div>
                                 <div class="col-lg-4 mr-lg-4 my-2 rounded bg-white ">
-                                    <input type="radio" name="itemName" value="business" id="business">
+                                    <input type="radio" name="ad_type" value="business" id="business">
                                     <label for="business" class="py-2">Business</label>
                                 </div>
                             </div>
@@ -52,8 +52,8 @@
                                     <input type="text" name="city" class="border w-100 p-2 bg-white text-capitalize" placeholder="Enter City">
                                 </div>
                                 <div class="col-lg-6 mr-lg-auto my-2">
-                                    <select name="state" id="inputGroupSelect" class="w-100">
-                                        <option value="1">Select category</option>
+                                    <select name="state" id="state" class="w-100">
+                                        <option value="1">Select State</option>
                                     </select>
                                 </div>
                             </div>
@@ -63,19 +63,22 @@
                                 <h6 class="font-weight-bold pt-4 pb-1">Item Price (₹ INR):</h6>
                                 <div class="row px-3">
                                     <div class="col-lg-4 mr-lg-4 rounded bg-white my-2 ">
-                                        <input type="text" name="price" class="border-0 py-2 w-100 price" placeholder="Price"
+                                        <input type="text" name="expected_price" class="border-0 py-2 w-100 price" placeholder="Price"
                                             id="price">
                                     </div>
-                                    <div class="col-lg-4 mrx-4 rounded bg-white my-2 ">
-                                        <input type="checkbox" value="Negotiable" id="Negotiable">
-                                        <label for="Negotiable" class="py-2">Negotiable</label>
+                                    <div class="col-lg-4 rounded bg-white my-2 ">
+                                        <select name="state" id="state" class="w-100">
+                                            <option value="" hide>Is Negotiable</option>
+                                            <option value="Y">YES</option>
+                                            <option value="N">NO/option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
                             <h6 class="font-weight-bold pt-4 pb-1">Ad Description:</h6>
-                            <textarea name="editor" id="editor" class="border p-3 w-100" rows="7" placeholder="Write details about your product"></textarea>
+                            <textarea name="editor" id="post_detail" class="border p-3 w-100" rows="7" placeholder="Write details about your product"></textarea>
                                 <script>
-                                    CKEDITOR.replace( 'editor');
+                                    CKEDITOR.replace( 'post_detail');
                                 </script>
 				<!--text editor end here-->
                         </div>
