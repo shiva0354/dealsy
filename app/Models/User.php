@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\UnauthorizedException;
 
 class User extends Authenticatable
 {
@@ -44,6 +47,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public static function current()
+    {
+        $user = Auth::user();
+        if ($user instanceof User) {
+            return $user;
+        }
+
+        throw new UnauthorizedException();
+    }
+
     //this defines user can have many posts
     public function posts()
     {
@@ -54,5 +67,24 @@ class User extends Authenticatable
     public function savedposts()
     {
         return $this->hasMany(SavedPost::class);
+    }
+
+    public function findPostOrFail($postId)
+    {
+        $post = Post::findOrFail($postId);
+        if ($post->user_id != $this->id) {
+            throw (new ModelNotFoundException('Post does not belong to this user'));
+        }
+        return $post;
+    }
+
+    public function findSavedPostOrFail($id)
+    {
+        $savedPost = SavedPost::findOrFail($id);
+
+        if ($savedPost->user_id != $this->id) {
+            throw new ModelNotFoundException('Post does not belong to this user');
+        }
+        return $savedPost;
     }
 }

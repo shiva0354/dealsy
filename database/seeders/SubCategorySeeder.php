@@ -17,6 +17,7 @@ class SubCategorySeeder extends Seeder
         SubCategory::reguard();
         $sub_categories = [
             ['Cars', 1, 'cars'],
+            ['Suvs', 1, 'suvs'],
             ['For Sale: Houses & Apartments', 2, 'for-sale-houses-apartments'],
             ['For Rent: Houses & Apartments', 2, 'for-rent-house-apartments'],
             ['Lands & Plots', 2, 'lands-plots'],
@@ -66,6 +67,7 @@ class SubCategorySeeder extends Seeder
             ['Sports Bike', 5, 'sports-bikes'],
             ['Spare Parts', 5, 'spare-parts'],
             ['Bicycle', 5, 'bicycle'],
+            ['Electronics & Computers', 6, 'electronics-computers'],
             ['TVs', 6, 'tvs'],
             ['Kitchen & Other Appliances', 6, 'kitchens-other-appliances'],
             ['Computers & Laptops', 6, 'computers-laptops'],
@@ -107,7 +109,6 @@ class SubCategorySeeder extends Seeder
             ['Dogs', 12, 'dogs'],
             ['Cats', 12, 'cats'],
             ['Other Pets', 12, 'other-pets'],
-            ['Electronics & Computers', 13, 'electronics-computers'],
             ['Education & Classes', 13, 'education-classes'],
             ['Drivers & Taxi', 13, 'drivers-taxi'],
             ['Health & Beauty', 13, 'health-beauty'],

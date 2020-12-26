@@ -22,6 +22,6 @@ class RegisterController extends Controller
 
         $user = User::create($input);
         Auth::login($user);
-        return redirect()->route('home')->with('success', 'Account created successfully');
+        return redirect()->intended()->with('success', 'Account created successfully');
     }
 }

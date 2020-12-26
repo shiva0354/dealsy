@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
@@ -62,4 +63,14 @@ class Post extends Model
     {
         return $this->belongsTo(SubCategory::class);
     }
+
+    public function findSavedPostOrFail($id)
+    {
+        $savedPost = SavedPost::findOrFail($id);
+        if ($savedPost->id != $this->id) {
+            throw new ModelNotFoundException('This post does not belongs to this post');
+        }
+        return $savedPost;
+    }
+
 }

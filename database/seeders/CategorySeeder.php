@@ -17,6 +17,7 @@ class CategorySeeder extends Seeder
     {
         Category::reguard();
         $categories = [
+            ['Autos(Cars & Suvs)','autos'],
             ['Properties', 'properties'],
             ['Mobiles', 'mobiles'],
             ['Jobs', 'jobs'],
@@ -27,7 +28,7 @@ class CategorySeeder extends Seeder
             ['Fashion', 'fashions'],
             ['Books', 'books'],
             ['Sports & hobbies', 'sports-hobbies'],
-            ['lPets', 'pets'],
+            ['Pets', 'pets'],
             ['Services', 'services'],
             ['Matrimony', 'matrimonies'],
         ];

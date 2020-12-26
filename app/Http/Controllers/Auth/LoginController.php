@@ -27,7 +27,7 @@ class LoginController extends Controller
             'password' => 'required|string|min:6',
         ]);
         if (Auth::attempt($validateData)) {
-            return redirect()->route('user.dashboard');
+            return redirect()->intended();
         }
         return redirect()->back()->with('error', 'Oops! You have entered invalid credentials');
     }
@@ -45,8 +45,7 @@ class LoginController extends Controller
     //success response
     protected function sendSuccessResponse($message)
     {
-        session()->flash('success', $message);
-        return redirect()->route('home');
+        return redirect()->intended()->with('success', $message);
     }
     //callback function returned from social auth provider
     public function handleProviderCallback($driver)

@@ -17,6 +17,6 @@ class ContactController extends Controller
     {
         $input = $request->input();
         Contact::create($input);
-        return redirect()->route('home')->with('success','Message sent successfully!');
+        return redirect()->back()->with('success','Message sent successfully!');
     }
 }
