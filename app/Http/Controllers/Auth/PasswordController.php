@@ -8,6 +8,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -88,9 +89,9 @@ class PasswordController extends Controller
                 ->delete();
         } catch (Exception $e) {
             DB::rollback();
-            return redirect()->back()->with('error',$e->getMessage());
+            return redirect()->back()->with('error', $e->getMessage());
         }
         DB::commit();
-        return redirect()->route('login')-with('success', 'Password changed successfully!');
+        return redirect()->route('login') - with('success', 'Password changed successfully!');
     }
 }

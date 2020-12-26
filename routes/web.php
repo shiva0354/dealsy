@@ -31,9 +31,18 @@ Route::post('/reset-password', [PasswordController::class, 'resetPassword'])->na
 //logout
 Route::get('/logout', [LoginController::class, 'logout'])->name('user.logout');
 //pages that user can access after login
-Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('user.dashboard');
 Route::get('/add-listing', [ProductController::class, 'create'])->name('ad.listing');
-Route::get('user-profile', [UserController::class, 'index'])->name('user.profile');
+Route::get('dashboard', [UserDashboardController::class, 'index'])->name('user.dashboard');
+Route::get('dashboard/saved-ads', [UserDashboardController::class, 'savedAds'])->name('user.saved.ads');
+Route::get('dashboard/pending-ads', [UserDashboardController::class, 'pendingAds'])->name('user.pending.ads');
+Route::get('dashboard/archived-ads', [UserDashboardController::class, 'archivedAds'])->name('user.archive.ads');
+
+Route::get('dashboard/profile', [UserController::class, 'index'])->name('user.profile');
+Route::post('dashboard/profile/change-password',[UserController::class,'changePassword'])->name('user.change.password');
+Route::post('dashboard/profile/change-email',[UserController::class,'changeEmail'])->name('user.change.email');
+Route::post('dashboard/profile/change-picture',[UserController::class,'changePicture'])->name('user.change.picture');
+Route::post('dashboard/profile/delete-user',[UserController::class,'destroyUser'])->name('user.destroy');
+
 
 Route::view('/category', 'category')->name('category');
 Route::view('/single-product', 'item')->name('single-product');

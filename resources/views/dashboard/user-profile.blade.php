@@ -85,17 +85,17 @@
 							<!-- Current Password -->
 							<div class="form-group">
 								<label for="current-password">Current Password</label>
-								<input type="password" class="form-control" id="current-password">
+								<input type="password" class="form-control" id="current-password" name="old_password">
 							</div>
 							<!-- New Password -->
 							<div class="form-group">
 								<label for="new-password">New Password</label>
-								<input type="password" class="form-control" id="new-password">
+								<input type="password" class="form-control" id="new-password" name="password">
 							</div>
 							<!-- Confirm New Password -->
 							<div class="form-group">
 								<label for="confirm-password">Confirm New Password</label>
-								<input type="password" class="form-control" id="confirm-password">
+								<input type="password" class="form-control" id="confirm-password" name="password_confirmation">
 							</div>
 							<!-- Submit Button -->
 							<button class="btn btn-transparent">Change Password</button>

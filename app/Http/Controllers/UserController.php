@@ -15,8 +15,8 @@ class UserController extends Controller
     //show edit profile
     public function index()
     {
-        $user = auth()->user();
-        return route('user-profile', compact('user'));
+        $user = Auth::user();
+        return view('dashboard.user-profile', compact('user'));
     }
     //update profile of user
     public function updateUser(Request $request)
@@ -51,9 +51,7 @@ class UserController extends Controller
         }
         DB::commit();
         Auth::logout(); //after changing password, logout the user and send them to get login from new password
-        return redirect()->route('login')->with([
-            'message' => 'Password updated successfully',
-        ]);
+        return redirect()->route('login')->with('message', 'Password updated successfully');
     }
     //change email
     public function changeEmail(Request $request)
@@ -63,13 +61,11 @@ class UserController extends Controller
             'email' => 'required|email|max:255',
             'new_email' => 'required|email|max:255',
         ]);
-        if (auth()->user()->email == $request->email) {
+        if (Auth::user()->email == $request->email) {
             DB::beginTransaction();
             try {
                 if (User::where('email', $request->email)->exists()) { //checking if new email is already registered
-                    return redirect()->intended()->with([
-                        'message' => 'Email already registered',
-                    ]);
+                    return redirect()->intended()->with('warning', 'Email is already registered with us');
                 } else {
                     User::find(auth()->user()->id)->update([ //updating email in database
                         'email' => $request->email,
@@ -77,16 +73,12 @@ class UserController extends Controller
                 }
             } catch (Exception $e) {
                 DB::rollback();
-                return redirect()->intended()->with([
-                    'message' => $e, //'Something went wrong'
-                ]);
+                return redirect()->intended()->with('message', $e->getMessage());
             }
             DB::commit();
-            return redirect()->intended()->with([ //redirect to same page
-                'message' => 'Email updated successfully',
-            ]);
+            return redirect()->intended()->with('success', 'Email updated successfully');
         } else {
-            return ['message' => 'email not matched'];
+            return redirect()->intended()->with('error', 'email not matched');
         }
     }
     //soft deleting user from the database
