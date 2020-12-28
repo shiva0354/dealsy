@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
 use App\Models\Post;
+use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -12,11 +13,9 @@ use Illuminate\Support\Facades\DB;
 // implement auto approve ads after new ads get submitted by the user
 class PostController extends Controller
 {
-    public function index()
+    public function __construct()
     {
-        $posts = Post::paginate(10);
-
-        return view('products', compact('posts'));
+        $this->middleware('auth');
     }
 
     public function create()
@@ -26,11 +25,9 @@ class PostController extends Controller
 
     public function store(PostRequest $request)
     {
-        $user = auth()->user()->id;
+        $user = User::current();
         //create and store the newly ads
-        $request->validate([
-            'ad_title' => 'string|required|max:80',
-        ]);
+        $input = $request->input();
     }
 
     public function show($id)

@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class CreatePostsTable extends Migration
 {
@@ -21,11 +21,10 @@ class CreatePostsTable extends Migration
             $table->foreignId('sub_category_id')->nullable()->constrained();
             $table->string('post_title')->nullable();
             $table->longText('post_detail')->nullable();
-            $table->char('is_active', 1)->default('0');
-            $table->char('is_seller', 1)->nullable();
-            $table->char('is_individual', 1)->nullable();
+            $table->enum('status', ['ACTIVE', 'PENDING', 'REJECTED'])->default('PENDING');
+            $table->enum('ad_type', ['PERSONAL', 'BUSINESS'])->nullable();
             $table->float('expected_price')->nullable();
-            $table->char('is_price_negotiable', 1)->nullable();
+            $table->enum('is_price_negotiable', ['YES', 'NO'])->nullable();
             $table->timestamp('last_renewed_on')->nullable();
             $table->string('locality')->nullable();
             $table->string('city')->nullable();

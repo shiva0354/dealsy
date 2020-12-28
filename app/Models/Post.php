@@ -64,6 +64,16 @@ class Post extends Model
         return $this->belongsTo(SubCategory::class);
     }
 
+    public function findUserOrFail($userId)
+    {
+        $user = User::findOrFail($userId);
+
+        if ($user->id != $this->user_id) {
+            throw new ModelNotFoundException("Error Processing Request");
+        }
+        return $user;
+    }
+    
     public function findSavedPostOrFail($id)
     {
         $savedPost = SavedPost::findOrFail($id);

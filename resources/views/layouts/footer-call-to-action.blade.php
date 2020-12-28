@@ -7,8 +7,8 @@
 					<h2>Start today to get more exposure and
 					grow your business</h2>
 					<ul class="list-inline mt-30">
-						<li class="list-inline-item"><a class="btn btn-main" href="{{route('ad.listing')}}">Add Listing</a></li>
-						<li class="list-inline-item"><a class="btn btn-secondary" href="{{route('category')}}">Browser Listing</a></li>
+						<li class="list-inline-item"><a class="btn btn-main" href="{{route('add.listing')}}">Add Listing</a></li>
+						<li class="list-inline-item"><a class="btn btn-secondary" href="#">Browser Listing</a></li>
 					</ul>
 				</div>
 			</div>
