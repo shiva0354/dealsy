@@ -1694,6 +1694,11 @@ ul.pagination .active a {
   border-bottom: 1px solid #dedede;
 }
 
+.widget.category-list{
+max-height: 300px;
+overflow-y: auto;
+}
+
 .widget.category-list ul li:not(:last-child) {
   border-bottom: 1px solid #F4F7F9;
 }

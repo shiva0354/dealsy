@@ -8,7 +8,7 @@
                 <div class="border">
                     <h3 class="p-3 bg-gray" style="text-align: center; font-color:#888;">Reset Your Password</h3>
                     <p class="p-2">Enter your user account's verified email address and we will send you a password reset link.</p>
-                  <form action="{{route('user.login')}}" method="POST">
+                  <form method="POST">
                     @csrf
                         <fieldset class="p-3">
                             <input type="text" name="email" placeholder="Enter Email" class="border p-2 w-100 my-2">

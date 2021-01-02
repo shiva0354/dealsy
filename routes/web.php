@@ -24,7 +24,7 @@ Route::get('login/{driver}', [LoginController::class, 'redirectToProvider'])->na
 Route::get('login/{driver}/callback', [LoginController::class, 'handleProviderCallback']);
 //forgot-password
 Route::get('/forgot-password', [PasswordController::class, 'index'])->name('forgot.password');
-Route::post('/forgot-password', [PasswordController::class, 'postEmail'])->name('user.forgotPassword');
+Route::post('/forgot-password', [PasswordController::class, 'postEmail']);
 //reset password
 Route::get('/reset-password/{token}', [PasswordController::class, 'showResetPassword'])->name('reset.password');
 Route::post('/reset-password', [PasswordController::class, 'resetPassword'])->name('user.resetPassword');
@@ -44,17 +44,26 @@ Route::post('dashboard/profile/change-password', [UserController::class, 'change
 Route::post('dashboard/profile/change-email', [UserController::class, 'changeEmail'])->name('user.change.email');
 Route::post('dashboard/profile/change-picture', [UserController::class, 'changePicture'])->name('user.change.picture');
 Route::post('dashboard/profile/delete-user', [UserController::class, 'destroyUser'])->name('user.destroy');
-//Search
-Route::get('{category-slug}-{id}', [SearchController::class, 'categorySearch'])->name('search.category');
-Route::get('{subcategory-slug}-{id}', [SearchController::class, 'subCategorySearch'])->name('search.sub.category');
-Route::get('{state}', [SearchController::class, 'stateSearch'])->name('search.state');
-Route::get('{city}', [SearchController::class, 'citySearch'])->name('search.city');
-Route::get('{city}/{locality}', [SearchController::class, 'cityLocalitySearch'])->name('search.city.locality');
-Route::get('item/{post-title}/{id}', [ItemeController::class, 'showItem'])->name('item');
-
 // pages
 Route::get('pricing', [PageController::class, 'pricing'])->name('pricing.package');
 Route::get('terms', [PageController::class, 'terms'])->name('terms');
 Route::get('contact', [ContactController::class, 'index'])->name('contact-us');
 Route::post('contact', [ContactController::class, 'store']);
 Route::get('about', [PageController::class, 'about'])->name('about-us');
+
+Route::view('item','item');
+
+//Search
+Route::get('search', [SearchController::class, 'search'])->name('search');
+Route::get('{category-slug}-{id}', [SearchController::class, 'categorySearch'])->name('search.category');
+Route::get('{subcategory-slug}-{id}', [SearchController::class, 'subCategorySearch'])->name('search.subcategory');
+Route::get('{state}', [SearchController::class, 'stateSearch'])->name('search.state');
+Route::get('{city}', [SearchController::class, 'citySearch'])->name('search.city');
+Route::get('{city}/{locality}', [SearchController::class, 'cityLocalitySearch'])->name('search.city.locality');
+Route::get('{city}/{locality}/{category-slug}-{id}', [SearchController::class, 'cityLocalityCategorySearch'])->name('search.city.locality.category');
+Route::get('{city}/{locality}/{subcategory-slug}-{id}', [SearchController::class, 'cityLocalitySubCategorySearch'])->name('search.city.locality.subcategory');
+Route::get('{state}-{category-slug}-{id}', [SearchController::class, 'stateCategorySearch'])->name('search.state.category');
+Route::get('{city}-{category-slug}-{id}', [SearchController::class, 'cityCategorySearch'])->name('search.city.category');
+Route::get('{state}-{subcategory-slug}-{id}', [SearchController::class, 'stateSubCategorySearch'])->name('search.state.subcategory');
+Route::get('{city}-{subcategory-slug}-{id}', [SearchController::class, 'citySubCategorySearch'])->name('search.city.subcategory');
+Route::get('item/{post-title}/{id}', [ItemeController::class, 'showItem'])->name('item');
