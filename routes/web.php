@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'home'])->name('home');
 //manual signup
 Route::get('/signup', [RegisterController::class, 'index'])->name('signup');
-Route::post('/signup', [RegisterController::class, 'create'])->name('user.signup');
+Route::post('/signup', [RegisterController::class, 'create']);
 // //manual login
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'emailLogin'])->name('user.login');
@@ -27,7 +27,7 @@ Route::get('/forgot-password', [PasswordController::class, 'index'])->name('forg
 Route::post('/forgot-password', [PasswordController::class, 'postEmail']);
 //reset password
 Route::get('/reset-password/{token}', [PasswordController::class, 'showResetPassword'])->name('reset.password');
-Route::post('/reset-password', [PasswordController::class, 'resetPassword'])->name('user.resetPassword');
+Route::post('/reset-password', [PasswordController::class, 'resetPassword']);
 //logout
 Route::get('/logout', [LoginController::class, 'logout'])->name('user.logout');
 //pages that user can access after login
@@ -50,6 +50,8 @@ Route::get('terms', [PageController::class, 'terms'])->name('terms');
 Route::get('contact', [ContactController::class, 'index'])->name('contact-us');
 Route::post('contact', [ContactController::class, 'store']);
 Route::get('about', [PageController::class, 'about'])->name('about-us');
+Route::get('404', [PageController::class, 'error'])->name('error404');
+Route::get('privacy', [PageController::class, 'privacy'])->name('privacy');
 
 Route::view('item','item');
 

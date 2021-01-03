@@ -8,15 +8,15 @@
                 <div class="border">
                     <h3 class="p-3 bg-gray" style="text-align: center; font-color:#888;">Sign in with your social media account</h3>
                     <div class="col">
-                      <a href="login/facebook" class="fb btn">
+                      <a href="{{route('social.login', 'facebook')}}" class="fb btn">
                         <i class="fa fa-facebook fa-fw"></i> Facebook
                       </a>
-                       <a href="login/google" class="google btn">
+                       <a href="{{route('social.login', 'google')}}" class="google btn">
                         <i class="fa fa-google fa-fw"></i> Google
                       </a>                   
                     </div>
                     <div class="ml-3 mr-3 or-seperator"><b>or</b></div>
-                  <form action="{{route('user.login')}}" method="POST">
+                  <form method="POST">
                     @csrf
                         <fieldset class="p-3">
                             <input type="text" name="email" placeholder="Enter Email" class="border p-2 w-100 my-2 mb-2">

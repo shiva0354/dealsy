@@ -21,4 +21,14 @@ class PageController extends Controller
     {
         return view('pages.about');
     }
+    
+    public function error()
+    {
+        return view('pages.404');
+    }
+
+    public function privacy()
+    {
+        return view('pages.privacy');
+    }
 }

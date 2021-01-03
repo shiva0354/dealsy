@@ -7,7 +7,7 @@
             <div class="col-lg-5 col-md-8 align-item-center">
                 <div class="border border">
                     <h3 class="bg-gray p-4">Register Now</h3>
-                    <form action="{{ route('user.signup') }}" method="POST">
+                    <form method="POST">
                         @csrf
                         <fieldset class="p-4">
                             <input type="text" name="name" placeholder="Name" class="border p-3 w-100 my-2 mb-2">

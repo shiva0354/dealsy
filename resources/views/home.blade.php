@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 {{-- defining page title --}}
-@section('title', 'Classimax')
+@section('title', 'Buy & Sell Near You')
 @section('content')
     <!--===============================
         =            Hero Area            =

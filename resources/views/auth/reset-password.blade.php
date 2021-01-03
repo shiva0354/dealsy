@@ -7,7 +7,7 @@
             <div class="col-lg-5 col-md-8 align-item-center">
                 <div class="border border">
                     <h3 class="bg-gray p-4">Reset Password</h3>
-                    <form action="{{ route('user.resetPassword') }}" method="POST">
+                    <form method="POST">
                         @csrf
                         <fieldset class="p-4">
                         <input type="hidden" name="token" value="{{$token}}" class="border p-3 w-100 my-2">                         
