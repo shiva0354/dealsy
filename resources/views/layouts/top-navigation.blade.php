@@ -31,7 +31,7 @@
                   </div>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link text-white btn btn-primary" href="{{route('ad.listing')}}"><i class="fa fa-plus-circle"></i> Add Listing</a>
+                  <a class="nav-link text-white btn btn-primary" href="{{route('add.listing')}}"><i class="fa fa-plus-circle"></i> Add Listing</a>
                 </li>
               </ul>
               @else

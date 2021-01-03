@@ -95,5 +95,7 @@
     z-index: 1;
   }
     </style>
+    @include('layouts.footer-call-to-action')
+    @include('layouts.footer-main')
 @endsection
 

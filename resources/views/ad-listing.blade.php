@@ -6,7 +6,8 @@
         --}}
         <script src="//cdn.ckeditor.com/4.15.0/basic/ckeditor.js"></script>
         <div class="container">
-            <form action="#">
+            <form method="POST" enctype="multipart/form-data">
+                @csrf
                 <!-- Post Your ad start -->
                 <fieldset class="border border-gary p-4 mb-5">
                     <div class="row">
@@ -177,4 +178,8 @@
             </form>
         </div>
     </section>
+    @include('layouts.footer-main')
 @endsection
+@push('js')
+
+@endpush

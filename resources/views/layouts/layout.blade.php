@@ -9,13 +9,17 @@
   <title>@yield('title') - Dealsy</title>
   <!-- FAVICON -->
   <link href="{!! asset('/theme/images/classimax_favicon.jpg') !!}" rel="shortcut icon">
+  <!-- Scripts -->
+  <script src="{{ asset('js/app.js') }}" defer></script>
   <!-- PLUGINS CSS STYLE -->
   <!-- <link href="plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet"> -->
   <!-- Bootstrap -->
-  <link  href="{!! asset('theme/plugins/bootstrap/css/bootstrap.min.css') !!}" rel="stylesheet">
+  {{-- <link  href="{!! asset('theme/plugins/bootstrap/css/bootstrap.min.css') !!}" rel="stylesheet"> --}}
+<!-- Styles -->
+<link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <link href="{!! asset('theme/plugins/bootstrap/css/bootstrap-slider.css') !!}" rel="stylesheet">
-  <!-- Font Awesome -->
-  <link href="{!! asset('theme/plugins/font-awesome/css/font-awesome.min.css') !!}" rel="stylesheet">
+  {{-- <!-- Font Awesome -->
+  <link href="{!! asset('theme/plugins/font-awesome/css/font-awesome.min.css') !!}" rel="stylesheet"> --}}
   <!-- Owl Carousel -->
   <link href="{!! asset('theme/plugins/slick-carousel/slick/slick.css') !!}" rel="stylesheet">
   <link href="{!! asset('theme/plugins/slick-carousel/slick/slick-theme.css') !!}" rel="stylesheet">
@@ -35,7 +39,7 @@
   <!-- JAVASCRIPTS -->
   <script src="{!! asset('theme/plugins/jQuery/jquery.min.js') !!}"></script>
   <script src="{!! asset('theme/plugins/bootstrap/js/popper.min.js') !!}"></script>
-  <script src="{!! asset('theme/plugins/bootstrap/js/bootstrap.min.js') !!}"></script>
+  {{-- <script src="{!! asset('theme/plugins/bootstrap/js/bootstrap.min.js') !!}"></script> --}}
   <script src="{!! asset('theme/plugins/bootstrap/js/bootstrap-slider.js') !!}"></script>
     <!-- tether js -->
   <script src="{!! asset('theme/plugins/tether/js/tether.min.js') !!}"></script>
