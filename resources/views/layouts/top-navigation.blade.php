@@ -37,7 +37,7 @@
               @else
                 <ul class="navbar-nav ml-auto mt-10">
                     <li class="nav-item">
-                        <a class="nav-link login-button" href="{{route('user.login')}}">Login</a>
+                        <a class="nav-link login-button" href="{{route('login')}}">Login</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white add-button" href="{{route('add.listing')}}"><i class="fa fa-camera"></i> Add Listing</a>

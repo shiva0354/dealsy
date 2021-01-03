@@ -18,7 +18,7 @@ Route::get('/signup', [RegisterController::class, 'index'])->name('signup');
 Route::post('/signup', [RegisterController::class, 'create']);
 // //manual login
 Route::get('/login', [LoginController::class, 'index'])->name('login');
-Route::post('/login', [LoginController::class, 'emailLogin'])->name('user.login');
+Route::post('/login', [LoginController::class, 'emailLogin']);
 //social login
 Route::get('login/{driver}', [LoginController::class, 'redirectToProvider'])->name('social.login');
 Route::get('login/{driver}/callback', [LoginController::class, 'handleProviderCallback']);

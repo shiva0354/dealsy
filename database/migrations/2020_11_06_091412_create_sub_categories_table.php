@@ -15,7 +15,7 @@ class CreateSubCategoriesTable extends Migration
     {
         Schema::create('sub_categories', function (Blueprint $table) {
             $table->id()->autoIncrement();
-            $table->string('sub_category')->nullable();
+            $table->string('name')->nullable();
             $table->string('slug')->unique();
             $table->foreignId('category_id')->constrained();
             $table->softDeletes();

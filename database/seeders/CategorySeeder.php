@@ -17,26 +17,27 @@ class CategorySeeder extends Seeder
     {
         Category::reguard();
         $categories = [
-            ['Autos(Cars & Suvs)','autos'],
-            ['Properties', 'properties'],
-            ['Mobiles', 'mobiles'],
-            ['Jobs', 'jobs'],
-            ['Bikes', 'bikes'],
-            ['Electronics & Appliances', 'electronics-appliances'],
-            ['Commercial Vehicle', 'commercial-vehicles'],
-            ['Furnitures', 'furnitures'],
-            ['Fashion', 'fashions'],
-            ['Books', 'books'],
-            ['Sports & hobbies', 'sports-hobbies'],
-            ['Pets', 'pets'],
-            ['Services', 'services'],
-            ['Matrimony', 'matrimonies'],
+            ['Autos(Cars & Suvs)', 'autos', 'fas fa-car'],
+            ['Properties', 'properties','fas fa-home'],
+            ['Mobiles', 'mobiles', 'fas fa-mobile-alt'],
+            ['Jobs', 'jobs','fab fa-black-tie'],
+            ['Bikes', 'bikes','fas fa-motorcycle'],
+            ['Electronics & Appliances', 'electronics-appliances','fas fa-laptop'],
+            ['Commercial Vehicle', 'commercial-vehicles', 'fas fa-truck-pickup'],
+            ['Furnitures', 'furnitures','fas fa-couch'],
+            ['Fashion', 'fashions','fas fa-tshirt'],
+            ['Books', 'books','fas fa-book'],
+            ['Sports & hobbies', 'sports-hobbies','fas fa-futbol'],
+            ['Pets', 'pets','fas fa-cat'],
+            ['Services', 'services','fas fa-cogs'],
+            ['Matrimony', 'matrimonies','fas fa-user-friends'],
         ];
 
         foreach ($categories as $category) {
             Category::create([
                 'category' => $category[0],
                 'slug' => $category[1],
+                'icon' => $category[2],
             ]);
         }
     }

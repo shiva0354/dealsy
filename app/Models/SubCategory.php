@@ -13,7 +13,7 @@ class SubCategory extends Model
     protected $table = 'sub_categories';
 
     protected $fillable = ([
-        'sub_category', 'category_id', 'slug',
+        'name', 'category_id', 'slug',
     ]);
 
     //this defines subcategory belongs to some category
@@ -23,7 +23,7 @@ class SubCategory extends Model
     }
 
     // this defines sub categoris can have many posts
-    public function post()
+    public function posts()
     {
         return $this->hasMany(Post::class);
     }

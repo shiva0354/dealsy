@@ -3,8 +3,8 @@
 @section('title', 'Buy & Sell Near You')
 @section('content')
     <!--===============================
-        =            Hero Area            =
-        ================================-->
+                            =            Hero Area            =
+                            ================================-->
     <section class="hero-area bg-1 text-center overly">
         <!-- Container Start -->
         <div class="container">
@@ -18,36 +18,18 @@
                         <div class="short-popular-category-list text-center">
                             <h2>Popular Category</h2>
                             <ul class="list-inline">
-                                <li class="list-inline-item">
-                                    <a href="category.html"><i class="fa fa-bed"></i> Hotel</a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="category.html"><i class="fa fa-grav"></i> Fitness</a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="category.html"><i class="fa fa-car"></i> Cars</a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="category.html"><i class="fa fa-cutlery"></i> Restaurants</a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="category.html"><i class="fa fa-coffee"></i> Cafe</a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="category.html"><i class="fa fa-bed"></i> Hotel</a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="category.html"><i class="fa fa-grav"></i> Fitness</a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="category.html"><i class="fa fa-car"></i> Cars</a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="category.html"><i class="fa fa-cutlery"></i> Restaurants</a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="category.html"><i class="fa fa-coffee"></i> Cafe</a>
-                                </li>
+                                {{-- @foreach ($categories as $category)
+                                    <li class="list-inline-item">
+                                        <a href="#"><i class="fa fa-grav"></i>{{ $category->category }}</a>
+                                    </li>
+                                @endforeach --}}
+                                @for ($i = 0; $i < 9; $i++)
+                                    <li class="list-inline-item">
+                                        <a
+                                            href="{{ route('search.category', [$categories[$i]->slug, $categories[$i]->id]) }}"><i
+                                                class="fa fa-grav"></i>{{ $categories[$i]->name }}</a>
+                                    </li>
+                                @endfor
                             </ul>
                         </div>
                     </div>
@@ -65,8 +47,8 @@
                                             <div class="form-group col-md-3">
                                                 <select class="w-100 form-control mt-lg-1 mt-md-2" name="category" required>
                                                     <option value="" hidden>Category</option>
-                                                    @foreach (App\Models\Category::all() as $category)
-                                                        <option value="{{ $category->id }}">{{ $category->category }}
+                                                    @foreach ($categories as $category)
+                                                        <option value="{{ $category->id }}">{{ $category->name }}
                                                         </option>
                                                     @endforeach
                                                 </select>
@@ -92,13 +74,13 @@
     </section>
 
     <!--===================================
-        =            Client Slider            =
-        ====================================-->
+                            =            Client Slider            =
+                            ====================================-->
 
 
     <!--===========================================
-        =            Popular deals section            =
-        ============================================-->
+                            =            Popular deals section            =
+                            ============================================-->
 
     <section class="popular-deals section bg-gray">
         <div class="container">
@@ -114,108 +96,49 @@
                 <!-- offer 01 -->
                 <div class="col-lg-12">
                     <div class="trending-ads-slide">
-                        <div class="col-sm-12 col-lg-4">
-                            <!-- product card -->
-                            <div class="product-item bg-light">
-                                <div class="card">
-                                    <div class="thumb-content">
-                                        <div class="price">$200</div>
-                                        <a href="single.html">
-                                            <img class="card-img-top img-fluid"
-                                                src="{!!  asset('theme/images/products/products-2.jpg') !!}"
-                                                alt="Card image cap">
-                                        </a>
-                                    </div>
-                                    <span class="wishlist"><a href="javascript:;" onclick="addTowishlist('product_id');"><i
-                                                class="fa fa-heart-o fa-lg" data-toggle="tooltip" data-placement="top"
-                                                title="favourite"></i></a></span>
-                                    <div class="card-body">
-                                        <h4 class="card-title"><a href="single.html">11inch Macbook Air</a></h4>
-                                        <ul class="list-inline product-meta">
-                                            <li class="list-inline-item">
-                                                <a href="single.html"><i class="fa fa-folder-open-o"></i>Electronics</a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a href="#"><i class="fa fa-calendar"></i>26th December</a>
-                                            </li>
-                                        </ul>
-                                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                            Explicabo, aliquam!</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-lg-4">
-                            <!-- product card -->
-                            <div class="product-item bg-light">
-                                <div class="card">
-                                    <div class="thumb-content">
-                                        <div class="price">$200</div>
-                                        <a href="single.html">
-                                            <img class="card-img-top img-fluid"
-                                                src="{!!  asset('theme/images/products/products-2.jpg') !!}"
-                                                alt="Card image cap">
-                                        </a>
-                                    </div>
-                                    <span class="wishlist"><a href="javascript:;" onclick="addTowishlist('product_id');"><i
-                                                class="fa fa-heart-o fa-lg" data-toggle="tooltip" data-placement="top"
-                                                title="favourite"></i></a></span>
-                                    <div class="card-body">
-                                        <h4 class="card-title"><a href="single.html">11inch Macbook Air</a></h4>
-                                        <ul class="list-inline product-meta">
-                                            <li class="list-inline-item">
-                                                <a href="single.html"><i class="fa fa-folder-open-o"></i>Electronics</a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a href="#"><i class="fa fa-calendar"></i>26th December</a>
-                                            </li>
-                                        </ul>
-                                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                            Explicabo, aliquam!</p>
+                        @foreach ($posts as $post)
+                            <div class="col-sm-12 col-lg-4">
+                                <!-- product card -->
+                                <div class="product-item bg-light">
+                                    <div class="card">
+                                        <div class="thumb-content">
+                                            <div class="price">₹{{ $post->expected_price }}</div>
+                                            <a href="single.html">
+                                                <img class="card-img-top img-fluid"
+                                                    src="{!!  asset('theme/images/products/products-2.jpg') !!}"
+                                                    alt="Card image cap">
+                                            </a>
+                                        </div>
+                                        <span class="wishlist"><a href="javascript:;"
+                                                onclick="addTowishlist('product_id');"><i class="fa fa-heart-o fa-lg"
+                                                    data-toggle="tooltip" data-placement="top"
+                                                    title="favourite"></i></a></span>
+                                        <div class="card-body">
+                                            <h4 class="card-title"><a href="single.html">{{ $post->post_title }}</a></h4>
+                                            <ul class="list-inline product-meta">
+                                                <li class="list-inline-item">
+                                                    <a href="single.html"><i
+                                                            class="fa fa-folder-open-o"></i>{{ $post->category->name }}</a>
+                                                </li>
+                                                <li class="list-inline-item">
+                                                    <a href="#"><i class="fa fa-calendar"></i>{{ $post->created_at }}</a>
+                                                </li>
+                                            </ul>
+                                            {{-- <p class="card-text">{{ $post->post_detail }}
+                                            </p> --}}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-12 col-lg-4">
-                            <!-- product card -->
-                            <div class="product-item bg-light">
-                                <div class="card">
-                                    <div class="thumb-content">
-                                        <div class="price">$200</div>
-                                        <a href="single.html">
-                                            <img class="card-img-top img-fluid"
-                                                src="{!!  asset('theme/images/products/products-2.jpg') !!}"
-                                                alt="Card image cap">
-                                        </a>
-                                    </div>
-                                    <span class="wishlist"><a href="javascript:;" onclick="addTowishlist('product_id');"><i
-                                                class="fa fa-heart-o fa-lg" data-toggle="tooltip" data-placement="top"
-                                                title="favourite"></i></a></span>
-                                    <div class="card-body">
-                                        <h4 class="card-title"><a href="single.html">11inch Macbook Air</a></h4>
-                                        <ul class="list-inline product-meta">
-                                            <li class="list-inline-item">
-                                                <a href="single.html"><i class="fa fa-folder-open-o"></i>Electronics</a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a href="#"><i class="fa fa-calendar"></i>26th December</a>
-                                            </li>
-                                        </ul>
-                                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                            Explicabo, aliquam!</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
     </section>
     <!--==========================================
-        =            All Category Section            =
-        ===========================================-->
-
+                            =            All Category Section            =
+                            ===========================================-->
     <section class=" section">
         <!-- Container Start -->
         <div class="container">
@@ -227,129 +150,24 @@
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis, provident!</p>
                     </div>
                     <div class="row">
-                        <!-- Category list -->
-                        <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-                            <div class="category-block">
-                                <div class="header">
-                                    <i class="fa fa-laptop icon-bg-1"></i>
-                                    <h4>Electronics</h4>
+                        @foreach ($categories as $category)
+                            <!-- Category list -->
+                            <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
+                                <div class="category-block">
+                                    <div class="header">
+                                        <i class="{{ $category->icon }} icon-bg-{{ rand(1, 8) }}"></i>
+                                        <h4>{{ $category->name }}</h4>
+                                    </div>
+                                    <ul class="category-list" style="height:150px; max-height: 150px; overflow-x:hidden;">
+                                        @foreach ($category->subCategories as $subcategory)
+                                            <li><a
+                                                    href="{{ route('search.subcategory', [$subcategory->slug, $subcategory->id]) }}">{{ $subcategory->name }}<span>{{ $subcategory->posts()->count() }}</span></a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
                                 </div>
-                                <ul class="category-list">
-                                    <li><a href="category.html">Laptops <span>93</span></a></li>
-                                    <li><a href="category.html">Iphone <span>233</span></a></li>
-                                    <li><a href="category.html">Microsoft <span>183</span></a></li>
-                                    <li><a href="category.html">Monitors <span>343</span></a></li>
-                                </ul>
                             </div>
-                        </div> <!-- /Category List -->
-                        <!-- Category list -->
-                        <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-                            <div class="category-block">
-                                <div class="header">
-                                    <i class="fa fa-apple icon-bg-2"></i>
-                                    <h4>Restaurants</h4>
-                                </div>
-                                <ul class="category-list">
-                                    <li><a href="category.html">Cafe <span>393</span></a></li>
-                                    <li><a href="category.html">Fast food <span>23</span></a></li>
-                                    <li><a href="category.html">Restaurants <span>13</span></a></li>
-                                    <li><a href="category.html">Food Track<span>43</span></a></li>
-                                </ul>
-                            </div>
-                        </div> <!-- /Category List -->
-                        <!-- Category list -->
-                        <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-                            <div class="category-block">
-                                <div class="header">
-                                    <i class="fa fa-home icon-bg-3"></i>
-                                    <h4>Real Estate</h4>
-                                </div>
-                                <ul class="category-list">
-                                    <li><a href="category.html">Farms <span>93</span></a></li>
-                                    <li><a href="category.html">Gym <span>23</span></a></li>
-                                    <li><a href="category.html">Hospitals <span>83</span></a></li>
-                                    <li><a href="category.html">Parolurs <span>33</span></a></li>
-                                </ul>
-                            </div>
-                        </div> <!-- /Category List -->
-                        <!-- Category list -->
-                        <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-                            <div class="category-block">
-                                <div class="header">
-                                    <i class="fa fa-shopping-basket icon-bg-4"></i>
-                                    <h4>Shoppings</h4>
-                                </div>
-                                <ul class="category-list">
-                                    <li><a href="category.html">Mens Wears <span>53</span></a></li>
-                                    <li><a href="category.html">Accessories <span>212</span></a></li>
-                                    <li><a href="category.html">Kids Wears <span>133</span></a></li>
-                                    <li><a href="category.html">It & Software <span>143</span></a></li>
-                                </ul>
-                            </div>
-                        </div> <!-- /Category List -->
-                        <!-- Category list -->
-                        <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-                            <div class="category-block">
-                                <div class="header">
-                                    <i class="fa fa-briefcase icon-bg-5"></i>
-                                    <h4>Jobs</h4>
-                                </div>
-                                <ul class="category-list">
-                                    <li><a href="category.html">It Jobs <span>93</span></a></li>
-                                    <li><a href="category.html">Cleaning & Washing <span>233</span></a></li>
-                                    <li><a href="category.html">Management <span>183</span></a></li>
-                                    <li><a href="category.html">Voluntary Works <span>343</span></a></li>
-                                </ul>
-                            </div>
-                        </div> <!-- /Category List -->
-                        <!-- Category list -->
-                        <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-                            <div class="category-block">
-                                <div class="header">
-                                    <i class="fa fa-car icon-bg-6"></i>
-                                    <h4>Vehicles</h4>
-                                </div>
-                                <ul class="category-list">
-                                    <li><a href="category.html">Bus <span>193</span></a></li>
-                                    <li><a href="category.html">Cars <span>23</span></a></li>
-                                    <li><a href="category.html">Motobike <span>33</span></a></li>
-                                    <li><a href="category.html">Rent a car <span>73</span></a></li>
-                                </ul>
-                            </div>
-                        </div> <!-- /Category List -->
-                        <!-- Category list -->
-                        <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-                            <div class="category-block">
-                                <div class="header">
-                                    <i class="fa fa-paw icon-bg-7"></i>
-                                    <h4>Pets</h4>
-                                </div>
-                                <ul class="category-list">
-                                    <li><a href="category.html">Cats <span>65</span></a></li>
-                                    <li><a href="category.html">Dogs <span>23</span></a></li>
-                                    <li><a href="category.html">Birds <span>113</span></a></li>
-                                    <li><a href="category.html">Others <span>43</span></a></li>
-                                </ul>
-                            </div>
-                        </div> <!-- /Category List -->
-                        <!-- Category list -->
-                        <div class="col-lg-3 offset-lg-0 col-md-5 offset-md-1 col-sm-6 col-6">
-                            <div class="category-block">
-
-                                <div class="header">
-                                    <i class="fa fa-laptop icon-bg-8"></i>
-                                    <h4>Services</h4>
-                                </div>
-                                <ul class="category-list">
-                                    <li><a href="category.html">Cleaning <span>93</span></a></li>
-                                    <li><a href="category.html">Car Washing <span>233</span></a></li>
-                                    <li><a href="category.html">Clothing <span>183</span></a></li>
-                                    <li><a href="category.html">Business <span>343</span></a></li>
-                                </ul>
-                            </div>
-                        </div> <!-- /Category List -->
-
-
+                        @endforeach
                     </div>
                 </div>
             </div>

@@ -13,7 +13,7 @@ class Category extends Model
     protected $table = 'categories';
 
     protected $fillable = ([
-        'category', 'slug',
+        'name', 'slug', 'icon',
     ]);
 
     //this defines categories can have many sub categories
@@ -23,7 +23,7 @@ class Category extends Model
     }
 
     //this defines category have many posts
-    public function post()
+    public function posts()
     {
         return $this->hasMany(Post::class);
     }

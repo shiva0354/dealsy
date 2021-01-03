@@ -29,6 +29,7 @@
             <h4>Important Links</h4>
             <ul>
               <li><a href="{{route('contact-us')}}">Contact Us</a></li>
+              <li><a href="{{route('privacy')}}">Privacy Policy</a></li>
               <li><a href="{{route('terms')}}">Terms & Conditions</a></li>
             </ul>
           </div>
