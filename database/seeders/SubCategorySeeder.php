@@ -119,7 +119,7 @@ class SubCategorySeeder extends Seeder
 
         foreach ($sub_categories as $sub_category) {
             SubCategory::create([
-                'sub_category' => $sub_category[0],
+                'name' => $sub_category[0],
                 'category_id' => $sub_category[1],
                 'slug' => $sub_category[2],
             ]);
