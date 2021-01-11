@@ -1,4 +1,5 @@
 @extends('layouts.layout')
+@section('title',$user->name)
 @section('content')
     <!--==================================
 =            User Profile            =
@@ -12,10 +13,10 @@
 					<div class="widget user">
 						<!-- User Image -->
 						<div class="image d-flex justify-content-center">
-							<img src="{!! asset('theme/images/user/user-thumb.jpg') !!}" alt="" class="">
+							<img src="{!! asset('theme/images/user/user-thumb.jpg') !!}" alt="{{$user->name}}" class="">
 						</div>
 						<!-- User Name -->
-						<h5 class="text-center">Samanta Doe</h5>
+						<h5 class="text-center">{{$user->name}}</h5>
 					</div>
 					<!-- Dashboard Links -->
 					<div class="widget dashboard-links">
@@ -42,7 +43,7 @@
 							<form action="#">
 								<!-- First Name -->
 								<div class="form-group">
-									<label for="first-name">First Name</label>
+									<label for="first-name"></label>
 									<input type="text" class="form-control" id="first-name">
 								</div>
 								<!-- Last Name -->

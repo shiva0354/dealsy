@@ -6,7 +6,7 @@
           <!-- About -->
           <div class="block about">
             <!-- footer logo -->
-            <img src="{!! asset('theme/images/logo-footer.png') !!}" alt="">
+            <img src="{{ asset('theme/images/classimax_logo.jpg') }}" alt="">
             <!-- description -->
             <p class="alt-color">Join the millions who buy and sell from each other
               everyday in local communities around the world</p>
@@ -45,12 +45,12 @@
             <div class="mobile d-flex">
               <a href="">
                 <!-- Icon -->
-                <img src="{!! asset('theme/images/footer/phone-icon.png') !!}" alt="mobile-icon">
+                <img src="{{ asset('theme/images/footer/phone-icon.png')}}" alt="mobile-icon">
               </a>
               <p>Get the Dealsy Mobile App and Save more</p>
             </div>
             <div class="download-btn d-flex my-3">
-              <a href="#"><img src="{!! asset('theme/images/apps/google-play-store.png') !!}" class="img-fluid" alt=""></a>
+              <a href="#"><img src="{{ asset('theme/images/apps/google-play-store.png')}}" class="img-fluid" alt=""></a>
               <a href="#" class=" ml-3"><img src="{!! asset('theme/images/apps/apple-app-store.png')!!}" class="img-fluid" alt=""></a>
             </div>
           </div>

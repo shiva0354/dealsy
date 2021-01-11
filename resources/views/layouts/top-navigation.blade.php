@@ -22,11 +22,10 @@
                   </a>
                   <!-- Dropdown list -->
                   <div class="dropdown-menu">
-                    <a class="dropdown-item" href="dashboard.html">Dashboard</a>
-                    <a class="dropdown-item" href="dashboard-my-ads.html">Dashboard My Ads</a>
-                    <a class="dropdown-item" href="dashboard-favourite-ads.html">Dashboard Favourite Ads</a>
-                    <a class="dropdown-item" href="dashboard-archived-ads.html">Dashboard Archived Ads</a>
-                    <a class="dropdown-item" href="dashboard-pending-ads.html">Dashboard Pending Ads</a>
+                    <a class="dropdown-item" href="{{route('user.dashboard')}}">Dashboard</a>
+                    <a class="dropdown-item" href="{{route('user.saved.ads')}}">Dashboard Favourite Ads</a>
+                    <a class="dropdown-item" href="{{route('user.archive.ads')}}">Dashboard Archived Ads</a>
+                    <a class="dropdown-item" href="{{route('user.pending.ads')}}">Dashboard Pending Ads</a>
                     <a class="dropdown-item" href="{{route('user.logout')}}"><i class="fa fa-power"></i>Logout</a>
                   </div>
                 </li>

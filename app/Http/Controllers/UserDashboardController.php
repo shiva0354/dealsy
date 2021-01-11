@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+
 class UserDashboardController extends Controller
 {
     public function __construct()
@@ -11,7 +13,9 @@ class UserDashboardController extends Controller
     // show user dashboard
     public function index()
     {
-        return view('dashboard.dashboard');
+        $user = User::current();
+        $posts = $user->posts()->paginate(6);
+        return view('dashboard.dashboard', compact('posts'));
     }
 
     //show all ads of the particular ads

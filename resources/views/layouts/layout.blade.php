@@ -30,11 +30,13 @@
   <link href="{!! asset('theme/css/style.css') !!}" rel="stylesheet">
   </head>
 <body class="body-wrapper">
+  
 @include('layouts.top-navigation')
 <div class="container">
   @include('layouts.message')
 </div>
 @yield('content')
+
 @include('layouts.footer')
   <!-- JAVASCRIPTS -->
   <script src="{!! asset('theme/plugins/jQuery/jquery.min.js') !!}"></script>
@@ -50,7 +52,8 @@
   <script src="{!! asset('theme/plugins/smoothscroll/SmoothScroll.min.js') !!}"></script>
   <!-- google map -->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcABaamniA6OL5YvYSpB3pFMNrXwXnLwU&libraries=places"></script>
-  <script src="{!! asset('theme/plugins/google-map/gmap.js') !!}"></script>
-  <script src="{!! asset('theme/js/script.js') !!}"></script>
+  <script src="{{ asset('theme/plugins/google-map/gmap.js')}}"></script>
+  <script src="{{ asset('theme/js/script.js')}}"></script>
+  @yield('js-script')
   </body>
   </html>

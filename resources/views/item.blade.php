@@ -52,30 +52,30 @@
                     <div id="social-share">
 
                     <a href="" data-toggle="tooltip" data-placement="top" title="Social Share" id="share">
-                            <i class="fa fa-share-alt my-social"></i>
+                            <i class="fas fa-share-alt my-social"></i>
                         </a>
 
                         <a href="{{ url()->current()}}" target="_blank" data-toggle="tooltip" data-placement="top" title="Instagram" id="instagram">
-                            <i class="fa fa-instagram my-social"></i>
+                            <i class="fab fa-instagram my-social"></i>
                         </a>
                         <a href="{{ url()->current()}}" target="_blank" data-toggle="tooltip" data-placement="top" title="Linkedin" id="linkedin">
-                            <i class="fa fa-linkedin my-social"></i>
+                            <i class="fab fa-linkedin my-social"></i>
                         </a>
 
                         <a href="{{ url()->current()}}" target="_blank" data-toggle="tooltip" data-placement="top" title="Reddit" id="reddit">
-                            <i class="fa fa-reddit-alien my-social"></i>
+                            <i class="fab fa-reddit-alien my-social"></i>
                         </a>
 
                         <a href="{{ url()->current()}}" target="_blank" data-toggle="tooltip" data-placement="top" title="Whatsapp" id="whatsapp">
-                            <i class="fa fa-whatsapp my-social"></i>
+                            <i class="fab fa-whatsapp my-social"></i>
                         </a>
 
                         <a href="{{ url()->current()}}" target="_blank" data-toggle="tooltip" data-placement="top" title="Twitter" id="twitter">
-                            <i class="fa fa-twitter my-social"></i>
+                            <i class="fab fa-twitter my-social"></i>
                         </a>
 
                         <a href="{{ url()->current()}}" target="_blank" data-toggle="tooltip" data-placement="top" title="Facebook" id="facebook">
-                            <i class="fa fa-facebook-f my-social"></i>
+                            <i class="fab fa-facebook-f my-social"></i>
                         </a>
 
                     </div>
@@ -309,9 +309,11 @@
 	<!-- Container End -->
 </section>
 @include('layouts.footer-main')
+@endsection
+@section('js-script')
 <script>
     $('#makeOffer').on('shown.bs.modal', function () {
   $('#myInput').trigger('focus')
 })
 </script>
-@endsection
+@stop

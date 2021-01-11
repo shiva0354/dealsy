@@ -64,8 +64,8 @@ Route::get('{city}', [SearchController::class, 'citySearch'])->name('search.city
 Route::get('{city}/{locality}', [SearchController::class, 'cityLocalitySearch'])->name('search.city.locality');
 Route::get('{city}/{locality}/{category-slug}-{id}', [SearchController::class, 'cityLocalityCategorySearch'])->name('search.city.locality.category');
 Route::get('{city}/{locality}/{subcategory-slug}-{id}', [SearchController::class, 'cityLocalitySubCategorySearch'])->name('search.city.locality.subcategory');
-Route::get('{state}-{category-slug}-{id}', [SearchController::class, 'stateCategorySearch'])->name('search.state.category');
-Route::get('{city}-{category-slug}-{id}', [SearchController::class, 'cityCategorySearch'])->name('search.city.category');
-Route::get('{state}-{subcategory-slug}-{id}', [SearchController::class, 'stateSubCategorySearch'])->name('search.state.subcategory');
-Route::get('{city}-{subcategory-slug}-{id}', [SearchController::class, 'citySubCategorySearch'])->name('search.city.subcategory');
+Route::get('{state}/{category-slug}-{id}', [SearchController::class, 'stateCategorySearch'])->name('search.state.category');
+Route::get('{city}/{category-slug}-{id}', [SearchController::class, 'cityCategorySearch'])->name('search.city.category');
+Route::get('{state}/{subcategory-slug}-{id}', [SearchController::class, 'stateSubCategorySearch'])->name('search.state.subcategory');
+Route::get('{city}/{subcategory-slug}-{id}', [SearchController::class, 'citySubCategorySearch'])->name('search.city.subcategory');
 Route::get('item/{post-title}/{id}', [ItemeController::class, 'showItem'])->name('item');

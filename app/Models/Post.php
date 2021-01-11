@@ -27,6 +27,7 @@ class Post extends Model
         'locality',
         'city',
         'state',
+        'images',
     ];
 
     //castiing data type
@@ -73,7 +74,7 @@ class Post extends Model
         }
         return $user;
     }
-    
+
     public function findSavedPostOrFail($id)
     {
         $savedPost = SavedPost::findOrFail($id);

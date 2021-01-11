@@ -29,13 +29,13 @@ class PostRequest extends FormRequest
             'category_id' => 'required|numeric',
             'sub_category_id' => 'nullable|numeric',
             'ad_type' => 'required|string',
-            'expected_price' => 'nullable|numeric',
+            'expected_price' => 'required|nullable|numeric',
             'is_negotiable' => 'nullable|string',
             'locality' => 'required|string|min:3|max:255',
             'city' => 'required|string|min:3|max:255',
             'state' => 'required|string|min:2|max:255',
             'images' => 'required',
-            'images.*' => 'image|mimes:png,jpg,jpeg|max:20000',
+            'images.*' => 'image|mimes:png,jpg,jpeg|max:1000',
         ];
     }
 }
