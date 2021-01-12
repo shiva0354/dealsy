@@ -18,7 +18,6 @@ class CreatePostsTable extends Migration
             $table->id()->autoIncrement();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('category_id')->nullable()->constrained();
-            $table->foreignId('sub_category_id')->nullable()->constrained();
             $table->string('post_title')->nullable();
             $table->longText('post_detail')->nullable();
             $table->enum('status', ['ACTIVE', 'PENDING', 'REJECTED'])->default('PENDING');
@@ -26,9 +25,8 @@ class CreatePostsTable extends Migration
             $table->float('expected_price')->nullable();
             $table->enum('is_price_negotiable', ['YES', 'NO'])->nullable();
             $table->timestamp('last_renewed_on')->nullable();
+            $table->foreignId('location_id')->nullable()->constrained();
             $table->string('locality')->nullable();
-            $table->string('city')->nullable();
-            $table->string('state', 30)->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

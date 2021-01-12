@@ -13,14 +13,8 @@ class Category extends Model
     protected $table = 'categories';
 
     protected $fillable = ([
-        'name', 'slug', 'icon',
+        'name', 'slug', 'icon','parent_id','icon'
     ]);
-
-    //this defines categories can have many sub categories
-    public function subCategories()
-    {
-        return $this->hasMany(SubCategory::class);
-    }
 
     //this defines category have many posts
     public function posts()

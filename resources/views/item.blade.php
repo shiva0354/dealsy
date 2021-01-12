@@ -1,4 +1,5 @@
 @extends('layouts.layout')
+@section('title',$item->post_title)
 @section('content')
 @include('layouts.search')
 <!--===================================
@@ -13,19 +14,21 @@
 				<div class="product-details">
                     {{-- breadcrumb --}}
                     <ul class="breadcrumb">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Category</a></li>
-                        <li><a href="#">Sub Category</a></li>
-                        <li><a href="#">Sub Category in state</a></li>
-                        <li><a href="#">Sub Category in city</a></li>
-                        <li><a href="#">Sub Category in locality</a></li>
+                        <li><a href="{{route('home')}}">Home</a></li>
+                        <li><a href="{{route('search.category',[$item->category->slug,$item->category])}}">Category</a></li>
+                        @if ($item->subcategory)
+						<li><a href="#">{{$item->subcategory->name}}</a></li>
+                        <li><a href="#">{{$item->subcategory->name}} in {{$item->state}}</a></li>
+                        <li><a href="#">{{$item->subcategory->name}} in {{$item->city}}</a></li>
+                        <li><a href="#">{{$item->subcategory->name}} in {{$item->locality}}</a></li>
+						@endif
                       </ul>
-					<h1 class="product-title">Hp Dual Core 2gb Ram-Slim Laptop Available In Very Low Price</h1>
+					<h1 class="product-title">{{$item->post_title}}</h1>
 					<div class="product-meta">
 						<ul class="list-inline">
-							<li class="list-inline-item"><i class="fa fa-user-o"></i> By <a href="">Andrew</a></li>
-							<li class="list-inline-item"><i class="fa fa-folder-open-o"></i> Category<a href="">Electronics</a></li>
-							<li class="list-inline-item"><i class="fa fa-location-arrow"></i> Location<a href="">Dhaka Bangladesh</a></li>
+							<li class="list-inline-item"><i class="fa fa-user-o"></i> By <a >{{$item->user->name}}</a></li>
+							<li class="list-inline-item"><i class="fa fa-folder-open-o"></i> Category<a href="">{{$item->category->name}}</a></li>
+							<li class="list-inline-item"><i class="fa fa-location-arrow"></i> Location<a href="">{{$item->city}}, {{$item->state}}</a></li>
 						</ul>
 					</div>
 
@@ -98,8 +101,7 @@
 						<div class="tab-content" id="pills-tabContent">
 							<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 								<h3 class="tab-title">Product Description</h3>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia laudantium beatae quod perspiciatis, neque
-									dolores eos rerum, ipsa iste cum culpa numquam amet provident eveniet pariatur, sunt repellendus quas
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia laudantium beatae quod perspiciatis, neque				dolores eos rerum, ipsa iste cum culpa numquam amet provident eveniet pariatur, sunt repellendus quas
 									voluptate dolor cumque autem molestias. Ab quod quaerat molestias culpa eius, perferendis facere vitae commodi
 									maxime qui numquam ex voluptatem voluptate, fuga sequi, quasi! Accusantium eligendi vitae unde iure officia
 									amet molestiae velit assumenda, quidem beatae explicabo dolore laboriosam mollitia quod eos, eaque voluptas
@@ -108,14 +110,6 @@
 
 								<iframe width="100%" height="400" src="https://www.youtube.com/embed/LUH7njvhydE?rel=0&amp;controls=0&amp;showinfo=0"
 								 frameborder="0" allowfullscreen></iframe>
-								<p></p>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam sed, officia reiciendis necessitatibus
-									obcaecati eum, quaerat unde illo suscipit placeat nihil voluptatibus ipsa omnis repudiandae, excepturi! Id
-									aperiam eius perferendis cupiditate exercitationem, mollitia numquam fuga, inventore quam eaque cumque fugiat,
-									neque repudiandae dolore qui itaque iste asperiores ullam ut eum illum aliquam dignissimos similique! Aperiam
-									aut temporibus optio nulla numquam molestias eum officia maiores aliquid laborum et officiis pariatur,
-									delectus sapiente molestiae sit accusantium a libero, eligendi vero eius laboriosam minus. Nemo quibusdam
-									nesciunt doloribus repellendus expedita necessitatibus velit vero?</p>
 
 							</div>
 							{{-- <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
@@ -235,9 +229,9 @@
 					</div>
 					<!-- User Profile widget -->
 					<div class="widget user text-center sticky-top">
-						<img class="rounded-circle img-fluid mb-2 px-2" width="150px" src="{!! asset('theme/images/user/user-thumb.jpg') !!}" alt="">
-						<h4><a href="">Jonathon Andrew</a></h4>
-						<p class="member-time">Member Since Jun 27, 2017</p>
+						<img class="rounded-circle img-fluid mb-2 px-2" width="150px" src="{!! asset($item->user->avatar) !!}" alt="{{$item->user->name}}">
+						<h4><a href="">{{$item->user->name}}</a></h4>
+						{{-- <p class="member-time">Member Since Jun 27, 2017</p> --}}
 						<a href="">See all ads</a>
 						<ul class="list-inline mt-20">
 							<li class="list-inline-item"><a href="" class="btn btn-offer d-inline-block  btn-primary px-lg-5 my-1 px-md-3"><i class="fa fa-phone fa-lg"></i>&nbsp; Call Now</a></li>

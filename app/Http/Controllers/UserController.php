@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 //don't forget to implement database transaction
 class UserController extends Controller
@@ -23,12 +24,14 @@ class UserController extends Controller
         return view('dashboard.user-profile', compact('user'));
     }
     //update profile of user
-    public function updateUser(Request $request)
+    public function changeName(Request $request)
     {
         $user = User::current();
-        $request->validate([
+        $validatedData = $request->validate([
             'name' => 'required|string|max:255',
         ]);
+        $user->update($validatedData);
+        return redirect()->back()->with('success','Name changed successfully');
     }
     //change password when user is logged in
     public function changePassword(Request $request)
@@ -57,7 +60,7 @@ class UserController extends Controller
         }
         DB::commit();
         Auth::logout(); //after changing password, logout the user and send them to get login from new password
-        return redirect()->route('login')->with('message', 'Password updated successfully');
+        return redirect()->intended('login')->with('message', 'Password updated successfully');
     }
     //change email
     public function changeEmail(Request $request)
@@ -78,10 +81,27 @@ class UserController extends Controller
                 // return redirect()->intended()->with('message', $e->getMessage());
             }
         } else {
-            return redirect()->intended()->with('error', 'email not matched');
+            return redirect()->back()->with('error', 'email not matched');
         }
-        return redirect()->intended()->with('success', 'Email updated successfully');
+        return redirect()->back()->with('success', 'Email updated successfully');
     }
+
+    //change profile picture
+    public function changePicture(Request $request){
+        $user = User::current();
+        $request->validate(['avatar'=>'required|image|mimes:png,jpg|max:1000']);
+        try {
+            $file =$request->file('avatar'); 
+            $name = Str::random(60) . '.' . $file->extension();
+            $file->move(public_path('uploads/users/') , $name);
+            $path ='uploads/users/'. $name;
+            $user->update(['avatar'=>$path]);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('success',$e->getMessage());  
+        }
+        return redirect()->back()->with('success','Profile Picture updated');    
+    }
+
     //soft deleting user from the database
     public function destroyUser()
     {

@@ -15,7 +15,7 @@
                         <div class="widget user-dashboard-profile">
                             <!-- User Image -->
                             <div class="profile-thumb">
-                                <img src="{{ Auth::user()->avatar }}" alt="" class="rounded-circle">
+                                <img src="{{ asset(Auth::user()->avatar) }}" alt="{{ Auth::user()->name }}" class="rounded-circle">
                             </div>
                             <!-- User Name -->
                             <h5 class="text-center">{{ Auth::user()->name }}</h5>
@@ -50,6 +50,7 @@
                             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             <form action="{{ route('user.destroy') }}" method="POST">
                                 @csrf
+                                @method('DELETE')
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header border-bottom-0">
@@ -101,7 +102,7 @@
                                     <tr>
 
                                     <td class="product-thumb">
-                                        <img width="80px" height="auto" src="images/products/products-1.jpg"
+                                        <img width="80px" height="auto" src=""
                                             alt="image description">
                                     </td>
                                     <td class="product-details">

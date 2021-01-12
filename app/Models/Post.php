@@ -60,7 +60,7 @@ class Post extends Model
     }
 
     //this defines post belong to sub category
-    public function subCategories()
+    public function subCategory()
     {
         return $this->belongsTo(SubCategory::class);
     }

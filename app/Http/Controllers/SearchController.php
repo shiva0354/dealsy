@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SearchRequest;
 use App\Models\Category;
 use App\Models\Post;
-use App\Models\SubCategory;
 
 class SearchController extends Controller
 {
@@ -36,7 +35,7 @@ class SearchController extends Controller
         return view('products', compact('posts'));
     }
 
-    public function categorySearch($id)
+    public function categorySearch($slug, $id)
     {
         $category = Category::findOrFail($id);
         $posts = Post::where('status', 'ACTIVE')->where('category_id', $category->id)->paginate(9);
@@ -44,85 +43,23 @@ class SearchController extends Controller
         return view('products', compact('posts'));
     }
 
-    public function subCategorySearch($id)
+    public function LocationSearch($location, $location_id)
     {
-        $sub_category = SubCategory::findOrFail($id);
-        $posts = Post::where('status', 'ACTIVE')->where('category_id', $sub_category->id)->paginate(9);
+        $posts = Post::where('status', 'ACTIVE')->where('location_id', $location_id)->paginate(9);
 
         return view('products', compact('posts'));
     }
 
-    public function citySearch($city)
+    public function locationCategorySearch($location, $location_id, $category, $category_id)
     {
-        $posts = Post::where('status', 'ACTIVE')->where('city', $city)->paginate(9);
+        $posts = Post::where('status', 'ACTIVE')->where('location_id', $location_id)->where('category_id', $category_id)->paginate(9);
 
         return view('products', compact('posts'));
     }
 
-    public function stateSearch($state)
+    public function localitySearch()
     {
-        $posts = Post::where('status', 'ACTIVE')->where('city', $state)->paginate(9);
 
-        return view('products', compact('posts'));
     }
 
-    public function cityLocalitySearch($city, $locality)
-    {
-        $posts = Post::where('status', 'ACTIVE')->where('city', $city)->where('locality', $locality)->paginate(9);
-
-        return view('products', compact('posts'));
-    }
-
-    public function stateCategorySearch($state, $category_id)
-    {
-        $category = Category::findOrFail($category_id);
-
-        $posts = Post::where('status', 'ACTIVE')->where('state', $state)->where('category_id', $category->id)->paginate(9);
-
-        return view('products', compact('posts'));
-    }
-
-    public function cityCateogrySearch($city, $category_id)
-    {
-        $category = Category::findOrFail($category_id);
-
-        $posts = Post::where('status', 'ACTIVE')->where('city', $city)->where('category_id', $category->id)->paginate(9);
-
-        return view('products', compact('posts'));
-    }
-
-    public function stateSubCategorySearch($state, $sub_category_id)
-    {
-        $sub_category = SubCategory::findOrFail($sub_category_id);
-
-        $posts = Post::where('status', 'ACTIVE')->where('state', $state)->where('category_id', $sub_category->id)->paginate(9);
-
-        return view('products', compact('posts'));
-    }
-
-    public function citySubCategorySearch($city, $sub_category_id)
-    {
-        $sub_category = SubCategory::findOrFail($sub_category_id);
-
-        $posts = Post::where('status', 'ACTIVE')->where('city', $city)->where('category_id', $sub_category->id)->paginate(9);
-
-        return view('products', compact('posts'));
-    }
-
-    public function cityLocalityCategorySearch($city, $locality, $category_id)
-    {
-        $category = Category::findOrFail($category_id);
-
-        $posts = Post::where('status', 'ACTIVE')->where('city', $city)->where('locality', $locality)->where('category_id', $category->id)->paginate(9);
-
-        return view('products', compact('posts'));
-    }
-    public function cityLocalitySubCategorySearch($city, $locality, $sub_category_id)
-    {
-        $sub_category = SubCategory::findOrFail($sub_category_id);
-
-        $posts = Post::where('status', 'ACTIVE')->where('city', $city)->where('locality', $locality)->where('category_id', $sub_category->id)->paginate(9);
-
-        return view('products', compact('posts'));
-    }
 }

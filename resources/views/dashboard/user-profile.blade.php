@@ -13,7 +13,7 @@
 					<div class="widget user">
 						<!-- User Image -->
 						<div class="image d-flex justify-content-center">
-							<img src="{!! asset('theme/images/user/user-thumb.jpg') !!}" alt="{{$user->name}}" class="">
+							<img src="{!! asset($user->avatar) !!}" alt="{{$user->name}}" class="">
 						</div>
 						<!-- User Name -->
 						<h5 class="text-center">{{$user->name}}</h5>
@@ -31,50 +31,41 @@
 			</div>
 			<div class="col-md-10 offset-md-1 col-lg-9 offset-lg-0">
 				<!-- Edit Profile Welcome Text -->
-				<div class="widget welcome-message">
+				{{-- <div class="widget welcome-message">
 					<h2>Edit profile</h2>
 					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
-				</div>
+				</div> --}}
 				<!-- Edit Personal Info -->
 				<div class="row">
 					<div class="col-lg-6 col-md-6">
 						<div class="widget personal-info">
-							<h3 class="widget-header user">Edit Personal Information</h3>
-							<form action="#">
-								<!-- First Name -->
-								<div class="form-group">
-									<label for="first-name"></label>
-									<input type="text" class="form-control" id="first-name">
-								</div>
-								<!-- Last Name -->
-								<div class="form-group">
-									<label for="last-name">Last Name</label>
-									<input type="text" class="form-control" id="last-name">
-								</div>
+							<h3 class="widget-header user">Change Profile Picture</h3>
+							<form method="POST" action="{{route('user.change.picture')}}" enctype="multipart/form-data">
+								@csrf
+								@method('PUT')
 								<!-- File chooser -->
 								<div class="form-group choose-file d-inline-flex">
 									<i class="fa fa-user text-center px-3"></i>
-									<input type="file" class="form-control-file mt-2 pt-1" id="input-file">
+									<input type="file" class="form-control-file mt-2 pt-1" name="avatar" accept=".jpeg,.jpg,.png">
 								 </div>
-								<!-- Comunity Name -->
-								<div class="form-group">
-									<label for="comunity-name">Comunity Name</label>
-									<input type="text" class="form-control" id="comunity-name">
-								</div>
-								<!-- Checkbox -->
-								<div class="form-check">
-								  <label class="form-check-label" for="hide-profile">
-									<input class="form-check-input mt-1" type="checkbox" value="" id="hide-profile">
-									Hide Profile from Public/Comunity
-								  </label>
-								</div>
-								<!-- Zip Code -->
-								<div class="form-group">
-									<label for="zip-code">Zip Code</label>
-									<input type="text" class="form-control" id="zip-code">
-								</div>
 								<!-- Submit button -->
 								<button class="btn btn-transparent">Save My Changes</button>
+							</form>
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-6">
+						<div class="widget personal-info">
+							<h3 class="widget-header user">Edit Name</h3>
+							<form method="POST" action="{{route('user.change.name')}}">
+								@csrf
+								@method('PUT')
+								<!-- First Name -->
+								<div class="form-group">
+									<label for="first-name"></label>
+									<input type="text" class="form-control" name="name" id="first-name">
+								</div>
+								<!-- Submit button -->
+								<button class="btn btn-transparent">Change Name</button>
 							</form>
 						</div>
 					</div>
@@ -82,7 +73,9 @@
 						<!-- Change Password -->
 					<div class="widget change-password">
 						<h3 class="widget-header user">Edit Password</h3>
-						<form action="#">
+						<form method="POST" action="{{route('user.change.password')}}" enctype="application/x-www-form-urlencoded">
+							@csrf
+							@method('PUT')
 							<!-- Current Password -->
 							<div class="form-group">
 								<label for="current-password">Current Password</label>
@@ -107,19 +100,21 @@
 						<!-- Change Email Address -->
 					<div class="widget change-email mb-0">
 						<h3 class="widget-header user">Edit Email Address</h3>
-						<form action="#">
+						<form method="POST" action="{{route('user.change.email')}}" enctype="application/x-www-form-urlencoded">
+							@csrf
+							@method('PUT')
 							<!-- Current Password -->
 							<div class="form-group">
 								<label for="current-email">Current Email</label>
-								<input type="email" class="form-control" id="current-email">
+								<input type="email" class="form-control" name="email" id="current-email">
 							</div>
 							<!-- New email -->
 							<div class="form-group">
 								<label for="new-email">New email</label>
-								<input type="email" class="form-control" id="new-email">
+								<input type="email" class="form-control" name="new_email" id="new-email">
 							</div>
 							<!-- Submit Button -->
-							<button class="btn btn-transparent">Change email</button>
+							<button type="submit" class="btn btn-transparent">Change email</button>
 						</form>
 					</div>
 					</div>
