@@ -65,7 +65,7 @@ Route::get('privacy', [PageController::class, 'privacy'])->name('privacy');
 Route::get('item/{id}/{title}', [ItemController::class, 'showItem'])->name('item');
 //Search
 Route::get('search', [SearchController::class, 'search'])->name('search');
-Route::get('{category}-c{id}', [SearchController::class, 'categorySearch'])->name('search.category');
-Route::get('{location}-g{id}', [SearchController::class, 'locationSearch'])->name('search.location');
-Route::get('{location}-g{id}/{category}-c{id}', [SearchController::class, 'locationCategorySearch'])->name('search.location.category');
-Route::get('{location}-g{id}/{locality}/{category}-c{id}', [SearchController::class, 'localitySearch'])->name('search.locality');
+Route::get('{category}_c{categoryId}', [SearchController::class, 'categorySearch'])->name('search.category');
+Route::get('{location}_g{locationId}', [SearchController::class, 'locationSearch'])->name('search.location');
+Route::get('{location}_g{locationId}/{category}_c{categoryId}', [SearchController::class, 'locationCategorySearch'])->name('search.location.category');
+Route::get('{location}_g{locationId}/{locality}/{category}_c{categoryId}', [SearchController::class, 'localitySearch'])->name('search.locality');

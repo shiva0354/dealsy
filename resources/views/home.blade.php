@@ -18,18 +18,18 @@
                         <div class="short-popular-category-list text-center">
                             <h2>Popular Category</h2>
                             <ul class="list-inline">
-                                {{-- @foreach ($categories as $category)
-                                    <li class="list-inline-item">
-                                        <a href="#"><i class="fa fa-grav"></i>{{ $category->category }}</a>
+                                @foreach ($categories as $category)
+                                    <li class="list-inline-item mb-2">
+                                        <a href="{{route('search.category',[$category->slug,$category->id])}}"><i class="{{ $category->icon }}"></i>{{ $category->name }}</a>
                                     </li>
-                                @endforeach --}}
-                                @for ($i = 0; $i < 9; $i++)
+                                @endforeach
+                                {{-- @for ($i = 0; $i < 9; $i++)
                                     <li class="list-inline-item">
                                         <a
                                             href="{{ route('search.category', [$categories[$i]->slug, $categories[$i]->id]) }}"><i
                                                 class="fa fa-grav"></i>{{ $categories[$i]->name }}</a>
                                     </li>
-                                @endfor
+                                @endfor --}}
                             </ul>
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                                                 </select>
                                             </div>
                                             <div class="form-group col-md-3">
-                                                <input type="text" class="form-control my-2 my-lg-1" id="inputLocation4"
+                                                <input type="text" class="form-control my-2 my-lg-1"
                                                     placeholder="Location" name="location" required>
                                             </div>
                                             <div class="form-group col-md-2 align-self-center">
@@ -114,7 +114,7 @@
                                                     data-toggle="tooltip" data-placement="top"
                                                     title="favourite"></i></a></span>
                                         <div class="card-body">
-                                            <h4 class="card-title"><a href="single.html">{{ $post->post_title }}</a></h4>
+                                            <h4 class="card-title"><a href="single.html">{{ $post->title }}</a></h4>
                                             <ul class="list-inline product-meta">
                                                 <li class="list-inline-item">
                                                     <a href="single.html"><i
@@ -124,7 +124,7 @@
                                                     <a href="#"><i class="fa fa-calendar"></i>{{ $post->created_at }}</a>
                                                 </li>
                                             </ul>
-                                            {{-- <p class="card-text">{{ $post->post_detail }}
+                                            {{-- <p class="card-text">{{ $post->detail }}
                                             </p> --}}
                                         </div>
                                     </div>
@@ -156,12 +156,12 @@
                                 <div class="category-block">
                                     <div class="header">
                                         <i class="{{ $category->icon }} icon-bg-{{ rand(1, 8) }}"></i>
-                                        <h4>{{ $category->name }}</h4>
+                                        <a href="{{route('search.category',[$category->slug, $category->id])}}"><h4>{{ $category->name }}</h4></a>
                                     </div>
                                     <ul class="category-list" style="height:150px; max-height: 150px; overflow-x:hidden;">
                                         @foreach ($category->subCategories as $subcategory)
-                                            <li><a
-                                                    href="{{ route('search.subcategory', [$subcategory->slug, $subcategory->id]) }}">{{ $subcategory->name }}<span>{{ $subcategory->posts()->count() }}</span></a>
+                                            <li>
+                                                <a href="{{ route('search.category', [$subcategory->slug, $subcategory->id]) }}">{{ $subcategory->name }}<span>{{ $subcategory->posts()->count() }}</span></a>
                                             </li>
                                         @endforeach
                                     </ul>

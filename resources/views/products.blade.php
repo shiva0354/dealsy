@@ -1,4 +1,5 @@
 @extends('layouts.layout')
+@section('title', $category->name ?? '' )
 @section('content')
     @include('layouts.search')
     <section class="section-sm">
@@ -6,13 +7,13 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="search-result bg-gray">
-                        <h2>Results For "Electronics"</h2>
-                        <p>123 Results on 12 December, 2017</p>
+                        <h2>Results For "{{$category->name ?? ''}}"</h2>
+                        <p>{{$posts->total()}} Results on {{now()}}</p>
                     </div>
                 </div>
                 <div class="col-md-12">
                     <ul class="breadcrumb">
-                        <li><a href="#">Home</a></li>
+                        <li><a href="{{route('home')}}">Home</a></li>
                         <li><a href="#">Category</a></li>
                         <li><a href="#">Sub Category</a></li>
                         <li><a href="#">Sub Category in state</a></li>
@@ -25,21 +26,27 @@
                 <div class="col-md-3">
                     <div class="category-sidebar">
                         <div class="widget category-list">
-                            <h4 class="widget-header">All Category</h4>
-                            <ul class="category-list">
-                                <li><a href="category.html">Laptops <span>93</span></a></li>
-                                <li><a href="category.html">Iphone <span>233</span></a></li>
-                                <li><a href="category.html">Microsoft <span>183</span></a></li>
-                                <li><a href="category.html">Monitors <span>343</span></a></li>
-                                <li><a href="category.html">Monitors <span>343</span></a></li>
-                                <li><a href="category.html">Monitors <span>343</span></a></li>
-                                <li><a href="category.html">Monitors <span>343</span></a></li>
-                                <li><a href="category.html">Monitors <span>343</span></a></li>
-                                <li><a href="category.html">Monitors <span>343</span></a></li>
-                                <li><a href="category.html">Monitors <span>343</span></a></li>
-                                <li><a href="category.html">Monitors <span>343</span></a></li>
-                                <li><a href="category.html">Monitors <span>343</span></a></li>
-                            </ul>
+                            @if (!$category->parent_id) 
+                                <a href="{{route('search.category',[$category->slug,$category->id])}}">
+                                    <h4 class="widget-header">{{$category->name}}</h4>
+                                </a>
+                                <ul class="category-list">
+                                @foreach ($category->subCategories as $subcategory)
+                                            <li>
+                                                <a href="{{ route('search.category', [$subcategory->slug, $subcategory->id]) }}">{{ $subcategory->name }}<span>{{ $subcategory->posts()->count() }}</span></a>
+                                            </li>
+                                @endforeach
+                                </ul>
+                            @else
+                                <h4 class="widget-header">All Category</h4>
+                                <ul class="category-list">
+                                @foreach (App\Models\Category::whereNull('parent_id')->get() as $category)
+                                        <li>
+                                                <a href="{{ route('search.category', [$category->slug, $category->id]) }}">{{ $category->name }}<span>{{ $category->posts()->count() }}</span></a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            @endif
                         </div>
 
                         <div class="widget category-list">
@@ -130,10 +137,10 @@
                                     <ul class="list-inline view-switcher">
                                         <li class="list-inline-item">
                                             <a href="#" onclick="event.preventDefault();" class="text-info"><i
-                                                    class="fa fa-th-large"></i></a>
+                                                    class="fa fa-th fa-lg"></i></a>
                                         </li>
                                         <li class="list-inline-item">
-                                            <a href="ad-list-view.html"><i class="fa fa-reorder"></i></a>
+                                            <a href="ad-list-view.html"><i class="fas fa-list fa-lg"></i></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -142,12 +149,13 @@
                     </div>
                     <div class="product-grid-list">
                         <div class="row mt-30">
-                            <div class="col-sm-12 col-lg-4 col-md-6">
+                            @foreach ($posts as $post)
+                                <div class="col-sm-12 col-lg-4 col-md-6">
                                 <!-- product card -->
                                 <div class="product-item bg-light">
                                     <div class="card">
                                         <div class="thumb-content">
-                                            <div class="price">$200</div>
+                                            <div class="price">₹{{$post->expected_price}}</div>
                                             <a href="single.html">
                                                 <img class="card-img-top img-fluid"
                                                     src="{!!  asset('theme/images/products/products-1.jpg') !!}"
@@ -159,21 +167,22 @@
                                                     data-toggle="tooltip" data-placement="top"
                                                     title="favourite"></i></a></span>
                                         <div class="card-body">
-                                            <h4 class="card-title"><a href="single.html">11inch Macbook Air</a></h4>
+                                            <h4 class="card-title"><a href="{{single.html}}">{{$post->title}}</a></h4>
                                             <ul class="list-inline product-meta">
                                                 <li class="list-inline-item">
-                                                    <a href="single.html"><i class="fa fa-folder-open-o"></i>Electronics</a>
+                                                    <a href="{{single.html}}"><i class="fa fa-folder-open-o"></i>{{$post->category}}</a>
                                                 </li>
                                                 <li class="list-inline-item">
-                                                    <a href="#"><i class="fa fa-calendar"></i>26th December</a>
+                                                    <a href="#"><i class="fa fa-calendar"></i>{{$post->created_at}}</a>
                                                 </li>
                                             </ul>
-                                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                Explicabo, aliquam!</p>
+                                            {{-- <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                                                Explicabo, aliquam!</p> --}}
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            @endforeach
                         </div>
                     </div>
                     <div class="pagination justify-content-center">

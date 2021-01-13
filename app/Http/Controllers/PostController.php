@@ -19,8 +19,6 @@ class PostController extends Controller
     //     $this->middleware('auth');
     // }
 
-    const STATES = ['Andaman and Nicobar Islands', 'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chandigarh', 'Chhattisgarh', 'Dadra Nagar Haveli', 'Daman & Diu', 'Delhi', 'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jammu and Kashmir', 'Jharkhand', 'Karnataka', 'Kerala', 'Ladakh', 'Lakshadweep', 'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland', 'Odisha', 'Puducherry', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu', 'Telangana', 'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal'];
-
     public function create()
     {
         // $states = $this->dd('State', self::STATES);
@@ -44,24 +42,22 @@ class PostController extends Controller
 
             $post = Post::create([
                 'user_id' => $user->id,
-                'post_title' => $request->input('post_title'),
-                'post_detail' => $request->input('post_detail'),
+                'title' => $request->input('post_title'),
+                'detail' => $request->input('post_detail'),
                 'category_id' => $request->input('category_id'),
-                'sub_category_id' => $request->input('sub_category_id'),
                 'ad_type' => $request->input('ad_type'),
                 'expected_price' => $request->input('expected_price'),
                 'is_price_negotiable' => $request->input('is_negotiable'),
                 'locality' => $request->input('locality'),
                 'city' => $request->input('city'),
                 'state' => $request->input('state'),
-                'images'=>json_encode($images),
             ]);
 
-            // if ($images) {
-            //     foreach ($images as $image) {
-            //         PostImage::create(['post_id' => $post->id, 'image' => $image]);
-            //     }
-            // }
+            if ($images) {
+                foreach ($images as $image) {
+                    PostImage::create(['post_id' => $post->id, 'image' => $image]);
+                }
+            }
 
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
@@ -79,7 +75,6 @@ class PostController extends Controller
     public function edit($id)
     {
         User::current();
-        $countries = $this->ddArray('Country', self::STATES);
         $post = Post::findOrFail($id);
         return view('item', compact('post', 'countries'));
     }

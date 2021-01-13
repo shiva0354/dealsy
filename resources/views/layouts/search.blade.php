@@ -13,8 +13,8 @@
                             <div class="form-group col-md-3">
                                 <select class="w-100 form-control mt-lg-1 mt-md-2" name="category" required>
                                     <option value="" hidden>Category</option>
-                                    @foreach (App\Models\Category::all() as $category)
-                                        <option value="{{ $category->id }}">{{ $category->category }}</option>
+                                    @foreach (App\Models\Category::whereNull('parent_id')->get() as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach
                                 </select>
                             </div>

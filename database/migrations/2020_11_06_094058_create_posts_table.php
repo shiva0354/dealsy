@@ -18,8 +18,8 @@ class CreatePostsTable extends Migration
             $table->id()->autoIncrement();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('category_id')->nullable()->constrained();
-            $table->string('post_title')->nullable();
-            $table->longText('post_detail')->nullable();
+            $table->string('title')->nullable();
+            $table->longText('detail')->nullable();
             $table->enum('status', ['ACTIVE', 'PENDING', 'REJECTED'])->default('PENDING');
             $table->enum('ad_type', ['PERSONAL', 'BUSINESS'])->nullable();
             $table->float('expected_price')->nullable();
