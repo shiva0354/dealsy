@@ -13,4 +13,8 @@ class Location extends Model
     protected $fillable = [
         'location','slug','parent_id'
     ];
+
+    public function locations(){
+        return $this->hasMany(Location::class,'parent_id');
+    }
 }

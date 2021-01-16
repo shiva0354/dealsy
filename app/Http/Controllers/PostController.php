@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
+use App\Models\Category;
+use App\Models\Location;
 use App\Models\Post;
 use App\Models\PostImage;
 use App\Models\User;
 use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -14,15 +17,16 @@ use Illuminate\Support\Str;
 // implement auto approve ads after new ads get submitted by the user
 class PostController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function create()
     {
-        // $states = $this->dd('State', self::STATES);
-        return view('ad-listing');
+        $categories = Category::whereNull('parent_id')->get();
+        $locations = Location::whereNull('parent_id')->get();
+        return view('ad-listing', compact('categories', 'locations'));
     }
 
     public function store(PostRequest $request)
@@ -30,15 +34,8 @@ class PostController extends Controller
         //create and store the newly ads
         $user = User::current();
         try {
-            $images[] = '';
 
-            if ($request->hasfile('images')) {
-                foreach ($request->file('images') as $file) {
-                    $name = Str::random(60) . '.' . $file->extension();
-                    $file->move(public_path('upload/posts/') , $name);
-                    $images[] = $name;
-                }
-            }
+            $images = $this->saveImage($request);
 
             $post = Post::create([
                 'user_id' => $user->id,
@@ -63,6 +60,20 @@ class PostController extends Controller
             return redirect()->back()->with('error', $e->getMessage());
         }
         return redirect()->route('home')->with('success', 'Ad posted successfully');
+    }
+
+    private function saveImage($request)
+    {
+        $images[] = '';
+
+        if ($request->hasfile('images')) {
+            foreach ($request->file('images') as $file) {
+                $name = Str::random(60) . '.' . $file->extension();
+                $file->move(public_path('upload/posts/'), $name);
+                $images[] = $name;
+            }
+        }
+        return $images;
     }
 
     public function show($id)
@@ -99,5 +110,17 @@ class PostController extends Controller
         }
         DB::commit();
         return redirect()->intended()->with('success', 'Post Deleted Successfully');
+    }
+
+    public function ajaxLocation(Request $request)
+    {
+        $keyword = $request->input('keyword');
+        $search[] = '';
+        $locations = Location::where('location', 'LIKE', $keyword)->get();
+        foreach ($locations as $location) {
+            $search = $location->location;
+
+        }
+        return $search;
     }
 }

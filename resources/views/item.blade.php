@@ -1,7 +1,9 @@
 @extends('layouts.layout')
 @section('title',$item->post_title)
 @section('content')
-@include('layouts.search')
+<section class="page-search">
+<x-search />
+</section>
 <!--===================================
 =            Store Section            =
 ====================================-->

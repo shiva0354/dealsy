@@ -18,14 +18,11 @@
 <!-- Styles -->
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <link href="{!! asset('theme/plugins/bootstrap/css/bootstrap-slider.css') !!}" rel="stylesheet">
-  {{-- <!-- Font Awesome -->
-  <link href="{!! asset('theme/plugins/font-awesome/css/font-awesome.min.css') !!}" rel="stylesheet"> --}}
-  <!-- Owl Carousel -->
   <link href="{!! asset('theme/plugins/slick-carousel/slick/slick.css') !!}" rel="stylesheet">
   <link href="{!! asset('theme/plugins/slick-carousel/slick/slick-theme.css') !!}" rel="stylesheet">
   <!-- Fancy Box -->
   <link href="{!! asset('theme/plugins/fancybox/jquery.fancybox.pack.css') !!}" rel="stylesheet">
-  <link href="{!! asset('theme/plugins/jquery-nice-select/css/nice-select.css') !!}" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
   <!-- CUSTOM CSS -->
   <link href="{!! asset('theme/css/style.css') !!}" rel="stylesheet">
   </head>
@@ -40,19 +37,18 @@
 @include('layouts.footer')
   <!-- JAVASCRIPTS -->
   <script src="{!! asset('theme/plugins/jQuery/jquery.min.js') !!}"></script>
+  {{-- <script src="https://code.jquery.com/jquery-2.2.4.min.js" crossorigin="anonymous"></script> --}}
   <script src="{!! asset('theme/plugins/bootstrap/js/popper.min.js') !!}"></script>
   {{-- <script src="{!! asset('theme/plugins/bootstrap/js/bootstrap.min.js') !!}"></script> --}}
   <script src="{!! asset('theme/plugins/bootstrap/js/bootstrap-slider.js') !!}"></script>
     <!-- tether js -->
-  <script src="{!! asset('theme/plugins/tether/js/tether.min.js') !!}"></script>
-  <script src="{!! asset('theme/plugins/raty/jquery.raty-fa.js') !!}"></script>
+  {{-- <script src="{!! asset('theme/plugins/tether/js/tether.min.js') !!}"></script> --}}
+  {{-- <script src="{!! asset('theme/plugins/raty/jquery.raty-fa.js') !!}"></script> --}}
   <script src="{!! asset('theme/plugins/slick-carousel/slick/slick.min.js') !!}"></script>
-  <script src="{!! asset('theme/plugins/jquery-nice-select/js/jquery.nice-select.min.js') !!}"></script>
+  {{-- <script src="{!! asset('theme/plugins/jquery-nice-select/js/jquery.nice-select.min.js') !!}"></script> --}}
   <script src="{!! asset('theme/plugins/fancybox/jquery.fancybox.pack.js') !!}"></script>
   <script src="{!! asset('theme/plugins/smoothscroll/SmoothScroll.min.js') !!}"></script>
-  <!-- google map -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcABaamniA6OL5YvYSpB3pFMNrXwXnLwU&libraries=places"></script>
-  <script src="{{ asset('theme/plugins/google-map/gmap.js')}}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" crossorigin="anonymous"></script>
   <script src="{{ asset('theme/js/script.js')}}"></script>
   @yield('js-script')
   </body>

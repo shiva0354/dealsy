@@ -35,7 +35,7 @@
                                     <select name="category_id" class="w-100" required>
                                         <option value="" hidden class="w-100" style="width: 100% !important;">Select
                                             category</option>
-                                        @foreach (App\Models\Category::all() as $category)
+                                        @foreach ($categories as $category)
                                             <option value="{{ $category->id }}" class="w-100"
                                                 style="width: 100% !important;">{{ $category->name }}</option>
                                         @endforeach
@@ -72,10 +72,9 @@
                                 <div class="col-lg-6 mr-lg-auto my-2">
                                     <select name="state" id="state" class="w-100" required>
                                         <option value="">Select State</option>
-                                        <option value="state">State</option>
-                                        <option value="state1">Select State1</option>
-                                        <option value="state2">Select State2</option>
-                                        <option value="state3">Select State3</option>
+                                        @foreach ($locations as $location)
+                                            <option value="{{$location->id}}">{{$location->location}}</option>
+                                        @endforeach
                                         {{-- @foreach ($states as $state)
                                             <option value="{{$state}}">{{$state}}</option>
                                         @endforeach --}}

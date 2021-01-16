@@ -1,13 +1,21 @@
 @extends('layouts.layout')
-@section('title', $category->name ?? '' )
+@if($category)
+    @section('title',$category->name)
+@elseif($location)
+    @section('title',$location->location) 
+@else
+    @section('title','Search Results')  
+@endif
 @section('content')
-    @include('layouts.search')
+    <section class="page-search">
+        <x-search />
+    </section>
     <section class="section-sm">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="search-result bg-gray">
-                        <h2>Results For "{{$category->name ?? ''}}"</h2>
+                        <h2>Results For "@if($category){{$category->name}} @elseif($location) {{$location->location}} @else Search @endif"</h2>
                         <p>{{$posts->total()}} Results on {{now()}}</p>
                     </div>
                 </div>
@@ -26,45 +34,67 @@
                 <div class="col-md-3">
                     <div class="category-sidebar">
                         <div class="widget category-list">
-                            @if (!$category->parent_id) 
+                            @if ($category)
+                                @if (!$category->parent_id) 
                                 <a href="{{route('search.category',[$category->slug,$category->id])}}">
                                     <h4 class="widget-header">{{$category->name}}</h4>
                                 </a>
                                 <ul class="category-list">
-                                @foreach ($category->subCategories as $subcategory)
-                                            <li>
-                                                <a href="{{ route('search.category', [$subcategory->slug, $subcategory->id]) }}">{{ $subcategory->name }}<span>{{ $subcategory->posts()->count() }}</span></a>
-                                            </li>
-                                @endforeach
-                                </ul>
-                            @else
-                                <h4 class="widget-header">All Category</h4>
-                                <ul class="category-list">
-                                @foreach (App\Models\Category::whereNull('parent_id')->get() as $category)
+                                    @foreach ($category->subCategories as $subcategory)
                                         <li>
-                                                <a href="{{ route('search.category', [$category->slug, $category->id]) }}">{{ $category->name }}<span>{{ $category->posts()->count() }}</span></a>
+                                            <a href="{{ route('search.category', [$subcategory->slug, $subcategory->id]) }}">{{ $subcategory->name }}<span>{{ $subcategory->posts()->count() }}</span></a>
                                         </li>
                                     @endforeach
-                                </ul>
+                                </ul>                                    
+                                @endif
+                            @else
+                            <h4 class="widget-header">All Category</h4>
+                            <ul class="category-list">
+                                @foreach (App\Models\Category::whereNull('parent_id')->get() as $category)
+                                    <li>
+                                            <a href="{{ route('search.category', [$category->slug, $category->id]) }}">{{ $category->name }}<span>{{ $category->posts()->count() }}</span></a>
+                                    </li>
+                                @endforeach
+                            </ul>
                             @endif
                         </div>
 
                         <div class="widget category-list">
                             <h4 class="widget-header">Nearby</h4>
                             <ul class="category-list">
-                                <li><a href="category.html">New York <span>93</span></a></li>
-                                <li><a href="category.html">New Jersy <span>233</span></a></li>
-                                <li><a href="category.html">Florida <span>183</span></a></li>
-                                <li><a href="category.html">California <span>120</span></a></li>
-                                <li><a href="category.html">Texas <span>40</span></a></li>
-                                <li><a href="category.html">Alaska <span>81</span></a></li>
-                                <li><a href="category.html">Alaska <span>81</span></a></li>
-                                <li><a href="category.html">Alaska <span>81</span></a></li>
-                                <li><a href="category.html">Alaska <span>81</span></a></li>
-                                <li><a href="category.html">Alaska <span>81</span></a></li>
-                                <li><a href="category.html">Alaska <span>81</span></a></li>
-                                <li><a href="category.html">Alaska <span>81</span></a></li>
-                                <li><a href="category.html">Alaska <span>81</span></a></li>
+                                @if ($category)
+                                    @if ($location)
+                                        @if (!$location->parent_id)
+                                            @foreach ($location->locations as $location)
+                                            <li><a href="{{route('search.location.category',[$location->slug,$location->id,$category->slug,$category->id])}}">{{$location->location}}</a></li>
+                                            @endforeach
+                                        @elseif($location->parent_id)
+                                            @foreach ($location->posts()->distinct('locality') as $locality)
+                                            <li><a href="{{route('search.locality.category',[$location->slug,$location->id,$locality,$category->slug,$category->id])}}">{{$locality}},{{$location->location}}</a></li>
+                                            @endforeach
+                                        @endif                                       
+                                    @else
+                                        @foreach (App\Models\Location::whereNull('parent_id')->get() as $location)                                            
+                                        <li><a href="{{route('search.location.category',[$location->slug,$location->id,$category->slug,$category->id])}}">{{$location->location}}</a></li>
+                                        @endforeach
+                                    @endif
+                                @else                               
+                                    @if ($location)
+                                        @if (!$location->parent_id)
+                                            @foreach ($location->locations as $location)
+                                            <li><a href="{{route('search.location',[$location])}}">{{$location->location}}</a></li>
+                                            @endforeach
+                                        @elseif($location->parent_id)
+                                            @foreach ($location->posts()->distinct('locality') as $locality)
+                                            <li><a href="{{route('search.locality',[$location->slug, $location->id,$locality])}}">{{$locality}},{{$location->location}}</a></li>
+                                            @endforeach                                            
+                                        @endif 
+                                    @else 
+                                        @foreach (App\Models\Location::whereNull('parent_id')->get() as $location)                                            
+                                        <li><a href="{{route('search.location',[$location->slug,$location->id])}}">{{$location->location}}</a></li>
+                                        @endforeach
+                                    @endif
+                                @endif
                             </ul>
                         </div>
 
@@ -213,3 +243,4 @@
     </section>
 
 @endsection
+

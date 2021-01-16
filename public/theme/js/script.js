@@ -31,7 +31,9 @@
   $(window).on('scroll', function () {
     counter();
   });
-
+  $(document).ready(function() {
+      $('.select-category').select2();
+  }); 
   // bottom to top
   $('#top').click(function () {
     $('html, body').animate({
@@ -44,7 +46,7 @@
   $(document).on('ready', function () {
 
     // Nice Select
-    $('select').niceSelect();
+    // $('select').niceSelect();
     // -----------------------------
     //  Client Slider
     // -----------------------------
@@ -107,7 +109,7 @@
 
   // niceSelect
 
-  $('select:not(.ignore)').niceSelect();
+  // $('select:not(.ignore)').niceSelect();
 
   // blog post-slider
   $('.post-slider').slick({

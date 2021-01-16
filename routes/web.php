@@ -68,4 +68,8 @@ Route::get('search', [SearchController::class, 'search'])->name('search');
 Route::get('{category}_c{categoryId}', [SearchController::class, 'categorySearch'])->name('search.category');
 Route::get('{location}_g{locationId}', [SearchController::class, 'locationSearch'])->name('search.location');
 Route::get('{location}_g{locationId}/{category}_c{categoryId}', [SearchController::class, 'locationCategorySearch'])->name('search.location.category');
-Route::get('{location}_g{locationId}/{locality}/{category}_c{categoryId}', [SearchController::class, 'localitySearch'])->name('search.locality');
+Route::get('{location}_g{locationId}/{locality}', [SearchController::class, 'localitySearch'])->name('search.locality');
+Route::get('{location}_g{locationId}/{locality}/{category}_c{categoryId}', [SearchController::class, 'localityCategorySearch'])->name('search.locality.category');
+
+//ajax
+Route::get('ajax-location', [PostController::class, 'ajaxLocation'])->name('ajax.location');

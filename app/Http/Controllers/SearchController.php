@@ -46,7 +46,8 @@ class SearchController extends Controller
 
     public function LocationSearch($location, $location_id)
     {
-        $category = Category::findOrFail($location_id);
+        // $category = Category::findOrFail($location_id);
+        $category = null;
         $location = Location::findOrFail($location_id);
 
         $posts = Post::where('status', 'ACTIVE')->where('location_id', $location_id)->paginate(9);
@@ -62,12 +63,20 @@ class SearchController extends Controller
         return view('products', compact('posts', 'category', 'location'));
     }
 
-    public function localitySearch($location, $location_id, $locality, $category, $category_id)
+    public function localityCategorySearch($location, $location_id, $locality, $category, $category_id)
     {
         $category = Category::findOrFail($category_id);
         $location = Location::findOrFail($location_id);
 
         $posts = Post::where('status', 'ACTIVE')->where('category_id', $category_id)->where('locality', $locality)->paginate(9);
+        return view('products', compact('posts', 'category', 'location'));
+    }
+
+    public function localitySearch($location, $location_id, $locality){
+        $category = null;
+        $location = Location::findOrFail($location_id);
+
+        $posts = Post::where('status', 'ACTIVE')->where('locality', $locality)->paginate(9);
         return view('products', compact('posts', 'category', 'location'));
     }
 
