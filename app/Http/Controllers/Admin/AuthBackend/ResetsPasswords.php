@@ -172,7 +172,7 @@ trait ResetsPasswords
      */
     public function broker()
     {
-        return Password::broker();
+        return Password::broker('admins');
     }
 
     /**
