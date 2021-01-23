@@ -1,5 +1,11 @@
 <?php
 
+use App\Http\Controllers\Admin\Auth\ConfirmPasswordController as AdminConfirmPassword;
+use App\Http\Controllers\Admin\Auth\ForgotPasswordController as AdminForgotPassword;
+use App\Http\Controllers\Admin\Auth\LoginController as AdminLogin;
+use App\Http\Controllers\Admin\Auth\ResetPasswordController as AdminResetPassword;
+use App\Http\Controllers\Admin\Auth\VerificationController as AdminVerification;
+use App\Http\Controllers\Admin\HomeController as AdminHome;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -56,11 +62,11 @@ Route::group(['middleware' => ['auth']], function () {
 // pages
 Route::get('pricing', [PageController::class, 'pricing'])->name('pricing.package');
 Route::get('terms', [PageController::class, 'terms'])->name('terms');
-Route::get('contact', [ContactController::class, 'index'])->name('contact-us');
-Route::post('contact', [ContactController::class, 'store']);
 Route::get('about', [PageController::class, 'about'])->name('about-us');
 Route::get('404', [PageController::class, 'error'])->name('error404');
 Route::get('privacy', [PageController::class, 'privacy'])->name('privacy');
+Route::get('contact', [ContactController::class, 'index'])->name('contact-us');
+Route::post('contact', [ContactController::class, 'store']);
 //item
 Route::get('item/{id}/{title}', [ItemController::class, 'showItem'])->name('item');
 //Search
@@ -73,3 +79,25 @@ Route::get('{location}_g{locationId}/{locality}/{category}_c{categoryId}', [Sear
 
 //ajax
 Route::get('ajax-location', [PostController::class, 'ajaxLocation'])->name('ajax.location');
+
+Route::group(['prefix' => 'admin', 'name' => 'admin.', 'middleware' => ['adminauth']], function () {
+    Route::get('login', [AdminLogin::class, 'showLoginForm'])->name('login');
+    Route::post('login', [AdminLogin::class, 'login']);
+    Route::get('register', [App\Http\Controllers\Admin\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
+    Route::post('register', [App\Http\Controllers\Admin\Auth\RegisterController::class, 'register']);
+    Route::get('password/reset', [AdminForgotPassword::class, 'showLinkRequestForm'])->name('password.request');
+    Route::post('password/email', [AdminForgotPassword::class, 'sendResetLinkEmail'])->name('password.email');
+    Route::get('password/reset/{token}', [AdminResetPassword::class, 'showResetForm'])->name('password.reset');
+    Route::post('password/reset', [AdminResetPassword::class, 'reset'])->name('password.update');
+    Route::get('password/confirm', [AdminConfirmPassword::class, 'showConfirmForm'])->name('password.confirm');
+    Route::post('password/confirm', [AdminConfirmPassword::class, 'confirm']);
+    Route::get('email/verify', [AdminVerification::class, 'show'])->name('verification.notice');
+    Route::get('email/verify/{id}/{hash}', [AdminVerification::class, 'verify'])->name('verification.verify');
+    Route::post('email/resend', [AdminVerification::class, 'resend'])->name('verification.resend');
+});
+
+Route::post('logout', [AdminLogin::class, 'logout'])->name('logout');
+Route::group(['prefix' => 'admin', 'name' => 'admin.', 'middleware' => ['auth:admin']], function () {
+    Route::get('/', [AdminHome::class, 'index'])->name('home');
+    Route::get('home', [AdminHome::class, 'home']);
+});
