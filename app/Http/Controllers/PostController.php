@@ -24,7 +24,7 @@ class PostController extends Controller
 
     public function create()
     {
-        $categories = Category::whereNull('parent_id')->get();
+        $categories = Category::all();
         $locations = Location::whereNull('parent_id')->get();
         return view('ad-listing', compact('categories', 'locations'));
     }
@@ -46,7 +46,7 @@ class PostController extends Controller
                 'expected_price' => $request->input('expected_price'),
                 'is_price_negotiable' => $request->input('is_negotiable'),
                 'locality' => $request->input('locality'),
-                'city' => $request->input('city'),
+                'location_id' => $request->input('city'),
                 'state' => $request->input('state'),
             ]);
 

@@ -2,9 +2,7 @@
 @section('title', 'Post Your Ad')
 @section('content')
 
-    <section class="bg-gray py-5">
-        {{-- <script src="{!!  url('theme/plugins/ckeditor/ckeditor.js') !!}"></script>
-        --}}
+    <section class="bg-gray py-5">       
         <div class="container">
             @if ($errors->any())
                 <div class="alert alert-warning">
@@ -32,7 +30,7 @@
                             <h6 class="font-weight-bold pt-4 pb-1">Select Ad Category:</h6>
                             <div class="row">
                                 <div class="col-lg-6 mr-lg-auto my-2">
-                                    <select name="category_id" class="w-100" required>
+                                    <select name="category_id" class="w-100 select-category" required>
                                         <option value="" hidden class="w-100" style="width: 100% !important;">Select
                                             category</option>
                                         @foreach ($categories as $category)
@@ -42,11 +40,11 @@
                                     </select>
                                 <div class="invalid-feedback">Select Category</div>
                                 </div>
-                                <div class="col-lg-6 mr-lg-auto my-2">
+                                {{-- <div class="col-lg-6 mr-lg-auto my-2">
                                     <select name="sub_category_id" class="w-100" style="width: 100% !important;">
                                         <option value="" hidden class="w-100">Sub category</option>
                                     </select>
-                                </div>
+                                </div> --}}
                             </div>
                             <h6 class="font-weight-bold pt-4 pb-1">Ad Type:</h6>
                             <div class="row px-3">
@@ -70,10 +68,10 @@
                                         <div class="invalid-feedback">Enter city</div>
                                 </div>
                                 <div class="col-lg-6 mr-lg-auto my-2">
-                                    <select name="state" id="state" class="w-100" required>
+                                    <select name="state" id="state" class="w-100 select-category" required>
                                         <option value="">Select State</option>
-                                        @foreach ($locations as $location)
-                                            <option value="{{$location->id}}">{{$location->location}}</option>
+                                        @foreach (App\Models\Location::whereNull('parent_id')->get() as $location)
+                                            <option value="{{$location->location}}">{{$location->location}}</option>
                                         @endforeach
                                         {{-- @foreach ($states as $state)
                                             <option value="{{$state}}">{{$state}}</option>
@@ -95,7 +93,7 @@
                                         {{-- </div> --}}
                                     </div>
                                     <div class="col-lg-4 rounded bg-white my-2 ">
-                                        <select name="is_negotiable" id="state" class="w-100" required>
+                                        <select name="is_negotiable" class="w-100 form-control" required style="border: none;">
                                             <option value="">Is Negotiable</option>
                                             <option value="YES">YES</option>
                                             <option value="NO">NO</option>
@@ -105,13 +103,12 @@
                                 </div>
                             </div>
                             <h6 class="font-weight-bold pt-4 pb-1">Ad Description:</h6>
-                            <textarea name="post_detail" id="post_detail" class="border p-3 w-100" rows="7"
+                            <textarea name="post_detail" id="post_detail" class="border p-3 w-100" rows="15"
                                 placeholder="Write details about your product" required></textarea>
                                <div class="invalid-feedback">Enter Ad details</div>
-                            <script>
+                            {{-- <script>
                                 CKEDITOR.replace('post_detail');
-
-                            </script>
+                            </script> --}}
                             <!--text editor end here-->
                         </div>
                     </div>
@@ -125,13 +122,6 @@
                             <h3>Product Images</h3>
                         </div>
                         <div class="choose-file my-4 py-4 rounded col-lg-3">
-                            {{-- <label for="file-upload">
-                                <span class="d-block font-weight-bold text-dark">Drop files anywhere to upload</span>
-                                <span class="d-block">or</span>
-                                <span class="d-block btn bg-primary text-white my-3 select-files">Select files</span>
-                                <span class="d-block">Maximum upload file size: 500 KB</span>
-                                <input type="file" class="form-control-file d-none" id="file-upload" name="file">
-                            </label> --}}
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" name="images[]" id="file1" accept=".jpg, .jpeg, .png" required>
                                 <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
@@ -191,62 +181,6 @@
                 </fieldset>
                 <!-- seller-information end-->
 
-                <!-- ad-feature start -->
-                {{-- <fieldset class="border bg-white p-4 my-5 ad-feature bg-gray">
-                    <div class="row">
-                        <div class="col-lg-12">
-
-                            <h3 class="pb-3">Make Your Ad Featured
-                                <span class="float-right"><a class="text-right font-weight-normal text-success"
-                                        href="#">What
-                                        is featured ad ?</a></span>
-                            </h3>
-
-                        </div>
-                        <div class="col-lg-6 my-3">
-                            <span class="mb-3 d-block">Premium Ad Options:</span>
-                            <ul>
-                                <li>
-                                    <input type="radio" id="regular-ad" name="adfeature">
-                                    <label for="regular-ad" class="font-weight-bold text-dark py-1">Regular Ad</label>
-                                    <span>$00.00</span>
-                                </li>
-                                <li>
-                                    <input type="radio" id="Featured-Ads" name="adfeature">
-                                    <label for="Featured-Ads" class="font-weight-bold text-dark py-1">Top Featured
-                                        Ads</label>
-                                    <span>$59.00</span>
-                                </li>
-                                <li>
-                                    <input type="radio" id="urgent-Ads" name="adfeature">
-                                    <label for="urgent-Ads" class="font-weight-bold text-dark py-1">Urgent Ads</label>
-                                    <span>$79.00</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-6 my-3">
-                            <span class="mb-3 d-block">Please select the preferred payment method:</span>
-                            <ul>
-                                <li>
-                                    <input type="radio" id="bank-transfer" name="adfeature">
-                                    <label for="bank-transfer" class="font-weight-bold text-dark py-1">Direct Bank
-                                        Transfer</label>
-                                </li>
-                                <li>
-                                    <input type="radio" id="Cheque-Payment" name="adfeature">
-                                    <label for="Cheque-Payment" class="font-weight-bold text-dark py-1">Cheque
-                                        Payment</label>
-                                </li>
-                                <li>
-                                    <input type="radio" id="Credit-Card" name="adfeature">
-                                    <label for="Credit-Card" class="font-weight-bold text-dark py-1">Credit Card</label>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </fieldset> --}}
-                <!-- ad-feature start -->
-
                 <!-- submit button -->
                 <div class="checkbox d-inline-flex">
                     <input type="checkbox" id="terms-&-condition" class="mt-1" required>
@@ -287,16 +221,6 @@
         })();
         $(document).ready(function () {
             bsCustomFileInput.init()
-
-            $(".slug-source").bind("propertychange keyup input cut paste", function (event) {
-                let slugId = $(this).data('slug-sink');
-
-                let slug = $("#" + slugId);
-                if (slug) {
-                    let text = slugify($(this).val());
-                    slug.val(text);
-                }
-            });
         });
     </script>
 @stop
