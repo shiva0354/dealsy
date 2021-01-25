@@ -80,7 +80,7 @@ Route::get('{location}_g{locationId}/{locality}/{category}_c{categoryId}', [Sear
 //ajax
 Route::get('ajax-location', [PostController::class, 'ajaxLocation'])->name('ajax.location');
 
-Route::group(['prefix' => 'admin', 'name' => 'admin.', 'middleware' => ['adminauth']], function () {
+Route::prefix('admin')->name('admin.')->middleware('adminauth')->group(function () {
     Route::get('login', [AdminLogin::class, 'showLoginForm'])->name('login');
     Route::post('login', [AdminLogin::class, 'login']);
     Route::get('register', [App\Http\Controllers\Admin\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
@@ -96,8 +96,9 @@ Route::group(['prefix' => 'admin', 'name' => 'admin.', 'middleware' => ['adminau
     Route::post('email/resend', [AdminVerification::class, 'resend'])->name('verification.resend');
 });
 
-Route::post('logout', [AdminLogin::class, 'logout'])->name('logout');
-Route::group(['prefix' => 'admin', 'name' => 'admin.', 'middleware' => ['auth:admin']], function () {
-    Route::get('/', [AdminHome::class, 'index'])->name('home');
-    Route::get('home', [AdminHome::class, 'home']);
+Route::post('admin/logout', [AdminLogin::class, 'logout'])->name('admin.logout');
+
+Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function () {
+
+    Route::get('/', [AdminHome::class, 'index'])->name('admin.home');
 });

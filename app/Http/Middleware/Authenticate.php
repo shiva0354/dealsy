@@ -12,10 +12,21 @@ class Authenticate extends Middleware
      * @param  \Illuminate\Http\Request  $request
      * @return string|null
      */
+    private $guards;
+
+    protected function unauthenticated($request, array $guards)
+    {
+        $this->guards = $guards;
+        parent::unauthenticated($request, $guards);
+    }
     protected function redirectTo($request)
     {
-        if (! $request->expectsJson()) {
-            return route('login');
+
+        if (!$request->expectsJson()) {
+            $guard = $this->guards[0] ?? null;
+            return $guard ? route("$guard.login") : route('login');
         }
+
+        return null;
     }
 }
