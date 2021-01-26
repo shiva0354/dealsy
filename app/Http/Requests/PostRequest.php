@@ -23,19 +23,18 @@ class PostRequest extends FormRequest
      */
     public function rules()
     {
-        return [ 
+        return [
             'category_id' => 'required|numeric',
-            'post_title' => 'required|string|min:30|max:255',
-            'post_detail' => 'required|string|min:30|max:1000',
-            // 'sub_category_id' => 'nullable|numeric',
+            'title' => 'required|string|min:20|max:60',
+            'detail' => 'required|string|min:30|max:1000',
             'ad_type' => 'required|string',
             'expected_price' => 'required|nullable|numeric',
-            'is_negotiable' => 'nullable|string',
+            'is_price_negotiable' => 'nullable|string',
             'locality' => 'required|string|min:3|max:255',
             'location_id' => 'required|numeric',
-            'state' => 'required|string|min:2|max:255',
+            'state_id' => 'required|numeric',
             'images' => 'required',
-            'images.*' => 'image|mimes:png,jpg,jpeg|max:1000',
+            'images.*' => 'image|mimes:png,jpg,jpeg|max:2000',
         ];
     }
 }

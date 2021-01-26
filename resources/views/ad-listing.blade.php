@@ -23,9 +23,9 @@
                         </div>
                         <div class="col-lg-6">
                             <h6 class="font-weight-bold pt-4 pb-1">Title Of Ad:</h6>
-                            <input type="text" name="post_title" class="border w-100 p-2 bg-white text-capitalize"
-                                placeholder="Ad title go There" required>
-                               <div class="invalid-feedback">Please enter Ad title</div>
+                            <input type="text" name="title" class="border w-100 p-2 bg-white text-capitalize"
+                              pattern="[a-zA-Z0-9 ]{20,60}"  placeholder="Ad title go There" required value="{{old('title')}}">
+                               <div class="invalid-feedback">Please enter Ad title. Minimum of 20 characters and maximum of 80 character</div>
 
                             <h6 class="font-weight-bold pt-4 pb-1">Select Ad Category:</h6>
                             <div class="row">
@@ -40,11 +40,6 @@
                                     </select>
                                 <div class="invalid-feedback">Select Category</div>
                                 </div>
-                                {{-- <div class="col-lg-6 mr-lg-auto my-2">
-                                    <select name="sub_category_id" class="w-100" style="width: 100% !important;">
-                                        <option value="" hidden class="w-100">Sub category</option>
-                                    </select>
-                                </div> --}}
                             </div>
                             <h6 class="font-weight-bold pt-4 pb-1">Ad Type:</h6>
                             <div class="row px-3">
@@ -59,23 +54,24 @@
                             </div>
                             <h6 class="font-weight-bold pt-4 pb-1">Location:</h6>
                             <input type="text" name="locality" class="border w-100 p-2 bg-white text-capitalize"
-                                placeholder="Enter Locality" required>
+                                placeholder="Enter Locality" required value="{{old('locality')}}">
                                 <div class="invalid-feedback">Enter locality</div>
                             <div class="row">
                                 <div class="col-lg-6 mr-lg-auto my-2">
-                                    <input type="text" name="city" class="border w-100 p-2 bg-white text-capitalize"
-                                        placeholder="Enter City" required>
-                                        <div class="invalid-feedback">Enter city</div>
+                                    <select name="location_id" id="city" class="w-100 select-category" required>
+                                        <option value="">Select City</option>
+                                        @foreach ($cities as $city)
+                                            <option value="{{$city->id}}">{{$city->location}}</option>
+                                        @endforeach
+                                    </select>
+                                    <div class="invalid-feedback">Select City</div>
                                 </div>
                                 <div class="col-lg-6 mr-lg-auto my-2">
-                                    <select name="state" id="state" class="w-100 select-category" required>
+                                    <select name="state_id" id="state" class="w-100 select-category" required>
                                         <option value="">Select State</option>
-                                        @foreach (App\Models\Location::whereNull('parent_id')->get() as $location)
-                                            <option value="{{$location->location}}">{{$location->location}}</option>
+                                        @foreach ($states as $state)
+                                            <option value="{{$state->id}}">{{$state->location}}</option>
                                         @endforeach
-                                        {{-- @foreach ($states as $state)
-                                            <option value="{{$state}}">{{$state}}</option>
-                                        @endforeach --}}
                                     </select>
                                     <div class="invalid-feedback">Select State</div>
                                 </div>
@@ -88,12 +84,12 @@
                                     <div class="col-lg-4 mr-lg-4 rounded bg-white my-2 ">
                                         {{-- <div class="form-group"> --}}
                                             <input type="text" name="expected_price" class="border-0 py-2 w-100 price"
-                                            placeholder="Price" id="price" required>
+                                            pattern="[0-9]{2,9}" placeholder="Price" id="price" required>
                                             <div class="invalid-feedback">Enter your expected price</div>
                                         {{-- </div> --}}
                                     </div>
                                     <div class="col-lg-4 rounded bg-white my-2 ">
-                                        <select name="is_negotiable" class="w-100 form-control" required style="border: none;">
+                                        <select name="is_price_negotiable" class="w-100 form-control" required style="border: none;">
                                             <option value="">Is Negotiable</option>
                                             <option value="YES">YES</option>
                                             <option value="NO">NO</option>
@@ -103,19 +99,13 @@
                                 </div>
                             </div>
                             <h6 class="font-weight-bold pt-4 pb-1">Ad Description:</h6>
-                            <textarea name="post_detail" id="post_detail" class="border p-3 w-100" rows="15"
-                                placeholder="Write details about your product" required></textarea>
-                               <div class="invalid-feedback">Enter Ad details</div>
-                            {{-- <script>
-                                CKEDITOR.replace('post_detail');
-                            </script> --}}
-                            <!--text editor end here-->
+                            <textarea name="detail" id="post_detail" class="border p-3 w-100" rows="15"
+                                placeholder="Write details about your product" pattern="[*]{100,1000}" required>{{old('detail')}}</textarea>
+                               <div class="invalid-feedback">Enter Ad details. Minimum of 100 character and maximum of 1000 character</div>
                         </div>
                     </div>
                 </fieldset>
                 <!-- Post Your ad end -->
-
-                <!-- seller-information start -->
                 <fieldset class="border p-4 my-5 seller-information bg-gray">
                     <div class="row">
                         <div class="col-lg-12">
@@ -179,8 +169,6 @@
                         </div>
                     </div>
                 </fieldset>
-                <!-- seller-information end-->
-
                 <!-- submit button -->
                 <div class="checkbox d-inline-flex">
                     <input type="checkbox" id="terms-&-condition" class="mt-1" required>
@@ -199,7 +187,6 @@
 @endsection
 @section('js-script')
     <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input@1.3.4/dist/bs-custom-file-input.min.js"></script>
-    <script src="//cdn.ckeditor.com/4.15.0/basic/ckeditor.js"></script>
     <script>
         // Example starter JavaScript for disabling form submissions if there are invalid fields
         (function () {
