@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Library\UserAuthGuard;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -13,10 +14,7 @@ use Illuminate\Support\Str;
 //don't forget to implement database transaction
 class UserController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    use UserAuthGuard;
     //show edit profile
     public function index()
     {
@@ -31,7 +29,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
         ]);
         $user->update($validatedData);
-        return redirect()->back()->with('success','Name changed successfully');
+        return redirect()->back()->with('success', 'Name changed successfully');
     }
     //change password when user is logged in
     public function changePassword(Request $request)
@@ -87,19 +85,20 @@ class UserController extends Controller
     }
 
     //change profile picture
-    public function changePicture(Request $request){
+    public function changePicture(Request $request)
+    {
         $user = User::current();
-        $request->validate(['avatar'=>'required|image|mimes:png,jpg|max:1000']);
+        $request->validate(['avatar' => 'required|image|mimes:png,jpg|max:1000']);
         try {
-            $file =$request->file('avatar'); 
+            $file = $request->file('avatar');
             $name = Str::random(60) . '.' . $file->extension();
-            $file->move(public_path('uploads/users/') , $name);
-            $path ='uploads/users/'. $name;
-            $user->update(['avatar'=>$path]);
+            $file->move(public_path('uploads/users/'), $name);
+            $path = 'uploads/users/' . $name;
+            $user->update(['avatar' => $path]);
         } catch (\Exception $e) {
-            return redirect()->back()->with('success',$e->getMessage());  
+            return redirect()->back()->with('success', $e->getMessage());
         }
-        return redirect()->back()->with('success','Profile Picture updated');    
+        return redirect()->back()->with('success', 'Profile Picture updated');
     }
 
     //soft deleting user from the database

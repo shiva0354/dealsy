@@ -21,15 +21,6 @@
 @section('auth_header', __('adminlte::adminlte.login_message'))
 
 @section('auth_body')
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
     <form action="{{ $login_url }}" method="post">
         {{ csrf_field() }}
 

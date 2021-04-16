@@ -2,15 +2,14 @@
 
 namespace App\Models;
 
-use App\Http\Controllers\Admin\AuthBackend\VerifiesEmails;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Notifications\AdminResetPasswordNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class Admin extends Authenticatable implements MustVerifyEmail
+class Admin extends Authenticatable
 {
-    use HasFactory, VerifiesEmails,Notifiable;
+    use HasFactory, Notifiable;
 
     protected $fillable = [
         'name',
@@ -28,4 +27,9 @@ class Admin extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new AdminResetPasswordNotification($token));
+    }
 }

@@ -19,14 +19,15 @@ class Authenticate extends Middleware
         $this->guards = $guards;
         parent::unauthenticated($request, $guards);
     }
+
     protected function redirectTo($request)
     {
+        // if (!$request->expectsJson()) {
+        //     $guard = $this->guards[0] ?? null;
+        //     return $guard ? route("$guard.login") : route('login');
+        // }
 
-        if (!$request->expectsJson()) {
-            $guard = $this->guards[0] ?? null;
-            return $guard ? route("$guard.login") : route('login');
-        }
-
-        return null;
+        $guard = $this->guards[0] ?? null;
+        return $guard ? route("$guard.login") : route('login');
     }
 }

@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Library\UserAuthGuard;
 use App\Models\User;
 
 class UserDashboardController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    use UserAuthGuard;
     // show user dashboard
     public function index()
     {

@@ -86,7 +86,7 @@
                                             <ul class="list-inline product-meta">
                                                 <li class="list-inline-item">
                                                     <a href="single.html"><i
-                                                            class="fa fa-folder-open-o"></i>{{ $post->category->name }}</a>
+                                                            class="fa fa-folder-open-o"></i>{{ $post->category->name ?? '' }}</a>
                                                 </li>
                                                 <li class="list-inline-item">
                                                     <a href="#"><i class="fa fa-calendar"></i>{{ $post->created_at }}</a>
