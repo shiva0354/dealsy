@@ -47,7 +47,7 @@
   <script src="{!! asset('theme/plugins/slick-carousel/slick/slick.min.js') !!}"></script>
   {{-- <script src="{!! asset('theme/plugins/jquery-nice-select/js/jquery.nice-select.min.js') !!}"></script> --}}
   <script src="{!! asset('theme/plugins/fancybox/jquery.fancybox.pack.js') !!}"></script>
-  <script src="{!! asset('theme/plugins/smoothscroll/SmoothScroll.min.js') !!}"></script>
+  {{-- <script src="{!! asset('theme/plugins/smoothscroll/SmoothScroll.min.js') !!}"></script> --}}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" crossorigin="anonymous"></script>
   <script src="{{ asset('theme/js/script.js')}}"></script>
   @yield('js-script')

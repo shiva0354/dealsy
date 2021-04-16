@@ -9,12 +9,8 @@ use App\Models\Post;
 use App\Models\PostImage;
 use App\Models\User;
 use Exception;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-// Don't forget to implement database transaction while adding and updating product
-// implement auto approve ads after new ads get submitted by the user
 class PostController extends Controller
 {
     public function __construct()
@@ -25,8 +21,27 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::all();
-        $locations = Location::whereNull('parent_id')->get();
-        return view('ad-listing', compact('categories', 'locations'));
+        $states = Location::whereNull('parent_id')->get();
+        $cities = Location::whereNotNull('parent_id')->get();
+        return view('ad-listing', compact('categories', 'states', 'cities'));
+    }
+
+    public function show($id)
+    {
+        // show the particular ad
+        $post = Post::findOrFail($id);
+        return view('item', compact('post'));
+    }
+    //show ad edit form view
+    public function edit($id)
+    {
+        $user = User::current();
+        $post = $user->findPostOrFail($id);
+        $categories = Category::all();
+        $states = Location::whereNull('parent_id')->get();
+        $cities = Location::whereNotNull('parent_id')->get();
+        return view('ad-listing', compact('categories', 'states', 'cities', 'post'));
+
     }
 
     public function store(PostRequest $request)
@@ -34,21 +49,9 @@ class PostController extends Controller
         //create and store the newly ads
         $user = User::current();
         try {
-
             $images = $this->saveImage($request);
-
-            $post = Post::create([
-                'user_id' => $user->id,
-                'title' => $request->input('post_title'),
-                'detail' => $request->input('post_detail'),
-                'category_id' => $request->input('category_id'),
-                'ad_type' => $request->input('ad_type'),
-                'expected_price' => $request->input('expected_price'),
-                'is_price_negotiable' => $request->input('is_negotiable'),
-                'locality' => $request->input('locality'),
-                'location_id' => $request->input('city'),
-                'state' => $request->input('state'),
-            ]);
+            $input = $this->getInput($request, $user->id);
+            $post = Post::create($input);
 
             if ($images) {
                 foreach ($images as $image) {
@@ -60,6 +63,56 @@ class PostController extends Controller
             return redirect()->back()->with('error', $e->getMessage());
         }
         return redirect()->route('home')->with('success', 'Ad posted successfully');
+    }
+
+    public function update(PostRequest $request, $id)
+    {
+        //uodate the posting of ads
+        $user = User::current();
+        $post = $user->findPostOrFail($id);
+        try {
+            $images = $this->saveImage($request);
+            $input = $this->getInput($request, $user->id);
+
+            $post->update($input);
+
+            if ($images) {
+                foreach ($images as $image) {
+                    PostImage::create(['post_id' => $post->id, 'image' => $image]);
+                }
+            }
+
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+        return redirect()->route('home')->with('success', 'Ad updated successfully');
+
+    }
+
+    public function destroy($id)
+    {
+        $user = User::current();
+        $post = $user->findPostOrFail($id);
+        $post->delete();
+        return redirect()->intended()->with('success', 'Post Deleted Successfully');
+    }
+
+    private function getInput($request, $userId)
+    {
+        $input = $request->only([
+            'category_id',
+            'title',
+            'detail',
+            'ad_type',
+            'expected_price',
+            'is_price_negotiable',
+            'locality',
+            'location_id', //city
+            'state_id',
+        ]);
+
+        $input['user_id'] = $userId;
+        return $input;
     }
 
     private function saveImage($request)
@@ -74,53 +127,5 @@ class PostController extends Controller
             }
         }
         return $images;
-    }
-
-    public function show($id)
-    {
-        // show the particular ad
-        $post = Post::findOrFail($id);
-        return view('item', compact('post'));
-    }
-    //show ad edit form view
-    public function edit($id)
-    {
-        User::current();
-        $post = Post::findOrFail($id);
-        return view('item', compact('post', 'countries'));
-    }
-
-    public function update(PostRequest $request, $id)
-    {
-        //uodate the posting of ads
-        $user = User::current();
-    }
-
-    public function destroy($id)
-    {
-        User::current();
-
-        DB::beginTransaction();
-        try {
-            $post = Post::findOrFail($id); //user can only delete their own post
-            $post->destroy();
-        } catch (Exception $e) {
-            DB::rollback();
-            return redirect()->intended()->with('error', $e->getMessage());
-        }
-        DB::commit();
-        return redirect()->intended()->with('success', 'Post Deleted Successfully');
-    }
-
-    public function ajaxLocation(Request $request)
-    {
-        $keyword = $request->input('keyword');
-        $search[] = '';
-        $locations = Location::where('location', 'LIKE', $keyword)->get();
-        foreach ($locations as $location) {
-            $search = $location->location;
-
-        }
-        return $search;
     }
 }

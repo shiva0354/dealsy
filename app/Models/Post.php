@@ -15,19 +15,30 @@ class Post extends Model
     protected $fillable = [
         'user_id',
         'category_id',
-        'sub_category_id',
-        'post_title',
-        'post_detail',
-        'is_active',
-        'is_seller',
-        'is_individual',
+        'title',
+        'detail',
+        'status',
+        'ad_type',
         'expected_price',
         'is_price_negotiable',
         'last_renewed_on',
         'locality',
-        'city',
-        'state',
-        'images',
+        'location_id', //city
+        'state_id',
+    ];
+
+    protected $visible = [
+        'category_id',
+        'title',
+        'detail',
+        'status',
+        'ad_type',
+        'expected_price',
+        'is_price_negotiable',
+        'locality',
+        'location_id', //city
+        'state_id',
+        'created_at' => 'date',
     ];
 
     //castiing data type

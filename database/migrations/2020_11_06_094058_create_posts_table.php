@@ -27,12 +27,12 @@ class CreatePostsTable extends Migration
             $table->timestamp('last_renewed_on')->nullable();
             $table->string('locality')->nullable();
             $table->foreignId('location_id')->nullable()->constrained();
-            $table->string('state')->nullable();
+            $table->foreignId('state_id')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
 
-        DB::update("ALTER TABLE posts AUTO_INCREMENT = 1000000000;");
+        DB::update("ALTER TABLE posts AUTO_INCREMENT = 1000000000");
     }
 
     /**
