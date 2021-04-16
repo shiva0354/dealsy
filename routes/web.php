@@ -5,34 +5,36 @@ use App\Http\Controllers\Admin\Auth\AdminForgotPasswordController;
 use App\Http\Controllers\Admin\Auth\AdminLoginController;
 use App\Http\Controllers\Admin\Auth\AdminResetPasswordController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\PasswordController;
-use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserDashboardController;
+use App\Http\Controllers\User\Auth\UserForgotPasswordController;
+use App\Http\Controllers\User\Auth\UserLoginController;
+use App\Http\Controllers\User\Auth\UserRegisterController;
+use App\Http\Controllers\User\Auth\UserResetPasswordController;
+use App\Http\Controllers\User\UserHomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [HomeController::class, 'home'])->name('home');
+Route::get('/', [UserHomeController::class, 'home'])->name('home');
 //manual signup
-Route::get('/signup', [RegisterController::class, 'index'])->name('signup');
-Route::post('/signup', [RegisterController::class, 'create']);
+Route::get('/signup', [UserRegisterController::class, 'showRegistrationForm'])->name('signup');
+Route::post('/signup', [UserRegisterController::class, 'register']);
 // //manual login
-Route::get('/login', [LoginController::class, 'index'])->name('login');
-Route::post('/login', [LoginController::class, 'emailLogin']);
+Route::get('/login', [UserLoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [UserLoginController::class, 'login']);
 //social login
 Route::get('login/{driver}', [LoginController::class, 'redirectToProvider'])->name('social.login');
 Route::get('login/{driver}/callback', [LoginController::class, 'handleProviderCallback']);
 //forgot-password
-Route::get('/forgot-password', [PasswordController::class, 'index'])->name('forgot.password');
-Route::post('/forgot-password', [PasswordController::class, 'postEmail']);
+Route::get('password/reset', [UserForgotPasswordController::class, 'showForm'])->name('password.request');
+Route::post('password/email', [UserForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
 //reset password
-Route::get('/reset-password/{token}', [PasswordController::class, 'showResetPassword'])->name('reset.password');
-Route::post('/reset-password', [PasswordController::class, 'resetPassword'])->name('password.reset');
+Route::get('password/reset/{token}', [UserResetPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('password/reset', [UserResetPasswordController::class, 'reset'])->name('password.update');
 //logout
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 //pages that user can access after login

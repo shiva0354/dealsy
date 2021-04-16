@@ -37,7 +37,7 @@
                                     in</button>
                                 <div class="col">
                                     <a class="mt-3 d-block  text-primary float-left"
-                                        href="{{ route('forgot.password') }}">Forget Password?</a>
+                                        href="{{ route('password.request') }}">Forget Password?</a>
                                     <a class="mt-3 d-inline-block text-primary float-right"
                                         href="{{ route('signup') }}">Register Now</a>
                                 </div>

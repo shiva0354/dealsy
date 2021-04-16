@@ -26,7 +26,7 @@
                                         <a class="dropdown-item" href="{{ route('user.saved.ads') }}">Dashboard Favourite Ads</a>
                                         <a class="dropdown-item" href="{{ route('user.archive.ads') }}">Dashboard Archived Ads</a>
                                         <a class="dropdown-item" href="{{ route('user.pending.ads') }}">Dashboard Pending Ads</a>
-                                        <a class="dropdown-item" href="{{ route('user.logout') }}"><i class="fa fa-power"></i>Logout</a>
+                                        <a class="dropdown-item" href="{{ route('logout') }}"><i class="fa fa-power"></i>Logout</a>
                                     </div>
                                 </li>
                                 <li class="nav-item">
