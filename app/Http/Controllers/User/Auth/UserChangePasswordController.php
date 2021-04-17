@@ -16,8 +16,6 @@ class UserChangePasswordController extends Controller
         $this->middleware('auth');
     }
 
-    protected $redirectTo = '/user/dashboard';
-
     public function showForm()
     {
         return view('user.auth.change-password');

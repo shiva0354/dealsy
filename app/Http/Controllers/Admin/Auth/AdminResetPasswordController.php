@@ -12,6 +12,11 @@ class AdminResetPasswordController extends Controller
 {
     use ResetsPasswords;
 
+    public function __construct()
+    {
+        $this->middleware('auth')->only(['showChangePasswordForm', 'changePassword']);
+    }
+
     protected $redirectTo = '/admin';
 
     public function showResetForm(Request $request)
@@ -31,5 +36,19 @@ class AdminResetPasswordController extends Controller
     protected function guard()
     {
         return Auth::guard('admin');
+    }
+
+    public function showChangePasswordForm()
+    {
+        return view('admin.admin-password');
+    }
+
+    public function changePassword(Request $request)
+    {
+        $request->validate($this->rules(), $this->validationErrorMessages());
+        $user = $this->guard()->user();
+        $password = $request->input('password');
+        $this->resetPassword($user, $password);
+        return redirect()->route('admin.home');
     }
 }

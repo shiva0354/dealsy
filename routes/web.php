@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminAdminController;
+use App\Http\Controllers\Admin\AdminContactController;
 use App\Http\Controllers\Admin\AdminHomeController;
 use App\Http\Controllers\Admin\Auth\AdminForgotPasswordController;
 use App\Http\Controllers\Admin\Auth\AdminLoginController;
@@ -48,7 +50,7 @@ Route::get('dashboard/pending-ads', [UserDashboardController::class, 'pendingAds
 Route::get('dashboard/archived-ads', [UserDashboardController::class, 'archivedAds'])->name('user.archive.ads');
 //User Profile
 Route::get('dashboard/profile', [UserProfileController::class, 'index'])->name('user.profile');
-Route::put('dashboard/profile/change-password', [UserProfileController::class, 'changePassword'])->name('user.change.password');
+Route::put('dashboard/profile/change-password', [UserResetPasswordController::class, 'changePassword'])->name('user.change.password');
 Route::put('dashboard/profile/change-email', [UserProfileController::class, 'changeEmail'])->name('user.change.email');
 Route::put('dashboard/profile/change-name', [UserProfileController::class, 'changeName'])->name('user.change.name');
 Route::put('dashboard/profile/change-picture', [UserProfileController::class, 'changePicture'])->name('user.change.picture');
@@ -83,5 +85,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('password/reset/{token}', [AdminResetPasswordController::class, 'showResetForm'])->name('password.reset');
     Route::post('password/reset', [AdminResetPasswordController::class, 'reset'])->name('password.update');
     Route::post('logout', [AdminLoginController::class, 'logout'])->name('logout');
+    Route::get('password/change', [AdminResetPasswordController::class, 'showChangePasswordForm'])->name('password.change');
+    Route::post('password/change', [AdminResetPasswordController::class, 'changePassword']);
     Route::get('/', [AdminHomeController::class, 'index'])->name('home');
+
+    //Admin Management
+    Route::resource('admins', AdminAdminController::class)->except(['show']);
+    Route::resource('contacts', AdminContactController::class)->only(['index', 'show', 'destroy']);
+    Route::resource('users', AdminUserController::class)->only(['index', 'destroy']);
+    Route::resource('categories', AdminUserController::class)->except(['show', 'create']);
 });

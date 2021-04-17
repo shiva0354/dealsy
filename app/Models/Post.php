@@ -70,12 +70,6 @@ class Post extends Model
         return $this->belongsTo(Category::class);
     }
 
-    //this defines post belong to sub category
-    public function subCategory()
-    {
-        return $this->belongsTo(SubCategory::class);
-    }
-
     public function findUserOrFail($userId)
     {
         $user = User::findOrFail($userId);
