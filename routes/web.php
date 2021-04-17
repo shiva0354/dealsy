@@ -27,8 +27,8 @@ Route::post('/signup', [UserRegisterController::class, 'register']);
 Route::get('/login', [UserLoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [UserLoginController::class, 'login']);
 //social login
-Route::get('login/{driver}', [LoginController::class, 'redirectToProvider'])->name('social.login');
-Route::get('login/{driver}/callback', [LoginController::class, 'handleProviderCallback']);
+Route::get('login/{driver}', [UserLoginController::class, 'redirectToProvider'])->name('social.login');
+Route::get('login/{driver}/callback', [UserLoginController::class, 'handleProviderCallback']);
 //forgot-password
 Route::get('password/reset', [UserForgotPasswordController::class, 'showForm'])->name('password.request');
 Route::post('password/email', [UserForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
