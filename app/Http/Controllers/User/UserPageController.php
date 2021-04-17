@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
-class PageController extends Controller
+use App\Http\Controllers\Controller;
+
+class UserPageController extends Controller
 {
     //showing pricing page
     public function pricing()
@@ -21,7 +23,7 @@ class PageController extends Controller
     {
         return view('pages.about');
     }
-    
+
     public function error()
     {
         return view('pages.404');

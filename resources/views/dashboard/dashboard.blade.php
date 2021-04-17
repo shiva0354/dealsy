@@ -36,7 +36,7 @@
                                 <li><a href="{{ route('user.archive.ads') }}"><i
                                             class="far fa-file-archive"></i>Archived Ads <span>12</span></a></li>
 
-                                <li><a href="{{ route('user.logout') }}"><i class="fas fa-cog"></i> Logout</a></li>
+                                <li><a href="{{ route('logout') }}"><i class="fas fa-cog"></i> Logout</a></li>
 
                                 <li><a href="#" data-toggle="modal" data-target="#deleteaccount"><i
                                             class="fa fa-power-off"></i>Delete

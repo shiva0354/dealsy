@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
-use App\Library\UserAuthGuard;
+use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class UserDashboardController extends Controller
 {
-    use UserAuthGuard;
-    // show user dashboard
+        // show user dashboard
     public function index()
     {
         $user = User::current();
@@ -39,5 +39,4 @@ class UserDashboardController extends Controller
     {
 
     }
-
 }

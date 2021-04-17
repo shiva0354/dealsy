@@ -1,16 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\SearchRequest;
 use App\Models\Category;
 use App\Models\Location;
 use App\Models\Post;
 
-class SearchController extends Controller
+class UserSearchController extends Controller
 {
-    //all functions related to search
-
+    /**
+     * @param SearchRequest $request
+     * @return Post $posts
+     */
     public function search(SearchRequest $request)
     {
         $query = $request->input('query');
@@ -72,7 +75,8 @@ class SearchController extends Controller
         return view('products', compact('posts', 'category', 'location'));
     }
 
-    public function localitySearch($location, $location_id, $locality){
+    public function localitySearch($location, $location_id, $locality)
+    {
         $category = null;
         $location = Location::findOrFail($location_id);
 

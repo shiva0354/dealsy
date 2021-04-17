@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use App\Models\Post;
 
-class ItemController extends Controller
+class UserItemController extends Controller
 {
     public function showItem($id, $title)
     {
