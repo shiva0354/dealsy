@@ -18,6 +18,7 @@ class Admin extends Authenticatable
         'mobile',
         'role',
         'remember_token',
+        'enabled',
     ];
 
     protected $hidden = [
@@ -26,6 +27,7 @@ class Admin extends Authenticatable
 
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'enabled' => 'bool',
     ];
 
     public function sendPasswordResetNotification($token)

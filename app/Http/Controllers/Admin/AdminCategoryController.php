@@ -17,7 +17,7 @@ class AdminCategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::orderBy('parent_id')->paginate(50);
+        $categories = Category::with('parent')->orderBy('parent_id')->paginate(50);
         $singleCategory = null;
         $action = route('admin.categories.store');
         return view('admin.category-index', compact('categories', 'singleCategory', 'action'));
@@ -32,7 +32,7 @@ class AdminCategoryController extends Controller
     public function edit($id)
     {
         $singleCategory = Category::findOrFail($id);
-        $categories = Category::orderBy('parent_id')->paginate(50);
+        $categories = Category::with('parent')->orderBy('parent_id')->paginate(50);
         $action = route('admin.categories.update', $id);
         return view('admin.category-index', compact('categories', 'singleCategory', 'action'));
     }

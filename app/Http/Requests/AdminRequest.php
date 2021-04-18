@@ -13,7 +13,7 @@ class AdminRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,22 @@ class AdminRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|string|min:3|max:255',
+            'email' => 'required|string|email|min:4',
+            'mobile' => 'nullable|numeric|digits:10',
+            'role' => 'required|in:SUPER ADMIN,ADMIN,EMPLOYEE',
+            'enabled' => 'required|boolean',
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'name' => 'Admin Name',
+            'email' => 'Admin Email',
+            'mobile' => 'Admin Mobile',
+            'role' => 'Admin Role',
+            'enabled' => 'Admin Status',
         ];
     }
 }

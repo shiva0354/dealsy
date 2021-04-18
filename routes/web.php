@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminAdminController;
+use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminContactController;
 use App\Http\Controllers\Admin\AdminHomeController;
+use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\Auth\AdminForgotPasswordController;
 use App\Http\Controllers\Admin\Auth\AdminLoginController;
 use App\Http\Controllers\Admin\Auth\AdminResetPasswordController;
@@ -92,6 +94,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     //Admin Management
     Route::resource('admins', AdminAdminController::class)->except(['show']);
     Route::resource('contacts', AdminContactController::class)->only(['index', 'show', 'destroy']);
-    Route::resource('users', AdminUserController::class)->only(['index', 'destroy']);
-    Route::resource('categories', AdminUserController::class)->except(['show', 'create']);
+    Route::resource('users', AdminUserController::class)->only(['index', 'destroy', 'show']);
+    Route::resource('categories', AdminCategoryController::class)->except(['show', 'create']);
 });
