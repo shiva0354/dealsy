@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryRequest extends FormRequest
+class LocationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,13 +23,12 @@ class CategoryRequest extends FormRequest
      */
     public function rules()
     {
-        $id = $this->route('category');
+        $id = $this->route('location');
         $except = $id ? "$id,id" : "";
         return [
-            'name' => 'required|string|min:3|max:100',
-            'slug' => "required|string|min:3|max:100|unique:categories,slug,$except",
-            'icon' => 'nullable|string',
-            'parent_id' => 'nullable|numeric|exists:categories,id',
+            'location' => 'required|string|min:3|max:255',
+            'slug' => "required|string|unique:locations,slug,$except",
+            'parent_id' => "nullable|numeric|exists:locations,id",
         ];
     }
 }

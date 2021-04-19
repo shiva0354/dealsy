@@ -67,7 +67,7 @@ class UserPostController extends Controller
 
     public function update(PostRequest $request, $id)
     {
-        //uodate the posting of ads
+        //update the posting of ads
         $user = User::current();
         $post = $user->findPostOrFail($id);
         try {
@@ -86,7 +86,6 @@ class UserPostController extends Controller
             return redirect()->back()->with('error', $e->getMessage());
         }
         return redirect()->route('home')->with('success', 'Ad updated successfully');
-
     }
 
     public function destroy($id)

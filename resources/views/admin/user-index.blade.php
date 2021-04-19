@@ -18,6 +18,7 @@
                     <table class="table table-sm table-valign-middle">
                         <thead>
                             <tr>
+                                {{-- <th scope="col">image</th> --}}
                                 <th scope="col">Name</th>
                                 <th scope="col">Mobile</th>
                                 <th scope="col">Email</th>
@@ -29,6 +30,7 @@
                         <tbody>
                             @foreach ($users as $user)
                                 <tr>
+                                    {{-- <td><img src="{{ $user->avatar }}" alt="{{ $user->name }}" class="brand-image img-circle elevation-3" width="50px"></td> --}}
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->mobile }}</td>
                                     <td>{{ $user->email }}</td>

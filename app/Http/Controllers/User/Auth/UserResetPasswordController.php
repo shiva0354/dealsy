@@ -34,7 +34,10 @@ class UserResetPasswordController extends Controller
 
     public function changePassword(Request $request)
     {
-        $request->validate($this->rules(), $this->validationErrorMessages());
+        $request->validate([
+            'old_password' => 'required|password',
+            'password' => 'required|string|min:8|max:255|confirmed',
+        ]);
         $user = $this->guard()->user();
         $password = $request->input('password');
         $this->resetPassword($user, $password);
