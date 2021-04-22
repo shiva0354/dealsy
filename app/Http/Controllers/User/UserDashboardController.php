@@ -4,39 +4,46 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class UserDashboardController extends Controller
 {
-        // show user dashboard
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    // show user dashboard
     public function index()
     {
         $user = User::current();
         $posts = $user->posts()->paginate(6);
+        $posts->load(['category', 'postImages', 'postVideo']);
         return view('dashboard.dashboard', compact('posts'));
-    }
-
-    //show all ads of the particular ads
-    public function myAds()
-    {
-
     }
 
     //show favourite ads of user that is saved_posts
     public function savedAds()
     {
-
+        $user = User::current();
+        $posts = $user->savedposts()->paginate(6);
+        $posts->load(['category', 'postImages', 'postVideo']);
+        return view('dashboard.dashboard', compact('posts'));
     }
 
     //show pending ads of the user
     public function pendingAds()
     {
-
+        $user = User::current();
+        $posts = $user->posts()->whereStatus('PENDING')->paginate(6);
+        $posts->load(['category', 'postImages', 'postVideo']);
+        return view('dashboard.dashboard', compact('posts'));
     }
 
     //show pending ads of the user
     public function archiveAds()
     {
-
+        $user = User::current();
+        $posts = $user->posts()->onlyTrashed()->paginate(6);
+        $posts->load(['category', 'postImages', 'postVideo']);
+        return view('dashboard.dashboard', compact('posts'));
     }
 }

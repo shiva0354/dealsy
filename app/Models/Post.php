@@ -80,13 +80,4 @@ class Post extends Model
         return $user;
     }
 
-    public function findSavedPostOrFail($id)
-    {
-        $savedPost = SavedPost::findOrFail($id);
-        if ($savedPost->id != $this->id) {
-            throw new ModelNotFoundException('This post does not belongs to this post');
-        }
-        return $savedPost;
-    }
-
 }

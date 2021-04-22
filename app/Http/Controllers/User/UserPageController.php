@@ -9,28 +9,33 @@ class UserPageController extends Controller
     //showing pricing page
     public function pricing()
     {
-        return view('pages.pricing');
+        return view('user.pages.pricing');
     }
 
     //show terms and conditions page
     public function terms()
     {
-        return view('pages.terms');
+        return view('user.pages.terms');
     }
 
     //show about page
     public function about()
     {
-        return view('pages.about');
+        return view('user.pages.about');
     }
 
     public function error()
     {
-        return view('pages.404');
+        return view('user.pages.404');
     }
 
     public function privacy()
     {
-        return view('pages.privacy');
+        return view('user.pages.privacy');
+    }
+
+    public function sitemap()
+    {
+        return view('user.pages.sitemap');
     }
 }

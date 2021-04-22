@@ -66,25 +66,16 @@ class User extends Authenticatable
     //this defines user can have many saved posts
     public function savedposts()
     {
-        return $this->hasMany(SavedPost::class);
+        return $this->hasMany(Post::class, 'saved_posts', 'user_id', 'post_id');
     }
 
-    public function findPostOrFail($postId)
-    {
-        $post = Post::findOrFail($postId);
-        if ($post->user_id != $this->id) {
-            throw (new ModelNotFoundException('Post does not belong to this user'));
-        }
-        return $post;
-    }
+    // public function findPostOrFail($postId)
+    // {
+    //     $post = Post::findOrFail($postId);
+    //     if ($post->user_id != $this->id) {
+    //         throw (new ModelNotFoundException('Post does not belong to this user'));
+    //     }
+    //     return $post;
+    // }
 
-    public function findSavedPostOrFail($id)
-    {
-        $savedPost = SavedPost::findOrFail($id);
-
-        if ($savedPost->user_id != $this->id) {
-            throw new ModelNotFoundException('Post does not belong to this user');
-        }
-        return $savedPost;
-    }
 }

@@ -17,6 +17,7 @@ class CreateSavedPostsTable extends Migration
             $table->id()->autoIncrement();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('post_id')->constrained();
+            $table->unique(['user_id', 'post_id']);
             $table->timestamps();
         });
     }

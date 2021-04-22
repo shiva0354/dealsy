@@ -62,10 +62,11 @@ Route::delete('dashboard/profile/delete-user', [UserProfileController::class, 'd
 // pages
 Route::get('pricing', [UserPageController::class, 'pricing'])->name('pricing.package');
 Route::get('terms', [UserPageController::class, 'terms'])->name('terms');
-Route::get('about', [UserPageController::class, 'about'])->name('about-us');
+Route::get('about', [UserPageController::class, 'about'])->name('about');
 Route::get('404', [UserPageController::class, 'error'])->name('error404');
 Route::get('privacy', [UserPageController::class, 'privacy'])->name('privacy');
-Route::get('contact', [UserContactController::class, 'index'])->name('contact-us');
+Route::get('sitemap', [UserPageController::class, 'sitemap'])->name('sitemap');
+Route::get('contact', [UserContactController::class, 'index'])->name('contact');
 Route::post('contact', [UserContactController::class, 'store']);
 //item
 Route::get('item/{id}/{title}', [ItemController::class, 'showItem'])->name('item');

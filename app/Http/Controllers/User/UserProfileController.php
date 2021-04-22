@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ChangeEmailRequest;
+use App\Http\Requests\ProfileImageRequest;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -10,6 +12,11 @@ use Illuminate\Support\Str;
 
 class UserProfileController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     //show edit profile
     public function index()
     {
@@ -24,47 +31,46 @@ class UserProfileController extends Controller
             'name' => 'required|string|max:255',
         ]);
         $user->update($validatedData);
-        return redirect()->back()->with('success', 'Name changed successfully');
+        return redirect()->route('user.profile')->with('success', 'Name changed successfully');
     }
     //change email
-    public function changeEmail(Request $request)
+    public function changeEmail(ChangeEmailRequest $request)
     {
         $user = User::current();
-        $except = "$user->id,id";
-        //compare existing email
-        $request->validate([
-            'email' => 'required|email|max:255',
-            'new_email' => 'required|email|max:255|unique:users,email,' . $except,
-        ]);
-        if ($user->email == $request->email) {
-            try {
-                $user->update([ //updating email in database
-                    'email' => $request->email,
-                ]);
-            } catch (\Exception $e) {
-                // return redirect()->intended()->with('message', $e->getMessage());
-            }
-        } else {
+        $email = $request->input('new_email');
+
+        if ($user->email != $email) {
             return redirect()->back()->with('error', 'email not matched');
         }
-        return redirect()->back()->with('success', 'Email updated successfully');
+
+        try {
+            $user->update(['email' => $email]);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('message', $e->getMessage());
+        }
+        return redirect()->route('user.profile')->with('success', 'Email updated successfully');
     }
 
     //change profile picture
-    public function changePicture(Request $request)
+    public function changePicture(ProfileImageRequest $request)
     {
         $user = User::current();
-        $request->validate(['avatar' => 'required|image|mimes:png,jpg|max:1000']);
-        try {
+        $dir = "/uploads/users/";
+        $destinationPath = public_path($dir);
+
+        if ($request->hasFile('avatar')) {
             $file = $request->file('avatar');
-            $name = Str::random(60) . '.' . $file->extension();
-            $file->move(public_path('uploads/users/'), $name);
-            $path = 'uploads/users/' . $name;
-            $user->update(['avatar' => $path]);
-        } catch (\Exception $e) {
-            return redirect()->back()->with('success', $e->getMessage());
+            if ($file->isValid()) {
+                $ext = $file->getClientOriginalExtension();
+                $fileName = Str::random(30) . "." . $ext;
+                $file->move($destinationPath, $fileName);
+                $path = $dir . $fileName;
+                $user->update(['avatar' => $path]);
+                return redirect()->route('user.profile')->with('success', 'Profile image updated successfully');
+            }
+            return redirect()->back()->with('error', 'Invalid file uploaded');
         }
-        return redirect()->back()->with('success', 'Profile Picture updated');
+        return redirect()->back()->with('error', 'No file uploaded');
     }
 
     //soft deleting user from the database

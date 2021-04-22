@@ -9,13 +9,14 @@ use App\Models\Location;
 use App\Models\Post;
 use App\Models\PostImage;
 use App\Models\User;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 
 class UserPostController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['show']);
     }
 
     public function create()
@@ -36,12 +37,18 @@ class UserPostController extends Controller
     public function edit($id)
     {
         $user = User::current();
-        $post = $user->findPostOrFail($id);
+        $post = Post::findOrFail($id);
+        $response = Gate::inspect('post', $post);
+
+        if (!$response->allowed()) {
+            return redirect()->back()->with('error', $response->message());
+        }
+
+        $post->load(['category', 'postImages', 'PostVideo']);
         $categories = Category::all();
         $states = Location::whereNull('parent_id')->get();
         $cities = Location::whereNotNull('parent_id')->get();
         return view('ad-listing', compact('categories', 'states', 'cities', 'post'));
-
     }
 
     public function store(PostRequest $request)
@@ -69,7 +76,13 @@ class UserPostController extends Controller
     {
         //update the posting of ads
         $user = User::current();
-        $post = $user->findPostOrFail($id);
+        $post = Post::findOrFail($id);
+        $response = Gate::inspect('postPermission', $post);
+
+        if (!$response->allowed()) {
+            return redirect()->back()->with('error', $response->message());
+        }
+
         try {
             $images = $this->saveImage($request);
             $input = $this->getInput($request, $user->id);
@@ -90,8 +103,12 @@ class UserPostController extends Controller
 
     public function destroy($id)
     {
-        $user = User::current();
-        $post = $user->findPostOrFail($id);
+        $post = Post::findOrFail($id);
+        $response = Gate::inspect('postPermission', $post);
+
+        if (!$response->allowed()) {
+            return redirect()->back()->with('error', $response->message());
+        }
         $post->delete();
         return redirect()->intended()->with('success', 'Post Deleted Successfully');
     }

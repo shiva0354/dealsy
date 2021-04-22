@@ -8,12 +8,14 @@ use App\Models\Category;
 use App\Models\Location;
 use App\Models\Post;
 
+/**
+ * @param SearchRequest $request
+ * @return Post $posts
+ */
+
 class UserSearchController extends Controller
 {
-    /**
-     * @param SearchRequest $request
-     * @return Post $posts
-     */
+
     public function search(SearchRequest $request)
     {
         $query = $request->input('query');
