@@ -21,7 +21,7 @@ class UserProfileController extends Controller
     public function index()
     {
         $user = User::current();
-        return view('dashboard.user-profile', compact('user'));
+        return view('user.profile', compact('user'));
     }
     //update profile of user
     public function changeName(Request $request)

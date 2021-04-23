@@ -20,6 +20,8 @@ class UserLoginController extends Controller
         'facebook', 'google',
     ];
 
+    protected $redirectTo = '/';
+
     public function showLoginForm()
     {
         return view('user.auth.login');
@@ -30,7 +32,7 @@ class UserLoginController extends Controller
  */
     protected function createUserOnLogin($socialiteUser, $provider)
     {
-       $user = User::create([
+        $user = User::create([
             'name' => $socialiteUser->getName(),
             'avatar' => $socialiteUser->getAvatar(),
             'email' => $socialiteUser->getEmail(),

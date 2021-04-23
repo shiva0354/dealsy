@@ -48,12 +48,13 @@ Route::post('posts/{post}/images', [UserPostController::class, 'storeImage'])->n
 Route::delete('posts/{post}/images/{image}', [UserPostController::class, 'deleteImages'])->name('posts.images.delete');
 //Dashboard
 Route::get('dashboard', [UserDashboardController::class, 'index'])->name('user.dashboard');
-Route::get('dashboard/saved-ads', [UserDashboardController::class, 'savedAds'])->name('user.saved.ads');
-Route::get('dashboard/pending-ads', [UserDashboardController::class, 'pendingAds'])->name('user.pending.ads');
-Route::get('dashboard/archived-ads', [UserDashboardController::class, 'archivedAds'])->name('user.archive.ads');
+Route::get('dashboard/ads/saved', [UserDashboardController::class, 'savedAds'])->name('user.saved.ads');
+Route::get('dashboard/ads/pending', [UserDashboardController::class, 'pendingAds'])->name('user.pending.ads');
+Route::get('dashboard/ads/archived', [UserDashboardController::class, 'archivedAds'])->name('user.archive.ads');
+Route::get('dashboard/ads/rejected', [UserDashboardController::class, 'rejectedAds'])->name('user.rejected.ads');
 //User Profile
 Route::get('dashboard/profile', [UserProfileController::class, 'index'])->name('user.profile');
-Route::put('dashboard/profile/change-password', [UserResetPasswordController::class, 'changePassword'])->name('user.change.password');
+Route::post('dashboard/profile/change-password', [UserResetPasswordController::class, 'changePassword'])->name('user.change.password');
 Route::put('dashboard/profile/change-email', [UserProfileController::class, 'changeEmail'])->name('user.change.email');
 Route::put('dashboard/profile/change-name', [UserProfileController::class, 'changeName'])->name('user.change.name');
 Route::put('dashboard/profile/change-picture', [UserProfileController::class, 'changePicture'])->name('user.change.picture');

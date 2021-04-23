@@ -19,7 +19,7 @@
                     <ul>
                         <li><a href="{{ route('home') }}">Home</a></li>
                         <li><a href="{{ route('about') }}">About</a></li>
-                        <li><a href="#">Articls & Tips</a></li>
+                        <li><a href="https://dealsy.in/blog/">Articles & Tips</a></li>
                     </ul>
                 </div>
             </div>
@@ -31,11 +31,12 @@
                         <li><a href="{{ route('contact') }}">Contact Us</a></li>
                         <li><a href="{{ route('privacy') }}">Privacy Policy</a></li>
                         <li><a href="{{ route('terms') }}">Terms & Conditions</a></li>
+                        <li><a href="{{ route('sitemap') }}">Sitemap</a></li>
                     </ul>
                 </div>
                 <div class="block">
                     <h4 class="mb-0">Email Us</h4>
-                    <li type="none">support@mydealsy.com</li>
+                    <li type="none">support[@]dealsy.in</li>
                 </div>
             </div>
             <!-- Promotion -->

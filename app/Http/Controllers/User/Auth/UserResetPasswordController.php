@@ -13,7 +13,7 @@ class UserResetPasswordController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->only(['showForm', 'changePassword']);
-        $this->middleware('guest');
+        $this->middleware('guest')->except(['showForm', 'changePassword']);
     }
 
     protected $redirectTo = '/';

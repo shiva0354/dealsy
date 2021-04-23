@@ -22,9 +22,11 @@ class UserPostController extends Controller
     public function create()
     {
         $categories = Category::all();
-        $states = Location::whereNull('parent_id')->get();
-        $cities = Location::whereNotNull('parent_id')->get();
-        return view('ad-listing', compact('categories', 'states', 'cities'));
+        $locations = Location::all();
+        $states = $locations->whereNull('parent_id');
+        $cities = $locations->whereNotNull('parent_id');
+        $post = null;
+        return view('user.ad-listing', compact('categories', 'states', 'cities', 'post'));
     }
 
     public function show($id)
@@ -46,9 +48,10 @@ class UserPostController extends Controller
 
         $post->load(['category', 'postImages', 'PostVideo']);
         $categories = Category::all();
-        $states = Location::whereNull('parent_id')->get();
-        $cities = Location::whereNotNull('parent_id')->get();
-        return view('ad-listing', compact('categories', 'states', 'cities', 'post'));
+        $locations = Location::all();
+        $states = $locations->whereNull('parent_id');
+        $cities = $locations->whereNotNull('parent_id');
+        return view('user.ad-listing', compact('categories', 'states', 'cities', 'post'));
     }
 
     public function store(PostRequest $request)
