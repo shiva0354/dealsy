@@ -4,41 +4,23 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'posts';
     protected $fillable = [
         'user_id',
         'category_id',
         'title',
         'detail',
         'status',
-        'ad_type',
-        'expected_price',
-        'is_price_negotiable',
+        'price',
         'last_renewed_on',
         'locality',
-        'location_id', //city
-        'state_id',
-    ];
-
-    protected $visible = [
-        'category_id',
-        'title',
-        'detail',
-        'status',
-        'ad_type',
-        'expected_price',
-        'is_price_negotiable',
-        'locality',
-        'location_id', //city
-        'state_id',
-        'created_at' => 'date',
+        'city',
+        'state',
     ];
 
     //castiing data type
@@ -58,26 +40,29 @@ class Post extends Model
         return $this->hasMany(PostImage::class);
     }
 
-    //defines post can have one video
-    public function postVideo()
-    {
-        return $this->hasOne(PostVideo::class);
-    }
-
     //this defines post belong to category
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
 
-    public function findUserOrFail($userId)
+    public function city()
     {
-        $user = User::findOrFail($userId);
-
-        if ($user->id != $this->user_id) {
-            throw new ModelNotFoundException("Error Processing Request");
-        }
-        return $user;
+        return $this->belongsTo(Location::class, 'city');
     }
 
+    public function state()
+    {
+        return $this->belongsTo(Location::class, 'state');
+    }
+
+    public function postLocation()
+    {
+        return ($this->locality . "," . $this->city->location . "," . $this->state->location);
+    }
+
+    public function saveImage(string $image)
+    {
+        PostImage::create(['post_id' => $this->id, 'image' => $image]);
+    }
 }

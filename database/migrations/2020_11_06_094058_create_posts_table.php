@@ -20,19 +20,17 @@ class CreatePostsTable extends Migration
             $table->foreignId('category_id')->nullable()->constrained();
             $table->string('title')->nullable();
             $table->text('detail')->nullable();
-            $table->enum('status', ['ACTIVE', 'PENDING', 'REJECTED'])->default('PENDING');
-            $table->enum('ad_type', ['PERSONAL', 'BUSINESS'])->default('PERSONAL');
-            $table->float('expected_price')->nullable();
-            $table->enum('is_price_negotiable', ['YES', 'NO'])->nullable();
+            $table->enum('status', ['ACTIVE', 'PENDING', 'REJECTED', 'SOLD'])->default('PENDING');
+            $table->float('price')->nullable();
             $table->timestamp('last_renewed_on')->nullable();
             $table->string('locality')->nullable();
-            $table->foreignId('location_id')->nullable()->constrained();
-            $table->foreignId('state_id')->nullable();
+            $table->foreignId('city')->nullable()->constrained('locations');
+            $table->foreignId('state')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
 
-        DB::update("ALTER TABLE posts AUTO_INCREMENT = 1000000000");
+        DB::update("ALTER TABLE posts AUTO_INCREMENT = 1000000001");
     }
 
     /**

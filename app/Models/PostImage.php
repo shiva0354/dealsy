@@ -10,8 +10,6 @@ class PostImage extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'post_images';
-
     protected $fillable = ([
         'image', 'post_id',
     ]);

@@ -20,7 +20,7 @@ class AdminSeeder extends Seeder
             'email' => 'adminshiva@gmail.com',
             'role' => 'ADMIN',
             'password' => Hash::make('password'),
-            'mobile' => '9865986598',
+            'mobile' => '8676901392',
         ]);
     }
 }

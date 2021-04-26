@@ -23,7 +23,6 @@ class CreateUsersTable extends Migration
             $table->string('provider', 20)->nullable();
             $table->string('provider_id', 50)->nullable();
             $table->rememberToken()->nullable();
-            $table->timestamp('email_verified_at')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

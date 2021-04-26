@@ -16,7 +16,7 @@ class UserDashboardController extends Controller
     {
         $user = User::current();
         $posts = $user->posts()->paginate(6);
-        $posts->load(['category', 'postImages', 'postVideo']);
+        $posts->load(['category', 'postImages', 'city', 'state']);
         $title = 'My Ads';
         return view('user.dashboard', compact('posts', 'title', 'user'));
     }

@@ -24,17 +24,38 @@ class PostRequest extends FormRequest
     public function rules()
     {
         return [
-            'category_id' => 'required|numeric',
+            'category' => 'required|numeric|exists:categories,id',
+            'sub_category' => 'nullable|numeric|exists:categories,id',
             'title' => 'required|string|min:20|max:60',
             'detail' => 'required|string|min:30|max:1000',
-            'ad_type' => 'required|string',
-            'expected_price' => 'required|nullable|numeric',
-            'is_price_negotiable' => 'nullable|string',
+            'price' => 'required|nullable|numeric',
             'locality' => 'required|string|min:3|max:255',
-            'location_id' => 'required|numeric',
-            'state_id' => 'required|numeric',
+            'city' => 'required|numeric|exists:locations,id',
+            'state' => 'required|numeric|exists:locations,id',
             'images' => 'required',
             'images.*' => 'image|mimes:png,jpg,jpeg|max:2000',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'category' => 'Category',
+            'sub_category' => 'Sub Category',
+            'title' => 'Post title',
+            'detail' => 'Post description',
+            'price' => 'Price',
+            'locality' => 'Locality',
+            'location_id' => 'City',
+            'state_id' => 'State',
+            'images' => 'Post Images',
         ];
     }
 }

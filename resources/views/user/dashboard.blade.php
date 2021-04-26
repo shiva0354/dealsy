@@ -2,8 +2,8 @@
 @section('title', 'Dashboard')
 @section('content')
     <!--==================================
-                                                                                                        =            User Profile            =
-                                                                                                        ===================================-->
+                                                                                                                                                =            User Profile            =
+                                                                                                                                                ===================================-->
     <section class="dashboard section">
         <!-- Container Start -->
         <div class="container">
@@ -91,31 +91,31 @@
                                     <tr>
 
                                         <td class="product-thumb">
-                                            <img width="80px" height="auto" src="" alt="image description">
+                                            <img width="80px" src="{{ asset('uploads/posts/' . $post->postImages->first()->image) }}" height="auto" src="" alt="image description">
                                         </td>
                                         <td class="product-details">
-                                            <h3 class="title">{{ $post->post_title }}</h3>
+                                            <h3 class="title">{{ $post->title }}</h3>
                                             <span class="add-id"><strong>Ad ID:</strong>{{ $post->id }}</span>
                                             <span><strong>Posted on: </strong><time>Jun 27, 2017</time> </span>
                                             <span class="status active"><strong>Status</strong>{{ $post->status }}</span>
-                                            <span class="location"><strong>Location</strong>{{ $post->city }}, {{ $post->state }}</span>
+                                            <span class="location"><strong>Location</strong>{{ $post->postLocation() }}</span>
                                         </td>
                                         <td class="product-category"><span class="categories">Laptops</span></td>
                                         <td class="action" data-title="Action">
                                             <div class="">
                                                 <ul class="list-inline justify-content-center">
                                                     <li class="list-inline-item">
-                                                        <a data-toggle="tooltip" data-placement="top" title="view" class="view" href="category.html">
+                                                        <a data-toggle="tooltip" data-placement="top" title="view" target="_blank" class="view" href="{{ route('posts.show', [$post, $post->title]) }}">
                                                             <i class="fa fa-eye"></i>
                                                         </a>
                                                     </li>
                                                     <li class="list-inline-item">
-                                                        <a class="edit" data-toggle="tooltip" data-placement="top" title="Edit" href="">
+                                                        <a class="edit" data-toggle="tooltip" data-placement="top" title="Edit" href="{{ route('posts.edit', $post) }}">
                                                             <i class="fa fa-edit"></i>
                                                         </a>
                                                     </li>
                                                     <li class="list-inline-item">
-                                                        <a class="delete" data-toggle="tooltip" data-placement="top" title="Delete" href="">
+                                                        <a class="delete" data-toggle="tooltip" data-placement="top" title="Delete" href="{{ route('posts.destroy', $post) }}">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
                                                     </li>

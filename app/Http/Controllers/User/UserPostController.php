@@ -7,7 +7,6 @@ use App\Http\Requests\PostRequest;
 use App\Models\Category;
 use App\Models\Location;
 use App\Models\Post;
-use App\Models\PostImage;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
@@ -21,19 +20,18 @@ class UserPostController extends Controller
 
     public function create()
     {
-        $categories = Category::all();
-        $locations = Location::all();
-        $states = $locations->whereNull('parent_id');
-        $cities = $locations->whereNotNull('parent_id');
+        $categories = Category::whereNull('parent_id')->get();
+        $states = Location::whereNull('parent_id')->get();
         $post = null;
-        return view('user.ad-listing', compact('categories', 'states', 'cities', 'post'));
+        return view('user.ad-listing', compact('categories', 'states', 'post'));
     }
 
     public function show($id)
     {
         // show the particular ad
         $post = Post::findOrFail($id);
-        return view('item', compact('post'));
+        $post->load(['category', 'postImages', 'postVideo', 'city', 'state']);
+        return view('user.item', compact('post'));
     }
     //show ad edit form view
     public function edit($id)
@@ -54,6 +52,9 @@ class UserPostController extends Controller
         return view('user.ad-listing', compact('categories', 'states', 'cities', 'post'));
     }
 
+    /**
+     * @param Post $post
+     */
     public function store(PostRequest $request)
     {
         //create and store the newly ads
@@ -65,7 +66,7 @@ class UserPostController extends Controller
 
             if ($images) {
                 foreach ($images as $image) {
-                    PostImage::create(['post_id' => $post->id, 'image' => $image]);
+                    $post->saveImage($image);
                 }
             }
 
@@ -80,7 +81,7 @@ class UserPostController extends Controller
         //update the posting of ads
         $user = User::current();
         $post = Post::findOrFail($id);
-        $response = Gate::inspect('postPermission', $post);
+        $response = Gate::inspect('post', $post);
 
         if (!$response->allowed()) {
             return redirect()->back()->with('error', $response->message());
@@ -94,22 +95,22 @@ class UserPostController extends Controller
 
             if ($images) {
                 foreach ($images as $image) {
-                    PostImage::create(['post_id' => $post->id, 'image' => $image]);
+                    $post->saveImage($image);
                 }
             }
 
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
+
         return redirect()->route('home')->with('success', 'Ad updated successfully');
     }
 
     public function destroy($id)
     {
         $post = Post::findOrFail($id);
-        $response = Gate::inspect('postPermission', $post);
-
-        if (!$response->allowed()) {
+        $response = Gate::inspect('post', $post);
+        if ($response->allowed()) {
             return redirect()->back()->with('error', $response->message());
         }
         $post->delete();
@@ -118,19 +119,22 @@ class UserPostController extends Controller
 
     private function getInput($request, $userId)
     {
+        if (!empty($request->input('sub_category'))) {
+            $category = $request->input('sub_category');
+        }
+        $category = $request->input('category');
+
         $input = $request->only([
-            'category_id',
             'title',
             'detail',
-            'ad_type',
-            'expected_price',
-            'is_price_negotiable',
+            'price',
             'locality',
-            'location_id', //city
-            'state_id',
+            'city', //city
+            'state',
         ]);
 
         $input['user_id'] = $userId;
+        $input['category_id'] = $category;
         return $input;
     }
 
@@ -141,10 +145,24 @@ class UserPostController extends Controller
         if ($request->hasfile('images')) {
             foreach ($request->file('images') as $file) {
                 $name = Str::random(60) . '.' . $file->extension();
-                $file->move(public_path('upload/posts/'), $name);
+                $file->move(public_path('uploads/posts/'), $name);
                 $images[] = $name;
             }
         }
         return $images;
+    }
+
+    public function cities($stateId)
+    {
+        $state = Location::findOrFail($stateId);
+        $cities = $state->locations;
+        return $cities;
+    }
+
+    public function categories($id)
+    {
+        $category = Category::findOrFail($id);
+        $categories = $category->subCategories;
+        return $categories;
     }
 }

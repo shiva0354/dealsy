@@ -38,7 +38,7 @@ class UserSearchController extends Controller
             $posts = Post::where('status', 'ACTIVE')
                 ->where('title', 'LIKE', $query)->paginate(9);
         }
-        return view('products', compact('posts', 'category', 'location'));
+        return view('user.products', compact('posts', 'category', 'location'));
     }
 
     public function categorySearch($slug, $id)
@@ -46,7 +46,7 @@ class UserSearchController extends Controller
         $category = Category::findOrFail($id);
         $location = null;
         $posts = Post::where('status', 'ACTIVE')->where('category_id', $category->id)->paginate(9);
-        return view('products', compact('posts', 'category', 'location'));
+        return view('user.products', compact('posts', 'category', 'location'));
     }
 
     public function LocationSearch($location, $location_id)
@@ -56,7 +56,7 @@ class UserSearchController extends Controller
         $location = Location::findOrFail($location_id);
 
         $posts = Post::where('status', 'ACTIVE')->where('location_id', $location_id)->paginate(9);
-        return view('products', compact('posts', 'category', 'location'));
+        return view('user.products', compact('posts', 'category', 'location'));
     }
 
     public function locationCategorySearch($location, $location_id, $category, $category_id)
@@ -65,7 +65,7 @@ class UserSearchController extends Controller
         $location = Location::findOrFail($location_id);
 
         $posts = Post::where('status', 'ACTIVE')->where('location_id', $location_id)->where('category_id', $category_id)->paginate(9);
-        return view('products', compact('posts', 'category', 'location'));
+        return view('user.products', compact('posts', 'category', 'location'));
     }
 
     public function localityCategorySearch($location, $location_id, $locality, $category, $category_id)
@@ -74,7 +74,7 @@ class UserSearchController extends Controller
         $location = Location::findOrFail($location_id);
 
         $posts = Post::where('status', 'ACTIVE')->where('category_id', $category_id)->where('locality', $locality)->paginate(9);
-        return view('products', compact('posts', 'category', 'location'));
+        return view('user.products', compact('posts', 'category', 'location'));
     }
 
     public function localitySearch($location, $location_id, $locality)
@@ -83,7 +83,7 @@ class UserSearchController extends Controller
         $location = Location::findOrFail($location_id);
 
         $posts = Post::where('status', 'ACTIVE')->where('locality', $locality)->paginate(9);
-        return view('products', compact('posts', 'category', 'location'));
+        return view('user.products', compact('posts', 'category', 'location'));
     }
 
 }
