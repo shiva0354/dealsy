@@ -34,8 +34,8 @@
                         <!-- product slider -->
                         <div class="product-slider">
                             @foreach ($post->postImages as $image)
-                                <div class="product-slider-item my-4" data-image="{{ asset('upload/posts/' . $image->image) }}">
-                                    <img class="img-fluid w-100" src="{{ asset('upload/posts/' . $image->image) }}" alt="product-img">
+                                <div class="product-slider-item my-4" data-image="{{ asset('uploads/posts/' . $image->image) }}">
+                                    <img class="img-fluid w-100" src="{{ asset('uploads/posts/' . $image->image) }}" alt="product-img">
                                 </div>
                             @endforeach
                         </div>

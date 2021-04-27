@@ -54,14 +54,12 @@ Route::post('dashboard/profile/change-password', [UserResetPasswordController::c
 Route::put('dashboard/profile/change-email', [UserProfileController::class, 'changeEmail'])->name('user.change.email');
 Route::put('dashboard/profile/change-name', [UserProfileController::class, 'changeName'])->name('user.change.name');
 Route::put('dashboard/profile/change-picture', [UserProfileController::class, 'changePicture'])->name('user.change.picture');
-Route::delete('dashboard/profile/delete-user', [UserProfileController::class, 'destroyUser'])->name('user.destroy');
+Route::delete('dashboard/profile/delete', [UserProfileController::class, 'destroyUser'])->name('user.destroy');
 
 //posts related route
 Route::get('add-listing', [UserPostController::class, 'create'])->name('add.listing');
 Route::post('add-listing', [UserPostController::class, 'store']);
-Route::get('posts/{post}/images', [UserPostController::class, 'postImages'])->name('posts.images');
-Route::post('posts/{post}/images', [UserPostController::class, 'storeImage'])->name('posts.images.store');
-Route::delete('posts/{post}/images/{image}', [UserPostController::class, 'deleteImages'])->name('posts.images.delete');
+Route::delete('posts/{post}/images/{image}', [UserPostController::class, 'deleteImage'])->name('posts.images.delete');
 Route::get('item/{id}/{title}', [UserPostController::class, 'show'])->name('posts.show');
 Route::get('dashboard/post/{id}/edit', [UserPostController::class, 'edit'])->name('posts.edit');
 Route::put('dashboard/post/{id}', [UserPostController::class, 'update'])->name('posts.update');

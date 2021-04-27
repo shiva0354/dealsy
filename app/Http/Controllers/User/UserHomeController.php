@@ -11,9 +11,12 @@ class UserHomeController extends Controller
     //show home page
     public function home()
     {
-        $categories = Category::with('subCategories')->withCount('posts')->whereNull('parent_id')->inRandomOrder()->get();
-        $posts = Post::with('category')->get();
-        // $posts = Post::all()->random(9);
+        $categories = Category::whereNull('parent_id')->inRandomOrder()->get();
+        $categories->load(['subCategories' => function ($q) {
+            $q->withCount('posts');
+        }]);
+        // $posts = Post::with('category', 'postImages')->get();
+        $posts = Post::with(['category', 'postImages'])->inRandomOrder()->limit(9)->get();
         return view('user.home', compact('categories', 'posts'));
     }
 }

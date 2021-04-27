@@ -20,8 +20,8 @@ class PostImagePolicy
      * @param  \App\Models\Post  $post
      * @return mixed
      */
-    public function post_image(User $user, Post $post, PostImage $postImage)
+    public function post_image(User $user, Post $post, PostImage $image)
     {
-        return ($user->id === $post->user_id && $post->id === $postImage->post_id) ? Response::allow() : Response::deny('You do not own this post.');
+        return ($user->id === $post->user_id && $post->id === $image->post_id) ? Response::allow() : Response::deny('You do not own this post.');
     }
 }

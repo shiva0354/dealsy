@@ -2,8 +2,8 @@
 @section('title', 'Dashboard')
 @section('content')
     <!--==================================
-                                                                                                                                                =            User Profile            =
-                                                                                                                                                ===================================-->
+                                                                                                                                                        =            User Profile            =
+                                                                                                                                                        ===================================-->
     <section class="dashboard section">
         <!-- Container Start -->
         <div class="container">
@@ -19,7 +19,7 @@
                             </div>
                             <!-- User Name -->
                             <h5 class="text-center">{{ $user->name ?? 'User' }}</h5>
-                            <p>Joined {{ $user->created_at }}</p>
+                            <p>Joined {{ date_format($user->created_at, 'd M, Y') }}</p>
                             <a href="{{ route('user.profile') }}" class="btn btn-main-sm">Edit Profile</a>
                         </div>
                         <!-- Dashboard Links -->
@@ -131,7 +131,7 @@
 
                     <!-- pagination -->
                     <div class="pagination justify-content-center">
-                        {{ $posts->links() }}
+                        {{ $posts->links('pagination::bootstrap-4') }}
                     </div>
                     <!-- pagination -->
 

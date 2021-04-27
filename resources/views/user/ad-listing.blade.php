@@ -1,5 +1,3 @@
-<?php $post = null; ?>
-
 @extends('layouts.layout')
 @section('title', 'Post Your Ad')
 @section('content')
@@ -24,22 +22,38 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="row">
-                                <div class="col-md-12 my-2">
-                                    <h6 class="font-weight-bold pt-4 pb-1">Select Ad Category:</h6>
-                                    <select name="category" class="custom-select" id="main-category">
-                                        <option value="">Select Category</option>
-                                        @foreach ($categories as $category)
-                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    <div class="invalid-feedback">Select category</div>
-                                </div>
-                                <div class="col-md-12 my-2">
-                                    <h6 class="font-weight-bold pt-4 pb-1">Select Sub Category:</h6>
-                                    <select name="sub_category" class="custom-select" id="category" required>
-                                    </select>
-                                    <div class="invalid-feedback">Select Sub Category</div>
-                                </div>
+                                @if ($post)
+                                    <div class="col-md-12 my-2">
+                                        <h6 class="font-weight-bold pt-4 pb-1">Select Ad Category:</h6>
+                                        <select name="category" class="custom-select" id="main-category" required>
+                                            <option value="">Select Category</option>
+                                            @foreach ($categories as $category)
+                                                <option value="{{ $category->id }}" @if (($post->category_id ?? '') == $category->id) selected @endif>
+                                                    {{ $category->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <div class="invalid-feedback">Select category</div>
+                                    </div>
+                                @else
+                                    <div class="col-md-12 my-2">
+                                        <h6 class="font-weight-bold pt-4 pb-1">Select Ad Category:</h6>
+                                        <select name="category" class="custom-select" id="main-category" required>
+                                            <option value="">Select Category</option>
+                                            @foreach ($categories as $category)
+                                                <option value="{{ $category->id }}" @if (($post->category_id ?? '') == $category->id) selected @endif>
+                                                    {{ $category->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        <div class="invalid-feedback">Select category</div>
+                                    </div>
+
+                                    <div class="col-md-12 my-2">
+                                        <h6 class="font-weight-bold pt-4 pb-1">Select Sub Category:</h6>
+                                        <select name="sub_category" class="custom-select" id="category" required>
+                                        </select>
+                                        <div class="invalid-feedback">Select Sub Category</div>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -47,13 +61,13 @@
                                 <div class="col-md-12 my-2">
                                     <h6 class="font-weight-bold pt-4 pb-1">Title Of Ad:</h6>
                                     <input type="text" name="title" class="border w-100 p-2 bg-white text-capitalize" pattern="[a-zA-Z0-9 ]{20,60}" placeholder="Ad title go There" required
-                                        value="{{ old('title') }}">
+                                        value="{{ old('title', $post->title ?? '') }}">
                                     <div class="invalid-feedback">Please enter Ad title. Minimum of 10 characters and maximum of 80 character</div>
                                 </div>
 
                                 <div class="col-md-12 my-2">
                                     <h6 class="font-weight-bold pt-4 pb-1">Set Price</h6>
-                                    <input type="number" name="price" class="border w-100 p-2 bg-white" placeholder="Set Price" value="{{ old('price') }}" required>
+                                    <input type="number" name="price" class="border w-100 p-2 bg-white" placeholder="Set Price" value="{{ old('price', $post->price ?? '') }}" required>
                                     <div class="invalid-feedback">Enter Price</div>
                                 </div>
                             </div>
@@ -62,14 +76,15 @@
                     <div class="row">
                         <div class="col-md-6">
                             <h6 class="font-weight-bold pt-4 pb-1">Ad Description:</h6>
-                            <textarea name="detail" id="detail" class="border w-100" placeholder="Write details about your product" pattern="[*]{100,1000}" required>{{ old('detail') }}</textarea>
+                            <textarea name="detail" id="detail" class="border w-100" placeholder="Write details about your product" pattern="[*]{100,1000}"
+                                required>{{ old('detail', $post->detail ?? '') }}</textarea>
                             <div class="invalid-feedback">Enter Ad details. Minimum of 100 character and maximum of 1000 character</div>
                         </div>
                         <div class="col-md-6">
                             <h6 class="font-weight-bold pt-4 pb-1">Location:</h6>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <select name="state" class="custom-select" id="state">
+                                    <select name="state_id" class="custom-select" id="state">
                                         <option value="">Select State</option>
                                         @foreach ($states as $state)
                                             <option value="{{ $state->id }}" @if (($post->state_id ?? '') == $state->id) selected @endif>
@@ -79,12 +94,13 @@
                                     <div class="invalid-feedback">Select City</div>
                                 </div>
                                 <div class="col-md-12 my-2">
-                                    <select name="city" class="custom-select" id="city">
+                                    <select name="city_id" class="custom-select" id="city">
                                     </select>
                                     <div class="invalid-feedback">Select City</div>
                                 </div>
                                 <div class="col-md-12 my-2">
-                                    <input type="text" name="locality" class="border w-100 p-2 bg-white text-capitalize" placeholder="Enter Locality" value="{{ old('locality') }}" required>
+                                    <input type="text" name="locality" class="border w-100 p-2 bg-white text-capitalize" placeholder="Enter Locality"
+                                        value="{{ old('locality', $post->locality ?? '') }}" required>
                                     <div class="invalid-feedback">Enter locality</div>
                                 </div>
                             </div>
@@ -155,6 +171,17 @@
                         </div>
                     </div>
                 </fieldset>
+                @if ($post)
+                    <fieldset class="border p-4 my-5 seller-information bg-gray">
+                        <div class="row">
+                            @foreach ($post->postImages as $image)
+                                <div class="col-md-3">
+                                    <img src="{{ asset('uploads/posts/' . $image->image) }}" alt="" class="w-100" style="height: 150px;">
+                                </div>
+                            @endforeach
+                        </div>
+                    </fieldset>
+                @endif
                 <!-- submit button -->
                 <div class="d-inline-flex">
                     <label for="terms-&-condition" class="ml-2">By posting you agree with our

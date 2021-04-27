@@ -25,7 +25,7 @@ class UserDashboardController extends Controller
     public function savedAds()
     {
         $user = User::current();
-        $posts = $user->savedposts()->with(['category', 'postImages', 'postVideo'])->paginate(6);
+        $posts = $user->savedposts()->with(['category', 'postImages'])->paginate(6);
         $title = 'Favourite Ads';
         return view('user.dashboard', compact('posts', 'title', 'user'));
     }
@@ -35,7 +35,7 @@ class UserDashboardController extends Controller
     {
         $user = User::current();
         $posts = $user->posts()->whereStatus('PENDING')->paginate(6);
-        $posts->load(['category', 'postImages', 'postVideo']);
+        $posts->load(['category', 'postImages']);
         $title = 'Pending Ads';
         return view('user.dashboard', compact('posts', 'title', 'user'));
     }
@@ -44,7 +44,7 @@ class UserDashboardController extends Controller
     {
         $user = User::current();
         $posts = $user->posts()->whereStatus('REJECTED')->paginate(6);
-        $posts->load(['category', 'postImages', 'postVideo']);
+        $posts->load(['category', 'postImages']);
         $title = 'Rejected Ads';
         return view('user.dashboard', compact('posts', 'title', 'user'));
     }
@@ -54,7 +54,7 @@ class UserDashboardController extends Controller
     {
         $user = User::current();
         $posts = $user->posts()->onlyTrashed()->paginate(6);
-        $posts->load(['category', 'postImages', 'postVideo']);
+        $posts->load(['category', 'postImages']);
         $title = 'Archived Ads';
         return view('user.dashboard', compact('posts', 'title', 'user'));
     }

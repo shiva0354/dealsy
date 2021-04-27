@@ -19,8 +19,8 @@ class Post extends Model
         'price',
         'last_renewed_on',
         'locality',
-        'city',
-        'state',
+        'city_id',
+        'state_id',
     ];
 
     //castiing data type
@@ -48,12 +48,12 @@ class Post extends Model
 
     public function city()
     {
-        return $this->belongsTo(Location::class, 'city');
+        return $this->belongsTo(Location::class, 'city_id');
     }
 
     public function state()
     {
-        return $this->belongsTo(Location::class, 'state');
+        return $this->belongsTo(Location::class, 'state_id');
     }
 
     public function postLocation()

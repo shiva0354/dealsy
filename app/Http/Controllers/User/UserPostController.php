@@ -7,6 +7,7 @@ use App\Http\Requests\PostRequest;
 use App\Models\Category;
 use App\Models\Location;
 use App\Models\Post;
+use App\Models\PostImage;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
@@ -17,7 +18,13 @@ class UserPostController extends Controller
     {
         $this->middleware('auth')->except(['show']);
     }
-
+    /**
+     * showing view page for ad listing
+     * @param Category $categories
+     * @param Location $states
+     * @param Post $post
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
         $categories = Category::whereNull('parent_id')->get();
@@ -26,14 +33,26 @@ class UserPostController extends Controller
         return view('user.ad-listing', compact('categories', 'states', 'post'));
     }
 
+    /**
+     * @param int $id
+     * @param Post $post
+     * @return \Illuminate\Http\Response
+     */
     public function show($id)
     {
-        // show the particular ad
         $post = Post::findOrFail($id);
-        $post->load(['category', 'postImages', 'postVideo', 'city', 'state']);
+        $post->load(['category', 'postImages', 'city', 'state']);
         return view('user.item', compact('post'));
     }
-    //show ad edit form view
+    /**
+     * Displaying edit form for post
+     * @param int $id
+     * @param User $user
+     * @param Post $post
+     * @param Category $categories
+     * @param Location $states
+     * @return \Illuminate\Http\Response $response
+     */
     public function edit($id)
     {
         $user = User::current();
@@ -44,16 +63,17 @@ class UserPostController extends Controller
             return redirect()->back()->with('error', $response->message());
         }
 
-        $post->load(['category', 'postImages', 'PostVideo']);
+        $post->load(['category', 'postImages']);
         $categories = Category::all();
-        $locations = Location::all();
-        $states = $locations->whereNull('parent_id');
-        $cities = $locations->whereNotNull('parent_id');
-        return view('user.ad-listing', compact('categories', 'states', 'cities', 'post'));
+        $states = Location::whereNull('parent_id')->get();
+        return view('user.ad-listing', compact('categories', 'states', 'post'));
     }
 
     /**
+     * @param \Illuminate\Http\Request $request
+     * @param User $user
      * @param Post $post
+     * @return \Illuminate\Http\Response $response
      */
     public function store(PostRequest $request)
     {
@@ -75,7 +95,13 @@ class UserPostController extends Controller
         }
         return redirect()->route('home')->with('success', 'Ad posted successfully');
     }
-
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
+     * @param User $user
+     * @param Gate $response
+     * @return \Illuminate\Http\Response
+     */
     public function update(PostRequest $request, $id)
     {
         //update the posting of ads
@@ -106,6 +132,11 @@ class UserPostController extends Controller
         return redirect()->route('home')->with('success', 'Ad updated successfully');
     }
 
+    /**
+     * @param int $id
+     * @param Gate $response
+     * @return \Illuminate\Http\Response
+     */
     public function destroy($id)
     {
         $post = Post::findOrFail($id);
@@ -121,16 +152,17 @@ class UserPostController extends Controller
     {
         if (!empty($request->input('sub_category'))) {
             $category = $request->input('sub_category');
+        } else {
+            $category = $request->input('category');
         }
-        $category = $request->input('category');
 
         $input = $request->only([
             'title',
             'detail',
             'price',
             'locality',
-            'city', //city
-            'state',
+            'city_id',
+            'state_id',
         ]);
 
         $input['user_id'] = $userId;
@@ -138,10 +170,12 @@ class UserPostController extends Controller
         return $input;
     }
 
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Support\Arr $images
+     */
     private function saveImage($request)
     {
-        $images[] = '';
-
         if ($request->hasfile('images')) {
             foreach ($request->file('images') as $file) {
                 $name = Str::random(60) . '.' . $file->extension();
@@ -152,17 +186,37 @@ class UserPostController extends Controller
         return $images;
     }
 
+    /**
+     * @param int $stateId
+     * @return Location $cities
+     */
     public function cities($stateId)
     {
         $state = Location::findOrFail($stateId);
-        $cities = $state->locations;
+        $cities = $state->cities;
         return $cities;
     }
 
+    /**
+     * @param int $id
+     * @return Category $categories
+     */
     public function categories($id)
     {
         $category = Category::findOrFail($id);
         $categories = $category->subCategories;
         return $categories;
+    }
+
+    public function deleteImage(Post $post, int $imageId)
+    {
+        $image = PostImage::findOrFail($imageId);
+        $response = Gate::inspect('post_image', $post, $image);
+
+        if (!$response->allowed()) {
+            return redirect()->back()->with('error', $response->message());
+        }
+        $post->deleteImage($image);
+        return redirect()->back()->with('success', 'Image deleted successfully');
     }
 }

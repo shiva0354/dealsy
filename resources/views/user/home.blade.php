@@ -2,10 +2,7 @@
 {{-- defining page title --}}
 @section('title', 'Buy & Sell Near You')
 @section('content')
-    <!--===============================
-                                =            Hero Area            =
-                                ================================-->
-    <section class="hero-area bg-1 text-center overly">
+<section class="hero-area bg-1 text-center overly">
         <!-- Container Start -->
         <div class="container">
             <div class="row">
@@ -42,13 +39,13 @@
     </section>
 
     <!--===================================
-                                =            Client Slider            =
-                                ====================================-->
+                                            =            Client Slider            =
+                                            ====================================-->
 
 
     <!--===========================================
-                                =            Popular deals section            =
-                                ============================================-->
+                                            =            Popular deals section            =
+                                            ============================================-->
 
     <section class="popular-deals section bg-gray">
         <div class="container">
@@ -70,7 +67,7 @@
                                 <div class="product-item bg-light">
                                     <div class="card">
                                         <div class="thumb-content">
-                                            <div class="price">₹{{ $post->expected_price }}</div>
+                                            <div class="price">₹ {{ $post->price }}</div>
                                             <a href="single.html">
                                                 <img class="card-img-top img-fluid" src="{!! asset('theme/images/products/products-2.jpg') !!}" alt="Card image cap">
                                             </a>
@@ -84,7 +81,7 @@
                                                     <a href="single.html"><i class="fa fa-folder-open-o"></i>{{ $post->category->name ?? '' }}</a>
                                                 </li>
                                                 <li class="list-inline-item">
-                                                    <a href="#"><i class="fa fa-calendar"></i>{{ $post->created_at }}</a>
+                                                    <a href="#"><i class="fa fa-calendar"></i>{{ date_format($post->created_at, 'd M,Y') }}</a>
                                                 </li>
                                             </ul>
                                             {{-- <p class="card-text">{{ $post->detail }}
@@ -100,8 +97,8 @@
         </div>
     </section>
     <!--==========================================
-                                =            All Category Section            =
-                                ===========================================-->
+                                            =            All Category Section            =
+                                            ===========================================-->
     <section class=" section">
         <!-- Container Start -->
         <div class="container">
@@ -125,6 +122,7 @@
                                     </div>
                                     <ul class="category-list" style="height:150px; max-height: 150px; overflow-x:hidden;">
                                         @foreach ($category->subCategories as $subcategory)
+
                                             <li>
                                                 <a
                                                     href="{{ route('search.category', [$subcategory->slug, $subcategory->id]) }}">{{ $subcategory->name }}<span>{{ $subcategory->posts_count }}</span></a>

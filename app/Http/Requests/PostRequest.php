@@ -30,8 +30,8 @@ class PostRequest extends FormRequest
             'detail' => 'required|string|min:30|max:1000',
             'price' => 'required|nullable|numeric',
             'locality' => 'required|string|min:3|max:255',
-            'city' => 'required|numeric|exists:locations,id',
-            'state' => 'required|numeric|exists:locations,id',
+            'city_id' => 'required|numeric|exists:locations,id',
+            'state_id' => 'required|numeric|exists:locations,id',
             'images' => 'required',
             'images.*' => 'image|mimes:png,jpg,jpeg|max:2000',
         ];
@@ -53,7 +53,7 @@ class PostRequest extends FormRequest
             'detail' => 'Post description',
             'price' => 'Price',
             'locality' => 'Locality',
-            'location_id' => 'City',
+            'city_id' => 'City',
             'state_id' => 'State',
             'images' => 'Post Images',
         ];

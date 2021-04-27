@@ -24,8 +24,8 @@ class CreatePostsTable extends Migration
             $table->float('price')->nullable();
             $table->timestamp('last_renewed_on')->nullable();
             $table->string('locality')->nullable();
-            $table->foreignId('city')->nullable()->constrained('locations');
-            $table->foreignId('state')->nullable();
+            $table->foreignId('city_id')->nullable()->constrained('locations');
+            $table->foreignId('state_id')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

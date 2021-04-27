@@ -14,12 +14,12 @@ class Location extends Model
         'location', 'slug', 'parent_id',
     ];
 
-    public function locations()
+    public function cities()
     {
         return $this->hasMany(Location::class, 'parent_id');
     }
 
-    public function parent()
+    public function state()
     {
         return $this->belongsTo(Location::class, 'parent_id');
     }
