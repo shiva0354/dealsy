@@ -603,12 +603,12 @@ ul.pagination .active a {
 
 .page-search .advance-search .form-control {
   border: 1px solid #fff;
-  color: #fff;
+  color: rgb(46, 41, 41);
 }
 
 .page-search .advance-search ::-webkit-input-placeholder {
   /* Chrome/Opera/Safari */
-  color: #fff;
+  color: #000;
 }
 
 .page-search .advance-search ::-moz-placeholder {

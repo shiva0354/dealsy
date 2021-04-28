@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Models\Category;
 use Illuminate\View\Component;
 
 class search extends Component
@@ -11,9 +12,12 @@ class search extends Component
      *
      * @return void
      */
+    public $categories;
+    public $action;
     public function __construct()
     {
-        //
+        $this->categories = Category::all();
+        $this->action = route('search');
     }
 
     /**
