@@ -29,7 +29,7 @@
                             @if ($post->locality)
                                 <li><a
                                         href="{{ route('search.locality.category', [$post->city->slug, $post->city->id, str_replace(' ', '-', $post->locality), $post->category->slug, $post->category->id]) }}">{{ $post->category->name }}
-                                        in {{$post->locality}}, {{$post->city->name }}</a></li>
+                                        in {{ $post->locality }}, {{ $post->city->name }}</a></li>
                             @endif
                         </ul>
                         <h1 class="product-title">{{ $post->title }}</h1>
@@ -58,32 +58,33 @@
                                 <i class="fas fa-share-alt my-social"></i>
                             </a>
 
-                            <a href="{{ url()->current() }}" target="_blank" data-toggle="tooltip" data-placement="top" title="Instagram" id="instagram">
+                            {{-- <a href="{{ url()->current() }}" target="_blank" data-toggle="tooltip" data-placement="top" title="Instagram" id="instagram">
                                 <i class="fab fa-instagram my-social"></i>
-                            </a>
-                            <a href="{{ url()->current() }}" target="_blank" data-toggle="tooltip" data-placement="top" title="Linkedin" id="linkedin">
+                            </a> --}}
+                            <a href="http://www.linkedin.com/shareArticle?mini=true&url={{ url()->current() }}" target="_blank" data-toggle="tooltip" data-placement="top" title="Linkedin"
+                                id="linkedin">
                                 <i class="fab fa-linkedin my-social"></i>
                             </a>
 
-                            <a href="{{ url()->current() }}" target="_blank" data-toggle="tooltip" data-placement="top" title="Reddit" id="reddit">
+                            <a href="http://reddit.com/submit?url={{ url()->current() }}" target="_blank" data-toggle="tooltip" data-placement="top" title="Reddit" id="reddit">
                                 <i class="fab fa-reddit-alien my-social"></i>
                             </a>
 
-                            <a href="{{ url()->current() }}" target="_blank" data-toggle="tooltip" data-placement="top" title="Whatsapp" id="whatsapp">
+                            <a href="whatsapp://send?text={{ url()->current() }}" target="_blank" data-toggle="tooltip" data-placement="top" title="Whatsapp" id="whatsapp">
                                 <i class="fab fa-whatsapp my-social"></i>
                             </a>
 
-                            <a href="{{ url()->current() }}" target="_blank" data-toggle="tooltip" data-placement="top" title="Twitter" id="twitter">
+                            <a href="http://twitter.com/share?url={{ url()->current() }}" target="_blank" data-toggle="tooltip" data-placement="top" title="Twitter" id="twitter">
                                 <i class="fab fa-twitter my-social"></i>
                             </a>
 
-                            <a href="{{ url()->current() }}" target="_blank" data-toggle="tooltip" data-placement="top" title="Facebook" id="facebook">
+                            <a href="http://www.facebook.com/sharer.php?u={{ url()->current() }}" target="_blank" data-toggle="tooltip" data-placement="top" title="Facebook" id="facebook">
                                 <i class="fab fa-facebook-f my-social"></i>
                             </a>
 
                         </div>
                         <!-- // Sharer wideget end -->
-                        <div class="content mt-5 pt-5">
+                        <div class="content">
                             {{-- <ul class="nav nav-pills  justify-content-center" id="pills-tab" role="tablist">
 							<li class="nav-item">
 								<a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home"
@@ -100,11 +101,8 @@
 						</ul> --}}
                             <div class="tab-content" id="pills-tabContent">
                                 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                                    <h3 class="tab-title">Product Description</h3>
+                                    <h3 class="tab-title">Description</h3>
                                     <p>{{ $post->detail }}</p>
-
-                                    <iframe width="100%" height="400" src="https://www.youtube.com/embed/LUH7njvhydE?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
-
                                 </div>
                                 {{-- <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
 								<h3 class="tab-title">Product Specifications</h3>

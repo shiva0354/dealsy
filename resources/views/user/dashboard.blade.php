@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 @section('title', 'Dashboard')
-@section('content')                                                                                                                 ===================================-->
+@section('content')
     <section class="dashboard section">
         <!-- Container Start -->
         <div class="container">

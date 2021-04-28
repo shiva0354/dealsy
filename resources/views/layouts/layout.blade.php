@@ -18,12 +18,12 @@
     {{-- <link  href="{!! asset('plugins/bootstrap/css/bootstrap.min.css') !!}" rel="stylesheet"> --}}
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{!! asset('plugins/bootstrap/css/bootstrap-slider.css') !!}" rel="stylesheet">
+    {{-- <link href="{!! asset('plugins/bootstrap/css/bootstrap-slider.css') !!}" rel="stylesheet"> --}}
     <link href="{!! asset('plugins/slick-carousel/slick/slick.css') !!}" rel="stylesheet">
     <link href="{!! asset('plugins/slick-carousel/slick/slick-theme.css') !!}" rel="stylesheet">
     <!-- Fancy Box -->
-    <link href="{!! asset('plugins/fancybox/jquery.fancybox.pack.css') !!}" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    {{-- <link href="{!! asset('plugins/fancybox/jquery.fancybox.pack.css') !!}" rel="stylesheet"> --}}
+    {{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" /> --}}
     <!-- CUSTOM CSS -->
     <link href="{!! asset('css/style.css') !!}" rel="stylesheet">
 </head>
@@ -38,19 +38,19 @@
 
     @include('layouts.footer')
     <!-- JAVASCRIPTS -->
-    <script src="{!! asset('plugins/jQuery/jquery.min.js') !!}"></script>
-    {{-- <script src="https://code.jquery.com/jquery-2.2.4.min.js" crossorigin="anonymous"></script> --}}
-    <script src="{!! asset('plugins/bootstrap/js/popper.min.js') !!}"></script>
+    {{-- <script src="{!! asset('plugins/jQuery/jquery.min.js') !!}"></script> --}}
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" crossorigin="anonymous"></script>
+    {{-- <script src="{!! asset('plugins/bootstrap/js/popper.min.js') !!}"></script> --}}
     {{-- <script src="{!! asset('plugins/bootstrap/js/bootstrap.min.js') !!}"></script> --}}
-    <script src="{!! asset('plugins/bootstrap/js/bootstrap-slider.js') !!}"></script>
+    {{-- <script src="{!! asset('plugins/bootstrap/js/bootstrap-slider.js') !!}"></script> --}}
     <!-- tether js -->
     {{-- <script src="{!! asset('plugins/tether/js/tether.min.js') !!}"></script> --}}
     {{-- <script src="{!! asset('plugins/raty/jquery.raty-fa.js') !!}"></script> --}}
     <script src="{!! asset('plugins/slick-carousel/slick/slick.min.js') !!}"></script>
     {{-- <script src="{!! asset('plugins/jquery-nice-select/js/jquery.nice-select.min.js') !!}"></script> --}}
-    <script src="{!! asset('plugins/fancybox/jquery.fancybox.pack.js') !!}"></script>
+    {{-- <script src="{!! asset('plugins/fancybox/jquery.fancybox.pack.js') !!}"></script> --}}
     {{-- <script src="{!! asset('plugins/smoothscroll/SmoothScroll.min.js') !!}"></script> --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" crossorigin="anonymous"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" crossorigin="anonymous"></script> --}}
     <script src="{{ asset('js/script.js') }}"></script>
     @yield('js-script')
 </body>
