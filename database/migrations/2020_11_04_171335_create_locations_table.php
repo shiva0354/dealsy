@@ -15,9 +15,9 @@ class CreateLocationsTable extends Migration
     {
         Schema::create('locations', function (Blueprint $table) {
             $table->id()->autoIncrement();
-            $table->string('location');
+            $table->string('name');
             $table->string('slug');
-            $table->foreignId('parent_id')->nullable()->constrained('locations','id');
+            $table->foreignId('parent_id')->nullable()->constrained('locations', 'id');
             $table->softDeletes();
             $table->timestamps();
         });

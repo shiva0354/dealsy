@@ -11,7 +11,7 @@ class Location extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'location', 'slug', 'parent_id',
+        'name', 'slug', 'parent_id',
     ];
 
     public function cities()

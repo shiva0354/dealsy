@@ -58,7 +58,7 @@ class Post extends Model
 
     public function postLocation()
     {
-        return ($this->locality . "," . $this->city->location . "," . $this->state->location);
+        return ($this->locality . "," . $this->city->name . "," . $this->state->name);
     }
 
     public function saveImage(string $image)

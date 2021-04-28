@@ -25,7 +25,7 @@ class UserSearchController extends Controller
             $posts = Post::where('status', 'ACTIVE')
                 ->where('category_id', $category)
                 ->where('title', 'LIKE', $query)
-                ->where('location_id', $location)->paginate(9);
+                ->where('city_id', $location)->paginate(9);
         } elseif ($category != '') {
             $posts = Post::where('status', 'ACTIVE')
                 ->where('category_id', $category)
@@ -49,38 +49,38 @@ class UserSearchController extends Controller
         return view('user.products', compact('posts', 'category', 'location'));
     }
 
-    public function LocationSearch($location, $location_id)
+    public function LocationSearch($location, $locationId)
     {
-        // $category = Category::findOrFail($location_id);
+        // $category = Category::findOrFail($locationId);
         $category = null;
-        $location = Location::findOrFail($location_id);
+        $location = Location::findOrFail($locationId);
 
-        $posts = Post::where('status', 'ACTIVE')->where('location_id', $location_id)->paginate(9);
+        $posts = Post::where('status', 'ACTIVE')->where('city_id', $locationId)->paginate(9);
         return view('user.products', compact('posts', 'category', 'location'));
     }
 
-    public function locationCategorySearch($location, $location_id, $category, $category_id)
+    public function locationCategorySearch($location, $locationId, $category, $category_id)
     {
         $category = Category::findOrFail($category_id);
-        $location = Location::findOrFail($location_id);
+        $location = Location::findOrFail($locationId);
 
-        $posts = Post::where('status', 'ACTIVE')->where('location_id', $location_id)->where('category_id', $category_id)->paginate(9);
+        $posts = Post::where('status', 'ACTIVE')->where('city_id', $locationId)->where('category_id', $category_id)->paginate(9);
         return view('user.products', compact('posts', 'category', 'location'));
     }
 
-    public function localityCategorySearch($location, $location_id, $locality, $category, $category_id)
+    public function localityCategorySearch($location, $locationId, $locality, $category, $category_id)
     {
         $category = Category::findOrFail($category_id);
-        $location = Location::findOrFail($location_id);
+        $location = Location::findOrFail($locationId);
 
         $posts = Post::where('status', 'ACTIVE')->where('category_id', $category_id)->where('locality', $locality)->paginate(9);
         return view('user.products', compact('posts', 'category', 'location'));
     }
 
-    public function localitySearch($location, $location_id, $locality)
+    public function localitySearch($location, $locationId, $locality)
     {
         $category = null;
-        $location = Location::findOrFail($location_id);
+        $location = Location::findOrFail($locationId);
 
         $posts = Post::where('status', 'ACTIVE')->where('locality', $locality)->paginate(9);
         return view('user.products', compact('posts', 'category', 'location'));

@@ -2,7 +2,7 @@
 {{-- defining page title --}}
 @section('title', 'Buy & Sell Near You')
 @section('content')
-<section class="hero-area bg-1 text-center overly">
+    <section class="hero-area bg-1 text-center overly">
         <!-- Container Start -->
         <div class="container">
             <div class="row">
@@ -20,13 +20,6 @@
                                         <a href="{{ route('search.category', [$category->slug, $category->id]) }}"><i class="{{ $category->icon }}"></i>{{ $category->name }}</a>
                                     </li>
                                 @endforeach
-                                {{-- @for ($i = 0; $i < 9; $i++)
-                                    <li class="list-inline-item">
-                                        <a
-                                            href="{{ route('search.category', [$categories[$i]->slug, $categories[$i]->id]) }}"><i
-                                                class="fa fa-grav"></i>{{ $categories[$i]->name }}</a>
-                                    </li>
-                                @endfor --}}
                             </ul>
                         </div>
                     </div>
@@ -39,13 +32,13 @@
     </section>
 
     <!--===================================
-                                            =            Client Slider            =
-                                            ====================================-->
+                                                    =            Client Slider            =
+                                                    ====================================-->
 
 
     <!--===========================================
-                                            =            Popular deals section            =
-                                            ============================================-->
+                                                    =            Popular deals section            =
+                                                    ============================================-->
 
     <section class="popular-deals section bg-gray">
         <div class="container">
@@ -97,8 +90,8 @@
         </div>
     </section>
     <!--==========================================
-                                            =            All Category Section            =
-                                            ===========================================-->
+                                                    =            All Category Section            =
+                                                    ===========================================-->
     <section class=" section">
         <!-- Container Start -->
         <div class="container">
@@ -122,7 +115,6 @@
                                     </div>
                                     <ul class="category-list" style="height:150px; max-height: 150px; overflow-x:hidden;">
                                         @foreach ($category->subCategories as $subcategory)
-
                                             <li>
                                                 <a
                                                     href="{{ route('search.category', [$subcategory->slug, $subcategory->id]) }}">{{ $subcategory->name }}<span>{{ $subcategory->posts_count }}</span></a>
