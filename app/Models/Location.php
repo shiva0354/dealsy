@@ -23,4 +23,9 @@ class Location extends Model
     {
         return $this->belongsTo(Location::class, 'parent_id');
     }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'city_id');
+    }
 }

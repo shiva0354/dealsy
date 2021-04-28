@@ -14,19 +14,30 @@
                         {{-- breadcrumb --}}
                         <ul class="breadcrumb">
                             <li><a href="{{ route('home') }}">Home</a></li>
-                            <li><a href="{{ route('search.category', [$post->category->slug, $post->category]) }}">Category</a></li>
-                            @if ($post->subcategory)
-                                <li><a href="#">{{ $post->subcategory->name }}</a></li>
-                                <li><a href="#">{{ $post->subcategory->name }} in {{ $post->state }}</a></li>
-                                <li><a href="#">{{ $post->subcategory->name }} in {{ $post->city }}</a></li>
-                                <li><a href="#">{{ $post->subcategory->name }} in {{ $post->locality }}</a></li>
+                            @if ($post->category->parent)
+                                <li><a href="{{ route('search.category', [$post->category->parent->slug, $post->category->parent]) }}">{{ $post->category->parent->name }}</a></li>
+                            @endif
+                            <li><a href="{{ route('search.category', [$post->category->slug, $post->category]) }}">{{ $post->category->name }}</a></li>
+                            @if ($post->state)
+                                <li><a href="{{ route('search.location.category', [$post->state->slug, $post->state->id, $post->category->slug, $post->category->id]) }}">{{ $post->category->name }}
+                                        in {{ $post->state->name }}</a></li>
+                            @endif
+                            @if ($post->city)
+                                <li><a href="{{ route('search.location.category', [$post->city->slug, $post->city->id, $post->category->slug, $post->category->id]) }}">{{ $post->category->name }}
+                                        in {{ $post->city->name }}</a></li>
+                            @endif
+                            @if ($post->locality)
+                                <li><a
+                                        href="{{ route('search.locality.category', [$post->city->slug, $post->city->id, str_replace(' ', '-', $post->locality), $post->category->slug, $post->category->id]) }}">{{ $post->category->name }}
+                                        in {{$post->locality}}, {{$post->city->name }}</a></li>
                             @endif
                         </ul>
                         <h1 class="product-title">{{ $post->title }}</h1>
                         <div class="product-meta">
                             <ul class="list-inline">
                                 <li class="list-inline-item"><i class="fa fa-user-o"></i> By <a>{{ $post->user->name }}</a></li>
-                                <li class="list-inline-item"><i class="fa fa-folder-open-o"></i> Category<a href="">{{ $post->category->name }}</a></li>
+                                <li class="list-inline-item"><i class="fa fa-folder-open-o"></i> Category<a
+                                        href="{{ route('search.category', [$post->category->slug, $post->category]) }}">{{ $post->category->name }}</a></li>
                                 <li class="list-inline-item"><i class="fa fa-location-arrow"></i> Location<a href="">{{ $post->postLocation() }}</a></li>
                             </ul>
                         </div>

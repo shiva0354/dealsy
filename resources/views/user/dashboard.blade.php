@@ -1,9 +1,6 @@
 @extends('layouts.layout')
 @section('title', 'Dashboard')
-@section('content')
-    <!--==================================
-                                                                                                                                                        =            User Profile            =
-                                                                                                                                                        ===================================-->
+@section('content')                                                                                                                 ===================================-->
     <section class="dashboard section">
         <!-- Container Start -->
         <div class="container">
@@ -105,7 +102,8 @@
                                             <div class="">
                                                 <ul class="list-inline justify-content-center">
                                                     <li class="list-inline-item">
-                                                        <a data-toggle="tooltip" data-placement="top" title="view" target="_blank" class="view" href="{{ route('posts.show', [$post, $post->title]) }}">
+                                                        <a data-toggle="tooltip" data-placement="top" title="view" target="_blank" class="view"
+                                                            href="{{ route('posts.show', [$post, strtolower(str_replace(' ', '-', $post->title))]) }}">
                                                             <i class="fa fa-eye"></i>
                                                         </a>
                                                     </li>
