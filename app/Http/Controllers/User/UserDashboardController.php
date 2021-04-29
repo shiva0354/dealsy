@@ -58,4 +58,11 @@ class UserDashboardController extends Controller
         $title = 'Archived Ads';
         return view('user.dashboard', compact('posts', 'title', 'user'));
     }
+
+    public function getMessageRequest()
+    {
+        $user = User::current();
+        $messages = $user->message_requests()->paginate(10);
+        return view('user.dashboard-messages', compact('messages', 'user'));
+    }
 }

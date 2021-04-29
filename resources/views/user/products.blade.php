@@ -117,7 +117,7 @@
                         </div>
                     </div>
                     <div class="col-md-9">
-                        <div class="category-search-filter">
+                        {{-- <div class="category-search-filter">
                             <div class="row">
                                 <div class="col-md-6">
                                     <strong>Sort</strong>
@@ -142,30 +142,31 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="product-grid-list">
-                            <div class="row mt-30">
+                            <div class="row">
                                 @foreach ($posts as $post)
                                     <div class="col-sm-12 col-lg-4 col-md-6">
                                         <!-- product card -->
                                         <div class="product-item bg-light">
                                             <div class="card">
                                                 <div class="thumb-content">
-                                                    <div class="price">₹{{ $post->expected_price }}</div>
-                                                    <a href="single.html">
-                                                        <img class="card-img-top img-fluid" src="{!! asset('theme/images/products/products-1.jpg') !!}" alt="Card image cap">
+                                                    <div class="price">₹ {{ $post->price }}</div>
+                                                    <a href="{{ route('posts.show', [$post, strtolower(str_replace(' ', '-', $post->title))]) }}"">
+                                                                                        <img class=" card-img-top img-fluid" src="{!! asset('theme/images/products/products-1.jpg') !!}" alt="Card image cap">
                                                     </a>
                                                 </div>
                                                 <span class="wishlist"><a href="javascript:;" onclick="addTowishlist('product_id');"><i class="fa fa-heart-o fa-lg" data-toggle="tooltip" data-placement="top"
                                                             title="favourite"></i></a></span>
                                                 <div class="card-body">
-                                                    <h4 class="card-title"><a href="{{ single . html }}">{{ $post->title }}</a></h4>
+                                                    <h4 class="card-title"><a href="{{ route('posts.show', [$post, strtolower(str_replace(' ', '-', $post->title))]) }}">{{ $post->title }}</a></h4>
                                                     <ul class="list-inline product-meta">
                                                         <li class="list-inline-item">
-                                                            <a href="{{ single . html }}"><i class="fa fa-folder-open-o"></i>{{ $post->category }}</a>
+                                                            <a href="{{ route('search.category', [$post->category->slug, $post->category->id]) }}"><i
+                                                                    class="fa fa-folder-open-o"></i>{{ $post->category->name }}</a>
                                                         </li>
                                                         <li class="list-inline-item">
-                                                            <a href="#"><i class="fa fa-calendar"></i>{{ $post->created_at }}</a>
+                                                            <a href="#"><i class="fa fa-calendar"></i>{{ date_format($post->created_at, 'd M,Y') }}</a>
                                                         </li>
                                                     </ul>
                                                     {{-- <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -178,25 +179,6 @@
                             </div>
                         </div>
                         <div class="pagination justify-content-center">
-                            {{-- <nav aria-label="Page navigation example">
-                            <ul class="pagination">
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                        <span class="sr-only">Previous</span>
-                                    </a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                        <span class="sr-only">Next</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav> --}}
                             {{ $posts->links('pagination::simple-default') }}
                         </div>
                     </div>

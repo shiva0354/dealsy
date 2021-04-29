@@ -47,6 +47,7 @@ Route::get('dashboard/ads/saved', [UserDashboardController::class, 'savedAds'])-
 Route::get('dashboard/ads/pending', [UserDashboardController::class, 'pendingAds'])->name('user.pending.ads');
 Route::get('dashboard/ads/archived', [UserDashboardController::class, 'archivedAds'])->name('user.archive.ads');
 Route::get('dashboard/ads/rejected', [UserDashboardController::class, 'rejectedAds'])->name('user.rejected.ads');
+Route::get('dashboard/messages', [UserDashboardController::class, 'getMessageRequest'])->name('user.messages');
 
 //User Profile
 Route::get('dashboard/profile', [UserProfileController::class, 'index'])->name('user.profile');

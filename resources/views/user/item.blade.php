@@ -224,11 +224,20 @@
                             <img class="rounded-circle img-fluid mb-2 px-2" width="160px" src="{{ asset($post->user->avatar) }}" alt="{{ $post->user->name ?? '' }}">
                             <h4><a href="">{{ $post->user->name }}</a></h4>
                             {{-- <p class="member-time">Member Since Jun 27, 2017</p> --}}
-                            <a href="">See all ads</a>
+                            <a href="">See all ads by this seller</a>
                             <ul class="list-inline mt-20">
                                 <li class="list-inline-item"><a href="" class="btn btn-offer d-inline-block  btn-primary px-lg-5 my-1 px-md-3"><i class="fa fa-phone fa-lg"></i>&nbsp; Call Now</a></li>
-                                <li class="list-inline-item"><a href="" class="btn btn-offer d-inline-block btn-primary px-lg-5 my-1 px-md-3" data-toggle="modal" data-target="#makeOffer">Make an
-                                        offer</a></li>
+                                @if (Auth::check())
+                                    <li class="list-inline-item">
+                                        <form action="" method="post">
+                                            <button type="submit" class="btn btn-offer d-inline-block btn-primary px-lg-5 my-1 px-md-3">Make an Offer</button>
+                                        </form>
+                                    </li>
+                                @else
+                                    <li class="list-inline-item"><a href="void(0);" class="btn btn-offer d-inline-block btn-primary px-lg-5 my-1 px-md-3" data-toggle="modal" data-target="#makeOffer">Make
+                                            an
+                                            offer</a></li>
+                                @endif
                             </ul>
                         </div>
                         <!-- Modal -->

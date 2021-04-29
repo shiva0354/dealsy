@@ -58,4 +58,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Post::class, 'saved_posts', 'user_id', 'post_id');
     }
+
+    public function message_requests()
+    {
+        return $this->hasMany(MessageRequest::class)->latest();
+    }
 }

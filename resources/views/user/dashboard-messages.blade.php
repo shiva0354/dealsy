@@ -75,53 +75,24 @@
                 <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-0">
                     <!-- Recently Favorited -->
                     <div class="widget dashboard-container my-adslist">
-                        <h3 class="widget-header">{{ $title }}<span class="text-primary">({{ $posts->total() }})</span></h3>
-                        <table class="table table-responsive product-dashboard-table">
+                        <h3 class="widget-header">Message Requests<span class="text-primary">({{ $messages->total() }})</span></h3>
+                        <table class="table table-responsive">
                             <thead>
                                 <tr>
-                                    <th>Image</th>
-                                    <th>Product Title</th>
-                                    <th class="text-center">Category</th>
-                                    <th class="text-center">Action</th>
+                                    <th>Post</th>
+                                    <th>Message</th>
+                                    <th class="text-center">Mobile</th>
+                                    <th class="text-center">Name</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($posts as $post)
+                                @foreach ($messages as $message)
                                     <tr>
-
-                                        <td class="product-thumb">
-                                            <img width="80px" src="{{ asset('uploads/posts/' . $post->postImages->first()->image) }}" height="auto" src="" alt="image description">
-                                        </td>
-                                        <td class="product-details">
-                                            <h3 class="title">{{ $post->title }}</h3>
-                                            <span class="add-id"><strong>Ad ID:</strong>{{ $post->id }}</span>
-                                            <span><strong>Posted on: </strong><time>Jun 27, 2017</time> </span>
-                                            <span class="status active"><strong>Status</strong>{{ $post->status }}</span>
-                                            <span class="location"><strong>Location</strong>{{ $post->postLocation() }}</span>
-                                        </td>
-                                        <td class="product-category"><span class="categories">Laptops</span></td>
-                                        <td class="action" data-title="Action">
-                                            <div class="">
-                                                <ul class="list-inline justify-content-center">
-                                                    <li class="list-inline-item">
-                                                        <a data-toggle="tooltip" data-placement="top" title="view" target="_blank" class="view"
-                                                            href="{{ route('posts.show', [$post, strtolower(str_replace(' ', '-', $post->title))]) }}">
-                                                            <i class="fa fa-eye"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="list-inline-item">
-                                                        <a class="edit" data-toggle="tooltip" data-placement="top" title="Edit" href="{{ route('posts.edit', $post) }}">
-                                                            <i class="fa fa-edit"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="list-inline-item">
-                                                        <a class="delete" data-toggle="tooltip" data-placement="top" title="Delete" href="{{ route('posts.destroy', $post) }}">
-                                                            <i class="fa fa-trash"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </td>
+                                        <td class="mx-2"><a href="{{ route('posts.show', [$message->post, strtolower(str_replace(' ', '-', $message->post->title))]) }}"
+                                                class="text-bold">{{ $message->post->title }}</a></td>
+                                        <td>{{ $message->message }}</td>
+                                        <td>{{ $message->mobile }}</td>
+                                        <td>{{ $message->name }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -131,7 +102,7 @@
 
                     <!-- pagination -->
                     <div class="pagination justify-content-center">
-                        {{ $posts->links('pagination::bootstrap-4') }}
+                        {{ $messages->links('pagination::bootstrap-4') }}
                     </div>
                     <!-- pagination -->
 
@@ -141,4 +112,12 @@
         </div>
         <!-- Container End -->
     </section>
+@endsection
+@section('js-script')
+    <script>
+        $(function() {
+            $('li a[href^="/' + location.pathname.split("/")[1] + '"]').addClass('active');
+        });
+
+    </script>
 @endsection
