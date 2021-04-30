@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ChangeEmailRequest;
+use App\Http\Requests\MobileRequest;
 use App\Http\Requests\ProfileImageRequest;
 use App\Models\User;
 use Exception;
@@ -71,6 +72,17 @@ class UserProfileController extends Controller
             return redirect()->back()->with('error', 'Invalid file uploaded');
         }
         return redirect()->back()->with('error', 'No file uploaded');
+    }
+
+    public function changeMobile(MobileRequest $request)
+    {
+        $user = User::current();
+
+        if ($user->mobile && $user->mobile != $request->input('old_mobile')) {
+            return redirect()->back()->with('error', 'old mobile do not matched');
+        }
+        $user->update(['mobile' => $request->input('mobile')]);
+        return redirect()->route('user.profile')->with('success', 'Mobile updated successfully');
     }
 
     //soft deleting user from the database

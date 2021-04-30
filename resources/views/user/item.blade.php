@@ -223,20 +223,20 @@
                         <div class="widget user text-center sticky-top">
                             <img class="rounded-circle img-fluid mb-2 px-2" width="160px" src="{{ asset($post->user->avatar) }}" alt="{{ $post->user->name ?? '' }}">
                             <h4><a href="">{{ $post->user->name }}</a></h4>
-                            {{-- <p class="member-time">Member Since Jun 27, 2017</p> --}}
-                            <a href="">See all ads by this seller</a>
+                            <p class="member-time">Member Since {{ date_format($post->user->created_at, 'M d,Y') }}</p>
+                            <a href="{{ route('users.posts', $post->user) }}">See all ads by this seller</a>
                             <ul class="list-inline mt-20">
                                 <li class="list-inline-item"><a href="" class="btn btn-offer d-inline-block  btn-primary px-lg-5 my-1 px-md-3"><i class="fa fa-phone fa-lg"></i>&nbsp; Call Now</a></li>
-                                @if (Auth::check())
+                                @if (Auth::check() && Auth::user()->mobile)
                                     <li class="list-inline-item">
-                                        <form action="" method="post">
+                                        <form action="{{ route('user.auth.send.message', $post) }}" method="post">
+                                            @csrf
                                             <button type="submit" class="btn btn-offer d-inline-block btn-primary px-lg-5 my-1 px-md-3">Make an Offer</button>
                                         </form>
                                     </li>
                                 @else
                                     <li class="list-inline-item"><a href="void(0);" class="btn btn-offer d-inline-block btn-primary px-lg-5 my-1 px-md-3" data-toggle="modal" data-target="#makeOffer">Make
-                                            an
-                                            offer</a></li>
+                                            an offer</a></li>
                                 @endif
                             </ul>
                         </div>
@@ -251,10 +251,11 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="#" method="post">
+                                        <form action="{{ route('user.send.message', $post) }}" method="post">
+                                            @csrf
                                             <input class="form-control mb-2" type="text" name="name" placeholder="Enter Name">
-                                            <input class="form-control mb-2" type="text" name="mobile" placeholder="Enter mobile No.">
-                                            <textarea name="message" id="" class="form-control mb-2"></textarea>
+                                            <input class="form-control mb-2" type="email" name="email" placeholder="Enter email">
+                                            <input class="form-control mb-2" type="number" name="mobile" placeholder="Enter mobile No.">
                                             <button type="submit" class="btn btn-primary w-100">Send</button>
                                         </form>
                                     </div>

@@ -5,9 +5,15 @@ namespace App\Http\Controllers;
 use App\Http\Requests\MessageRequest;
 use App\Models\MessageRequest as ModelsMessageRequest;
 use App\Models\Post;
+use App\Models\User;
 
 class UserMessageRequestController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth')->only(['authStore']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -35,9 +41,29 @@ class UserMessageRequestController extends Controller
             'user_id' => $user->id,
             'name' => $request->input('name'),
             'mobile' => $request->input('mobile'),
-            'message' => $request->input('message'),
+            'email' => $request->input('email'),
         ]);
         //genrate event
+        return redirect()->intended()->with('success', 'Message request sent successfully');
+    }
+
+    public function authStore($postId)
+    {
+        $user = User::current();
+        $post = Post::findOrFail($postId);
+
+        if ($post->user == $user) {
+            return redirect()->back()->with('info', 'You can\'t send message request to yourself');
+        }
+
+        ModelsMessageRequest::create([
+            'post_id' => $post->id,
+            'user_id' => $user->id,
+            'name' => $post->user->name,
+            'mobile' => $post->user->mobile,
+            'email' => $post->user->email,
+        ]);
+
         return redirect()->intended()->with('success', 'Message request sent successfully');
     }
 }

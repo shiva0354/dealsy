@@ -19,7 +19,7 @@
                                 <span class="mb-2" style="color: red;">@error('password'){{ $message }} @enderror</span>
                                 <input type="password" name="password_confirmation" placeholder="Confirm Password*" class="border p-3 w-100 my-2 mb-2">
                                 <div class="loggedin-forgot d-inline-flex my-3" required>
-                                    <label for="registering" class="px-2">By registering, you accept our <a class="text-primary font-weight-bold" href="terms-condition.html">Terms &
+                                    <label for="registering" class="px-2">By registering, you accept our <a class="text-primary font-weight-bold" href="{{ route('terms') }}">Terms &
                                             Conditions</a></label>
                                 </div>
                                 <button type="submit" class="d-block py-3 px-4 bg-primary text-white border-0 rounded font-weight-bold w-100">Register Now</button>

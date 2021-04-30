@@ -16,7 +16,7 @@ class UserPostController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['show']);
+        $this->middleware('auth')->except(['show', 'userPosts']);
     }
     /**
      * showing view page for ad listing
@@ -218,5 +218,13 @@ class UserPostController extends Controller
         }
         $post->deleteImage($image);
         return redirect()->back()->with('success', 'Image deleted successfully');
+    }
+
+    public function userPosts($userId)
+    {
+        $user = User::findOrFail($userId);
+        $posts = $user->posts()->whereStatus('ACTIVE')->paginate(9);
+        $posts->load(['category', 'postImages', 'city', 'state']);
+        return view('user.user-products', compact('posts', 'user'));
     }
 }

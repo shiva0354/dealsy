@@ -1,38 +1,27 @@
 @extends('layouts.layout')
-@if ($category)
-    @section('title', $category->name)
-    @elseif($location)
-    @section('title', $location->name)
-    @else
-    @section('title', 'Search Results')
-    @endif
-    @section('content')
-        <section class="page-search">
-            <x-search />
-        </section>
-        <section class="section-sm">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="search-result bg-gray">
-                            <h2>Results For "@if ($category){{ $category->name }} @elseif($location) {{ $location->name }} @else Search @endif"</h2>
-                            <p>{{ $posts->total() }} Results on {{ now()->toDateString() }}</p>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <ul class="breadcrumb">
-                            <li><a href="{{ route('home') }}">Home</a></li>
-                            @if ($category)
-                                <li><a href="{{ route('search.category', [$category->slug, $category]) }}">{{ $category->name }}</a></li>
-                            @endif
-                            @if ($location)
-                                <li><a href="#">{{ $location->name }}</a></li>
-                            @endif
-                        </ul>
+@section('title', 'Posts By ' . ucwords($user->name))
+@section('content')
+    <section class="page-search">
+        <x-search />
+    </section>
+    <section class="section-sm">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="search-result bg-gray">
+                        <h2>All Posts By {{ ucwords($user->name) }} ({{ $posts->total() }})</h2>
+                        <p>{{ $posts->total() }} Results on {{ now()->toDateString() }}</p>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-3">
+                <div class="col-md-12">
+                    <ul class="breadcrumb">
+                        <li><a href="{{ route('home') }}">Home</a></li>
+                        <li><a href="{{ route('users.posts', $user) }}">Posts by {{ $user->name }}</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                {{-- <div class="col-md-3">
                         <div class="category-sidebar">
                             <div class="widget category-list">
                                 @if ($category)
@@ -115,75 +104,50 @@
                                 </ul>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-9">
-                        {{-- <div class="category-search-filter">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <strong>Sort</strong>
-                                    <select>
-                                        <option>Most Recent</option>
-                                        <option value="1">Most Popular</option>
-                                        <option value="2">Lowest Price</option>
-                                        <option value="4">Highest Price</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="view">
-                                        <strong>Views</strong>
-                                        <ul class="list-inline view-switcher">
-                                            <li class="list-inline-item">
-                                                <a href="#" onclick="event.preventDefault();" class="text-info"><i class="fa fa-th fa-lg"></i></a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a href="ad-list-view.html"><i class="fas fa-list fa-lg"></i></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
-                        <div class="product-grid-list">
-                            <div class="row">
-                                @foreach ($posts as $post)
-                                    <div class="col-sm-12 col-lg-4 col-md-6">
-                                        <!-- product card -->
-                                        <div class="product-item bg-light">
-                                            <div class="card">
-                                                <div class="thumb-content">
-                                                    <div class="price">₹ {{ $post->price }}</div>
-                                                    <a href="{{ route('posts.show', [$post, strtolower(str_replace(' ', '-', $post->title))]) }}"">
-                                                                                                        <img class=" card-img-top img-fluid" src="{!! asset('theme/images/products/products-1.jpg') !!}" alt="Card image cap">
-                                                    </a>
-                                                </div>
-                                                <span class="wishlist"><a href="javascript:;" onclick="addTowishlist('product_id');"><i class="fa fa-heart-o fa-lg" data-toggle="tooltip" data-placement="top"
-                                                            title="favourite"></i></a></span>
-                                                <div class="card-body">
-                                                    <h4 class="card-title"><a href="{{ route('posts.show', [$post, strtolower(str_replace(' ', '-', $post->title))]) }}">{{ $post->title }}</a></h4>
-                                                    <ul class="list-inline product-meta">
-                                                        <li class="list-inline-item">
-                                                            <a href="{{ route('search.category', [$post->category->slug, $post->category->id]) }}"><i
-                                                                    class="fa fa-folder-open-o"></i>{{ $post->category->name }}</a>
-                                                        </li>
-                                                        <li class="list-inline-item">
-                                                            <a href="#"><i class="fa fa-calendar"></i>{{ date_format($post->created_at, 'd M,Y') }}</a>
-                                                        </li>
-                                                    </ul>
-                                                    {{-- <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    </div> --}}
+                <div class="col-md-12">
+                    <div class="product-grid-list">
+                        <div class="row">
+                            @foreach ($posts as $post)
+                                <div class="col-sm-12 col-lg-4 col-md-6">
+                                    <!-- product card -->
+                                    <div class="product-item bg-light">
+                                        <div class="card">
+                                            <div class="thumb-content">
+                                                <div class="price">₹ {{ $post->price }}</div>
+                                                <a href="{{ route('posts.show', [$post, strtolower(str_replace(' ', '-', $post->title))]) }}"">
+                                                                                                                                                                                        <img class="
+                                                    card-img-top img-fluid" src="{!! asset('theme/images/products/products-1.jpg') !!}" alt="Card image cap">
+                                                </a>
+                                            </div>
+                                            <span class="wishlist"><a href="javascript:;" onclick="addTowishlist('product_id');"><i class="fa fa-heart-o fa-lg" data-toggle="tooltip" data-placement="top"
+                                                        title="favourite"></i></a></span>
+                                            <div class="card-body">
+                                                <h4 class="card-title"><a href="{{ route('posts.show', [$post, strtolower(str_replace(' ', '-', $post->title))]) }}">{{ $post->title }}</a></h4>
+                                                <ul class="list-inline product-meta">
+                                                    <li class="list-inline-item">
+                                                        <a href="{{ route('search.category', [$post->category->slug, $post->category->id]) }}"><i
+                                                                class="fa fa-folder-open-o"></i>{{ $post->category->name }}</a>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <a href="#"><i class="fa fa-calendar"></i>{{ date_format($post->created_at, 'd M,Y') }}</a>
+                                                    </li>
+                                                </ul>
+                                                {{-- <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                                 Explicabo, aliquam!</p> --}}
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                @endforeach
-                            </div>
+                                </div>
+                            @endforeach
                         </div>
-                        <div class="pagination justify-content-center">
-                            {{ $posts->links('pagination::bootstrap-4') }}
-                        </div>
+                    </div>
+                    <div class="pagination justify-content-center">
+                        {{ $posts->links('pagination::bootstrap-4') }}
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-    @endsection
+@endsection

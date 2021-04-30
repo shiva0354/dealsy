@@ -26,7 +26,7 @@ class MessageRequest extends FormRequest
         return [
             'name' => 'required|string|min:3|max:255',
             'mobile' => 'required|numeric|digits:10',
-            'message' => 'required|string|min:10|max:255',
+            'email' => 'required|string|email',
         ];
     }
 }

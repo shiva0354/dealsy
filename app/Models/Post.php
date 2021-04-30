@@ -65,4 +65,10 @@ class Post extends Model
     {
         PostImage::create(['post_id' => $this->id, 'image' => $image]);
     }
+
+    public function setStatus(string $status)
+    {
+        $this->status = $status;
+        $this->save();
+    }
 }

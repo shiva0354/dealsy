@@ -19,7 +19,7 @@ class CreateMessageRequestsTable extends Migration
             $table->foreignId('post_id')->constrained();
             $table->string('name')->nullable();
             $table->string('mobile', 10)->nullable();
-            $table->string('message')->nullable();
+            $table->string('email')->nullable();
             $table->boolean('message_status')->default(false);
             $table->timestamps();
         });

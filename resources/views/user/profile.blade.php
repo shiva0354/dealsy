@@ -100,6 +100,36 @@
                         <div class="col-lg-6 col-md-6">
                             <!-- Change Email Address -->
                             <div class="widget change-email mb-0">
+                                <h3 class="widget-header user">Update Mobile</h3>
+                                <form method="POST" action="{{ route('user.change.mobile') }}" enctype="application/x-www-form-urlencoded">
+                                    @csrf
+                                    @method('PUT')
+                                    @if ($user->mobile)
+                                        <!-- Current Password -->
+                                        <div class="form-group">
+                                            <label for="old_mobile">Current Mobile</label>
+                                            <input type="number" class="form-control" name="old_mobile" id="old_mobile" pattern="[6-9]{4}[0-9]{6}">
+                                            @error('old_mobile')
+                                                <div class="alert alert-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    @endif
+                                    <!-- New Mobile -->
+                                    <div class="form-group">
+                                        <label for="mobile">New Mobile</label>
+                                        <input type="number" class="form-control" name="mobile" id="mobile" pattern="[6-9]{4}[0-9]{6}">
+                                        @error('mobile')
+                                            <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <!-- Submit Button -->
+                                    <button type="submit" class="btn btn-transparent">Update Mobile</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <!-- Change Email Address -->
+                            <div class="widget change-email mb-0">
                                 <h3 class="widget-header user">Edit Email Address</h3>
                                 <form method="POST" action="{{ route('user.change.email') }}" enctype="application/x-www-form-urlencoded">
                                     @csrf

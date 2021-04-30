@@ -79,10 +79,11 @@
                         <table class="table table-responsive">
                             <thead>
                                 <tr>
-                                    <th>Post</th>
-                                    <th>Message</th>
-                                    <th class="text-center">Mobile</th>
+                                    <th class="text-center">Post</th>
                                     <th class="text-center">Name</th>
+                                    <th class="text-center">Email</th>
+                                    <th class="text-center">Mobile</th>
+                                    <th class="text-center">Date</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -90,9 +91,10 @@
                                     <tr>
                                         <td class="mx-2"><a href="{{ route('posts.show', [$message->post, strtolower(str_replace(' ', '-', $message->post->title))]) }}"
                                                 class="text-bold">{{ $message->post->title }}</a></td>
-                                        <td>{{ $message->message }}</td>
-                                        <td>{{ $message->mobile }}</td>
                                         <td>{{ $message->name }}</td>
+                                        <td>{{ $message->email }}</td>
+                                        <td>{{ $message->mobile }}</td>
+                                        <td>{{ date_format($message->created_at, 'd M') }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -112,12 +114,4 @@
         </div>
         <!-- Container End -->
     </section>
-@endsection
-@section('js-script')
-    <script>
-        $(function() {
-            $('li a[href^="/' + location.pathname.split("/")[1] + '"]').addClass('active');
-        });
-
-    </script>
 @endsection

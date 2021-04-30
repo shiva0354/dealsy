@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\Auth\AdminForgotPasswordController;
 use App\Http\Controllers\Admin\Auth\AdminLoginController;
 use App\Http\Controllers\Admin\Auth\AdminResetPasswordController;
+use App\Http\Controllers\UserMessageRequestController;
 use App\Http\Controllers\User\Auth\UserForgotPasswordController;
 use App\Http\Controllers\User\Auth\UserLoginController;
 use App\Http\Controllers\User\Auth\UserRegisterController;
@@ -51,10 +52,11 @@ Route::get('dashboard/messages', [UserDashboardController::class, 'getMessageReq
 
 //User Profile
 Route::get('dashboard/profile', [UserProfileController::class, 'index'])->name('user.profile');
-Route::post('dashboard/profile/change-password', [UserResetPasswordController::class, 'changePassword'])->name('user.change.password');
-Route::put('dashboard/profile/change-email', [UserProfileController::class, 'changeEmail'])->name('user.change.email');
-Route::put('dashboard/profile/change-name', [UserProfileController::class, 'changeName'])->name('user.change.name');
-Route::put('dashboard/profile/change-picture', [UserProfileController::class, 'changePicture'])->name('user.change.picture');
+Route::post('dashboard/profile/password', [UserResetPasswordController::class, 'changePassword'])->name('user.change.password');
+Route::put('dashboard/profile/email', [UserProfileController::class, 'changeEmail'])->name('user.change.email');
+Route::put('dashboard/profile/name', [UserProfileController::class, 'changeName'])->name('user.change.name');
+Route::put('dashboard/profile/picture', [UserProfileController::class, 'changePicture'])->name('user.change.picture');
+Route::put('dashboard/profile/mobile', [UserProfileController::class, 'changeMobile'])->name('user.change.mobile');
 Route::delete('dashboard/profile/delete', [UserProfileController::class, 'destroyUser'])->name('user.destroy');
 
 //posts related route
@@ -65,6 +67,8 @@ Route::get('item/{id}/{title}', [UserPostController::class, 'show'])->name('post
 Route::get('dashboard/post/{id}/edit', [UserPostController::class, 'edit'])->name('posts.edit');
 Route::put('dashboard/post/{id}', [UserPostController::class, 'update'])->name('posts.update');
 Route::get('dashboard/post/{id}/delete', [UserPostController::class, 'destroy'])->name('posts.destroy');
+//all post by user
+Route::get('posts/users/{userId}', [UserPostController::class,'userPosts'])->name('users.posts');
 
 // pages
 Route::get('pricing', [UserPageController::class, 'pricing'])->name('pricing');
@@ -75,6 +79,7 @@ Route::get('privacy', [UserPageController::class, 'privacy'])->name('privacy');
 Route::get('sitemap', [UserPageController::class, 'sitemap'])->name('sitemap');
 Route::get('contact', [UserContactController::class, 'index'])->name('contact');
 Route::post('contact', [UserContactController::class, 'store']);
+
 //Search
 Route::get('search', [UserSearchController::class, 'search'])->name('search');
 Route::get('{category}_c{categoryId}', [UserSearchController::class, 'categorySearch'])->name('search.category');
@@ -84,9 +89,13 @@ Route::get('{location}_g{locationId}/{locality}', [UserSearchController::class, 
 Route::get('{location}_g{locationId}/{locality}/{category}_c{categoryId}', [UserSearchController::class, 'localityCategorySearch'])->name('search.locality.category');
 
 //ajax
-Route::get('ajax-location', [UserPostController::class, 'ajaxLocation'])->name('ajax.location');
+Route::get('ajax-location', [UserPostController::class, 'ajaxLocation'])->name('ajax.location'); //need to rework
 Route::get('ajax/categories/{id}', [UserPostController::class, 'categories']);
 Route::get('ajax/cities/{id}', [UserPostController::class, 'cities']);
+
+//Message requets by user
+Route::post('send/message/{postId}', [UserMessageRequestController::class, 'store'])->name('user.send.message');
+Route::post('send/message/{postId}/auth', [UserMessageRequestController::class, 'authStore'])->name('user.auth.send.message');
 
 //Admin section related routes
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
