@@ -34,11 +34,10 @@ class UserMessageRequestController extends Controller
     public function store(MessageRequest $request, $postId)
     {
         $post = Post::findOrFail($postId);
-        $user = $post->user;
 
         ModelsMessageRequest::create([
             'post_id' => $post->id,
-            'user_id' => $user->id,
+            'user_id' => $post->user->id,
             'name' => $request->input('name'),
             'mobile' => $request->input('mobile'),
             'email' => $request->input('email'),
@@ -58,10 +57,10 @@ class UserMessageRequestController extends Controller
 
         ModelsMessageRequest::create([
             'post_id' => $post->id,
-            'user_id' => $user->id,
-            'name' => $post->user->name,
-            'mobile' => $post->user->mobile,
-            'email' => $post->user->email,
+            'user_id' => $post->user->id,
+            'name' => $user->name,
+            'mobile' => $user->mobile,
+            'email' => $user->email,
         ]);
 
         return redirect()->intended()->with('success', 'Message request sent successfully');
