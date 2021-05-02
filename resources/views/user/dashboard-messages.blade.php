@@ -69,7 +69,6 @@
                         </div> --}}
                         <!-- delete account popup modal end-->
                         <!-- delete-account modal -->
-
                     </div>
                 </div>
                 <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-0">
@@ -99,15 +98,12 @@
                                 @endforeach
                             </tbody>
                         </table>
-
                     </div>
-
                     <!-- pagination -->
                     <div class="pagination justify-content-center">
                         {{ $messages->links('pagination::bootstrap-4') }}
                     </div>
                     <!-- pagination -->
-
                 </div>
             </div>
             <!-- Row End -->

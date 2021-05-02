@@ -88,7 +88,6 @@
                             <tbody>
                                 @foreach ($posts as $post)
                                     <tr>
-
                                         <td class="product-thumb">
                                             <img width="80px" src="{{ asset('uploads/posts/' . $post->postImages->first()->image) }}" height="auto" src="" alt="image description">
                                         </td>
@@ -126,7 +125,6 @@
                                 @endforeach
                             </tbody>
                         </table>
-
                     </div>
 
                     <!-- pagination -->

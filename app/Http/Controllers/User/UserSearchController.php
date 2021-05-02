@@ -7,6 +7,7 @@ use App\Http\Requests\SearchRequest;
 use App\Models\Category;
 use App\Models\Location;
 use App\Models\Post;
+use Illuminate\Http\Request;
 
 /**
  * @param SearchRequest $request
@@ -86,4 +87,16 @@ class UserSearchController extends Controller
         return view('user.products', compact('posts', 'category', 'location'));
     }
 
+    public function ajaxLocation(Request $request)
+    {
+        $locations = [];
+
+        if ($request->has('location')) {
+            $search = $request->location;
+            $locations = Location::select("id", "name")
+                ->where('name', 'LIKE', "%$search%")
+                ->get();
+        }
+        return response()->json($locations);
+    }
 }

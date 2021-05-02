@@ -89,7 +89,7 @@ Route::get('{location}_g{locationId}/{locality}', [UserSearchController::class, 
 Route::get('{location}_g{locationId}/{locality}/{category}_c{categoryId}', [UserSearchController::class, 'localityCategorySearch'])->name('search.locality.category');
 
 //ajax
-Route::get('ajax-location', [UserPostController::class, 'ajaxLocation'])->name('ajax.location'); //need to rework
+Route::get('ajax/locations', [UserSearchController::class, 'ajaxLocation'])->name('ajax.location'); //need to rework
 Route::get('ajax/categories/{id}', [UserPostController::class, 'categories']);
 Route::get('ajax/cities/{id}', [UserPostController::class, 'cities']);
 

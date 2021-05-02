@@ -5,13 +5,13 @@
             <div class="thumb-content">
                 <div class="price">₹ {{ $post->price }}</div>
                 <a href="{{ route('posts.show', [$post, strtolower(str_replace(' ', '-', $post->title))]) }}">
-                    <img class=" card-img-top img-fluid" src="{!! asset('theme/images/products/products-1.jpg') !!}" alt="Card image cap">
+                    <img class=" card-img-top img-fluid" src="{{ asset('uploads/posts/' . $post->postImages->first()->image) }}" alt="{{ $post->title }}" style="height: 200px;">
                 </a>
             </div>
             <span class="wishlist"><a href="javascript:;" onclick="addTowishlist('product_id');"><i class="fa fa-heart-o fa-lg" data-toggle="tooltip" data-placement="top"
                         title="favourite"></i></a></span>
             <div class="card-body">
-                <h4 class="card-title"><a href="{{ route('posts.show', [$post, strtolower(str_replace(' ', '-', $post->title))]) }}">{{ $post->title }}</a></h4>
+                <h4 class="card-title"><a href="{{ route('posts.show', [$post, strtolower(str_replace(' ', '-', $post->title))]) }}">{{ substr($post->title, 0, 35) }}...</a></h4>
                 <ul class="list-inline product-meta">
                     <li class="list-inline-item">
                         <a href="{{ route('search.category', [$post->category->slug, $post->category->id]) }}"><i class="fa fa-folder-open-o"></i>{{ $post->category->name }}</a>

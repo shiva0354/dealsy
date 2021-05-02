@@ -187,6 +187,41 @@ class UserPostController extends Controller
     }
 
     /**
+     * Deleting image  of a posts
+     * @param Post $post
+     * @param int $imageId
+     * @param PostImage $image
+     * @param Gate $response
+     * @return mixed
+     */
+    public function deleteImage(Post $post, int $imageId)
+    {
+        $image = PostImage::findOrFail($imageId);
+        $response = Gate::inspect('post_image', $post, $image);
+
+        if (!$response->allowed()) {
+            return redirect()->back()->with('error', $response->message());
+        }
+        $post->deleteImage($image);
+        return redirect()->back()->with('success', 'Image deleted successfully');
+    }
+
+    /**
+     * Display posts by a particular user
+     * @param int $userId
+     * @param User $user
+     * @param Post $posts
+     * @return mixed
+     */
+    public function userPosts($userId)
+    {
+        $user = User::findOrFail($userId);
+        $posts = $user->posts()->whereStatus('ACTIVE')->paginate(9);
+        $posts->load(['category', 'postImages', 'city', 'state']);
+        return view('user.user-products', compact('posts', 'user'));
+    }
+
+    /**
      * @param int $stateId
      * @return Location $cities
      */
@@ -206,25 +241,5 @@ class UserPostController extends Controller
         $category = Category::findOrFail($id);
         $categories = $category->subCategories;
         return $categories;
-    }
-
-    public function deleteImage(Post $post, int $imageId)
-    {
-        $image = PostImage::findOrFail($imageId);
-        $response = Gate::inspect('post_image', $post, $image);
-
-        if (!$response->allowed()) {
-            return redirect()->back()->with('error', $response->message());
-        }
-        $post->deleteImage($image);
-        return redirect()->back()->with('success', 'Image deleted successfully');
-    }
-
-    public function userPosts($userId)
-    {
-        $user = User::findOrFail($userId);
-        $posts = $user->posts()->whereStatus('ACTIVE')->paginate(9);
-        $posts->load(['category', 'postImages', 'city', 'state']);
-        return view('user.user-products', compact('posts', 'user'));
     }
 }
