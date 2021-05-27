@@ -18,7 +18,7 @@ class LocationSeeder extends Seeder
 
         foreach ($locations as $location) {
             Location::create([
-                'location' => $location,
+                'name' => $location,
                 'slug' => strtolower(str_replace(" ", "-", $location)),
             ]);
         }

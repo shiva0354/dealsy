@@ -27,7 +27,7 @@
                             </div>
                     </div>
                 </form> --}}
-                <form action="{{ $action }}" method="get">
+                <form action="{{ route('search') }}" method="get">
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
@@ -39,7 +39,7 @@
                             <div class="form-group">
                                 <label for="inputPassword2" class="sr-only">Password</label>
                                 <select class="custom-select form-control" name="category" required>
-                                    @foreach ($categories as $category)
+                                    @foreach (\App\Models\Category::all() as $category)
                                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach
                                 </select>

@@ -117,3 +117,4 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::resource('categories', AdminCategoryController::class)->except(['show', 'create']);
     Route::resource('locations', AdminLocationController::class)->except(['show', 'create']);
 });
+

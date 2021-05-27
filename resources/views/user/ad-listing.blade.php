@@ -88,7 +88,7 @@
                                         <option value="">Select State</option>
                                         @foreach ($states as $state)
                                             <option value="{{ $state->id }}" @if (($post->state_id ?? '') == $state->id) selected @endif>
-                                                {{ $state->location }}</option>
+                                                {{ $state->name }}</option>
                                         @endforeach
                                     </select>
                                     <div class="invalid-feedback">Select City</div>

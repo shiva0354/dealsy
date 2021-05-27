@@ -29,9 +29,9 @@
                         @if ($singleLocation) @method('PUT') @endif
                         <div class="row">
                             <div class="form-group col-md-3">
-                                <label for="location" class="mb-2 mr-sm-2">Location Name</label>
-                                <input type="text" class="form-control mb-2 mr-sm-5" id="location" name="location" placeholder="Enter Location Name"
-                                    value="{{ old('location', $singleLocation->location ?? '') }}" required>
+                                <label for="name" class="mb-2 mr-sm-2">Location Name</label>
+                                <input type="text" class="form-control mb-2 mr-sm-5" id="name" name="name" placeholder="Enter Location Name"
+                                    value="{{ old('name', $singleLocation->name ?? '') }}" required>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="slug" class="mb-2 mr-sm-2">Location Slug</label>
@@ -43,7 +43,7 @@
                                 <select name="parent_id" id="parent_id" class="form-control custom-select">
                                     @foreach ($locations->whereNull('parent_id') as $location)
                                         <option value="{{ $location->id }}" @if (($singleLocation->parent_id ?? '') == $location->id) selected @endif>
-                                            {{ $location->location }}</option>
+                                            {{ $location->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -69,9 +69,9 @@
                         <tbody>
                             @foreach ($locations as $location)
                                 <tr>
-                                    <td>{{ $location->location }}</td>
+                                    <td>{{ $location->name }}</td>
                                     <td>{{ $location->slug }}</td>
-                                    <td>{{ $location->parent->location ?? '' }}</td>
+                                    <td>{{ $location->state->name ?? '' }}</td>
                                     <td class="td-actions-1">
                                         <a href="{{ route('admin.locations.edit', $location) }}" class="btn text-primary"><i class="fas fa-edit"></i> Edit</a>
                                     </td>

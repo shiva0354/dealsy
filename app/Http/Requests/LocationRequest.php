@@ -26,7 +26,7 @@ class LocationRequest extends FormRequest
         $id = $this->route('location');
         $except = $id ? "$id,id" : "";
         return [
-            'location' => 'required|string|min:3|max:255',
+            'name' => 'required|string|min:3|max:255',
             'slug' => "required|string|unique:locations,slug,$except",
             'parent_id' => "nullable|numeric|exists:locations,id",
         ];
