@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminContactController;
 use App\Http\Controllers\Admin\AdminHomeController;
 use App\Http\Controllers\Admin\AdminLocationController;
+use App\Http\Controllers\Admin\AdminPostController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\Auth\AdminForgotPasswordController;
 use App\Http\Controllers\Admin\Auth\AdminLoginController;
@@ -68,7 +69,7 @@ Route::get('dashboard/post/{id}/edit', [UserPostController::class, 'edit'])->nam
 Route::put('dashboard/post/{id}', [UserPostController::class, 'update'])->name('posts.update');
 Route::get('dashboard/post/{id}/delete', [UserPostController::class, 'destroy'])->name('posts.destroy');
 //all post by user
-Route::get('posts/users/{userId}', [UserPostController::class,'userPosts'])->name('users.posts');
+Route::get('posts/users/{userId}', [UserPostController::class, 'userPosts'])->name('users.posts');
 
 // pages
 Route::get('pricing', [UserPageController::class, 'pricing'])->name('pricing');
@@ -116,5 +117,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::resource('users', AdminUserController::class)->only(['index', 'destroy', 'show']);
     Route::resource('categories', AdminCategoryController::class)->except(['show', 'create']);
     Route::resource('locations', AdminLocationController::class)->except(['show', 'create']);
-});
 
+    //Post related
+    Route::get('posts', [AdminPostController::class, 'index']);
+    Route::get('posts/{post}', [AdminPostController::class, 'postDetail']);
+    // Route::get('{category}/posts/', [AdminPostController::class, 'getByCategory']);
+});

@@ -253,7 +253,7 @@
                     success: function(data) {
                         if (data) {
                             data.forEach(city => {
-                                cities += "<option value=" + city.id + ">" + city.location + "</option>";
+                                cities += "<option value=" + city.id + ">" + city.name + "</option>";
                             });
                             $("#city").html(cities);
                         }

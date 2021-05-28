@@ -29,8 +29,9 @@ class AdminUserController extends Controller
     public function show($id)
     {
         $user = User::findOrFail($id);
-        $user->load(['posts','posts.category']);
-        return view('admin.user-show', compact('$user'));
+        $posts = $user->posts()->paginate(10);
+        $posts->load(['postImages', 'category']);
+        return view('admin.user-show', compact('user', 'posts'));
     }
 
     /**
