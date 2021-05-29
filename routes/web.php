@@ -119,7 +119,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::resource('locations', AdminLocationController::class)->except(['show', 'create']);
 
     //Post related
-    Route::get('posts', [AdminPostController::class, 'index']);
-    Route::get('posts/{post}', [AdminPostController::class, 'postDetail']);
-    // Route::get('{category}/posts/', [AdminPostController::class, 'getByCategory']);
+    Route::get('posts', [AdminPostController::class, 'index'])->name('posts.index');
+    Route::get('posts/{post}', [AdminPostController::class, 'postDetail'])->name('posts.show');
+    Route::post('posts/{post}/{status}', [AdminPostController::class, 'changeStatus'])->name('posts.status');
 });

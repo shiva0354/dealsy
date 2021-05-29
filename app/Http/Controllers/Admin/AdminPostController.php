@@ -19,7 +19,7 @@ class AdminPostController extends Controller
         $status ? $status = $status : $status = "PENDING";
         $category = $request->query('category');
         $location = $request->query('location');
-        $locality = $request->query('locality');
+        $locality = strtolower($request->query('locality'));
 
         $posts = Post::whereStatus($status)
             ->when($category, function ($query, $category) {
@@ -43,6 +43,7 @@ class AdminPostController extends Controller
      */
     public function changeStatus($postId, $status)
     {
+        $status = strtoupper($status);
         $array = ['SOLD', 'ACTIVE', 'REJECTED'];
 
         if (!in_array($status, $array)) {
@@ -52,7 +53,7 @@ class AdminPostController extends Controller
         $post = Post::findOrFail($postId);
         $post->setStatus($status);
 
-        return redirect()->back()->with('success', "Stattus set to $status successfully");
+        return redirect()->route('admin.posts.index')->with('success', "Status set to '$status' successfully");
     }
 
     public function postDetail($postId)
@@ -61,24 +62,4 @@ class AdminPostController extends Controller
         $post->load(['user', 'postImages', 'category']);
         return view('admin.post-show', compact('post'));
     }
-
-    // public function getByCategory(string $category_slug, $status = null)
-    // {
-    //     if ($status) {
-    //         $status = $status;
-    //     } else {
-    //         $status = "PENDING";
-    //     }
-
-    //     $category = Category::findBySlug($category_slug);
-    //     $posts = $category->posts()->status($status)->paginate(10);
-    //     $posts->load(['user', 'postImages']);
-    //     return view('admin.posts-index', compact('posts'));
-    // }
-
-    // public function getByStatus(string $status)
-    // {
-    //     $posts = Post::status($status)->paginate(10);
-    //     return view('admin.posts-index', compact('posts'));
-    // }
 }

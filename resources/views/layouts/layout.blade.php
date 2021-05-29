@@ -50,8 +50,26 @@
     {{-- <script src="{!! asset('plugins/jquery-nice-select/js/jquery.nice-select.min.js') !!}"></script> --}}
     {{-- <script src="{!! asset('plugins/fancybox/jquery.fancybox.pack.js') !!}"></script> --}}
     {{-- <script src="{!! asset('plugins/smoothscroll/SmoothScroll.min.js') !!}"></script> --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" crossorigin="anonymous">
+    </script>
     <script src="{{ asset('js/script.js') }}"></script>
+    {{-- <script>
+        $(document).ready(function() {
+            $('#language-switcher').change(function() {
+                let locale = $(this).val();
+                $.ajax({
+                    url: "/set/locale/-XXX-".replace('-XXX-', locale),
+                    type: "get",
+                    success: function(response) {
+                        if (response['success']) {
+                            location.reload();
+                        }
+                    }
+                });
+            });
+        });
+
+    </script> --}}
     @yield('js-script')
 </body>
 

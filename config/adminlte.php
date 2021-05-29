@@ -46,7 +46,7 @@ return [
      */
 
     'logo' => '<b>Dealsy</b>',
-    'logo_img' => base_path('public/theme/images/classimax_favicon.jpg'),
+    'logo_img' => url('/images/classimax_favicon.jpg'),
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -230,6 +230,11 @@ return [
             'topnav' => true,
         ],
         [
+            'text' => 'Dashboard',
+            'route' => 'admin.home',
+            'icon' => 'fas fa-fw fa-tachometer-alt',
+        ],
+        [
             'text' => 'Admins',
             'route' => 'admin.admins.index',
             'icon' => 'fas fa-fw fa-user-tie',
@@ -240,9 +245,14 @@ return [
             'icon' => 'fas fa-fw fa-user',
         ],
         [
+            'text' => 'Posts',
+            'route' => 'admin.posts.index',
+            'icon' => 'fas fa-fw fa-th-list',
+        ],
+        [
             'text' => 'Categories',
             'route' => 'admin.categories.index',
-            'icon' => 'fas fa-fw fa-category',
+            'icon' => 'fas fa-fw fa-tags',
         ],
         [
             'text' => 'Locations',
@@ -263,7 +273,7 @@ return [
         [
             'text' => 'Logout',
             'route' => 'admin.logout',
-            'icon' => 'fas fa-fw fa-power',
+            'icon' => 'fas fa-fw fa-power-off',
         ],
     ],
 

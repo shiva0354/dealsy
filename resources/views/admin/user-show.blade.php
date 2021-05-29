@@ -2,6 +2,32 @@
 
 @section('content')
     <div class="row">
+        <div class="col-md-6 mx-auto">
+            <!-- Profile Image -->
+            <div class="card card-primary card-outline">
+                <div class="card-body box-profile">
+                    <div class="text-center">
+                        <img class="profile-user-img img-fluid img-circle" src="{{ $user->avatar }}"
+                            alt="User profile picture">
+                    </div>
+                    <h3 class="profile-username text-center">{{ $user->name }}</h3>
+
+                    <ul class="list-group list-group-unbordered mb-3">
+                        <li class="list-group-item">
+                            <b>Email</b> <a class="float-right">{{ $user->email }}</a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Mobile</b> <a class="float-right">{{ $user->mobile }}</a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Provider</b> <a class="float-right">{{ $user->provider }}</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
@@ -28,7 +54,9 @@
                                         <td>{{ $post->status }}</td>
                                         <td>{{ $post->created_at }}</td>
                                         <td>{{ $post->last_renewed_on }}</td>
-                                        <td><a href="#"><i class="fas fa-eye"></i></a></td>
+                                        <td><a href="{{ route('admin.posts.show', $post) }}"><i
+                                                    class="fas fa-eye"></i></a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
