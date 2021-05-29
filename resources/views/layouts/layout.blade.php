@@ -54,17 +54,25 @@
     </script>
     <script src="{{ asset('js/script.js') }}"></script>
     {{-- <script>
-        $(document).ready(function() {
-            $('#language-switcher').change(function() {
-                let locale = $(this).val();
-                $.ajax({
-                    url: "/set/locale/-XXX-".replace('-XXX-', locale),
-                    type: "get",
-                    success: function(response) {
-                        if (response['success']) {
-                            location.reload();
+        jQuery.noConflict()(function($) {
+            $(document).ready(function() {
+                console.log('printed');
+                switcher();
+
+                function switcher() {
+                    let locale = $('#language-switcher').val();
+                    $.ajax({
+                        url: "/set/locale/-XXX-".replace('-XXX-', locale),
+                        type: "get",
+                        success: function(response) {
+                            if (response['success']) {
+                                location.reload();
+                            }
                         }
-                    }
+                    });
+                }
+                $('#language-switcher').change(function() {
+                    switcher();
                 });
             });
         });

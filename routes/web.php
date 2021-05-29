@@ -43,6 +43,8 @@ Route::post('password/reset', [UserResetPasswordController::class, 'reset'])->na
 //logout
 Route::get('/logout', [UserLoginController::class, 'logout'])->name('logout');
 
+Route::get('set/locale/{locale}', [UserHomeController::class, 'setlocale']);
+
 //Dashboard
 Route::get('dashboard', [UserDashboardController::class, 'index'])->name('user.dashboard');
 Route::get('dashboard/ads/saved', [UserDashboardController::class, 'savedAds'])->name('user.saved.ads');

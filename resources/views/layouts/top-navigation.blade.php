@@ -6,18 +6,10 @@
                     <a class="navbar-brand" href="{{ route('home') }}">
                         <img src="{!! asset('theme/images/classimax_logo.jpg') !!}" width="140px" height="40px" alt="">
                     </a>
-                    <?php
-                    $lang = '';
-                    if (isset($_COOKIE['lang'])) {
-                    $lang = $_COOKIE['lang'];
-                    }
-                    ?>
-                    <form action="" method="post">
-                        <select class="" style="border: 2px solid #dedede !important;" id="language-switcher">
-                            <option value="en" @if ($lang == 'en') selected @endif>English</option>
-                            <option value="hi" @if ($lang == 'hi') selected @endif>हिंदी</option>
-                        </select>
-                    </form>
+                    <select class="" style="border: 2px solid #dedede !important;" id="language-switcher">
+                        <option value="en" @if (($_COOKIE['lang'] ?? '') == 'en') selected @endif>English</option>
+                        <option value="hi" @if (($_COOKIE['lang'] ?? '') == 'hi') selected @endif>हिंदी</option>
+                    </select>
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">

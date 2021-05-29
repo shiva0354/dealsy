@@ -9,15 +9,15 @@
                 <div class="col-md-12">
                     <!-- Header Contetnt -->
                     <div class="content-block">
-                        <h1>Buy & Sell Near You </h1>
-                        <p>Join the millions who buy and sell from each other <br> everyday in local communities around the
-                            world</p>
+                        <h1>@lang("site.home-heading")</h1>
+                        <p>@lang("site.home-sub-heading")</p>
                         <div class="short-popular-category-list text-center">
                             <h2>Popular Category</h2>
                             <ul class="list-inline">
                                 @foreach ($categories as $category)
                                     <li class="list-inline-item mb-2">
-                                        <a href="{{ route('search.category', [$category->slug, $category->id]) }}"><i class="{{ $category->icon }}"></i>{{ $category->name }}</a>
+                                        <a href="{{ route('search.category', [$category->slug, $category->id]) }}"><i
+                                                class="{{ $category->icon }}"></i>{{ $category->name }}</a>
                                     </li>
                                 @endforeach
                             </ul>

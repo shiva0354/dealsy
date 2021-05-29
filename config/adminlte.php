@@ -46,7 +46,7 @@ return [
      */
 
     'logo' => '<b>Dealsy</b>',
-    'logo_img' => url('/images/classimax_favicon.jpg'),
+    'logo_img' => base_path('/images/classimax_favicon.jpg'),
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
