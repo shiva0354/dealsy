@@ -6,10 +6,9 @@
                 <!-- About -->
                 <div class="block about">
                     <!-- footer logo -->
-                    <img src="{{ asset('theme/images/classimax_logo.jpg') }}" alt="">
+                    <img src="{{ asset('images/classimax_logo.jpg') }}" alt="">
                     <!-- description -->
-                    <p class="alt-color">Join the millions who buy and sell from each other
-                        everyday in local communities around the world</p>
+                    <p class="alt-color">@lang("site.home-sub-heading")</p>
                 </div>
             </div>
             <!-- Link list -->

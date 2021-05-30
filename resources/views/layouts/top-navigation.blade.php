@@ -20,7 +20,7 @@
                             <ul class="navbar-nav ml-auto main-nav ">
                                 <li class="nav-item dropdown dropdown-slide">
                                     <a class="nav-link dropdown-toggle" data-toggle="dropdown"
-                                        href="/dashboard">Dashboard<span><i class="fa fa-angle-down"></i></span>
+                                        href="/dashboard">@lang("site.dashboard")<span><i class="fa fa-angle-down"></i></span>
                                     </a>
                                     <!-- Dropdown list -->
                                     <div class="dropdown-menu">
@@ -39,8 +39,7 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link text-white btn btn-primary"
-                                        href="{{ route('add.listing') }}"><i class="fa fa-plus-circle"></i> Add
-                                        Listing</a>
+                                        href="{{ route('add.listing') }}"><i class="fa fa-plus-circle"></i>@lang("site.ad-listing")</a>
                                 </li>
                             </ul>
                         @else
@@ -50,7 +49,7 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link text-white add-button" href="{{ route('add.listing') }}"><i
-                                            class="fa fa-camera"></i> Add Listing</a>
+                                            class="fa fa-camera"></i>@lang("site.ad-listing")</a>
                                 </li>
                             </ul>
                         @endif
