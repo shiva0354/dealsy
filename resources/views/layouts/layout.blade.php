@@ -23,7 +23,7 @@
     <link href="{!! asset('plugins/slick-carousel/slick/slick-theme.css') !!}" rel="stylesheet">
     <!-- Fancy Box -->
     {{-- <link href="{!! asset('plugins/fancybox/jquery.fancybox.pack.css') !!}" rel="stylesheet"> --}}
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    {{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" /> --}}
     <!-- CUSTOM CSS -->
     <link href="{!! asset('css/style.css') !!}" rel="stylesheet">
 </head>
@@ -50,8 +50,8 @@
     {{-- <script src="{!! asset('plugins/jquery-nice-select/js/jquery.nice-select.min.js') !!}"></script> --}}
     {{-- <script src="{!! asset('plugins/fancybox/jquery.fancybox.pack.js') !!}"></script> --}}
     {{-- <script src="{!! asset('plugins/smoothscroll/SmoothScroll.min.js') !!}"></script> --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" crossorigin="anonymous">
-    </script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" crossorigin="anonymous">
+    </script> --}}
     <script src="{{ asset('js/script.js') }}"></script>
     {{-- <script>
         jQuery.noConflict()(function($) {

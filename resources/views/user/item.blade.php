@@ -28,7 +28,7 @@
                             @endif
                             @if ($post->locality)
                                 <li><a
-                                        href="{{ route('search.locality.category', [$post->city->slug, $post->city->id, str_replace(' ', '-', $post->locality), $post->category->slug, $post->category->id]) }}">{{ $post->category->name }}
+                                        href="{{ route('search.locality.category', [$post->city->slug, $post->city->id, str_replace(' ', '-', strtolower($post->locality)), $post->category->slug, $post->category->id]) }}">{{ $post->category->name }}
                                         in {{ $post->locality }}, {{ $post->city->name }}</a></li>
                             @endif
                         </ul>
@@ -226,8 +226,8 @@
                             <p class="member-time">Member Since {{ date_format($post->user->created_at, 'M d,Y') }}</p>
                             <a href="{{ route('users.posts', $post->user) }}">See all ads by this seller</a>
                             <ul class="list-inline mt-20">
-                                <li class="list-inline-item"><a href="" class="btn btn-offer d-inline-block  btn-primary px-lg-5 my-1 px-md-3"><i class="fa fa-phone fa-lg"></i>&nbsp; Call Now</a></li>
                                 @if (Auth::check() && Auth::user()->mobile)
+                                <li class="list-inline-item"><a href="tel:{{$post->user->mobile}}" class="btn btn-offer d-inline-block  btn-primary px-lg-5 my-1 px-md-3"><i class="fa fa-phone fa-lg"></i>&nbsp; Call Now</a></li>
                                     <li class="list-inline-item">
                                         <form action="{{ route('user.auth.send.message', $post) }}" method="post">
                                             @csrf
@@ -235,6 +235,7 @@
                                         </form>
                                     </li>
                                 @else
+                                <li class="list-inline-item"><a href="" class="btn btn-offer d-inline-block  btn-primary px-lg-5 my-1 px-md-3"><i class="fa fa-phone fa-lg"></i>&nbsp; Call Now</a></li>
                                     <li class="list-inline-item"><a href="void(0);" class="btn btn-offer d-inline-block btn-primary px-lg-5 my-1 px-md-3" data-toggle="modal" data-target="#makeOffer">Make
                                             an offer</a></li>
                                 @endif
@@ -281,10 +282,9 @@
                         <div class="widget disclaimer">
                             <h5 class="widget-header">Safety Tips</h5>
                             <ul>
-                                <li>Meet seller at a public place</li>
-                                <li>Check the item before you buy</li>
-                                <li>Pay only after collecting the item</li>
-                                <li>Pay only after collecting the item</li>
+                                <li><i class="fas fa-caret-right text-primary"></i> Meet seller at a public place</li>
+                                <li><i class="fas fa-caret-right text-primary"></i> Check the item before you buy</li>
+                                <li><i class="fas fa-caret-right text-primary"></i> Pay only after collecting the item</li>
                             </ul>
                         </div>
                         <!-- Coupon Widget -->

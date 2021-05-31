@@ -31,9 +31,9 @@
     $(window).on('scroll', function () {
         counter();
     });
-    $(document).ready(function () {
-        $('.select-category').select2();
-    });
+    // $(document).ready(function () {
+    //     $('.select-category').select2();
+    // });
     // bottom to top
     $('#top').click(function () {
         $('html, body').animate({

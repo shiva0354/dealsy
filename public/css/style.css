@@ -2763,14 +2763,14 @@ form textarea {
           #social-share {
               position: absolute;
               right: 15px;
-              top: 35%;
+              top: 55%;
               z-index:10;
           }
           @media only screen and (max-width: 768px) {
               #social-share {
               position: absolute;
               right: 15px;
-              top: 23%;
+              top: 55%;
               z-index:10;
           }
       }
