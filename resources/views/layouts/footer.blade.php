@@ -14,10 +14,10 @@
              <div class="col-sm-6 col-12">
                  <!-- Social Icons -->
                  <ul class="social-media-icons text-right">
-                     <li><a class="fa fa-facebook" href="#" target="_blank"></a></li>
-                     <li><a class="fa fa-twitter" href="#" target="_blank"></a></li>
-                     <li><a class="fa fa-pinterest-p" href="#" target="_blank"></a></li>
-                     <li><a class="fa fa-youtube" href="#"></a></li>
+                     <li><a class="fab fa-facebook" href="#" target="_blank"></a></li>
+                     <li><a class="fab fa-twitter" href="#" target="_blank"></a></li>
+                     <li><a class="fab fa-pinterest-p" href="#" target="_blank"></a></li>
+                     <li><a class="fab fa-youtube" href="#"></a></li>
                  </ul>
              </div>
          </div>

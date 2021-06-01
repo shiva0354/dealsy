@@ -98,7 +98,7 @@
                                             <span class="status active"><strong>Status</strong>{{ $post->status }}</span>
                                             <span class="location"><strong>Location</strong>{{ $post->postLocation() }}</span>
                                         </td>
-                                        <td class="product-category"><span class="categories">Laptops</span></td>
+                                        <td class="product-category"><span class="categories">{{$post->category->name}}</span></td>
                                         <td class="action" data-title="Action">
                                             <div class="">
                                                 <ul class="list-inline justify-content-center">

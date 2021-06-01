@@ -26,7 +26,7 @@ class PostRequest extends FormRequest
         return [
             'category' => 'required|numeric|exists:categories,id',
             'sub_category' => 'nullable|numeric|exists:categories,id',
-            'title' => 'required|string|min:20|max:60',
+            'title' => 'required|string|min:10|max:60',
             'detail' => 'required|string|min:30|max:1000',
             'price' => 'required|nullable|numeric',
             'locality' => 'required|string|min:3|max:255',

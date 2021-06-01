@@ -60,14 +60,17 @@
                             <div class="row">
                                 <div class="col-md-12 my-2">
                                     <h6 class="font-weight-bold pt-4 pb-1">Title Of Ad:</h6>
-                                    <input type="text" name="title" class="border w-100 p-2 bg-white text-capitalize" pattern="[a-zA-Z0-9 ]{20,60}" placeholder="Ad title go There" required
+                                    <input type="text" name="title" class="border w-100 p-2 bg-white text-capitalize"
+                                        pattern="[a-zA-Z0-9 ]{10,60}" placeholder="Ad title go There" required
                                         value="{{ old('title', $post->title ?? '') }}">
-                                    <div class="invalid-feedback">Please enter Ad title. Minimum of 10 characters and maximum of 80 character</div>
+                                    <div class="invalid-feedback">Please enter Ad title. Minimum of 10 characters and
+                                        maximum of 80 character</div>
                                 </div>
 
                                 <div class="col-md-12 my-2">
                                     <h6 class="font-weight-bold pt-4 pb-1">Set Price</h6>
-                                    <input type="number" name="price" class="border w-100 p-2 bg-white" placeholder="Set Price" value="{{ old('price', $post->price ?? '') }}" required>
+                                    <input type="number" name="price" class="border w-100 p-2 bg-white"
+                                        placeholder="Set Price" value="{{ old('price', $post->price ?? '') }}" required>
                                     <div class="invalid-feedback">Enter Price</div>
                                 </div>
                             </div>
@@ -76,9 +79,11 @@
                     <div class="row">
                         <div class="col-md-6">
                             <h6 class="font-weight-bold pt-4 pb-1">Ad Description:</h6>
-                            <textarea name="detail" id="detail" class="border w-100" placeholder="Write details about your product" pattern="[*]{100,1000}"
+                            <textarea name="detail" id="detail" class="border w-100"
+                                placeholder="Write details about your product" pattern="[*]{100,1000}"
                                 required>{{ old('detail', $post->detail ?? '') }}</textarea>
-                            <div class="invalid-feedback">Enter Ad details. Minimum of 100 character and maximum of 1000 character</div>
+                            <div class="invalid-feedback">Enter Ad details. Minimum of 100 character and maximum of 1000
+                                character</div>
                         </div>
                         <div class="col-md-6">
                             <h6 class="font-weight-bold pt-4 pb-1">Location:</h6>
@@ -99,8 +104,9 @@
                                     <div class="invalid-feedback">Select City</div>
                                 </div>
                                 <div class="col-md-12 my-2">
-                                    <input type="text" name="locality" class="border w-100 p-2 bg-white text-capitalize" placeholder="Enter Locality"
-                                        value="{{ old('locality', $post->locality ?? '') }}" required>
+                                    <input type="text" name="locality" class="border w-100 p-2 bg-white text-capitalize"
+                                        placeholder="Enter Locality" value="{{ old('locality', $post->locality ?? '') }}"
+                                        required>
                                     <div class="invalid-feedback">Enter locality</div>
                                 </div>
                             </div>
@@ -115,56 +121,64 @@
                         </div>
                         <div class="choose-file mb-2 rounded col-lg-3">
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" name="images[]" id="file1" accept=".jpg, .jpeg, .png" required>
+                                <input type="file" class="custom-file-input" name="images[]" id="file1"
+                                    accept=".jpg, .jpeg, .png" required>
                                 <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
                                 <div class="invalid-feedback">Only jpeg,jpg,png allowed.Maximum upload file size: 1 MB</div>
                             </div>
                         </div>
                         <div class="choose-file mb-2 rounded col-lg-3">
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" name="images[]" id="file2" accept=".jpg, .jpeg, .png">
+                                <input type="file" class="custom-file-input" name="images[]" id="file2"
+                                    accept=".jpg, .jpeg, .png">
                                 <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
                                 <div class="invalid-feedback">Only jpeg,jpg,png allowed.Maximum upload file size: 1 MB</div>
                             </div>
                         </div>
                         <div class="choose-file mb-2 rounded col-lg-3">
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" name="images[]" id="file3" accept=".jpg, .jpeg, .png">
+                                <input type="file" class="custom-file-input" name="images[]" id="file3"
+                                    accept=".jpg, .jpeg, .png">
                                 <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
                                 <div class="invalid-feedback">Only jpeg,jpg,png allowed.Maximum upload file size: 1 MB</div>
                             </div>
                         </div>
                         <div class="choose-file mb-2 rounded col-lg-3">
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" name="images[]" id="file4" accept=".jpg, .jpeg, .png">
+                                <input type="file" class="custom-file-input" name="images[]" id="file4"
+                                    accept=".jpg, .jpeg, .png">
                                 <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
                                 <div class="invalid-feedback">Only jpeg,jpg,png allowed.Maximum upload file size: 1 MB</div>
                             </div>
                         </div>
                         <div class="choose-file mb-2 rounded col-lg-3">
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" name="images[]" id="file5" accept=".jpg, .jpeg, .png">
+                                <input type="file" class="custom-file-input" name="images[]" id="file5"
+                                    accept=".jpg, .jpeg, .png">
                                 <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
                                 <div class="invalid-feedback">Only jpeg,jpg,png allowed.Maximum upload file size: 1 MB</div>
                             </div>
                         </div>
                         <div class="choose-file mb-2 rounded col-lg-3">
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" name="images[]" id="file6" accept=".jpg, .jpeg, .png">
+                                <input type="file" class="custom-file-input" name="images[]" id="file6"
+                                    accept=".jpg, .jpeg, .png">
                                 <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
                                 <div class="invalid-feedback">Only jpeg,jpg,png allowed.Maximum upload file size: 1 MB</div>
                             </div>
                         </div>
                         <div class="choose-file mb-2 rounded col-lg-3">
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" name="images[]" id="file7" accept=".jpg, .jpeg, .png">
+                                <input type="file" class="custom-file-input" name="images[]" id="file7"
+                                    accept=".jpg, .jpeg, .png">
                                 <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
                                 <div class="invalid-feedback">Only jpeg,jpg,png allowed.Maximum upload file size: 1 MB</div>
                             </div>
                         </div>
                         <div class="choose-file mb-2 rounded col-lg-3">
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" name="images[]" id="file8" accept=".jpg, .jpeg, .png">
+                                <input type="file" class="custom-file-input" name="images[]" id="file8"
+                                    accept=".jpg, .jpeg, .png">
                                 <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
                                 <div class="invalid-feedback">Only jpeg,jpg,png allowed.Maximum upload file size: 1 MB</div>
                             </div>
@@ -176,7 +190,8 @@
                         <div class="row">
                             @foreach ($post->postImages as $image)
                                 <div class="col-md-3">
-                                    <img src="{{ asset('uploads/posts/' . $image->image) }}" alt="" class="w-100" style="height: 150px;">
+                                    <img src="{{ asset('uploads/posts/' . $image->image) }}" alt="" class="w-100"
+                                        style="height: 150px;">
                                 </div>
                             @endforeach
                         </div>
@@ -185,7 +200,8 @@
                 <!-- submit button -->
                 <div class="d-inline-flex">
                     <label for="terms-&-condition" class="ml-2">By posting you agree with our
-                        <span><a class="text-success" href="{{ route('terms') }}">Terms & Conditions</a> and <a class="text-success" href="{{ route('privacy') }}">Privacy.</a></span>
+                        <span><a class="text-success" href="{{ route('terms') }}">Terms & Conditions</a> and <a
+                                class="text-success" href="{{ route('privacy') }}">Privacy.</a></span>
                     </label>
                 </div>
                 <button type="submit" class="btn btn-primary d-block mt-2">Post Your Ad</button>
@@ -198,7 +214,7 @@
 @endsection
 @section('js-script')
     <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input@1.3.4/dist/bs-custom-file-input.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> --}}
     <script>
         var categories = '';
         var cities = '';
@@ -234,7 +250,8 @@
                     success: function(data) {
                         if (data) {
                             data.forEach(category => {
-                                categories += "<option value=" + category.id + ">" + category.name + "</option>";
+                                categories += "<option value=" + category.id + ">" +
+                                    category.name + "</option>";
                             });
                             $("#category").html(categories);
                         }
@@ -253,7 +270,8 @@
                     success: function(data) {
                         if (data) {
                             data.forEach(city => {
-                                cities += "<option value=" + city.id + ">" + city.name + "</option>";
+                                cities += "<option value=" + city.id + ">" + city.name +
+                                    "</option>";
                             });
                             $("#city").html(cities);
                         }

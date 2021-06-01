@@ -174,4 +174,25 @@
         }
     });
 
+    //wishlist
+    $(document).on('click', '#addToWishlist', function (evt) {
+        var id = $(this).data('data');
+        $.ajax({
+            type: "GET",
+            url: "/posts/wishlist/" + id,
+            dataType: "json",
+            success: function (data) {
+                if (data == "unauthenticated") {
+                    alert("Please login first!");
+                    window.location = "/login";
+                } else if (data.type == "attach") {
+                    $("#wishlist" + id).removeClass("text-white");
+                    console.log(data['message']);
+                } else if (data.type == "detach") {
+                    $("#wishlist" + id).addClass("text-white");
+                }
+            }
+        });
+    });
+
 })(jQuery);

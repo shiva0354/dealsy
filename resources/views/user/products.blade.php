@@ -177,7 +177,7 @@ $title = 'Search Results';
 </section>
 @endsection
 @section('js-script')
-<script>
+{{-- <script>
     $(document).ready(function() {
         $(document).on('click', '#addToWishlist', function(evt) {
             var id = $(this).data('data');
@@ -200,5 +200,5 @@ $title = 'Search Results';
         });
     });
 
-</script>
+</script> --}}
 @stop
