@@ -65,6 +65,3 @@
         </div>
     </div>
 </div>
-@section('js-script')
-
-@endsection

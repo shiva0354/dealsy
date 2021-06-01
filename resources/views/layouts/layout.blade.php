@@ -53,31 +53,6 @@
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" crossorigin="anonymous">
     </script> --}}
     <script src="{{ asset('js/script.js') }}"></script>
-    {{-- <script>
-        jQuery.noConflict()(function($) {
-            $(document).ready(function() {
-                console.log('printed');
-                switcher();
-
-                function switcher() {
-                    let locale = $('#language-switcher').val();
-                    $.ajax({
-                        url: "/set/locale/-XXX-".replace('-XXX-', locale),
-                        type: "get",
-                        success: function(response) {
-                            if (response['success']) {
-                                location.reload();
-                            }
-                        }
-                    });
-                }
-                $('#language-switcher').change(function() {
-                    switcher();
-                });
-            });
-        });
-
-    </script> --}}
     @yield('js-script')
 </body>
 

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\MessageRequest;
 use App\Models\MessageRequest as ModelsMessageRequest;
 use App\Models\Post;

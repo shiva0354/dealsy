@@ -57,7 +57,16 @@ class User extends Authenticatable
     //this defines user can have many saved posts
     public function savedposts()
     {
-        return $this->belongsToMany(Post::class, 'saved_posts', 'user_id', 'post_id');
+        return $this->belongsToMany(Post::class, 'saved_posts', 'user_id', 'post_id')->withTimestamps();
+    }
+
+    public function isPostSavedAlready(Post $post, bool $checkAllConditions = true): bool
+    {
+        if ($checkAllConditions) {
+            if ($this->id == $post->user_id) return true;
+        }
+
+        return $this->savedposts()->where('post_id', $post->id)->exists();
     }
 
     public function message_requests()

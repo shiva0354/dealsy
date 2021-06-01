@@ -17,7 +17,7 @@ class SetLocale
      */
     public function handle(Request $request, Closure $next)
     {
-        $locale =  $_COOKIE['lang'] ? $_COOKIE['lang'] : app()->config->get('app.fallback_locale');
+        $locale =  isset($_COOKIE['lang'] ) ? $_COOKIE['lang'] : app()->config->get('app.fallback_locale');
         if (!in_array($locale, ['en', 'hi'])) {
             App::setLocale(app()->config->get('app.fallback_locale'));
             return $next($request);

@@ -10,7 +10,7 @@ use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\Auth\AdminForgotPasswordController;
 use App\Http\Controllers\Admin\Auth\AdminLoginController;
 use App\Http\Controllers\Admin\Auth\AdminResetPasswordController;
-use App\Http\Controllers\UserMessageRequestController;
+use App\Http\Controllers\User\UserMessageRequestController;
 use App\Http\Controllers\User\Auth\UserForgotPasswordController;
 use App\Http\Controllers\User\Auth\UserLoginController;
 use App\Http\Controllers\User\Auth\UserRegisterController;
@@ -22,6 +22,7 @@ use App\Http\Controllers\User\UserPageController;
 use App\Http\Controllers\User\UserPostController;
 use App\Http\Controllers\User\UserProfileController;
 use App\Http\Controllers\User\UserSearchController;
+use App\Http\Controllers\User\UserWishlistController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [UserHomeController::class, 'home'])->name('home');
@@ -99,6 +100,7 @@ Route::get('ajax/cities/{id}', [UserPostController::class, 'cities']);
 //Message requets by user
 Route::post('send/message/{postId}', [UserMessageRequestController::class, 'store'])->name('user.send.message');
 Route::post('send/message/{postId}/auth', [UserMessageRequestController::class, 'authStore'])->name('user.auth.send.message');
+Route::get('posts/wishlist/{post}', [UserWishlistController::class, 'wishlist'])->name('wishlist.add');
 
 //Admin section related routes
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {

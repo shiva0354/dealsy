@@ -35,10 +35,10 @@
                         <h1 class="product-title">{{ $post->title }}</h1>
                         <div class="product-meta">
                             <ul class="list-inline">
-                                <li class="list-inline-item"><i class="fa fa-user-o"></i> By <a>{{ $post->user->name }}</a></li>
+                                <li class="list-inline-item"><i class="fa fa-user-o"></i> By <a href="{{ route('users.posts', $post->user) }}">{{ $post->user->name }}</a></li>
                                 <li class="list-inline-item"><i class="fa fa-folder-open-o"></i> Category<a
                                         href="{{ route('search.category', [$post->category->slug, $post->category]) }}">{{ $post->category->name }}</a></li>
-                                <li class="list-inline-item"><i class="fa fa-location-arrow"></i> Location<a href="">{{ $post->postLocation() }}</a></li>
+                                <li class="list-inline-item"><i class="fa fa-location-arrow"></i> Location<a>{{ $post->postLocation() }}</a></li>
                             </ul>
                         </div>
 

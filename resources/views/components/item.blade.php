@@ -8,8 +8,8 @@
                     <img class=" card-img-top img-fluid" src="{{ asset('uploads/posts/' . $post->postImages->first()->image) }}" alt="{{ $post->title }}" style="height: 200px;">
                 </a>
             </div>
-            <span class="wishlist"><a href="javascript:;" onclick="addTowishlist('product_id');"><i class="fa fa-heart-o fa-lg" data-toggle="tooltip" data-placement="top"
-                        title="favourite"></i></a></span>
+            <span class="wishlist" id="addToWishlist" data-data="{{ $post->id }}" ><i class="fa fa-heart fa-lg text-white"
+                data-toggle="tooltip" data-placement="top" title="favourite" id="wishlist{{ $post->id }}"></i></span>
             <div class="card-body">
                 <h4 class="card-title"><a href="{{ route('posts.show', [$post, strtolower(str_replace(' ', '-', $post->title))]) }}">{{ substr($post->title, 0, 35) }}...</a></h4>
                 <ul class="list-inline product-meta">
