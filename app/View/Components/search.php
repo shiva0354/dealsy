@@ -16,7 +16,7 @@ class search extends Component
     public $action;
     public function __construct()
     {
-        $this->categories = Category::all();
+        $this->categories = Category::all(['id', 'slug', 'name']);
         $this->action = route('search');
     }
 
