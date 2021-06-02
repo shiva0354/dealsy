@@ -9,17 +9,17 @@ use App\Models\Location;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
-/**
- * @param SearchRequest $request
- * @return Post $posts
- */
-
 class UserSearchController extends Controller
 {
 
+    /**
+     * @param SearchRequest $request
+     * @return Post $posts
+     */
+
     public function search(SearchRequest $request)
     {
-        $query = $request->input('query');
+        $query = $request->query('query');
         $category = $request->input('category');
         $location = $request->input('location');
         if (($category != '') && ($location != '')) {
@@ -42,21 +42,26 @@ class UserSearchController extends Controller
         return view('user.products', compact('posts', 'category', 'location'));
     }
 
-    public function categorySearch($slug, $id)
+    public function categorySearch($category, $category_id)
     {
-        $category = Category::findOrFail($id);
+        $category = Category::findOrFail($category_id);
         $location = null;
-        $posts = Post::where('status', 'ACTIVE')->where('category_id', $category->id)->paginate(9);
+        $posts = $category->posts()->active()->paginate(9);
+        // $posts = Post::where('status', 'ACTIVE')->where('category_id', $category->id)->paginate(9);
+        $posts->load(['postImages', 'category']);
         return view('user.products', compact('posts', 'category', 'location'));
     }
 
     public function LocationSearch($location, $locationId)
     {
-        // $category = Category::findOrFail($locationId);
         $category = null;
         $location = Location::findOrFail($locationId);
-
-        $posts = Post::where('status', 'ACTIVE')->where('city_id', $locationId)->paginate(9);
+        $posts = $location->posts()->active()->paginate(9);
+        // $posts = Post::where('status', 'ACTIVE')->where('city_id', $locationId)->paginate(9);
+        if ($posts->isEmpty()) {
+            $posts = Post::active()->postState($locationId)->paginate(9);
+        }
+        $posts->load(['category', 'postImages']);
         return view('user.products', compact('posts', 'category', 'location'));
     }
 
@@ -65,7 +70,12 @@ class UserSearchController extends Controller
         $category = Category::findOrFail($category_id);
         $location = Location::findOrFail($locationId);
 
-        $posts = Post::where('status', 'ACTIVE')->where('city_id', $locationId)->where('category_id', $category_id)->paginate(9);
+        // $posts = Post::active()->where('city_id', $locationId)->where('category_id', $category_id)->paginate(9);
+        $posts = $location->posts()->active()->postCategory($category_id)->paginate(9);
+        if ($posts->isEmpty()) {
+            $posts = Post::active()->postState($locationId)->postCategory($category_id)->paginate(9);
+        }
+        $posts->load(['category', 'postImages']);
         return view('user.products', compact('posts', 'category', 'location'));
     }
 
@@ -73,8 +83,11 @@ class UserSearchController extends Controller
     {
         $category = Category::findOrFail($category_id);
         $location = Location::findOrFail($locationId);
+        $locality = str_replace('_', ' ', $locality);
 
-        $posts = Post::where('status', 'ACTIVE')->where('category_id', $category_id)->where('locality', $locality)->paginate(9);
+        // $posts = Post::active()->where('category_id', $category_id)->whereLocality($locality)->paginate(9);
+        $posts = $location->posts()->active()->postCategory($category_id)->whereLocality($locality)->paginate(9);
+        $posts->load(['category', 'postImages']);
         return view('user.products', compact('posts', 'category', 'location'));
     }
 
@@ -82,8 +95,11 @@ class UserSearchController extends Controller
     {
         $category = null;
         $location = Location::findOrFail($locationId);
+        $locality = str_replace('_', ' ', $locality);
 
-        $posts = Post::where('status', 'ACTIVE')->where('locality', $locality)->paginate(9);
+        // $posts = Post::active()->where('city_id', $locationId)->where('locality', $locality)->paginate(9);
+        $posts = $location->posts()->active()->whereLocality($locality)->paginate(9);
+        $posts->load(['category', 'postImages']);
         return view('user.products', compact('posts', 'category', 'location'));
     }
 

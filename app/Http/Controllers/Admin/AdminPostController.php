@@ -16,7 +16,7 @@ class AdminPostController extends Controller
     public function index(Request $request)
     {
         $status = $request->query('status');
-        $status ? $status = $status : $status = "PENDING";
+        $status = $status  ? $status : "PENDING";
         $category = $request->query('category');
         $location = $request->query('location');
         $locality = strtolower($request->query('locality'));
@@ -33,8 +33,8 @@ class AdminPostController extends Controller
             })
             ->paginate(10);
         $posts->load(['user', 'postImages', 'category']);
-        $categories = Category::all();
-        $locations = Location::whereNotNull('parent_id')->get();
+        $categories = Category::all(['name', 'id']);
+        $locations = Location::whereNotNull('parent_id')->get(['name', 'id']);
         return view('admin.posts-index', compact('posts', 'categories', 'locations'));
     }
 

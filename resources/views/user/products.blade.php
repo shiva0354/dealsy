@@ -24,7 +24,8 @@ $title = 'Search Results';
             <div class="col-md-12">
                 <ul class="breadcrumb">
                     <li><a href="{{ route('home') }}">Home</a></li>
-                    @if ($category->parent)
+                    <?php $parent = $category->parent ?? null; ?>
+                    @if ($parent)
                         <li><a
                                 href="{{ route('search.category', [$category->parent->slug, $category->parent]) }}">{{ $category->parent->name }}</a>
                         </li>
@@ -71,10 +72,10 @@ $title = 'Search Results';
                         @else
                             <h4 class="widget-header">All Category</h4>
                             <ul class="category-list">
-                                @foreach (App\Models\Category::whereNull('parent_id')->get() as $category)
+                                @foreach (App\Models\Category::whereNull('parent_id')->get() as $maincategory)
                                     <li>
                                         <a
-                                            href="{{ route('search.category', [$category->slug, $category->id]) }}">{{ $category->name }}<span>{{ $category->posts_count }}</span></a>
+                                            href="{{ route('search.category', [$maincategory->slug, $maincategory->id]) }}">{{ $maincategory->name }}<span>{{ $maincategory->posts_count }}</span></a>
                                     </li>
                                 @endforeach
                             </ul>
@@ -84,22 +85,19 @@ $title = 'Search Results';
                     <div class="widget category-list">
                         <h4 class="widget-header">Nearby</h4>
                         <ul class="category-list">
-                            @if ($category)
-                                @if ($location)
-
-                                    @if (!$location->parent_id)
-                                        @foreach ($location->cities as $city)
-                                            <li><a
-                                                    href="{{ route('search.location.category', [$city->slug, $city->id, $category->slug, $category->id]) }}">{{ $city->name }}</a>
-                                            </li>
-                                        @endforeach
-                                    @elseif($location->parent_id)
-                                        @foreach ($location->posts()->distinct('locality') as $locality)
-                                            <li><a
-                                                    href="{{ route('search.locality.category', [$location->slug, $location->id, $locality, $category->slug, $category->id]) }}">{{ $locality }},{{ $location->name }}</a>
-                                            </li>
-                                        @endforeach
-                                    @endif
+                            @if ($location && $category)
+                                @if (!$location->parent_id)
+                                    @foreach ($location->cities as $city)
+                                        <li><a
+                                                href="{{ route('search.location.category', [$city->slug, $city->id, $category->slug, $category->id]) }}">{{ $city->name }}</a>
+                                        </li>
+                                    @endforeach
+                                @elseif($location->parent_id)
+                                    @foreach ($location->posts()->distinct('locality') as $locality)
+                                        <li><a
+                                                href="{{ route('search.locality.category', [$location->slug, $location->id, $locality, $category->slug, $category->id]) }}">{{ $locality }},{{ $location->name }}</a>
+                                        </li>
+                                    @endforeach
                                 @else
                                     @foreach (App\Models\Location::whereNull('parent_id')->get() as $location)
                                         <li><a
@@ -112,13 +110,14 @@ $title = 'Search Results';
                                     @if (!$location->parent_id)
                                         @foreach ($location->cities as $city)
                                             <li><a
-                                                    href="{{ route('search.location', [$city]) }}">{{ $city->name }}</a>
+                                                    href="{{ route('search.location', [$city->slug, $city->id]) }}">{{ $city->name }}</a>
                                             </li>
                                         @endforeach
                                     @elseif($location->parent_id)
-                                        @foreach ($location->posts()->distinct('locality') as $locality)
-                                            <li><a
-                                                    href="{{ route('search.locality', [$location->slug, $location->id, $locality]) }}">{{ $locality }},{{ $location->name }}</a>
+                                        @foreach ($location->posts()->distinct('locality')->get('locality') as $locality)
+                                        {{-- {{$locality}} --}}
+                                        <li><a
+                                                    href="{{ route('search.locality', [$location->slug, $location->id, strtolower(str_replace(' ','_',$locality->locality))]) }}">{{ $locality->locality }},{{ $location->name }}</a>
                                             </li>
                                         @endforeach
                                     @endif

@@ -16,6 +16,7 @@
             <div class="card">
                 <div class="card-body">
                     <table class="table table-sm table-valign-middle">
+                        <span>Total:{{ $users->total() }}</span>
                         <thead>
                             <tr>
                                 {{-- <th scope="col">image</th> --}}
@@ -36,8 +37,10 @@
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->provider }}</td>
                                     <td class="td-actions-2">
-                                        <a href="{{ route('admin.users.show', $user) }}" class="btn text-primary"><i class="fas fa-eye"></i> View</a>
-                                        <a href="{{ route('admin.users.destroy', $user) }}" class="btn text-primary"><i class="fas fa-trash"></i> Delete</a>
+                                        <a href="{{ route('admin.users.show', $user) }}" class="btn text-primary"><i
+                                                class="fas fa-eye"></i> View</a>
+                                        <a href="{{ route('admin.users.destroy', $user) }}" class="btn text-primary"><i
+                                                class="fas fa-trash"></i> Delete</a>
                                     </td>
                                     {{-- <td class="td-actions-2">
                                         <a href="{{ route('admin.audits.user.one', $user) }}" class="btn text-primary"><i class="fas fa-history"></i> Audit</a>

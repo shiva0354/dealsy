@@ -71,4 +71,19 @@ class Post extends Model
         $this->status = $status;
         $this->save();
     }
+
+    public function scopeActive($query)
+    {
+        return $query->whereStatus('ACTIVE');
+    }
+
+    public function scopePostCategory($query, $category_id)
+    {
+        return $query->where('category_id', $category_id);
+    }
+
+    public function scopePostState($query, $state_id)
+    {
+        return $query->where('state_id', $state_id);
+    }
 }
