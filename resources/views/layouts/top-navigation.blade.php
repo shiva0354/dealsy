@@ -16,11 +16,12 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        @if (Auth::check())
+                        @auth
                             <ul class="navbar-nav ml-auto main-nav ">
                                 <li class="nav-item dropdown dropdown-slide">
                                     <a class="nav-link dropdown-toggle" data-toggle="dropdown"
-                                        href="/dashboard">@lang("site.dashboard")<span><i class="fa fa-angle-down"></i></span>
+                                        href="/dashboard">@lang("site.dashboard")<span><i
+                                                class="fa fa-angle-down"></i></span>
                                     </a>
                                     <!-- Dropdown list -->
                                     <div class="dropdown-menu">
@@ -38,11 +39,12 @@
                                     </div>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-white btn btn-primary"
-                                        href="{{ route('add.listing') }}"><i class="fa fa-plus-circle"></i>@lang("site.ad-listing")</a>
+                                    <a class="nav-link text-white btn btn-primary" href="{{ route('add.listing') }}"><i
+                                            class="fa fa-plus-circle"></i>@lang("site.ad-listing")</a>
                                 </li>
                             </ul>
-                        @else
+                        @endauth
+                        @guest
                             <ul class="navbar-nav ml-auto mt-10">
                                 <li class="nav-item">
                                     <a class="nav-link login-button" href="{{ route('login') }}">Login</a>
@@ -52,7 +54,7 @@
                                             class="fa fa-camera"></i>@lang("site.ad-listing")</a>
                                 </li>
                             </ul>
-                        @endif
+                        @endguest
                     </div>
                 </nav>
             </div>

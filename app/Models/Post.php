@@ -86,4 +86,9 @@ class Post extends Model
     {
         return $query->where('state_id', $state_id);
     }
+
+    public function firstImage()
+    {
+        return $this->hasOne(PostImage::class);
+    }
 }

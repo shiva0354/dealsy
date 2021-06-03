@@ -5,7 +5,7 @@
             <div class="thumb-content">
                 <div class="price">₹ {{ $post->price }}</div>
                 <a href="{{ route('posts.show', [$post, strtolower(str_replace(' ', '-', $post->title))]) }}">
-                    <img class=" card-img-top img-fluid" src="{{ asset('uploads/posts/' . $post->postImages->first()->image) }}" alt="{{ $post->title }}" style="height: 200px;">
+                    <img class=" card-img-top img-fluid" src="{{ asset('uploads/posts/' . $post->firstImage->image) }}" alt="{{ $post->title }}" style="height: 200px;">
                 </a>
             </div>
             <span class="wishlist" id="addToWishlist" data-data="{{ $post->id }}" ><i class="fa fa-heart fa-lg text-white"
@@ -17,7 +17,7 @@
                         <a href="{{ route('search.category', [$post->category->slug, $post->category->id]) }}"><i class="fa fa-folder-open-o"></i>{{ $post->category->name }}</a>
                     </li>
                     <li class="list-inline-item">
-                        <a href="#"><i class="fa fa-calendar"></i>{{ date_format($post->created_at, 'd M,Y') }}</a>
+                        <a href="#"><i class="fa fa-calendar"></i>{{$post->created_at->format('d M,Y') }}</a>
                     </li>
                 </ul>
                 {{-- <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.

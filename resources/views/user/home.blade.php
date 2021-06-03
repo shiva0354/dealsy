@@ -46,9 +46,11 @@
                 <!-- offer 01 -->
                 <div class="col-lg-12">
                     <div class="trending-ads-slide">
-                        @foreach ($posts as $post)
+                        @forelse ($posts as $post)
                             @include('components.item')
-                        @endforeach
+                        @empty
+                                
+                        @endforelse
                     </div>
                 </div>
             </div>

@@ -61,7 +61,7 @@ $title = 'Search Results';
                             @else
                                 <h4 class="widget-header">Similar Category</h4>
                                 <ul class="category-list">
-                                    @foreach (App\Models\Category::where('parent_id', $category->parent_id)->get(['id','slug','name']) as $subcategory)
+                                    @foreach ($category->parent->subCategories as $subcategory)
                                         <li>
                                             <a
                                                 href="{{ route('search.category', [$subcategory->slug, $subcategory->id]) }}">{{ $subcategory->name }}<span>{{ $subcategory->posts_count }}</span></a>
@@ -72,7 +72,7 @@ $title = 'Search Results';
                         @else
                             <h4 class="widget-header">All Category</h4>
                             <ul class="category-list">
-                                @foreach (App\Models\Category::whereNull('parent_id')->get(['id','slug','name']) as $maincategory)
+                                @foreach (App\Models\Category::whereNull('parent_id')->get(['id', 'slug', 'name']) as $maincategory)
                                     <li>
                                         <a
                                             href="{{ route('search.category', [$maincategory->slug, $maincategory->id]) }}">{{ $maincategory->name }}<span>{{ $maincategory->posts_count }}</span></a>
@@ -102,7 +102,7 @@ $title = 'Search Results';
                                         @endforeach
                                     @endif
                                 @else
-                                    @foreach (App\Models\Location::whereNull('parent_id')->get(['id','slug','name']) as $location)
+                                    @foreach (App\Models\Location::whereNull('parent_id')->get(['id', 'slug', 'name']) as $location)
                                         <li><a
                                                 href="{{ route('search.location.category', [$location->slug, $location->id, $category->slug, $category->id]) }}">{{ $location->name }}</a>
                                         </li>
@@ -117,9 +117,7 @@ $title = 'Search Results';
                                             </li>
                                         @endforeach
                                     @elseif($location->parent_id)
-                                        @foreach ($location->posts()->distinct('locality')->get('locality')
-    as $locality)
-                                            {{-- {{$locality}} --}}
+                                        @foreach ($location->posts()->distinct('locality')->get('locality') as $locality)
                                             <li><a
                                                     href="{{ route('search.locality', [$location->slug, $location->id, strtolower(str_replace(' ', '_', $locality->locality))]) }}">{{ $locality->locality }},{{ $location->name }}</a>
                                             </li>
@@ -166,9 +164,13 @@ $title = 'Search Results';
                         </div> --}}
                 <div class="product-grid-list">
                     <div class="row">
-                        @foreach ($posts as $post)
+                        @forelse  ($posts as $post)
                             @include('components.item')
-                        @endforeach
+                        @empty
+                            <div class="text-center">
+                                <span class="text-bold">No Result found</span>
+                            </div>
+                        @endforelse
                     </div>
                 </div>
                 <div class="pagination justify-content-center">

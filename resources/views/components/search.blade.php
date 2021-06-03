@@ -65,3 +65,28 @@
         </div>
     </div>
 </div>
+@section('js-script')
+    <script>
+        $(document).on('ready', function() {
+            ajaxCategories();
+            ajaxCities();
+
+            function switcher() {
+                let locale = $('#language-switcher').val();
+                $.ajax({
+                    url: "/set/locale/-XXX-".replace('-XXX-', locale),
+                    type: "get",
+                    success: function(response) {
+                        if (response == 'success') {
+                            location.reload();
+                            console.log('success');
+                        } else {
+                            alert(response);
+                        }
+                    }
+                });
+            }
+        });
+
+    </script>
+@endsection

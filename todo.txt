@@ -3,3 +3,10 @@
 # send mail when user get message request
 
 #seo implementation through arteso package
+
+
+
+#fetch no. of daily new users
+# No. of new posts posted
+# No. of new images posted
+# No. of new message request
