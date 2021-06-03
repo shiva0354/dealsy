@@ -17,19 +17,16 @@
 @stop
 
 @section('content')
-
+{{$data['total_money_saved']}}
     <!-- Info boxes -->
     <div class="row">
         <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box shadow-lg">
-                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
+                <span class="info-box-icon bg-info elevation-1"><i class="fas fa-users"></i></span>
 
                 <div class="info-box-content">
-                    <span class="info-box-text">CPU Traffic</span>
-                    <span class="info-box-number">
-                        10
-                        <small>%</small>
-                    </span>
+                    <span class="info-box-text">New Users</span>
+                    <span class="info-box-number">{{ $data['user_count'] }}</span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
@@ -38,11 +35,11 @@
         <!-- /.col -->
         <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box mb-3 shadow-lg">
-                <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
+                <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-th-list"></i></span>
 
                 <div class="info-box-content">
-                    <span class="info-box-text">Likes</span>
-                    <span class="info-box-number">41,410</span>
+                    <span class="info-box-text">New Posts</span>
+                    <span class="info-box-number">{{ $data['post_count'] }}</span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
@@ -55,11 +52,11 @@
 
         <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box mb-3 shadow-lg">
-                <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
+                <span class="info-box-icon bg-success elevation-1"><i class="far fa-comment"></i></span>
 
                 <div class="info-box-content">
-                    <span class="info-box-text">Sales</span>
-                    <span class="info-box-number">760</span>
+                    <span class="info-box-text">Message Request</span>
+                    <span class="info-box-number">{{ $data['message_count'] }}</span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
@@ -68,11 +65,11 @@
         <!-- /.col -->
         <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box mb-3 shadow-lg">
-                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-shopping-cart text-white"></i></span>
 
                 <div class="info-box-content">
-                    <span class="info-box-text">New Members</span>
-                    <span class="info-box-number">2,000</span>
+                    <span class="info-box-text">Sold Today</span>
+                    <span class="info-box-number">{{ $data['sold_count'] }}</span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
@@ -285,7 +282,7 @@
 
                 <div class="info-box-content">
                     <span class="info-box-text">Inventory</span>
-                    <span class="info-box-number">5,200</span>
+                    <span class="info-box-number">{{$data['inventory_count']}}</span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
@@ -295,7 +292,7 @@
 
                 <div class="info-box-content">
                     <span class="info-box-text">Mentions</span>
-                    <span class="info-box-number">92,050</span>
+                    <span class="info-box-number">{{$data['saved_count']}}</span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
@@ -314,8 +311,8 @@
                 <span class="info-box-icon"><i class="far fa-comment"></i></span>
 
                 <div class="info-box-content">
-                    <span class="info-box-text">Direct Messages</span>
-                    <span class="info-box-number">163,921</span>
+                    <span class="info-box-text">Messages</span>
+                    <span class="info-box-number">{{$data['message_count']}}</span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
