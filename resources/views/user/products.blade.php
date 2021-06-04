@@ -1,12 +1,14 @@
-<?php if ($category) {
-$title = $category->name;
+@php
+if ($category) {
+    $title = $category->name;
 } elseif ($location) {
-$title = $location->name;
+    $title = $location->name;
 } else {
-$title = 'Search Results';
-} ?>
+    $title = 'Search Results';
+}
+@endphp
 @extends('layouts.layout')
-@section('title', $title)
+{{-- @section('title', $title) --}}
 @section('content')
     <section class="page-search">
         <x-search />
@@ -18,7 +20,7 @@ $title = 'Search Results';
                     <div class="search-result bg-gray">
                         <h2>Results For "@if ($category){{ $category->name }}
                         @elseif($location) {{ $location->name }} @else Search @endif"</h2>
-                    <p>{{ $posts->total() }} Results on {{ now()->toDateString() }}</p>
+                    <p>{{ $posts->total() }} Results on {{ now()->format('d M, Y') }}</p>
                 </div>
             </div>
             <div class="col-md-12">
@@ -118,8 +120,8 @@ $title = 'Search Results';
                                         @endforeach
                                     @elseif($location->parent_id)
                                         @foreach ($location->posts()->distinct('locality')->get('locality') as $locality)
-                                            <li><a
-                                                    href="{{ route('search.locality', [$location->slug, $location->id, strtolower(str_replace(' ', '_', $locality->locality))]) }}">{{ $locality->locality }},{{ $location->name }}</a>
+                                            <li>
+                                                <a href="{{ route('search.locality', [$location->slug, $location->id, strtolower(str_replace(' ', '_', $locality->locality))]) }}">{{ $locality->locality }},{{ $location->name }}</a>
                                             </li>
                                         @endforeach
                                     @endif
@@ -136,32 +138,6 @@ $title = 'Search Results';
                 </div>
             </div>
             <div class="col-md-9">
-                {{-- <div class="category-search-filter">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <strong>Sort</strong>
-                                    <select>
-                                        <option>Most Recent</option>
-                                        <option value="1">Most Popular</option>
-                                        <option value="2">Lowest Price</option>
-                                        <option value="4">Highest Price</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="view">
-                                        <strong>Views</strong>
-                                        <ul class="list-inline view-switcher">
-                                            <li class="list-inline-item">
-                                                <a href="#" onclick="event.preventDefault();" class="text-info"><i class="fa fa-th fa-lg"></i></a>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a href="ad-list-view.html"><i class="fas fa-list fa-lg"></i></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
                 <div class="product-grid-list">
                     <div class="row">
                         @forelse  ($posts as $post)

@@ -3,11 +3,12 @@
 
 <head>
     <!-- SITE TITTLE -->
-    <meta charset="utf-8">
+    {{-- <meta charset="utf-8"> --}}
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {{-- <meta name="viewport" content="width=device-width, initial-scale=1"> --}}
     {{-- getting page title from the individual page --}}
-    <title>@yield('title') - Dealsy</title>
+    {{-- <title>@yield('title') - Dealsy</title> --}}
+    {{ seo()->render() }}
     <!-- FAVICON -->
     <link href="{!! asset('images/classimax_favicon.jpg') !!}" rel="shortcut icon">
     <!-- Scripts -->
@@ -53,6 +54,7 @@
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" crossorigin="anonymous">
     </script> --}}
     <script src="{{ asset('js/script.js') }}"></script>
+    {{-- {{ seo('body')->render() }} --}}
     @yield('js-script')
 </body>
 
