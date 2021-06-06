@@ -2,6 +2,8 @@
 
 namespace App\Events;
 
+use App\Models\Post;
+use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -14,14 +16,17 @@ class PostEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+
+    public $type, $post;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(string $type, Post $post)
     {
-        //
+        $this->type = $type;
+        $this->post = $post;
     }
 
     /**

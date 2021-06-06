@@ -6,8 +6,9 @@ use App\Events\PostMessageEvent;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class PostMessageEventListener
+class PostMessageEventListener implements ShouldQueue
 {
+    use InteractsWithQueue;
     /**
      * Create the event listener.
      *
@@ -26,6 +27,6 @@ class PostMessageEventListener
      */
     public function handle(PostMessageEvent $event)
     {
-        //
+        
     }
 }

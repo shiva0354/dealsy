@@ -4,26 +4,18 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MessageRequest;
-use App\Models\MessageRequest as ModelsMessageRequest;
+use App\Models\Message;
 use App\Models\Post;
 use App\Models\User;
 
-class UserMessageRequestController extends Controller
+class UserMessageController extends Controller
 {
 
     public function __construct()
     {
         $this->middleware('auth')->only(['authStore']);
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -36,7 +28,7 @@ class UserMessageRequestController extends Controller
     {
         $post = Post::findOrFail($postId);
 
-        ModelsMessageRequest::create([
+        Message::create([
             'post_id' => $post->id,
             'user_id' => $post->user->id,
             'name' => $request->input('name'),
@@ -56,7 +48,7 @@ class UserMessageRequestController extends Controller
             return redirect()->back()->with('info', 'You can\'t send message request to yourself');
         }
 
-        ModelsMessageRequest::create([
+        Message::create([
             'post_id' => $post->id,
             'user_id' => $post->user->id,
             'name' => $user->name,

@@ -98,8 +98,8 @@ Route::get('ajax/categories/{id}', [UserPostController::class, 'categories']);
 Route::get('ajax/cities/{id}', [UserPostController::class, 'cities']);
 
 //Message requets by user
-Route::post('send/message/{postId}', [UserMessageRequestController::class, 'store'])->name('user.send.message');
-Route::post('send/message/{postId}/auth', [UserMessageRequestController::class, 'authStore'])->name('user.auth.send.message');
+Route::post('send/message/{postId}', [UserMessageController::class, 'store'])->name('user.send.message');
+Route::post('send/message/{postId}/auth', [UserMessageController::class, 'authStore'])->name('user.auth.send.message');
 Route::get('posts/wishlist/{post}', [UserWishlistController::class, 'wishlist'])->name('wishlist.add');
 
 //Admin section related routes

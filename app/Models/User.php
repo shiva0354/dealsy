@@ -69,8 +69,8 @@ class User extends Authenticatable
         return $this->savedposts()->where('post_id', $post->id)->exists();
     }
 
-    public function message_requests()
+    public function messages()
     {
-        return $this->hasMany(MessageRequest::class)->latest();
+        return $this->hasMany(Message::class)->latest();
     }
 }

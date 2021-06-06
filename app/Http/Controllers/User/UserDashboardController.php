@@ -62,7 +62,7 @@ class UserDashboardController extends Controller
     public function getMessageRequest()
     {
         $user = User::current();
-        $messages = $user->message_requests()->paginate(10);
+        $messages = $user->messages()->paginate(10);
         return view('user.dashboard-messages', compact('messages', 'user'));
     }
 }

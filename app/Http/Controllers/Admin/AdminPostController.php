@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\PostEvent;
 use App\Http\Controllers\Controller;
 use App\Library\AdminAuthGuard;
 use App\Models\Category;
@@ -52,6 +53,7 @@ class AdminPostController extends Controller
 
         $post = Post::findOrFail($postId);
         $post->setStatus($status);
+        PostEvent::dispatch($status, $post);
 
         return redirect()->route('admin.posts.index')->with('success', "Status set to '$status' successfully");
     }
