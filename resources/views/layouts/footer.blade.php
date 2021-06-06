@@ -1,4 +1,4 @@
- <?php $date = \Illuminate\Support\Carbon::now()->format('Y'); ?>
+ <?php $date = now()->format('Y'); ?>
  </footer>
  <!-- Footer Bottom -->
  <footer class="footer-bottom">
@@ -8,7 +8,8 @@
              <div class="col-sm-6 col-12">
                  <!-- Copyright -->
                  <div class="copyright">
-                     <p>Copyright © {{ $date }}. All Rights Reserved <a class="text-primary" href="{{ route('home') }}" target="_blank"> Dealsy</a></p>
+                     <p>Copyright © {{ $date }}. All Rights Reserved <a class="text-primary"
+                             href="{{ route('home') }}" target="_blank"> Dealsy</a></p>
                  </div>
              </div>
              <div class="col-sm-6 col-12">

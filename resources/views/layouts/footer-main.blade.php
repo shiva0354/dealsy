@@ -17,7 +17,7 @@
                     <h4>Site Pages</h4>
                     <ul>
                         <li><a href="{{ route('home') }}">Home</a></li>
-                        <li><a href="{{ route('about') }}">About</a></li>
+                        <li><a href="{{ route('pages', 'about') }}">About</a></li>
                         <li><a href="https://dealsy.in/blog/">Articles & Tips</a></li>
                     </ul>
                 </div>
@@ -27,10 +27,10 @@
                 <div class="block">
                     <h4>Important Links</h4>
                     <ul>
-                        <li><a href="{{ route('contact') }}">Contact Us</a></li>
-                        <li><a href="{{ route('privacy') }}">Privacy Policy</a></li>
-                        <li><a href="{{ route('terms') }}">Terms & Conditions</a></li>
-                        <li><a href="{{ route('sitemap') }}">Sitemap</a></li>
+                        <li><a href="{{ route('pages', 'contact') }}">Contact Us</a></li>
+                        <li><a href="{{ route('pages', 'privacy') }}">Privacy Policy</a></li>
+                        <li><a href="{{ route('pages', 'terms') }}">Terms & Conditions</a></li>
+                        <li><a href="{{ route('pages', 'sitemap') }}">Sitemap</a></li>
                     </ul>
                 </div>
                 <div class="block">

@@ -75,14 +75,14 @@ Route::get('dashboard/post/{id}/delete', [UserPostController::class, 'destroy'])
 Route::get('posts/users/{userId}', [UserPostController::class, 'userPosts'])->name('users.posts');
 
 // pages
-Route::get('pricing', [UserPageController::class, 'pricing'])->name('pricing');
-Route::get('terms', [UserPageController::class, 'terms'])->name('terms');
-Route::get('about', [UserPageController::class, 'about'])->name('about');
-Route::get('404', [UserPageController::class, 'error'])->name('error404');
-Route::get('privacy', [UserPageController::class, 'privacy'])->name('privacy');
-Route::get('sitemap', [UserPageController::class, 'sitemap'])->name('sitemap');
-Route::get('contact', [UserContactController::class, 'index'])->name('contact');
-Route::post('contact', [UserContactController::class, 'store']);
+// Route::get('pricing', [UserPageController::class, 'pricing'])->name('pricing');
+// Route::get('terms', [UserPageController::class, 'terms'])->name('terms');
+// Route::get('about', [UserPageController::class, 'about'])->name('about');
+// Route::get('404', [UserPageController::class, 'error'])->name('error404');
+// Route::get('privacy', [UserPageController::class, 'privacy'])->name('privacy');
+// Route::get('sitemap', [UserPageController::class, 'sitemap'])->name('sitemap');
+// Route::get('contact', [UserContactController::class, 'index'])->name('contact');
+// Route::post('contact', [UserContactController::class, 'store']);
 
 //Search
 Route::get('search', [UserSearchController::class, 'search'])->name('search');
@@ -101,6 +101,11 @@ Route::get('ajax/cities/{id}', [UserPostController::class, 'cities']);
 Route::post('send/message/{postId}', [UserMessageController::class, 'store'])->name('user.send.message');
 Route::post('send/message/{postId}/auth', [UserMessageController::class, 'authStore'])->name('user.auth.send.message');
 Route::get('posts/wishlist/{post}', [UserWishlistController::class, 'wishlist'])->name('wishlist.add');
+
+Route::post('contact', [UserContactController::class, 'store']);
+Route::get('{page}', 'App\Http\Controllers\User\UserPageController')
+    ->name('pages')
+    ->where('page', 'contact|about|terms|privacy|sitemap|pricing|404|');
 
 //Admin section related routes
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
