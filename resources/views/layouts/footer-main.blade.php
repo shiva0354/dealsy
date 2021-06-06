@@ -6,7 +6,7 @@
                 <!-- About -->
                 <div class="block about">
                     <!-- footer logo -->
-                    <img src="{{ asset('images/classimax_logo.jpg') }}" alt="">
+                    <img src="{{ asset('images/dealsy-logo.png') }}" width="200px" alt="Dealsy">
                     <!-- description -->
                     <p class="alt-color">@lang("site.home-sub-heading")</p>
                 </div>
@@ -50,7 +50,8 @@
                         <p>Get the Dealsy Mobile App and Save more</p>
                     </div>
                     <div class="download-btn d-flex my-3">
-                        <a href="#"><img src="{{ asset('theme/images/apps/google-play-store.png') }}" class="img-fluid" alt=""></a>
+                        <a href="#"><img src="{{ asset('theme/images/apps/google-play-store.png') }}"
+                                class="img-fluid" alt=""></a>
                         <a href="#" class=" ml-3"><img src="{!! asset('theme/images/apps/apple-app-store.png') !!}" class="img-fluid" alt=""></a>
                     </div>
                 </div>

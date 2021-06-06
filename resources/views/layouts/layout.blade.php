@@ -10,7 +10,7 @@
     {{-- <title>@yield('title') - Dealsy</title> --}}
     {{ seo()->render() }}
     <!-- FAVICON -->
-    <link href="{!! asset('images/classimax_favicon.jpg') !!}" rel="shortcut icon">
+    <link href="{!! asset('images/dealsy-icon.png') !!}" rel="shortcut icon">
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <!-- PLUGINS CSS STYLE -->
