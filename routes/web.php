@@ -10,7 +10,7 @@ use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\Auth\AdminForgotPasswordController;
 use App\Http\Controllers\Admin\Auth\AdminLoginController;
 use App\Http\Controllers\Admin\Auth\AdminResetPasswordController;
-use App\Http\Controllers\User\UserMessageRequestController;
+use App\Http\Controllers\User\UserMessageController;
 use App\Http\Controllers\User\Auth\UserForgotPasswordController;
 use App\Http\Controllers\User\Auth\UserLoginController;
 use App\Http\Controllers\User\Auth\UserRegisterController;

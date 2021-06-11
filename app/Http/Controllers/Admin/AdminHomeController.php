@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Library\AdminAuthGuard;
-use App\Models\MessageRequest;
+use App\Models\Message;
 use App\Models\Post;
 use App\Models\PostImage;
 use App\Models\User;
@@ -21,7 +21,7 @@ class AdminHomeController extends Controller
             return [
                 'user_count' => User::whereDate('created_at', now()->today())->count('id'),
                 'post_count' => Post::whereDate('created_at', now()->today())->count('id'),
-                'message_count' => MessageRequest::whereDate('created_at', now()->today())->count('id'),
+                'message_count' => Message::whereDate('created_at', now()->today())->count('id'),
                 'sold_count' => Post::whereStatus('SOLD')->whereDate('updated_at', now()->today())->count('id'),
                 'images_count' => PostImage::whereDate('created_at', now()->today())->count('id'),
                 'inventory_count' => Post::active()->count('id'),
