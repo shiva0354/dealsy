@@ -12,7 +12,7 @@ class Category extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = ([
-        'name', 'slug', 'icon', 'parent_id',
+        'name', 'slug', 'icon', 'parent_id','seo_title','seo_description',
     ]);
 
     //this defines category have many posts

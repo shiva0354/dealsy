@@ -2,5 +2,5 @@
 # send mail on post approval and rejection
 # send mail when user get message request
 
-#seo implementation through arteso package
+#seo implementation through laravel-seo package
 

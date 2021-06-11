@@ -25,6 +25,7 @@ use App\Http\Controllers\User\UserSearchController;
 use App\Http\Controllers\User\UserWishlistController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('write', [AdminCategoryController::class, 'categoryWrite']);
 Route::get('/', [UserHomeController::class, 'home'])->name('home');
 //manual signup
 Route::get('/signup', [UserRegisterController::class, 'showRegistrationForm'])->name('signup');
@@ -105,7 +106,7 @@ Route::get('posts/wishlist/{post}', [UserWishlistController::class, 'wishlist'])
 Route::post('contact', [UserContactController::class, 'store']);
 Route::get('{page}', 'App\Http\Controllers\User\UserPageController')
     ->name('pages')
-    ->where('page', 'contact|about|terms|privacy|sitemap|pricing|404|');
+    ->where('page', 'contact|about|terms|privacy|sitemap|pricing|404');
 
 //Admin section related routes
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {

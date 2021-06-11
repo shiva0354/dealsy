@@ -18,7 +18,9 @@ class CreateCategoriesTable extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->string('icon')->nullable();
-            $table->foreignId('parent_id')->nullable()->constrained('categories','id');
+            $table->string('seo_title')->nullable();
+            $table->string('seo_description')->nullable();
+            $table->foreignId('parent_id')->nullable()->constrained('categories', 'id');
             $table->softDeletes();
             $table->timestamps();
         });

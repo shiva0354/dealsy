@@ -24,37 +24,53 @@
                             </ul>
                         </div>
                     @endif
-                    <form action="{{ $action }}" enctype="multipart/form-data" method="post">
+                    <form action="{{ $action }}" method="post">
                         @csrf
                         @if ($singleCategory) @method('PUT') @endif
                         <div class="row">
                             <div class="form-group col-md-2">
                                 <label for="name" class="mb-2 mr-sm-2">Category Name</label>
-                                <input type="text" class="form-control mb-2 mr-sm-5" id="name" name="name" placeholder="Enter Category Name" value="{{ old('name', $singleCategory->name ?? '') }}"
-                                    required>
+                                <input type="text" class="form-control mb-2 mr-sm-5" id="name" name="name"
+                                    placeholder="Enter Category Name"
+                                    value="{{ old('name', $singleCategory->name ?? '') }}" required>
                             </div>
                             <div class="form-group col-md-2">
                                 <label for="slug" class="mb-2 mr-sm-2">Category Slug</label>
-                                <input type="text" class="form-control mb-2 mr-sm-5" id="slug" name="slug" placeholder="Enter Category Slug" value="{{ old('slug', $singleCategory->slug ?? '') }}"
-                                    required>
+                                <input type="text" class="form-control mb-2 mr-sm-5" id="slug" name="slug"
+                                    placeholder="Enter Category Slug"
+                                    value="{{ old('slug', $singleCategory->slug ?? '') }}" required>
                             </div>
                             <div class="form-group col-md-2">
                                 <label for="model" class="mb-2 mr-sm-2">Icon (Fontawesome)</label>
-                                <input type="text" class="form-control mb-2 mr-sm-5" id="model" name="model" placeholder="Enter Category Icon" value="{{ old('icon', $singleCategory->icon ?? '') }}"
-                                    required>
+                                <input type="text" class="form-control mb-2 mr-sm-5" id="model" name="model"
+                                    placeholder="Enter Category Icon"
+                                    value="{{ old('icon', $singleCategory->icon ?? '') }}">
                             </div>
                             <div class="form-group col-md-2">
                                 <label for="type" class="mb-2 mr-sm-2">Parent Category</label>
                                 <select name="type" id="type" class="form-control custom-select">
-                                    @foreach ($categories->whereNull('parent_id') as $category)
-                                        <option value="{{ $category->id }}" @if (($singleCategory->parent_id ?? '') == $category->id) selected @endif>
-                                            {{ $category->name }}</option>
+                                    @foreach (App\Models\Category::whereNull('parent_id')->get() as $parent_category)
+                                        <option value="{{ $parent_category->id }}" @if (($singleCategory->parent_id ?? '') == $parent_category->id) selected @endif>
+                                            {{ $parent_category->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group col-md-2">
+                                <label for="seo_title" class="mb-2 mr-sm-2">Seo Title</label>
+                                <input type="text" class="form-control mb-2 mr-sm-5" id="seo_title" name="seo_title"
+                                    placeholder="Enter seo-title"
+                                    value="{{ old('seo_title', $singleCategory->seo_title ?? '') }}" required>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="seo_description" class="mb-2 mr-sm-2">Seo Description</label>
+                                <input type="text" class="form-control mb-2 mr-sm-5" id="seo_description"
+                                    name="seo_description" placeholder="Enter seo_description"
+                                    value="{{ old('seo_description', $singleCategory->seo_description ?? '') }}" required>
+                            </div>
+                            <div class="form-group col-md-2">
                                 <label for="submit" class="mb-2 mr-sm-2">&nbsp;</label>
-                                <input type="submit" class="form-control mb-2 mr-sm-2 btn btn-info" value="{{ $singleCategory ? 'Update' : 'Add  New Category' }}">
+                                <input type="submit" class="form-control mb-2 mr-sm-2 btn btn-info"
+                                    value="{{ $singleCategory ? 'Update' : 'Add  New Category' }}">
                             </div>
                         </div>
                     </form>
@@ -73,17 +89,20 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($categories as $category)
+                            @forelse ($categories as $category)
                                 <tr>
                                     <td>{{ $category->name }}</td>
                                     <td>{{ $category->slug }}</td>
                                     <td><i class="{{ $category->icon }}"></i></td>
                                     <td>{{ $category->parent->name ?? '' }}</td>
                                     <td class="td-actions-1">
-                                        <a href="{{ route('admin.categories.edit', $category) }}" class="btn text-primary"><i class="fas fa-edit"></i> Edit</a>
+                                        <a href="{{ route('admin.categories.edit', $category) }}"
+                                            class="btn text-primary"><i class="fas fa-edit"></i> Edit</a>
                                     </td>
                                 </tr>
-                            @endforeach
+                            @empty
+                            <tr><td>No Data Available</td></tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
