@@ -24,8 +24,7 @@
                                 <th scope="col">Mobile</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Provider</th>
-                                <th scope="col" class="min-w-200"></th>
-                                <th scope="col" class="td-delete"></th>
+                                <th scope="col" class="td-delete">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -39,8 +38,12 @@
                                     <td class="td-actions-2">
                                         <a href="{{ route('admin.users.show', $user) }}" class="btn text-primary"><i
                                                 class="fas fa-eye"></i> View</a>
-                                        <a href="{{ route('admin.users.destroy', $user) }}" class="btn text-primary"><i
-                                                class="fas fa-trash"></i> Delete</a>
+                                        <form action="{{ route('admin.users.destroy', $user) }}" method="post" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn text-danger"><i class="fas fa-trash"></i>
+                                                Delete</button>
+                                        </form>
                                     </td>
                                     {{-- <td class="td-actions-2">
                                         <a href="{{ route('admin.audits.user.one', $user) }}" class="btn text-primary"><i class="fas fa-history"></i> Audit</a>

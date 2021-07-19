@@ -104,7 +104,7 @@ Route::post('send/message/{postId}/auth', [UserMessageController::class, 'authSt
 Route::get('posts/wishlist/{post}', [UserWishlistController::class, 'wishlist'])->name('wishlist.add');
 
 Route::post('contact', [UserContactController::class, 'store']);
-Route::get('{page}', 'App\Http\Controllers\User\UserPageController')
+Route::get('{page}', [UserPageController::class, 'page'])
     ->name('pages')
     ->where('page', 'contact|about|terms|privacy|sitemap|pricing|404');
 

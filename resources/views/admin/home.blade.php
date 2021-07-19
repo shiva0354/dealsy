@@ -17,7 +17,6 @@
 @stop
 
 @section('content')
-{{$data['total_money_saved']}}
     <!-- Info boxes -->
     <div class="row">
         <div class="col-12 col-sm-6 col-md-3">
@@ -282,7 +281,7 @@
 
                 <div class="info-box-content">
                     <span class="info-box-text">Inventory</span>
-                    <span class="info-box-number">{{$data['inventory_count']}}</span>
+                    <span class="info-box-number">{{ $data['inventory_count'] }}</span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
@@ -292,7 +291,7 @@
 
                 <div class="info-box-content">
                     <span class="info-box-text">Mentions</span>
-                    <span class="info-box-number">{{$data['saved_count']}}</span>
+                    <span class="info-box-number">{{ $data['saved_count'] }}</span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
@@ -312,7 +311,7 @@
 
                 <div class="info-box-content">
                     <span class="info-box-text">Messages</span>
-                    <span class="info-box-number">{{$data['message_count']}}</span>
+                    <span class="info-box-number">{{ $data['message_count'] }}</span>
                 </div>
                 <!-- /.info-box-content -->
             </div>

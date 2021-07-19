@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 
 class UserPageController extends Controller
 {
-    public function __invoke($page)
+    public function page($page)
     {
         seo()->title(__("seo.seo-title:$page"));
         seo()->description(__("seo.seo-description:$page"));

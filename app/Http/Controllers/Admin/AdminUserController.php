@@ -43,6 +43,9 @@ class AdminUserController extends Controller
     public function destroy($id)
     {
         $user = User::findOrFail($id);
+        if ($user->posts()->count()) {
+            return back()->with('error', 'Cannot delete user. User has posts.');
+        }
         $user->delete();
         return redirect()->route('admin.users.index')->with('success', 'User deleted successfully');
     }
