@@ -11,13 +11,12 @@ class AdminCategoryController extends Controller
 {
     use AdminAuthGuard;
     /**
-     * Display a listing of the resource.
+     * Display a listing of the categories.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        // return Category::all();
         $categories = Category::with('parent')->orderBy('parent_id')->paginate(50);
         $singleCategory = null;
         $action = route('admin.categories.store');
@@ -39,10 +38,12 @@ class AdminCategoryController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created category in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  CategoryRequest  $request
      * @return \Illuminate\Http\Response
+     *
+     * Here observer listen and rewrite category seo file
      */
 
     public function store(CategoryRequest $request)
@@ -57,6 +58,8 @@ class AdminCategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
+     * 
+     * Here observer listen and rewrite category seo file
      */
     public function update(CategoryRequest $request, $id)
     {
@@ -66,23 +69,22 @@ class AdminCategoryController extends Controller
     }
 
 
-    public function categoryWrite()
+    /**
+     * Writing category seo file after each categorymodification
+     */
+    protected function categoryWrite()
     {
-        // ini_set('memory_limit', '10240M');
         $categories = Category::get(['name', 'slug']);
         $category_file = fopen(base_path('resources/lang/en/category-seo.php'), 'w');
 
         $array = [];
         $txt = "<?php return ";
-        // fwrite($category_file, $txt);
         foreach ($categories as $category) {
-            // $value = "'$category->name' => '$category->name',";
-            // fwrite($category_file, $value);
+
             $array["seo-title:" . $category->name] = $category->seo_title;
             $array["seo-description:" . $category->name] = $category->seo_description;
         }
         fwrite($category_file, $txt . var_export($array, true) . ";");
-        // fwrite($category_file, "];");
         fclose($category_file);
         return 'success';
     }
