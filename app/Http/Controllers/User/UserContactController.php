@@ -24,6 +24,6 @@ class UserContactController extends Controller
     {
         $input = $request->input();
         Contact::create($input);
-        return redirect()->back()->with('success', 'Message sent successfully!');
+        return back()->with('success', 'Message sent successfully!');
     }
 }

@@ -40,9 +40,8 @@ class AdminAdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Admin $admin)
     {
-        $admin = Admin::findOrFail($id);
         $action = route('admin.admins.update', $admin);
         return view('admin.admin-edit', compact('admin', 'action'));
     }
@@ -66,9 +65,8 @@ class AdminAdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(AdminRequest $request, $id)
+    public function update(AdminRequest $request, Admin $admin)
     {
-        $admin = Admin::findOrFail($id);
         $admin->update($request->validated());
         return redirect()->route('admin.admins.index')->with('success', 'Admin updated successfully');
     }
@@ -79,14 +77,13 @@ class AdminAdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Admin $admin)
     {
-        $admin = Admin::findOrFail($id);
+        if ($admin->role == 'SUPEr ADMIN') {
+            return back()->with('error', 'You cannot delete super admin');
+        }
+        
         $admin->delete();
         return redirect()->route('admin.admins.index')->with('success', 'Admin deleted successfully');
     }
-
-    /**
-     * checking git commit
-     */
 }
