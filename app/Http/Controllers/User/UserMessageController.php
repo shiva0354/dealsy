@@ -35,10 +35,16 @@ class UserMessageController extends Controller
             'mobile' => $request->input('mobile'),
             'email' => $request->input('email'),
         ]);
-        //genrate event
+        //generate event
         return redirect()->intended()->with('success', 'Message request sent successfully');
     }
 
+    /**
+     * Store message for a seller when the user is logged in
+     *
+     * @param User $user
+     * @param Post $post
+     */
     public function authStore($postId)
     {
         $user = User::current();

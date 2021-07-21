@@ -72,21 +72,33 @@ class Post extends Model
         $this->save();
     }
 
+    /**
+     * Defining scope for finding active post
+     */
     public function scopeActive($query)
     {
         return $query->whereStatus('ACTIVE');
     }
 
+    /**
+     * Defining scope for finding post by category
+     */
     public function scopePostCategory($query, $category_id)
     {
         return $query->where('category_id', $category_id);
     }
 
+    /**
+     * Defining scope for finding post by state
+     */
     public function scopePostState($query, $state_id)
     {
         return $query->where('state_id', $state_id);
     }
 
+    /**
+     * retrieving first image of the post from post image table
+     */
     public function firstImage()
     {
         return $this->hasOne(PostImage::class);

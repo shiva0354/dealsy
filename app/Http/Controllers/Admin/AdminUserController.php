@@ -10,8 +10,9 @@ class AdminUserController extends Controller
 {
     use AdminAuthGuard;
     /**
-     * Display a listing of the resource.
+     * Display a listing of the users.
      *
+     * @param User $user
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -21,9 +22,10 @@ class AdminUserController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified user.
      *
      * @param  int  $id
+     * @param  User $user
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -35,9 +37,10 @@ class AdminUserController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Deleting the specified user from system.
      *
      * @param  int  $id
+     * @param User $user
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

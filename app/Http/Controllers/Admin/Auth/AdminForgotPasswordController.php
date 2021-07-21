@@ -10,14 +10,19 @@ class AdminForgotPasswordController extends Controller
 {
     use SendsPasswordResetEmails;
 
+    /**
+     * Showing forgot password form
+     */
     public function showLinkRequestForm()
     {
         return view('vendor.adminlte.auth.passwords.email');
     }
 
+    /**
+     * Defining broker to use for password reset
+     */
     public function broker()
     {
         return Password::broker('admins');
     }
-
 }

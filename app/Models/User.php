@@ -38,6 +38,9 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /**
+     * For getting current  logged user
+     */
     public static function current()
     {
         $user = Auth::user();
@@ -48,18 +51,25 @@ class User extends Authenticatable
         throw new UnauthorizedException();
     }
 
-    //this defines user can have many posts
+    /**
+     *  this defines user can have many posts
+     */
     public function posts()
     {
         return $this->hasMany(Post::class);
     }
 
-    //this defines user can have many saved posts
+    /**
+     *    this defines user can have many saved posts
+     */
     public function savedposts()
     {
         return $this->belongsToMany(Post::class, 'saved_posts', 'user_id', 'post_id')->withTimestamps();
     }
 
+    /**
+     * Checking if post is already saved to users favourite list
+     */
     public function isPostSavedAlready(Post $post, bool $checkAllConditions = true): bool
     {
         if ($checkAllConditions) {
@@ -69,6 +79,9 @@ class User extends Authenticatable
         return $this->savedposts()->where('post_id', $post->id)->exists();
     }
 
+    /**
+     * Defining that users has many messages
+     */
     public function messages()
     {
         return $this->hasMany(Message::class)->latest();

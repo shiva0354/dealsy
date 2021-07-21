@@ -14,16 +14,25 @@ class Location extends Model
         'name', 'slug', 'parent_id',
     ];
 
+    /**
+     * Defining location has many cities
+     */
     public function cities()
     {
         return $this->hasMany(Location::class, 'parent_id');
     }
 
+    /**
+     *
+     */
     public function state()
     {
         return $this->belongsTo(Location::class, 'parent_id');
     }
 
+    /**
+     * Defining location has many posts
+     */
     public function posts()
     {
         return $this->hasMany(Post::class, 'city_id');

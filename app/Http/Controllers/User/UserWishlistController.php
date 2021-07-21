@@ -9,15 +9,15 @@ use Illuminate\Support\Facades\Auth;
 
 class UserWishlistController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
 
+    /**
+     * Adding and removing post from the users saved posts lists
+     * @param int $id
+     */
     public function wishlist($id)
     {
         if (!Auth::check()) {
-            return json_encode("unauthenticated");
+            return response()->json("unauthenticated");
         }
 
         $user = User::current();

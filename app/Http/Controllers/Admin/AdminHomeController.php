@@ -14,6 +14,11 @@ class AdminHomeController extends Controller
 {
     use AdminAuthGuard;
 
+    /**
+     * Displaying key datas on the dashboard
+     *
+     * Using cache to serve the content faster
+     */
     public function index()
     {
         $data = cache()->remember('admin-home', 60 * 60, function () {

@@ -14,7 +14,9 @@ class PostImage extends Model
         'image', 'post_id',
     ]);
 
-    //this defines image belongs to a post
+    /**
+     * this defines image belongs to a post
+     */
     public function post()
     {
         return $this->belongsTo(Post::class);

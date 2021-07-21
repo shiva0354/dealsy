@@ -7,9 +7,17 @@ use App\Models\Post;
 
 class UserItemController extends Controller
 {
-    public function showItem($id, $title)
+
+    /**
+     * @param Post $item
+     * @param int $postId
+     * @param string $title
+     *
+     * return item
+     */
+    public function showItem($postId, $title)
     {
-        $item = Post::findOrFail($id);
+        $item = Post::findOrFail($postId);
         return view('item', compact('item'));
     }
 }

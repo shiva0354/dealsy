@@ -14,6 +14,13 @@ class AdminPostController extends Controller
 {
     use AdminAuthGuard;
 
+    /**
+     * Returns the list of the posts
+     * By default return only pending posts
+     * @param string $status
+     * @param int $category, $location
+     */
+
     public function index(Request $request)
     {
         $status = $request->query('status');
@@ -40,6 +47,7 @@ class AdminPostController extends Controller
     }
 
     /**
+     * Changing status of the post
      * @param Post $post
      */
     public function changeStatus($postId, $status)
@@ -58,6 +66,10 @@ class AdminPostController extends Controller
         return redirect()->route('admin.posts.index')->with('success', "Status set to '$status' successfully");
     }
 
+    /**
+     * Displaying particular post with their details
+     * @param Post $post
+     */
     public function postDetail($postId)
     {
         $post = Post::findOrFail($postId);

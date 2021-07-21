@@ -9,7 +9,9 @@ use App;
 
 class UserHomeController extends Controller
 {
-    //show home page
+    /**
+     * Diplaying home page for the public user
+     */
     public function home()
     {
         $categories = cache()->remember('home-categories', 60 * 60 * 24, function () {
@@ -28,6 +30,9 @@ class UserHomeController extends Controller
         return view('user.home', compact('categories', 'posts'));
     }
 
+    /**
+     * Setting locale of the app for the user
+     */
     public function setlocale($locale)
     {
         if (!in_array($locale, ['en', 'hi'])) {

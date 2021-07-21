@@ -30,6 +30,10 @@ class Admin extends Authenticatable
         'enabled' => 'bool',
     ];
 
+    /**
+     * Overriding password reset email
+     */
+
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new AdminResetPasswordNotification($token));

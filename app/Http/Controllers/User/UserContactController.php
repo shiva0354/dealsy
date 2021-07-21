@@ -9,6 +9,9 @@ use Illuminate\Http\RedirectResponse;
 
 class UserContactController extends Controller
 {
+    /**
+     * displaying conatct page
+     */
     public function index()
     {
         return view('user.pages.contact');

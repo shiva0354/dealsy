@@ -24,6 +24,9 @@ class AdminLoginController extends Controller
         return view('vendor.adminlte.auth.login');
     }
 
+    /**
+     * Oveririding the logout method so that admin can get redirected to admin login page
+     */
     public function logout(Request $request)
     {
         $this->guard()->logout();
@@ -39,6 +42,9 @@ class AdminLoginController extends Controller
         return redirect()->route('admin.login');
     }
 
+    /**
+     * Overriding the guard function so that it can use our custom admin guard
+     */
     protected function guard()
     {
         return Auth::guard('admin');

@@ -12,25 +12,36 @@ class Category extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = ([
-        'name', 'slug', 'icon', 'parent_id','seo_title','seo_description',
+        'name', 'slug', 'icon', 'parent_id', 'seo_title', 'seo_description',
     ]);
 
-    //this defines category have many posts
+    /**
+     * Defining relation that category has many posts
+     */
     public function posts()
     {
         return $this->hasMany(Post::class);
     }
 
+    /**
+     * Defining that category has many subcategories that resides in the same table
+     */
     public function subCategories()
     {
         return $this->hasMany(Category::class, 'parent_id');
     }
 
+    /**
+     * Defining that category has a parent
+     */
     public function parent()
     {
         return $this->belongsTo(Category::class, 'parent_id');
     }
 
+    /**
+     * Finding category by slug
+     */
     public static function findBySlug(string $slug)
     {
         return Category::firstWhere('slug', $slug);

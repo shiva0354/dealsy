@@ -11,7 +11,10 @@ class UserDashboardController extends Controller
     {
         $this->middleware('auth');
     }
-    // show user dashboard
+
+    /**
+     * displaying logged in user dashboard with their ads
+     */
     public function index()
     {
         $user = User::current();
@@ -21,7 +24,9 @@ class UserDashboardController extends Controller
         return view('user.dashboard', compact('posts', 'title', 'user'));
     }
 
-    //show favourite ads of user that is saved_posts
+    /**
+     * displaying favourite ads of user that is saved_posts
+     */
     public function savedAds()
     {
         $user = User::current();
@@ -30,7 +35,9 @@ class UserDashboardController extends Controller
         return view('user.dashboard', compact('posts', 'title', 'user'));
     }
 
-    //show pending ads of the user
+    /**
+     *  displaying pending ads of the user
+     */
     public function pendingAds()
     {
         $user = User::current();
@@ -40,6 +47,9 @@ class UserDashboardController extends Controller
         return view('user.dashboard', compact('posts', 'title', 'user'));
     }
 
+    /**
+     * Displaying rejected ads of the user
+     */
     public function rejectedAds()
     {
         $user = User::current();
@@ -49,7 +59,9 @@ class UserDashboardController extends Controller
         return view('user.dashboard', compact('posts', 'title', 'user'));
     }
 
-    //show pending ads of the user
+    /**
+     * Displaying archived ads of the user
+     */
     public function archivedAds()
     {
         $user = User::current();
@@ -59,6 +71,9 @@ class UserDashboardController extends Controller
         return view('user.dashboard', compact('posts', 'title', 'user'));
     }
 
+    /**
+     * Displaying message request received from the buyer
+     */
     public function getMessageRequest()
     {
         $user = User::current();

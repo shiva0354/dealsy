@@ -7,16 +7,15 @@ use App\Http\Requests\SearchRequest;
 use App\Models\Category;
 use App\Models\Location;
 use App\Models\Post;
-use Illuminate\Http\Request;
 
 class UserSearchController extends Controller
 {
 
     /**
+     * for universal search box
      * @param SearchRequest $request
      * @return Post $posts
      */
-
     public function search(SearchRequest $request)
     {
         $title = $request->query('query');
@@ -40,13 +39,17 @@ class UserSearchController extends Controller
         return view('user.products', compact('posts', 'category', 'location'));
     }
 
+    /**
+     * returing products when category is set
+     * @param Category $category
+     * @param int $category_id
+     */
     public function categorySearch($category, $category_id)
     {
         $category = Category::findOrFail($category_id, ['id', 'slug', 'name']);
         $location = null;
-        // seo()->title(__('seo.seo-title-category',['category'=>$category->name]));
-        seo()->title(__("category-seo.$category->name"));
-        seo()->description();
+        seo()->title(__("category-seo.seo-title:$category->name"));
+        seo()->description(__("category-seo.seo-description:$category->name"));
         $posts = $category->posts()
             ->with(['firstImage', 'category' => function ($query) {
                 $query->select('id', 'slug', 'name');
@@ -57,6 +60,11 @@ class UserSearchController extends Controller
         return view('user.products', compact('posts', 'category', 'location'));
     }
 
+    /**
+     * returning list of products when location is set
+     * @param Location $location
+     * @param int $locationId
+     */
     public function LocationSearch($location, $locationId)
     {
         $category = null;
@@ -78,6 +86,12 @@ class UserSearchController extends Controller
         return view('user.products', compact('posts', 'category', 'location'));
     }
 
+    /**
+     * returning list of products when location and category both is set
+     * @param Location $location
+     * @param Category $category
+     * @param int $locationId,$category_id
+     */
     public function locationCategorySearch($location, $locationId, $category, $category_id)
     {
         $category = Category::findOrFail($category_id, ['id', 'slug', 'name']);
@@ -102,6 +116,13 @@ class UserSearchController extends Controller
         return view('user.products', compact('posts', 'category', 'location'));
     }
 
+    /**
+     * returning posts when location, locality and category are set
+     * @param Location $location
+     * @param string $locality
+     * @param Category $category
+     * @param int $locationId, $category_id
+     */
     public function localityCategorySearch($location, $locationId, $locality, $category, $category_id)
     {
         $category = Category::findOrFail($category_id, ['id', 'slug', 'name']);
@@ -120,6 +141,12 @@ class UserSearchController extends Controller
         return view('user.products', compact('posts', 'category', 'location'));
     }
 
+    /**
+     * returning when location and locality are set
+     * @param Location $location
+     * @param string $locality
+     * @param int $locationId
+     */
     public function localitySearch($location, $locationId, $locality)
     {
         $category = null;
@@ -136,15 +163,21 @@ class UserSearchController extends Controller
         return view('user.products', compact('posts', 'category', 'location'));
     }
 
+    /**
+     * returning categories
+     */
     public function ajaxCategory()
     {
         $categories = Category::get(['id', 'name']);
-        return json_encode($categories);
+        return response()->json($categories);
     }
 
+    /**
+     * returning locations
+     */
     public function ajaxcities()
     {
         $cities = Location::wherNotNull('parent_id')->get(['id', 'name']);
-        return json_encode($cities);
+        return response()->json($cities);
     }
 }

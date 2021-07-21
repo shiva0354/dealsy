@@ -18,13 +18,20 @@ class UserProfileController extends Controller
     {
         $this->middleware('auth');
     }
-    //show edit profile
+    /**
+     * Displaying form for editing user profile
+     */
     public function index()
     {
         $user = User::current();
         return view('user.profile', compact('user'));
     }
-    //update profile of user
+
+    /**
+     * Updating name of the user
+     * @param Request $request
+     * @param User $user
+     */
     public function changeName(Request $request)
     {
         $user = User::current();
@@ -34,7 +41,12 @@ class UserProfileController extends Controller
         $user->update($validatedData);
         return redirect()->route('user.profile')->with('success', 'Name changed successfully');
     }
-    //change email
+
+    /**
+     * Updating email of the user
+     * @param ChangeEmailRequest $request
+     * @param User $user
+     */
     public function changeEmail(ChangeEmailRequest $request)
     {
         $user = User::current();
@@ -52,7 +64,11 @@ class UserProfileController extends Controller
         return redirect()->route('user.profile')->with('success', 'Email updated successfully');
     }
 
-    //change profile picture
+    /**
+     * Changing profile image of the user
+     * @param ProfileImageRequest $request
+     * @param User $user
+     */
     public function changePicture(ProfileImageRequest $request)
     {
         $user = User::current();
@@ -74,6 +90,11 @@ class UserProfileController extends Controller
         return redirect()->back()->with('error', 'No file uploaded');
     }
 
+    /**
+     * Changing mobile of the user
+     * @param MobileRequest $request
+     * @param User $user
+     */
     public function changeMobile(MobileRequest $request)
     {
         $user = User::current();
@@ -85,7 +106,10 @@ class UserProfileController extends Controller
         return redirect()->route('user.profile')->with('success', 'Mobile updated successfully');
     }
 
-    //soft deleting user from the database
+    /**
+     * Soft deleting user from the database
+     * @param User $user
+     */
     public function destroyUser()
     {
         $user = User::current();
@@ -94,6 +118,6 @@ class UserProfileController extends Controller
         } catch (Exception $e) {
             return redirect()->intended(route('home'))->with('error', 'Something went wrong!');
         }
-        return redirect()->route('home')->with('info', 'Account and all related data deleted successfully', );
+        return redirect()->route('home')->with('info', 'Account and all related data deleted successfully',);
     }
 }
