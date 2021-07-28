@@ -12,7 +12,8 @@
                         <div class="widget user-dashboard-profile">
                             <!-- User Image -->
                             <div class="profile-thumb">
-                                <img src="{{ asset($user->avatar) }}" alt="{{ $user->name ?? 'User' }}" class="rounded-circle">
+                                <img src="{{ asset($user->avatar) }}" alt="{{ $user->name ?? 'User' }}"
+                                    class="rounded-circle">
                             </div>
                             <!-- User Name -->
                             <h5 class="text-center">{{ $user->name ?? 'User' }}</h5>
@@ -22,18 +23,23 @@
                         <!-- Dashboard Links -->
                         <div class="widget user-dashboard-menu">
                             <ul>
-                                <li @if (Route::is('user.dashboard')) class="active" @endif><a href="{{ route('user.dashboard') }}"><i
-                                            class="fa fa-user"></i> My Ads</a></li>
-                                <li @if (Route::is('user.saved.ads')) class="active" @endif><a href="{{ route('user.saved.ads') }}"><i
-                                            class="far fa-bookmark"></i> Favourite Ads</a></li>
-                                <li @if (Route::is('user.pending.ads')) class="active" @endif><a href="{{ route('user.pending.ads') }}"><i
-                                            class="fas fa-bolt"></i> Pending Approval</a></li>
-                                <li @if (Route::is('user.rejected.ads')) class="active" @endif><a href="{{ route('user.rejected.ads') }}"><i
-                                            class="fas fa-bolt"></i> Rejected </a></li>
-                                <li @if (Route::is('user.archive.ads')) class="active" @endif><a href="{{ route('user.archive.ads') }}"><i
-                                            class="far fa-file-archive"></i>Archived Ads</a></li>
-                                <li @if (Route::is('user.messages')) class="active" @endif><a href="{{ route('user.messages') }}"><i
-                                            class="fa fa-envelope"></i> Message Requests</a></li>
+                                <li @if (Route::is('user.dashboard')) class="active" @endif><a
+                                        href="{{ route('user.dashboard') }}"><i class="fa fa-user"></i> My Ads</a></li>
+                                <li @if (Route::is('user.saved.ads')) class="active" @endif><a
+                                        href="{{ route('user.saved.ads') }}"><i class="far fa-bookmark"></i> Favourite
+                                        Ads</a></li>
+                                <li @if (Route::is('user.pending.ads')) class="active" @endif><a
+                                        href="{{ route('user.pending.ads') }}"><i class="fas fa-bolt"></i> Pending
+                                        Approval</a></li>
+                                <li @if (Route::is('user.rejected.ads')) class="active" @endif><a
+                                        href="{{ route('user.rejected.ads') }}"><i class="fas fa-bolt"></i> Rejected </a>
+                                </li>
+                                <li @if (Route::is('user.archive.ads')) class="active" @endif><a
+                                        href="{{ route('user.archive.ads') }}"><i class="far fa-file-archive"></i>Archived
+                                        Ads</a></li>
+                                <li @if (Route::is('user.messages')) class="active" @endif><a
+                                        href="{{ route('user.messages') }}"><i class="fa fa-envelope"></i> Message
+                                        Requests</a></li>
                                 <li><a href="{{ route('logout') }}"><i class="fas fa-cog"></i> Logout</a></li>
                                 {{-- <li><a href="#" data-toggle="modal" data-target="#deleteaccount"><i class="fa fa-power-off"></i>Delete
                                         Account</a></li> --}}
@@ -75,7 +81,8 @@
                 <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-0">
                     <!-- Recently Favorited -->
                     <div class="widget dashboard-container my-adslist">
-                        <h3 class="widget-header">{{ $title }}<span class="text-primary">({{ $posts->total() }})</span></h3>
+                        <h3 class="widget-header">{{ $title }}<span
+                                class="text-primary">({{ $posts->total() }})</span></h3>
                         <table class="table table-responsive product-dashboard-table">
                             <thead>
                                 <tr>
@@ -89,35 +96,54 @@
                                 @foreach ($posts as $post)
                                     <tr>
                                         <td class="product-thumb">
-                                            <img width="80px" src="{{ asset('uploads/posts/' . $post->postImages->first()->image) }}" height="auto" src="" alt="image description">
+                                            <img width="80px"
+                                                src="{{ asset('uploads/posts/' . $post->postImages->first()->image) }}"
+                                                height="auto" src="" alt="image description">
                                         </td>
                                         <td class="product-details">
                                             <h3 class="title">{{ $post->title }}</h3>
                                             <span class="add-id"><strong>Ad ID:</strong>{{ $post->id }}</span>
                                             <span><strong>Posted on: </strong><time>Jun 27, 2017</time> </span>
                                             <span class="status active"><strong>Status</strong>{{ $post->status }}</span>
-                                            <span class="location"><strong>Location</strong>{{ $post->postLocation() }}</span>
+                                            <span
+                                                class="location"><strong>Location</strong>{{ $post->postLocation() }}</span>
                                         </td>
-                                        <td class="product-category"><span class="categories">{{$post->category->name}}</span></td>
+                                        <td class="product-category"><span
+                                                class="categories">{{ $post->category->name }}</span></td>
                                         <td class="action" data-title="Action">
                                             <div class="">
                                                 <ul class="list-inline justify-content-center">
-                                                    <li class="list-inline-item">
-                                                        <a data-toggle="tooltip" data-placement="top" title="view" target="_blank" class="view"
-                                                            href="{{ route('posts.show', [$post, strtolower(str_replace(' ', '-', $post->title))]) }}">
-                                                            <i class="fa fa-eye"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="list-inline-item">
-                                                        <a class="edit" data-toggle="tooltip" data-placement="top" title="Edit" href="{{ route('posts.edit', $post) }}">
-                                                            <i class="fa fa-edit"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li class="list-inline-item">
-                                                        <a class="delete" data-toggle="tooltip" data-placement="top" title="Delete" href="{{ route('posts.destroy', $post) }}">
-                                                            <i class="fa fa-trash"></i>
-                                                        </a>
-                                                    </li>
+                                                    @if ($title == 'Archived Ads')
+
+                                                    @elseif ($title == 'Favourite Ads')
+                                                        <li class="list-inline-item">
+                                                            <a data-toggle="tooltip" data-placement="top" title="view"
+                                                                target="_blank" class="view" href="#">
+                                                                <i class="fa fa-heart"></i>
+                                                            </a>
+                                                        </li>
+                                                    @else
+                                                        <li class="list-inline-item">
+                                                            <a data-toggle="tooltip" data-placement="top" title="view"
+                                                                target="_blank" class="view"
+                                                                href="{{ route('posts.show', [$post, strtolower(str_replace(' ', '-', $post->title))]) }}">
+                                                                <i class="fa fa-eye"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li class="list-inline-item">
+                                                            <a class="edit" data-toggle="tooltip" data-placement="top"
+                                                                title="Edit" href="{{ route('posts.edit', $post) }}">
+                                                                <i class="fa fa-edit"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li class="list-inline-item">
+                                                            <a class="delete" data-toggle="tooltip" data-placement="top"
+                                                                title="Delete"
+                                                                href="{{ route('posts.destroy', $post) }}">
+                                                                <i class="fa fa-trash"></i>
+                                                            </a>
+                                                        </li>
+                                                    @endif
                                                 </ul>
                                             </div>
                                         </td>

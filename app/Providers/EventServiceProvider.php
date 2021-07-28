@@ -7,6 +7,7 @@ use App\Events\PostMessageEvent;
 use App\Listeners\PostEventListener;
 use App\Listeners\PostMessageEventListener;
 use App\Models\Category;
+use App\Observers\CategoryObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;

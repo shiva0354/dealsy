@@ -200,8 +200,8 @@
                 <!-- submit button -->
                 <div class="d-inline-flex">
                     <label for="terms-&-condition" class="ml-2">By posting you agree with our
-                        <span><a class="text-success" href="{{ route('terms') }}">Terms & Conditions</a> and <a
-                                class="text-success" href="{{ route('privacy') }}">Privacy.</a></span>
+                        <span><a class="text-success" href="{{ route('pages', 'terms') }}">Terms & Conditions</a> and <a
+                                class="text-success" href="{{ route('pages', 'privacy') }}">Privacy.</a></span>
                     </label>
                 </div>
                 <button type="submit" class="btn btn-primary d-block mt-2">Post Your Ad</button>
@@ -241,7 +241,7 @@
         });
 
         $(function() {
-            $("#main-category").change(function() {
+            $("#main-category").on('change', function() {
                 var categoryId = $("#main-category").val();
                 $.ajax({
                     type: "GET",
@@ -250,8 +250,7 @@
                     success: function(data) {
                         if (data) {
                             data.forEach(category => {
-                                categories += "<option value=" + category.id + ">" +
-                                    category.name + "</option>";
+                                categories += "<option value=" + category.id + ">" + category.name + "</option>";
                             });
                             $("#category").html(categories);
                         }
@@ -279,6 +278,5 @@
                 });
             });
         });
-
     </script>
 @stop

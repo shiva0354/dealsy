@@ -63,6 +63,10 @@ class UserPostController extends Controller
             return redirect()->back()->with('error', $response->message());
         }
 
+        if ($post->status == 'SOLD') {
+            return back()->with('info','Sold ad cannot be updated');
+        }
+
         $post->load(['category', 'postImages']);
         $categories = Category::all();
         $states = Location::whereNull('parent_id')->get();
@@ -89,7 +93,6 @@ class UserPostController extends Controller
                     $post->saveImage($image);
                 }
             }
-
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
@@ -113,6 +116,10 @@ class UserPostController extends Controller
             return redirect()->back()->with('error', $response->message());
         }
 
+        if ($post->status == 'SOLD') {
+            return back()->with('info','Sold ad cannot be updated');
+        }
+
         try {
             $images = $this->saveImage($request);
             $input = $this->getInput($request, $user->id);
@@ -124,7 +131,6 @@ class UserPostController extends Controller
                     $post->saveImage($image);
                 }
             }
-
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
@@ -139,13 +145,16 @@ class UserPostController extends Controller
      */
     public function destroy($id)
     {
+
         $post = Post::findOrFail($id);
         $response = Gate::inspect('post', $post);
-        if ($response->allowed()) {
+
+        if (!$response->allowed()) {
             return redirect()->back()->with('error', $response->message());
         }
+
         $post->delete();
-        return redirect()->intended()->with('success', 'Post Deleted Successfully');
+        return back()->with('success', 'Post Deleted Successfully');
     }
 
     private function getInput($request, $userId)

@@ -42,7 +42,7 @@ class UserDashboardController extends Controller
     {
         $user = User::current();
         $posts = $user->posts()->whereStatus('PENDING')->paginate(6);
-        $posts->load(['category', 'postImages']);
+        $posts->load(['category', 'postImages', 'city', 'state']);
         $title = 'Pending Ads';
         return view('user.dashboard', compact('posts', 'title', 'user'));
     }
@@ -54,7 +54,7 @@ class UserDashboardController extends Controller
     {
         $user = User::current();
         $posts = $user->posts()->whereStatus('REJECTED')->paginate(6);
-        $posts->load(['category', 'postImages']);
+        $posts->load(['category', 'postImages', 'city', 'state']);
         $title = 'Rejected Ads';
         return view('user.dashboard', compact('posts', 'title', 'user'));
     }
@@ -66,7 +66,7 @@ class UserDashboardController extends Controller
     {
         $user = User::current();
         $posts = $user->posts()->onlyTrashed()->paginate(6);
-        $posts->load(['category', 'postImages']);
+        $posts->load(['category', 'postImages', 'city', 'state']);
         $title = 'Archived Ads';
         return view('user.dashboard', compact('posts', 'title', 'user'));
     }
