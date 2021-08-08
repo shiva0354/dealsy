@@ -7,6 +7,7 @@ use App\Http\Requests\SearchRequest;
 use App\Models\Category;
 use App\Models\Location;
 use App\Models\Post;
+use Illuminate\Http\Request;
 
 class UserSearchController extends Controller
 {
@@ -19,20 +20,23 @@ class UserSearchController extends Controller
     public function search(SearchRequest $request)
     {
         $title = $request->query('query');
-        $category = $request->query('category');
-        $location = $request->query('location');
+        $categoryId = $request->query('category');
+        $locationId = $request->query('location');
+
+        $category = Category::find($categoryId, ['id', 'name', 'slug']);
+        $location = Location::find($locationId, ['id', 'name', 'slug']);
 
         $posts = Post::with(['firstImage', 'category' => function ($query) {
             $query->select('id', 'slug', 'name');
         }])->active()
             ->when($title, function ($query, $title) {
-                return $query->where('title', 'LIKE', $query);
+                return $query->where('title', 'LIKE', '%' . $title . '%');
             })
-            ->when($category, function ($query, $category) {
-                return $query->postCategory($category);
+            ->when($categoryId, function ($query, $categoryId) {
+                return $query->postCategory($categoryId);
             })
-            ->when($location, function ($query, $location) {
-                return $query->where('city_id', $location);
+            ->when($locationId, function ($query, $locationId) {
+                return $query->postCity($locationId);
             })
             ->paginate(9, ['id', 'category_id', 'title', 'price', 'created_at']);
 
@@ -48,7 +52,7 @@ class UserSearchController extends Controller
     {
         $category = Category::findOrFail($category_id, ['id', 'slug', 'name']);
         $location = null;
-        seo()->title(__("category-seo.seo-title:$category->name"). " in India");
+        seo()->title(__("category-seo.seo-title:$category->name") . " in India");
         seo()->description(__("category-seo.seo-description:$category->name"));
         $posts = $category->posts()
             ->with(['firstImage', 'category' => function ($query) {
@@ -166,18 +170,41 @@ class UserSearchController extends Controller
     /**
      * returning categories
      */
-    public function ajaxCategory()
+    public function ajaxCategory(Request $request)
     {
-        $categories = Category::get(['id', 'name']);
+        $search = $request->input('search');
+        $categories = Category::selectRaw('`id`, `name` as `text`')->where('name', 'like', '%' . $search . '%')->get();
         return response()->json($categories);
     }
 
     /**
      * returning locations
      */
-    public function ajaxcities()
+    public function ajaxcities(Request $request)
     {
-        $cities = Location::wherNotNull('parent_id')->get(['id', 'name']);
-        return response()->json($cities);
+        $search = $request->input('search');
+
+        $cities = Location::with('state')->whereNotNull('parent_id')->where('name', 'like', '%' . $search . '%')->get(['id', 'name', 'parent_id']);
+
+        $response = array();
+        foreach ($cities as $city) {
+            $response[] = array(
+                "id" => $city->id,
+                "text" => $city->name . "," . $city->state->name
+            );
+        }
+
+        return response()->json($response);
+    }
+
+
+    /**
+     * returning titles
+     */
+    public function ajaxPostsTitle(Request $request)
+    {
+        $search = $request->input('search');
+        $titles = Post::selectRaw('distinct `title` as text')->where('title', 'like', '%' . $search . '%')->take(1000)->get();
+        return response()->json($titles);
     }
 }

@@ -2,61 +2,36 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                {{-- <form method="GET" action="{{ route('search') }}">
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <input type="text" class="form-control"
-                                placeholder="What are you looking for" name="query" required>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <select class="form-control select-category" name="category" required>
-                                @foreach (App\Models\Category::whereNull('parent_id')->get() as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <input type="text" class="form-control" autocomplete="off" id="location" onkeyup="locationAutocomplete()"
-                                placeholder="Location" name="location" required>
-                        </div>
-                        <div class="form-group col-md-2 align-self-center">
-                            <button type="submit" class="btn btn-primary">Search Now</button>
-                        </div>
-                        <div class="input-group input_container">
-                                <ul id="location_list" style="display: none;"></ul>
-                            </div>
-                    </div>
-                </form> --}}
                 <form action="{{ $action }}" method="GET">
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class=" col-md-3">
                             <div class="form-group">
-                                <label for="inputPassword2" class="sr-only">Password</label>
-                                <input type="text" class="form-control" placeholder="What are you looking for"
-                                    name="query" required>
+                                <label for="query" class="sr-only">Category</label>
+                                <select class="select2_title" name="query" id="query" required style="width: 250px;">
+                                    <option value="">What are you looking for?</option>
+                                </select>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class=" col-md-3">
                             <div class="form-group">
-                                <label for="inputPassword2" class="sr-only">Password</label>
-                                <select class="custom-select form-control" name="category" required>
-                                    @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}">@lang("category.$category->name")</option>
-                                    @endforeach
+                                <label for="category" class="sr-only">Category</label>
+                                <select class="select2_category" name="category" id="category" style="width: 250px;">
+                                    <option value="">-- Select Category --</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="inputPassword2" class="sr-only">Password</label>
-                                <input type="text" class="form-control" autocomplete="off" id="location"
-                                    onkeyup="locationAutocomplete()" placeholder="Location" name="location" required>
+                                <label for="location" class="sr-only">Location</label>
+                                <select class="select2_location" name="location" id="location" style="width: 250px;">
+                                    <option value="" disabled>-- Select Location --</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="inputPassword2" class="sr-only">Password</label>
-                                <input type="submit" class="btn btn-block btn-sm btn-primary" value="Search">
+                                <label for="location" class="sr-only">Search</label>
+                                <button type="submit" class="btn btn-block btn-sm btn-primary">Search</button>
                             </div>
                         </div>
                     </div>
@@ -67,26 +42,73 @@
 </div>
 @section('js-script')
     <script>
-        $(document).on('ready', function() {
-            ajaxCategories();
-            ajaxCities();
-
-            function switcher() {
-                let locale = $('#language-switcher').val();
-                $.ajax({
-                    url: "/set/locale/-XXX-".replace('-XXX-', locale),
-                    type: "get",
-                    success: function(response) {
-                        if (response == 'success') {
-                            location.reload();
-                            console.log('success');
-                        } else {
-                            alert(response);
-                        }
-                    }
-                });
+        $(".select2_category").select2({
+            width: 'resolve',
+            ajax: {
+                url: "{{ route('ajax.categories') }}",
+                type: "post",
+                dataType: 'json',
+                delay: 250,
+                data: function(params) {
+                    return {
+                        _token: "{{ csrf_token() }}",
+                        search: params.term
+                    };
+                },
+                processResults: function(response) {
+                    return {
+                        results: response
+                    };
+                },
+                cache: true
             }
         });
-
+        $(".select2_location").select2({
+            width: 'resolve',
+            ajax: {
+                url: "{{ route('ajax.cities') }}",
+                type: "post",
+                dataType: 'json',
+                delay: 250,
+                data: function(params) {
+                    return {
+                        _token: "{{ csrf_token() }}",
+                        search: params.term
+                    };
+                },
+                processResults: function(response) {
+                    return {
+                        results: response
+                    };
+                },
+                cache: true
+            }
+        });
+        $(".select2_title").select2({
+            width: 'resolve',
+            ajax: {
+                url: "{{ route('ajax.post.titles') }}",
+                type: "post",
+                dataType: 'json',
+                delay: 250,
+                data: function(params) {
+                    return {
+                        _token: "{{ csrf_token() }}",
+                        search: params.term
+                    };
+                },
+                processResults: function(response) {
+                    return {
+                        results: $.map(response, function(item) {
+                            return {
+                                text:item.text,
+                                id: item.text
+                            }
+                        }),
+                    };
+                },
+                cache: true
+            }
+        });
     </script>
 @endsection

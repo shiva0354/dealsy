@@ -97,6 +97,14 @@ class Post extends Model
     }
 
     /**
+     * Defining scope for finding post by state
+     */
+    public function scopePostCity($query, $city_id)
+    {
+        return $query->where('city_id', $city_id);
+    }
+
+    /**
      * retrieving first image of the post from post image table
      */
     public function firstImage()

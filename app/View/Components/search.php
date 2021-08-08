@@ -12,13 +12,13 @@ class search extends Component
      *
      * @return void
      */
-    public $categories;
+    // public $categories;
     public $action;
     public function __construct()
     {
-        $this->categories = cache()->remember('search-category', 60 * 60 * 24, function () {
-            return Category::all(['id', 'slug', 'name']);
-        });
+        // $this->categories = cache()->remember('search-category', 60 * 60 * 24, function () {
+        //     return Category::all(['id', 'slug', 'name']);
+        // });
         $this->action = route('search');
     }
 
