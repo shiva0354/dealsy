@@ -70,11 +70,10 @@
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-striped table-valign-middle">
+                        <table class="table table-striped table-valign-middle table-sm">
                             <thead>
                                 <tr>
                                     <th scope="col">Ad Id</th>
-                                    <th scope="col">Image</th>
                                     <th scope="col">Title</th>
                                     <th scope="col">Category</th>
                                     <th scope="col">User</th>
@@ -87,16 +86,17 @@
                                 @foreach ($posts as $post)
                                     <tr>
                                         <td>{{ $post->id }}</td>
-                                        <td><img src="{{ asset('uploads/posts/' . $post->postImages->first()->image) }}"
-                                                alt="" style="width: 80px;"></td>
+                                        {{-- <td><img src="{{ asset('uploads/posts/' . $post->postImages->first()->image) }}"
+                                                alt="" style="width: 80px;"></td> --}}
                                         <td>{{ $post->title }}</td>
                                         <td>{{ $post->category->name }}</td>
-                                        <td><a
-                                                href="{{ route('admin.users.show', $post->user) }}">{{ $post->user->name }}</a>
+                                        <td>
+                                            <a href="{{ route('admin.users.show', $post->user) }}">{{ $post->user->name }}</a>
                                         </td>
                                         <td>{{ $post->status }}</td>
                                         <td>{{ date_format($post->created_at, 'd/M/Y') }}</td>
-                                        <td><a href="{{ route('admin.posts.show', $post) }}"><i class="fas fa-eye"></i></a>
+                                        <td><a href="{{ route('admin.posts.show', $post) }}" target="_blank"><i
+                                                    class="fas fa-eye"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -126,6 +126,5 @@
             $('#category').select2();
             $('#location').select2();
         });
-
     </script>
 @stop

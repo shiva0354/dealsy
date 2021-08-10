@@ -39,9 +39,14 @@ class AdminPostController extends Controller
             ->when($locality, function ($query, $locality) {
                 return $query->where('locality', $locality);
             })
-            ->paginate(10);
-        $posts->load(['user', 'postImages', 'category']);
-        $categories = Category::all(['name', 'id']);
+            ->paginate(20,['id','title','category_id','city_id','user_id','status','created_at']);
+
+        $posts->load(['user' => function ($q) {
+            return $q->select('id', 'name');
+        }, 'category' => function ($q) {
+            return $q->select('id', 'name');
+        }]);
+        $categories = Category::get(['name', 'id']);
         $locations = Location::whereNotNull('parent_id')->get(['name', 'id']);
         return view('admin.posts-index', compact('posts', 'categories', 'locations'));
     }
