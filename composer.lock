@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ef60a8bc05de22022c00a8c166ec6c55",
+    "content-hash": "64af3522d950e6a13fc8db21ec246a7d",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -5536,6 +5536,51 @@
         }
     ],
     "packages-dev": [
+        {
+            "name": "adwiv/laravel-crud-generator",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/adwiv/laravel-crud-generator.git",
+                "reference": "46fc1913932d859e5b37f94dbfedc000faf96271"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/adwiv/laravel-crud-generator/zipball/46fc1913932d859e5b37f94dbfedc000faf96271",
+                "reference": "46fc1913932d859e5b37f94dbfedc000faf96271",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": ">=6.0",
+                "php": "^7.2 || ^8.0"
+            },
+            "require-dev": {
+                "doctrine/dbal": "^3.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Adwiv\\Laravel\\CrudGenerator\\CrudGeneratorServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Adwiv\\Laravel\\CrudGenerator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Generate CRUD Model, Controller, Resource, Request and Views for Laravel",
+            "support": {
+                "issues": "https://github.com/adwiv/laravel-crud-generator/issues",
+                "source": "https://github.com/adwiv/laravel-crud-generator/tree/1.0.0"
+            },
+            "time": "2021-08-13T14:53:28+00:00"
+        },
         {
             "name": "barryvdh/laravel-debugbar",
             "version": "v3.6.0",

@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminContactController;
 use App\Http\Controllers\Admin\AdminHomeController;
 use App\Http\Controllers\Admin\AdminLocationController;
 use App\Http\Controllers\Admin\AdminPostController;
+use App\Http\Controllers\Admin\AdminSeoController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\Auth\AdminForgotPasswordController;
 use App\Http\Controllers\Admin\Auth\AdminLoginController;
@@ -136,4 +137,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('posts', [AdminPostController::class, 'index'])->name('posts.index');
     Route::get('posts/{post}', [AdminPostController::class, 'postDetail'])->name('posts.show');
     Route::post('posts/{post}/{status}', [AdminPostController::class, 'changeStatus'])->name('posts.status');
+
+    Route::resource('seo-tools', AdminSeoController::class);
+
+    Route::get('url-write', [AdminSeoController::class, 'createUrl']);
 });
