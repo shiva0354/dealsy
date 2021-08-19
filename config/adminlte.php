@@ -225,11 +225,6 @@ return [
 
     'menu' => [
         [
-            'text' => 'search',
-            'search' => true,
-            'topnav' => true,
-        ],
-        [
             'text' => 'Dashboard',
             'route' => 'admin.home',
             'icon' => 'fas fa-fw fa-tachometer-alt',
@@ -258,6 +253,11 @@ return [
             'text' => 'Locations',
             'route' => 'admin.locations.index',
             'icon' => 'fas fa-fw fa-map-pin',
+        ],
+        [
+            'text' => 'Seo Tool',
+            'route' => 'admin.seo-tools.index',
+            'icon' => 'fas fa-fw fa-th-list',
         ],
         [
             'text' => 'Contact Requests',

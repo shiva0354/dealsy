@@ -11,6 +11,7 @@ use Exception;
 
 class AdminSeoController extends Controller
 {
+    /** Creating urls for all category and locations route */
     public static function createUrl()
     {
         set_time_limit(-1);
@@ -38,18 +39,24 @@ class AdminSeoController extends Controller
     }
 
 
+    /**
+     * Lists of all
+     */
     public function index()
     {
         $seoTools = SeoTool::paginate();
         return view('admin.seotool-index', compact('seoTools'));
     }
 
+    /**
+     * Displaying view file for creating seo details
+     */
     public function create()
     {
         $seoTool = null;
         $action = route('admin.seo-tools.store');
         $referrer = old('_referrer', url()->previous());
-        return view('seotool-edit', compact('seoTool', 'action', 'referrer'));
+        return view('admin.seotool-edit', compact('seoTool', 'action', 'referrer'));
     }
 
     public function store(SeoToolRequest $request)
@@ -67,12 +74,18 @@ class AdminSeoController extends Controller
         return redirect($redirectTo)->with('success', 'SeoTool created successfully');
     }
 
+    /**
+     * Displaying details of seo for particulare url
+     */
     public function show($id)
     {
         $seoTool = SeoTool::findOrFail($id);
         return view('admin.seotool-show', compact('seoTool'));
     }
 
+    /**
+     * Displaying edit file for editing seo details
+     */
     public function edit($id)
     {
         $seoTool = SeoTool::findOrFail($id);
@@ -81,6 +94,9 @@ class AdminSeoController extends Controller
         return view('admin.seotool-edit', compact('seoTool', 'action', 'referrer'));
     }
 
+    /**
+     * Updating seo details for particular url
+     */
     public function update(SeoToolRequest $request, $id)
     {
         $seoTool = SeoTool::findOrFail($id);
@@ -97,8 +113,12 @@ class AdminSeoController extends Controller
         return redirect($redirectTo)->with('success', 'SeoTool updated successfully');
     }
 
+    /**
+     * Deleting a seo detail for particular url
+     */
     public function destroy($id)
     {
+        return back()->with('error', 'Deleting is currently not allowed.');
         $seoTool = SeoTool::findOrFail($id);
         try {
             $seoTool->delete();

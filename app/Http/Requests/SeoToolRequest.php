@@ -13,7 +13,7 @@ class SeoToolRequest extends FormRequest
 
     public function rules(): array
     {
-        $seoToolId = $this->route('seoTool');
+        $seoToolId = $this->route('seo_tool');
         $ignoreId = $seoToolId ? ",$seoToolId,id" : '';
 
         return [

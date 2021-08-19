@@ -140,5 +140,4 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
 
     Route::resource('seo-tools', AdminSeoController::class);
 
-    Route::get('url-write', [AdminSeoController::class, 'createUrl']);
 });

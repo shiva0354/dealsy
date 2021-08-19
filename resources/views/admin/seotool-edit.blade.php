@@ -48,35 +48,35 @@
                 <div class="row">
                     <x-adminlte-input name="url" label="Url" disable-feedback required
                                       value="{{ old('url', $seoTool->url ?? '') }}"
-                                      label-class="text-sm" fgroup-class="col-sm-6 col-lg-4 col-xl-3">
+                                      label-class="text-sm" fgroup-class="col-sm-6 col-lg-4 col-xl-6">
                     </x-adminlte-input>
                     <x-adminlte-input name="meta_title" label="Meta Title" disable-feedback required
                                       value="{{ old('meta_title', $seoTool->meta_title ?? '') }}"
-                                      label-class="text-sm" fgroup-class="col-sm-6 col-lg-4 col-xl-3">
+                                      label-class="text-sm" fgroup-class="col-sm-6 col-lg-4 col-xl-6">
                     </x-adminlte-input>
-                    <x-adminlte-input name="meta_description" label="Meta Description" disable-feedback required
+                    <x-adminlte-textarea name="meta_description" label="Meta Description" disable-feedback required
                                       value="{{ old('meta_description', $seoTool->meta_description ?? '') }}"
-                                      label-class="text-sm" fgroup-class="col-sm-6 col-lg-4 col-xl-3">
-                    </x-adminlte-input>
+                                      label-class="text-sm" fgroup-class="col-sm-6 col-lg-4 col-xl-6">
+                    </x-adminlte-textarea>
                     <x-adminlte-input name="og_title" label="Og Title" disable-feedback required
                                       value="{{ old('og_title', $seoTool->og_title ?? '') }}"
-                                      label-class="text-sm" fgroup-class="col-sm-6 col-lg-4 col-xl-3">
+                                      label-class="text-sm" fgroup-class="col-sm-6 col-lg-4 col-xl-6">
                     </x-adminlte-input>
-                    <x-adminlte-input name="og_description" label="Og Description" disable-feedback required
+                    <x-adminlte-textarea name="og_description" label="Og Description" disable-feedback required
                                       value="{{ old('og_description', $seoTool->og_description ?? '') }}"
-                                      label-class="text-sm" fgroup-class="col-sm-6 col-lg-4 col-xl-3">
-                    </x-adminlte-input>
+                                      label-class="text-sm" fgroup-class="col-sm-6 col-lg-4 col-xl-6">
+                    </x-adminlte-textarea>
                     <x-adminlte-input name="twitter_title" label="Twitter Title" disable-feedback required
                                       value="{{ old('twitter_title', $seoTool->twitter_title ?? '') }}"
-                                      label-class="text-sm" fgroup-class="col-sm-6 col-lg-4 col-xl-3">
+                                      label-class="text-sm" fgroup-class="col-sm-6 col-lg-4 col-xl-6">
                     </x-adminlte-input>
-                    <x-adminlte-input name="twitter_description" label="Twitter Description" disable-feedback required
+                    <x-adminlte-textarea name="twitter_description" label="Twitter Description" disable-feedback required
                                       value="{{ old('twitter_description', $seoTool->twitter_description ?? '') }}"
-                                      label-class="text-sm" fgroup-class="col-sm-6 col-lg-4 col-xl-3">
-                    </x-adminlte-input>
+                                      label-class="text-sm" fgroup-class="col-sm-6 col-lg-4 col-xl-6">
+                    </x-adminlte-textarea>
                     <x-adminlte-input name="cannonical_url" label="Cannonical Url" disable-feedback required
                                       value="{{ old('cannonical_url', $seoTool->cannonical_url ?? '') }}"
-                                      label-class="text-sm" fgroup-class="col-sm-6 col-lg-4 col-xl-3">
+                                      label-class="text-sm" fgroup-class="col-sm-6 col-lg-4 col-xl-6">
                     </x-adminlte-input>
                 </div>
             </div>
