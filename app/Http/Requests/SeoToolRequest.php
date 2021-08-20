@@ -24,7 +24,6 @@ class SeoToolRequest extends FormRequest
             'og_description' => "nullable|string|max:255",
             'twitter_title' => "nullable|string|max:255",
             'twitter_description' => "nullable|string|max:255",
-            'cannonical_url' => "nullable|string|max:255",
         ];
     }
 

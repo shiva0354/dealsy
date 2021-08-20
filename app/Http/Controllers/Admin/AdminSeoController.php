@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Location;
 use App\Models\SeoTool;
 use Exception;
+use Illuminate\Http\Request;
 
 class AdminSeoController extends Controller
 {
@@ -128,4 +129,16 @@ class AdminSeoController extends Controller
 
         return redirect()->back()->with('success', 'SeoTool deleted successfully');
     }
+
+    public function seoDefaultView()
+    {
+        return view('');
+    }
+    /**
+     * Changing Seo Default Setting in seo config
+     */
+    // public function seoDefault(Request $request)
+    // {
+    //     $fields = $request->only(['meta_title','meta_description']);
+    // }
 }

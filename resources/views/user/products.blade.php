@@ -8,7 +8,9 @@ if ($category) {
 }
 @endphp
 @extends('layouts.layout')
-{{-- @section('title', $title) --}}
+@section('seo')
+    @include('layouts.seo')
+@endsection
 @section('content')
     <section class="page-search">
         <x-search />
@@ -119,9 +121,11 @@ if ($category) {
                                             </li>
                                         @endforeach
                                     @elseif($location->parent_id)
-                                        @foreach ($location->posts()->distinct('locality')->get('locality') as $locality)
+                                        @foreach ($location->posts()->distinct('locality')->get('locality')
+    as $locality)
                                             <li>
-                                                <a href="{{ route('search.locality', [$location->slug, $location->id, strtolower(str_replace(' ', '_', $locality->locality))]) }}">{{ $locality->locality }},{{ $location->name }}</a>
+                                                <a
+                                                    href="{{ route('search.locality', [$location->slug, $location->id, strtolower(str_replace(' ', '_', $locality->locality))]) }}">{{ $locality->locality }},{{ $location->name }}</a>
                                             </li>
                                         @endforeach
                                     @endif

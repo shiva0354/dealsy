@@ -55,7 +55,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group col-md-2">
+                            {{-- <div class="form-group col-md-2">
                                 <label for="seo_title" class="mb-2 mr-sm-2">Seo Title</label>
                                 <input type="text" class="form-control mb-2 mr-sm-5" id="seo_title" name="seo_title"
                                     placeholder="Enter seo-title"
@@ -66,7 +66,7 @@
                                 <input type="text" class="form-control mb-2 mr-sm-5" id="seo_description"
                                     name="seo_description" placeholder="Enter seo_description"
                                     value="{{ old('seo_description', $singleCategory->seo_description ?? '') }}" required>
-                            </div>
+                            </div> --}}
                             <div class="form-group col-md-2">
                                 <label for="submit" class="mb-2 mr-sm-2">&nbsp;</label>
                                 <input type="submit" class="form-control mb-2 mr-sm-2 btn btn-info"
@@ -101,7 +101,9 @@
                                     </td>
                                 </tr>
                             @empty
-                            <tr><td>No Data Available</td></tr>
+                                <tr>
+                                    <td>No Data Available</td>
+                                </tr>
                             @endforelse
                         </tbody>
                     </table>

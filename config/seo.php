@@ -1,43 +1,34 @@
 <?php
 
 return [
-    'shorthand' => [
-        /*
-         * Decide, which tags should be created when using the
-         * Seo Service shorthand methods like seo()->title(...)
-         */
 
-        'title' => [
-            // <title>...</title>
-            'tag' => true,
 
-            // <meta property="og:title" content="..." />
-            'opengraph' => true,
+    'meta_title' => '',
 
-            // <meta name="twitter:title" content="..." />
-            'twitter' => true,
-        ],
+    'meta_description' => '',
 
-        'description' => [
-            // <meta name="description" content="..." />
-            'meta' => true,
+    'og_title' => '',
 
-            // <meta property="og:description" content="..." />
-            'opengraph' => true,
+    'og_description' => '',
 
-            // <meta name="twitter:description" content="..." />
-            'twitter' => true,
-        ],
+    'og_sitename' => '',
 
-        'image' => [
-            // <meta name="image" content="..." />
-            'meta' => true,
+    'fb_admins' => '',
 
-            // <meta property="og:image" content="..." />
-            'opengraph' => true,
+    'fb_app_id' => '',
 
-            // <meta name="twitter:image" content="..." />
-            'twitter' => true,
-        ],
-    ],
+    'og_type' => '',
+
+    'og_publisher' => '',
+
+    'twitter_title' => '',
+
+    'twitter_description' => '',
+
+    'twitter_card' => '',
+
+    'twitter_site' => '',
+
+    'twitter_creator' => '',
+
 ];

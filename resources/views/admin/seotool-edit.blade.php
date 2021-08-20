@@ -74,10 +74,6 @@
                                       value="{{ old('twitter_description', $seoTool->twitter_description ?? '') }}"
                                       label-class="text-sm" fgroup-class="col-sm-6 col-lg-4 col-xl-6">
                     </x-adminlte-textarea>
-                    <x-adminlte-input name="cannonical_url" label="Cannonical Url" disable-feedback required
-                                      value="{{ old('cannonical_url', $seoTool->cannonical_url ?? '') }}"
-                                      label-class="text-sm" fgroup-class="col-sm-6 col-lg-4 col-xl-6">
-                    </x-adminlte-input>
                 </div>
             </div>
             <div class="card-footer">

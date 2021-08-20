@@ -3,12 +3,10 @@
 
 <head>
     <!-- SITE TITTLE -->
-    {{-- <meta charset="utf-8"> --}}
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    {{-- <meta name="viewport" content="width=device-width, initial-scale=1"> --}}
-    {{-- getting page title from the individual page --}}
-    {{-- <title>@yield('title') - Dealsy</title> --}}
-    {{ seo()->render() }}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    @yield('seo')
     <!-- FAVICON -->
     <link href="{!! asset('images/dealsy-icon.png') !!}" rel="shortcut icon">
     <!-- Scripts -->
@@ -54,7 +52,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" crossorigin="anonymous">
     </script>
     <script src="{{ asset('js/script.js') }}"></script>
-    {{-- {{ seo('body')->render() }} --}}
     <script>
         $(document).on('ready', function() {
             ajaxCategories();

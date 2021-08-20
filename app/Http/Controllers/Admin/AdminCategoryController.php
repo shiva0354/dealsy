@@ -58,7 +58,7 @@ class AdminCategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
-     * 
+     *
      * Here observer listen and rewrite category seo file
      */
     public function update(CategoryRequest $request, $id)
@@ -72,20 +72,20 @@ class AdminCategoryController extends Controller
     /**
      * Writing category seo file after each categorymodification
      */
-    protected function categoryWrite()
-    {
-        $categories = Category::get(['name', 'slug']);
-        $category_file = fopen(base_path('resources/lang/en/category-seo.php'), 'w');
+    // protected function categoryWrite()
+    // {
+    //     $categories = Category::get(['name', 'slug']);
+    //     $category_file = fopen(base_path('resources/lang/en/category-seo.php'), 'w');
 
-        $array = [];
-        $txt = "<?php return ";
-        foreach ($categories as $category) {
+    //     $array = [];
+    //     $txt = "<?php return ";
+    //     foreach ($categories as $category) {
 
-            $array["seo-title:" . $category->name] = $category->seo_title;
-            $array["seo-description:" . $category->name] = $category->seo_description;
-        }
-        fwrite($category_file, $txt . var_export($array, true) . ";");
-        fclose($category_file);
-        return 'success';
-    }
+    //         $array["seo-title:" . $category->name] = $category->seo_title;
+    //         $array["seo-description:" . $category->name] = $category->seo_description;
+    //     }
+    //     fwrite($category_file, $txt . var_export($array, true) . ";");
+    //     fclose($category_file);
+    //     return 'success';
+    // }
 }

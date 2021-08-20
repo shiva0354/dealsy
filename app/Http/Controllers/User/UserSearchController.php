@@ -52,8 +52,6 @@ class UserSearchController extends Controller
     {
         $category = Category::findOrFail($category_id, ['id', 'slug', 'name']);
         $location = null;
-        seo()->title(__("category-seo.seo-title:$category->name") . " in India");
-        seo()->description(__("category-seo.seo-description:$category->name"));
         $posts = $category->posts()
             ->with(['firstImage', 'category' => function ($query) {
                 $query->select('id', 'slug', 'name');

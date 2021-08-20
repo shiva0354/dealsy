@@ -9,15 +9,30 @@ class SeoTool extends Model
 {
     use HasFactory;
 
-    protected $fillable= [
+    protected $fillable = [
         'url',
         'meta_title',
         'meta_description',
         'og_title',
         'og_description',
-        'og_url',
         'twitter_title',
         'twitter_description',
-        'cannonical_url'
     ];
+
+    /**
+     * finding seo detail by url
+     * @param string $url
+     */
+    public static function findByUrl(string $url)
+    {
+        return self::where('url', $url)->first([
+            'url',
+            'meta_title',
+            'meta_description',
+            'og_title',
+            'og_description',
+            'twitter_title',
+            'twitter_description',
+        ]);
+    }
 }

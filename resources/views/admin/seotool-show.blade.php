@@ -26,7 +26,7 @@
             </div>
 
             <div class="card-body p-0">
-                <table class="table table-sm table-hover">
+                <table class="table table-hover">
                     <tr><td>Url</td><td>{{ $seoTool->url }}</td></tr>
                     <tr><td>Meta Title</td><td>{{ $seoTool->meta_title }}</td></tr>
                     <tr><td>Meta Description</td><td>{{ $seoTool->meta_description }}</td></tr>
@@ -34,7 +34,6 @@
                     <tr><td>Og Description</td><td>{{ $seoTool->og_description }}</td></tr>
                     <tr><td>Twitter Title</td><td>{{ $seoTool->twitter_title }}</td></tr>
                     <tr><td>Twitter Description</td><td>{{ $seoTool->twitter_description }}</td></tr>
-                    <tr><td>Cannonical Url</td><td>{{ $seoTool->cannonical_url }}</td></tr>
                 </table>
             </div>
         </div>

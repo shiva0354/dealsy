@@ -35,7 +35,6 @@
                         <th class="">Og Description</th>
                         <th class="">Twitter Title</th>
                         <th class="">Twitter Description</th>
-                        <th class="">Cannonical Url</th>
                         <td>&nbsp;</td>
                     </tr>
                 </thead>
@@ -50,7 +49,6 @@
                             <td class="">{{ $seoTool->og_description }}</td>
                             <td class="">{{ $seoTool->twitter_title }}</td>
                             <td class="">{{ $seoTool->twitter_description }}</td>
-                            <td class="">{{ $seoTool->cannonical_url }}</td>
                             <td>
                                 <div class="d-flex justify-content-between">
                                     <a href="{{ route('admin.seo-tools.show', $seoTool) }}" class="text-primary"><i

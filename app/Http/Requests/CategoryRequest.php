@@ -30,24 +30,6 @@ class CategoryRequest extends FormRequest
             'slug' => "required|string|min:3|max:100|unique:categories,slug,$except",
             'icon' => 'nullable|string',
             'parent_id' => 'nullable|numeric|exists:categories,id',
-            'seo_title' => 'string|min:10|max:150',
-            'seo_description' => 'string|min:60|max:255'
-        ];
-    }
-
-    public function attributes()
-    {
-        return [
-            'seo_description' => 'Seo Description',
-            'seo_title' => 'Seo Title',
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            'seo_title.min' => 'Minimum of 10 characters is required',
-            'seo_title.max' => 'Maximum of 150 characters is allowed',
         ];
     }
 }

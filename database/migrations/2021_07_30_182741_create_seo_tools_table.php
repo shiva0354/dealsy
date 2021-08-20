@@ -22,7 +22,6 @@ class CreateSeoToolsTable extends Migration
             $table->string('og_description')->nullable();
             $table->string('twitter_title')->nullable();
             $table->string('twitter_description')->nullable();
-            $table->string('cannonical_url')->nullable();
             $table->timestamps();
         });
     }

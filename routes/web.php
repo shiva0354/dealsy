@@ -26,7 +26,7 @@ use App\Http\Controllers\User\UserSearchController;
 use App\Http\Controllers\User\UserWishlistController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('write', [AdminCategoryController::class, 'categoryWrite']);
+// Route::get('write', [AdminCategoryController::class, 'categoryWrite']);
 Route::get('/', [UserHomeController::class, 'home'])->name('home');
 
 /** ajax response for categories, cities and post titles */
