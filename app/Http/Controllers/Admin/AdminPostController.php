@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Events\PostEvent;
 use App\Http\Controllers\Controller;
-use App\Library\AdminAuthGuard;
 use App\Models\Category;
 use App\Models\Location;
 use App\Models\Post;
@@ -12,8 +11,6 @@ use Illuminate\Http\Request;
 
 class AdminPostController extends Controller
 {
-    use AdminAuthGuard;
-
     /**
      * Returns the list of the posts
      * By default return only pending posts

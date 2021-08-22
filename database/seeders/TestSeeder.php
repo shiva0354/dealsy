@@ -29,14 +29,14 @@ class TestSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call([
-        //     CategorySeeder::class,
-        //     LocationSeeder::class,
-        //     AdminSeeder::class,
-        // ]);
-        // $this->createUsers(500);
-        // $this->createCity(500);
-        $this->createposts(60000);
+        $this->call([
+            CategorySeeder::class,
+            LocationSeeder::class,
+            AdminSeeder::class,
+        ]);
+        $this->createUsers(100);
+        $this->createCity(100);
+        $this->createposts(1000);
     }
 
     private function createUsers(int $count)

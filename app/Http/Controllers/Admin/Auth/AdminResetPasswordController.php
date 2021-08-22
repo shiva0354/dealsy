@@ -12,10 +12,10 @@ class AdminResetPasswordController extends Controller
 {
     use ResetsPasswords;
 
-    public function __construct()
-    {
-        $this->middleware('auth:admin')->only(['showChangePasswordForm', 'changePassword']);
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth:admin')->only(['showChangePasswordForm', 'changePassword']);
+    // }
 
     protected $redirectTo = '/admin';
 

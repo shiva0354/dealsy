@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SeoDefaultRequest;
 use App\Http\Requests\SeoToolRequest;
 use App\Models\Category;
 use App\Models\Location;
 use App\Models\SeoTool;
 use Exception;
-use Illuminate\Http\Request;
 
 class AdminSeoController extends Controller
 {
@@ -105,7 +105,7 @@ class AdminSeoController extends Controller
         try {
             $seoTool->update($fields);
         } catch (Exception $e) {
-            return redirect()->back()->with('warning', 'Could not update seoTool. ' . $e->getMessage());
+            return back()->with('warning', 'Could not update seoTool. ' . $e->getMessage());
         }
 
         $referrer = $request->get('_referrer');
@@ -124,21 +124,31 @@ class AdminSeoController extends Controller
         try {
             $seoTool->delete();
         } catch (Exception $e) {
-            return redirect()->back()->with('warning', 'Could not delete seoTool. ' . $e->getMessage());
+            return back()->with('warning', 'Could not delete seoTool. ' . $e->getMessage());
         }
 
-        return redirect()->back()->with('success', 'SeoTool deleted successfully');
+        return back()->with('success', 'SeoTool deleted successfully');
     }
 
+    /**
+     * Showing view file for default seo
+     */
     public function seoDefaultView()
     {
-        return view('');
+        $action = route('admin.seo-tools.default.update');
+        $referrer = old('_referrer', url()->previous());
+        return view('admin.seotool-default', compact('action', 'referrer'));
     }
     /**
      * Changing Seo Default Setting in seo config
      */
-    // public function seoDefault(Request $request)
-    // {
-    //     $fields = $request->only(['meta_title','meta_description']);
-    // }
+    public function seoDefault(SeoDefaultRequest $request)
+    {
+        $fields = $request->validated();
+        $txt = "<?php return ";
+        $file = fopen(config_path('seo.php'), 'w');
+        fwrite($file, $txt . var_export($fields, true) . ";");
+        fclose($file);
+        return back()->with('success', 'Changes saved successfully');
+    }
 }

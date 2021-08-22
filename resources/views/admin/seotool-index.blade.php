@@ -4,13 +4,14 @@
 
 @section('content_header')
     <div class="row align-items-center">
-        <div class="col">
+        <div class="col text-left">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">Home</a></li>
                 <li class="breadcrumb-item"><a href="{{ route('admin.seo-tools.index') }}">SeoTools</a></li>
             </ol>
         </div>
         <div class="col text-right">
+            <a class="btn btn-sm btn-outline-primary" href="{{ route('admin.seo-tools.default') }}">Default Seo</a>
         </div>
     </div>
 @stop

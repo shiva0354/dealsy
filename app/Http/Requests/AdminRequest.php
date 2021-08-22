@@ -27,7 +27,7 @@ class AdminRequest extends FormRequest
             'name' => 'required|string|min:3|max:255',
             'email' => 'required|string|email|min:4',
             'mobile' => 'nullable|numeric|digits:10',
-            'role' => 'required|in:SUPER ADMIN,ADMIN,EMPLOYEE',
+            'role' => 'required|in:SUPER ADMIN,ADMIN,EMPLOYEE,SEO AGENT',
             'enabled' => 'required|boolean',
         ];
     }

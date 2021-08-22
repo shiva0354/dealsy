@@ -3,12 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Library\AdminAuthGuard;
 use App\Models\User;
 
 class AdminUserController extends Controller
 {
-    use AdminAuthGuard;
     /**
      * Display a listing of the users.
      *

@@ -4,13 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LocationRequest;
-use App\Library\AdminAuthGuard;
 use App\Models\Location;
 
 class AdminLocationController extends Controller
 {
-    use AdminAuthGuard;
-
     /**
      * Displaying list of locations
      * @param Location $locations,$singleLocation

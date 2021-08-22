@@ -4,12 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
-use App\Library\AdminAuthGuard;
 use App\Models\Category;
 
 class AdminCategoryController extends Controller
 {
-    use AdminAuthGuard;
     /**
      * Display a listing of the categories.
      *

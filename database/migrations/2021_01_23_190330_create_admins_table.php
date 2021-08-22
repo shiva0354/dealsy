@@ -19,7 +19,7 @@ class CreateAdminsTable extends Migration
             $table->string('email')->unique();
             $table->string('mobile', 10)->unique()->nullable();
             $table->string('password')->nullable();
-            $table->enum('role', ['SUPER ADMIN', 'ADMIN', 'EMPLOYEE'])->default('ADMIN');
+            $table->enum('role', ['SUPER ADMIN', 'ADMIN', 'EMPLOYEE', 'SEO AGENT'])->default('ADMIN');
             $table->boolean('enabled')->default(true);
             $table->rememberToken()->nullable();
             $table->softDeletes();

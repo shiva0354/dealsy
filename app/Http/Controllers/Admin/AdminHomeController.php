@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Library\AdminAuthGuard;
 use App\Models\Message;
 use App\Models\Post;
 use App\Models\PostImage;
@@ -12,8 +11,6 @@ use Illuminate\Support\Facades\DB;
 
 class AdminHomeController extends Controller
 {
-    use AdminAuthGuard;
-
     /**
      * Displaying key datas on the dashboard
      *

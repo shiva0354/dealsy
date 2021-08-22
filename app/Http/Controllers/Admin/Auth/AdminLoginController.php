@@ -11,11 +11,11 @@ class AdminLoginController extends Controller
 {
     use AuthenticatesUsers;
 
-    public function __construct()
-    {
-        $this->middleware('auth:admin')->only('logout');
-        $this->middleware('guest:admin')->except('logout');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth:admin')->only('logout');
+    //     $this->middleware('guest:admin')->except('logout');
+    // }
 
     protected $redirectTo = '/admin';
 

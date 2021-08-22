@@ -4,13 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminRequest;
-use App\Library\AdminAuthGuard;
 use App\Models\Admin;
-use Illuminate\Http\Request;
 
 class AdminAdminController extends Controller
 {
-    use AdminAuthGuard;
     /**
      * Display a listing of the resource.
      *
@@ -82,7 +79,7 @@ class AdminAdminController extends Controller
         if ($admin->role == 'SUPEr ADMIN') {
             return back()->with('error', 'You cannot delete super admin');
         }
-        
+
         $admin->delete();
         return redirect()->route('admin.admins.index')->with('success', 'Admin deleted successfully');
     }
