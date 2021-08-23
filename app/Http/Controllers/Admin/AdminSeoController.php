@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Location;
 use App\Models\SeoTool;
 use Exception;
+use Illuminate\Support\Facades\Gate;
 
 class AdminSeoController extends Controller
 {
@@ -45,6 +46,9 @@ class AdminSeoController extends Controller
      */
     public function index()
     {
+        $response = Gate::inspect('perform_seo');
+        if (!$response->allowed())  return back()->with('error', $response->message());
+
         $seoTools = SeoTool::paginate();
         return view('admin.seotool-index', compact('seoTools'));
     }
@@ -54,6 +58,9 @@ class AdminSeoController extends Controller
      */
     public function create()
     {
+        $response = Gate::inspect('perform_seo');
+        if (!$response->allowed())  return back()->with('error', $response->message());
+
         $seoTool = null;
         $action = route('admin.seo-tools.store');
         $referrer = old('_referrer', url()->previous());
@@ -62,6 +69,9 @@ class AdminSeoController extends Controller
 
     public function store(SeoToolRequest $request)
     {
+        $response = Gate::inspect('perform_seo');
+        if (!$response->allowed())  return back()->with('error', $response->message());
+
         $fields = $request->validated();
         try {
             SeoTool::create($fields);
@@ -80,6 +90,9 @@ class AdminSeoController extends Controller
      */
     public function show($id)
     {
+        $response = Gate::inspect('perform_seo');
+        if (!$response->allowed())  return back()->with('error', $response->message());
+
         $seoTool = SeoTool::findOrFail($id);
         return view('admin.seotool-show', compact('seoTool'));
     }
@@ -89,6 +102,9 @@ class AdminSeoController extends Controller
      */
     public function edit($id)
     {
+        $response = Gate::inspect('perform_seo');
+        if (!$response->allowed())  return back()->with('error', $response->message());
+
         $seoTool = SeoTool::findOrFail($id);
         $action = route('admin.seo-tools.update', $id);
         $referrer = old('_referrer', url()->previous());
@@ -100,6 +116,9 @@ class AdminSeoController extends Controller
      */
     public function update(SeoToolRequest $request, $id)
     {
+        $response = Gate::inspect('perform_seo');
+        if (!$response->allowed())  return back()->with('error', $response->message());
+
         $seoTool = SeoTool::findOrFail($id);
         $fields = $request->validated();
         try {
@@ -119,6 +138,9 @@ class AdminSeoController extends Controller
      */
     public function destroy($id)
     {
+        $response = Gate::inspect('perform_seo');
+        if (!$response->allowed())  return back()->with('error', $response->message());
+
         return back()->with('error', 'Deleting is currently not allowed.');
         $seoTool = SeoTool::findOrFail($id);
         try {
@@ -135,6 +157,9 @@ class AdminSeoController extends Controller
      */
     public function seoDefaultView()
     {
+        $response = Gate::inspect('perform_seo');
+        if (!$response->allowed())  return back()->with('error', $response->message());
+
         $action = route('admin.seo-tools.default.update');
         $referrer = old('_referrer', url()->previous());
         return view('admin.seotool-default', compact('action', 'referrer'));
@@ -144,6 +169,9 @@ class AdminSeoController extends Controller
      */
     public function seoDefault(SeoDefaultRequest $request)
     {
+        $response = Gate::inspect('perform_seo');
+        if (!$response->allowed())  return back()->with('error', $response->message());
+
         $fields = $request->validated();
         $txt = "<?php return ";
         $file = fopen(config_path('seo.php'), 'w');

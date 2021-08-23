@@ -8,6 +8,12 @@ use App\Models\Admin;
 
 class AdminAdminController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('can:super_admin');
+    }
+    
     /**
      * Display a listing of the resource.
      *
