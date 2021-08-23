@@ -51,7 +51,7 @@ class UserMessageController extends Controller
         $post = Post::findOrFail($postId);
 
         if ($post->user == $user) {
-            return redirect()->back()->with('info', 'You can\'t send message request to yourself');
+            return back()->with('info', 'You can\'t send message request to yourself');
         }
 
         Message::create([

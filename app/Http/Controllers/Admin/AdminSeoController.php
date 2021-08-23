@@ -76,7 +76,7 @@ class AdminSeoController extends Controller
         try {
             SeoTool::create($fields);
         } catch (Exception $e) {
-            return redirect()->back()->with('warning', 'Could not create seoTool. ' . $e->getMessage());
+            return back()->with('warning', 'Could not create seoTool. ' . $e->getMessage());
         }
 
         $referrer = $request->get('_referrer');

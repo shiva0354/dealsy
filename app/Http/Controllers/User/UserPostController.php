@@ -60,11 +60,11 @@ class UserPostController extends Controller
         $response = Gate::inspect('post', $post);
 
         if (!$response->allowed()) {
-            return redirect()->back()->with('error', $response->message());
+            return back()->with('error', $response->message());
         }
 
         if ($post->status == 'SOLD') {
-            return back()->with('info','Sold ad cannot be updated');
+            return back()->with('info', 'Sold ad cannot be updated');
         }
 
         $post->load(['category', 'postImages']);
@@ -94,7 +94,7 @@ class UserPostController extends Controller
                 }
             }
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
+            return back()->with('error', $e->getMessage());
         }
         return redirect()->route('home')->with('success', 'Ad posted successfully');
     }
@@ -113,11 +113,11 @@ class UserPostController extends Controller
         $response = Gate::inspect('post', $post);
 
         if (!$response->allowed()) {
-            return redirect()->back()->with('error', $response->message());
+            return back()->with('error', $response->message());
         }
 
         if ($post->status == 'SOLD') {
-            return back()->with('info','Sold ad cannot be updated');
+            return back()->with('info', 'Sold ad cannot be updated');
         }
 
         try {
@@ -132,7 +132,7 @@ class UserPostController extends Controller
                 }
             }
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
+            return back()->with('error', $e->getMessage());
         }
 
         return redirect()->route('home')->with('success', 'Ad updated successfully');
@@ -150,7 +150,7 @@ class UserPostController extends Controller
         $response = Gate::inspect('post', $post);
 
         if (!$response->allowed()) {
-            return redirect()->back()->with('error', $response->message());
+            return back()->with('error', $response->message());
         }
 
         $post->delete();
@@ -209,10 +209,10 @@ class UserPostController extends Controller
         $response = Gate::inspect('post_image', $post, $image);
 
         if (!$response->allowed()) {
-            return redirect()->back()->with('error', $response->message());
+            return back()->with('error', $response->message());
         }
         $post->deleteImage($image);
-        return redirect()->back()->with('success', 'Image deleted successfully');
+        return back()->with('success', 'Image deleted successfully');
     }
 
     /**

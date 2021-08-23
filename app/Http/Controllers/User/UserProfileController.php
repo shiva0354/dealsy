@@ -53,13 +53,13 @@ class UserProfileController extends Controller
         $email = $request->input('new_email');
 
         if ($user->email != $email) {
-            return redirect()->back()->with('error', 'email not matched');
+            return back()->with('error', 'email not matched');
         }
 
         try {
             $user->update(['email' => $email]);
         } catch (\Exception $e) {
-            return redirect()->back()->with('message', $e->getMessage());
+            return back()->with('message', $e->getMessage());
         }
         return redirect()->route('user.profile')->with('success', 'Email updated successfully');
     }
@@ -85,9 +85,9 @@ class UserProfileController extends Controller
                 $user->update(['avatar' => $path]);
                 return redirect()->route('user.profile')->with('success', 'Profile image updated successfully');
             }
-            return redirect()->back()->with('error', 'Invalid file uploaded');
+            return back()->with('error', 'Invalid file uploaded');
         }
-        return redirect()->back()->with('error', 'No file uploaded');
+        return back()->with('error', 'No file uploaded');
     }
 
     /**
@@ -100,7 +100,7 @@ class UserProfileController extends Controller
         $user = User::current();
 
         if ($user->mobile && $user->mobile != $request->input('old_mobile')) {
-            return redirect()->back()->with('error', 'old mobile do not matched');
+            return back()->with('error', 'old mobile do not matched');
         }
         $user->update(['mobile' => $request->input('mobile')]);
         return redirect()->route('user.profile')->with('success', 'Mobile updated successfully');

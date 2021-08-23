@@ -36,7 +36,7 @@ class AdminPostController extends Controller
             ->when($locality, function ($query, $locality) {
                 return $query->where('locality', $locality);
             })
-            ->paginate(20,['id','title','category_id','city_id','user_id','status','created_at']);
+            ->paginate(20, ['id', 'title', 'category_id', 'city_id', 'user_id', 'status', 'created_at']);
 
         $posts->load(['user' => function ($q) {
             return $q->select('id', 'name');
@@ -58,7 +58,7 @@ class AdminPostController extends Controller
         $array = ['SOLD', 'ACTIVE', 'REJECTED'];
 
         if (!in_array($status, $array)) {
-            return redirect()->back()->with('error', 'Wrong status sent');
+            return back()->with('error', 'Wrong status sent');
         }
 
         $post = Post::findOrFail($postId);
