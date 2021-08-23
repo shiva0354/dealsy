@@ -4,6 +4,8 @@ namespace App\Exceptions;
 
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\UnauthorizedException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -37,17 +39,17 @@ class Handler extends ExceptionHandler
         //
     }
 
-    // public function render($request, Throwable $e)
-    // {
-    //     if ($request->expectsJson()) {
-    //         $e = $this->prepareException($e);
-    //         // $debug = config('app.debug') ? $e->getTraceAsString() : null;
+    public function render($request, Throwable $e)
+    {
+        // if (!$request->expectsJson()) {
+        //     $e = $this->prepareException($e);
+        //     // $debug = config('app.debug') ? $e->getTraceAsString() : null;
 
-    //         if ($e instanceof AuthenticationException) {
-    //             return $e->getMessage();
-    //         }
-    //     }
+        //     if ($e instanceof UnauthorizedException) {
+        //         return $e->getMessage();
+        //     }
+        // }
 
-    //     return parent::render($request, $e);
-    // }
+        return parent::render($request, $e);
+    }
 }

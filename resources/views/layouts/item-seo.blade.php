@@ -15,6 +15,7 @@ $seo_url = url()->current();
 <meta name="twitter:card" content="{{ config('seo.twitter_card') }}" />
 <meta name="twitter:site" content="{{ config('seo.twitter_site') }}" />
 <meta name="twitter:creator" content="{{ config('seo.twitter_creator') }}" />
+<meta name="robots" content="noindex, noimageindex, nofollow, nosnippet">
 
 <meta name="canonical_url" content="{{ $seo_url }}">
 

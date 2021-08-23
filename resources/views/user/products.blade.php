@@ -20,6 +20,7 @@ if ($category) {
             <div class="row">
                 <div class="col-md-12">
                     <div class="search-result bg-gray">
+                        {{-- <h1 class="text-xl">{{ $seo->meta_title ?? 'Dealsy' }}</h1> --}}
                         <h2>Results For "@if ($category){{ $category->name }}
                         @elseif($location) {{ $location->name }} @else Search @endif"</h2>
                     <p>{{ $posts->total() }} Results on {{ now()->format('d M, Y') }}</p>
