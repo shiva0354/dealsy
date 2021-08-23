@@ -27,7 +27,7 @@ class AdminLoginController extends Controller
     /**
      * Oveririding the logout method so that admin can get redirected to admin login page
      */
-    public function logout(Request $request)
+    public function logout(Request $request,string $message = null)
     {
         $this->guard()->logout();
 
@@ -39,7 +39,7 @@ class AdminLoginController extends Controller
             return $response;
         }
 
-        return redirect()->route('admin.login');
+        return redirect()->route('admin.login')->with('message',$message);
     }
 
     /**
@@ -48,5 +48,19 @@ class AdminLoginController extends Controller
     protected function guard()
     {
         return Auth::guard('admin');
+    }
+
+    /**
+     * The user has been authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
+    protected function authenticated(Request $request, $user)
+    {
+        if (!$user->enabled) {
+            return $this->logout($request,'Your account is not active');
+        }
     }
 }
