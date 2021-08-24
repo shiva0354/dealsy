@@ -264,6 +264,7 @@
         $(function() {
             $("#state").change(function() {
                 var cityId = $("#state").val();
+                let cities = '';
                 $.ajax({
                     type: "GET",
                     url: "/ajax/cities/" + cityId,
