@@ -241,8 +241,9 @@
         });
 
         $(function() {
-            $("#main-category").on('change', function() {
+            $("#main-category").change(function() {
                 var categoryId = $("#main-category").val();
+                let html = "";
                 $.ajax({
                     type: "GET",
                     url: "/ajax/categories/" + categoryId,
@@ -250,9 +251,10 @@
                     success: function(data) {
                         if (data) {
                             data.forEach(category => {
-                                categories += "<option value=" + category.id + ">" + category.name + "</option>";
+                                html += "<option value=" + category.id + ">" +
+                                    category.name + "</option>";
                             });
-                            $("#category").html(categories);
+                            $("#category").html(html);
                         }
                     }
                 });

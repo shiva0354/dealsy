@@ -57,15 +57,11 @@ class UserPostController extends Controller
     {
         $user = User::current();
         $post = Post::findOrFail($id);
+
         $response = Gate::inspect('post', $post);
+        if (!$response->allowed()) return back()->with('error', $response->message());
 
-        if (!$response->allowed()) {
-            return back()->with('error', $response->message());
-        }
-
-        if ($post->status == 'SOLD') {
-            return back()->with('info', 'Sold ad cannot be updated');
-        }
+        if ($post->status == 'SOLD') return back()->with('info', 'Sold ad cannot be updated');
 
         $post->load(['category', 'postImages']);
         $categories = Category::all();
@@ -110,15 +106,11 @@ class UserPostController extends Controller
         //update the posting of ads
         $user = User::current();
         $post = Post::findOrFail($id);
+
         $response = Gate::inspect('post', $post);
+        if (!$response->allowed()) return back()->with('error', $response->message());
 
-        if (!$response->allowed()) {
-            return back()->with('error', $response->message());
-        }
-
-        if ($post->status == 'SOLD') {
-            return back()->with('info', 'Sold ad cannot be updated');
-        }
+        if ($post->status == 'SOLD') return back()->with('info', 'Sold ad cannot be updated');
 
         try {
             $images = $this->saveImage($request);
@@ -145,13 +137,10 @@ class UserPostController extends Controller
      */
     public function destroy($id)
     {
-
         $post = Post::findOrFail($id);
-        $response = Gate::inspect('post', $post);
 
-        if (!$response->allowed()) {
-            return back()->with('error', $response->message());
-        }
+        $response = Gate::inspect('post', $post);
+        if (!$response->allowed()) return back()->with('error', $response->message());
 
         $post->delete();
         return back()->with('success', 'Post Deleted Successfully');
@@ -206,13 +195,12 @@ class UserPostController extends Controller
     public function deleteImage(Post $post, int $imageId)
     {
         $image = PostImage::findOrFail($imageId);
-        $response = Gate::inspect('post_image', $post, $image);
 
-        if (!$response->allowed()) {
-            return back()->with('error', $response->message());
-        }
+        $response = Gate::inspect('post_image', $post, $image);
+        if (!$response->allowed()) return back()->with('error', $response->message());
+
         $post->deleteImage($image);
-        return back()->with('success', 'Image deleted successfully');
+        return response()->json(['Image deleted successfully', 200]);
     }
 
     /**
