@@ -246,7 +246,7 @@
                 let html = "";
                 $.ajax({
                     type: "GET",
-                    url: "/ajax/categories/" + categoryId,
+                    url: "/categories/" + categoryId,
                     data: {},
                     success: function(data) {
                         if (data) {
@@ -267,7 +267,7 @@
                 let cities = '';
                 $.ajax({
                     type: "GET",
-                    url: "/ajax/cities/" + cityId,
+                    url: "/cities/" + cityId,
                     data: {},
                     success: function(data) {
                         if (data) {

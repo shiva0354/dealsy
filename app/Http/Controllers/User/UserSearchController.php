@@ -7,7 +7,6 @@ use App\Http\Requests\SearchRequest;
 use App\Models\Category;
 use App\Models\Location;
 use App\Models\Post;
-use Illuminate\Http\Request;
 
 class UserSearchController extends Controller
 {
@@ -163,46 +162,5 @@ class UserSearchController extends Controller
             ->paginate(9, ['id', 'category_id', 'title', 'price', 'created_at']);
 
         return view('user.products', compact('posts', 'category', 'location'));
-    }
-
-    /**
-     * returning categories
-     */
-    public function ajaxCategory(Request $request)
-    {
-        $search = $request->input('search');
-        $categories = Category::selectRaw('`id`, `name` as `text`')->where('name', 'like', '%' . $search . '%')->get();
-        return response()->json($categories);
-    }
-
-    /**
-     * returning locations
-     */
-    public function ajaxcities(Request $request)
-    {
-        $search = $request->input('search');
-
-        $cities = Location::with('state')->whereNotNull('parent_id')->where('name', 'like', '%' . $search . '%')->get(['id', 'name', 'parent_id']);
-
-        $response = array();
-        foreach ($cities as $city) {
-            $response[] = array(
-                "id" => $city->id,
-                "text" => $city->name . "," . $city->state->name
-            );
-        }
-
-        return response()->json($response);
-    }
-
-
-    /**
-     * returning titles
-     */
-    public function ajaxPostsTitle(Request $request)
-    {
-        $search = $request->input('search');
-        $titles = Post::selectRaw('distinct `title` as text')->where('title', 'like', '%' . $search . '%')->take(1000)->get();
-        return response()->json($titles);
     }
 }

@@ -217,26 +217,4 @@ class UserPostController extends Controller
         $posts->load(['category', 'postImages', 'city', 'state']);
         return view('user.user-products', compact('posts', 'user'));
     }
-
-    /**
-     * @param int $stateId
-     * @return Location $cities
-     */
-    public function cities($stateId)
-    {
-        $state = Location::findOrFail($stateId);
-        $cities = $state->cities;
-        return $cities;
-    }
-
-    /**
-     * @param int $id
-     * @return Category $categories
-     */
-    public function categories($id)
-    {
-        $category = Category::findOrFail($id);
-        $categories = $category->subCategories;
-        return $categories;
-    }
 }

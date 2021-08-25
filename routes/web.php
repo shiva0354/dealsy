@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\User\UserMessageController;
 use App\Http\Controllers\User\Auth\UserForgotPasswordController;
 use App\Http\Controllers\User\Auth\UserLoginController;
 use App\Http\Controllers\User\Auth\UserRegisterController;
 use App\Http\Controllers\User\Auth\UserResetPasswordController;
+use App\Http\Controllers\User\UserAjaxController;
 use App\Http\Controllers\User\UserContactController;
 use App\Http\Controllers\User\UserDashboardController;
 use App\Http\Controllers\User\UserHomeController;
+use App\Http\Controllers\User\UserMessageController;
 use App\Http\Controllers\User\UserPageController;
 use App\Http\Controllers\User\UserPostController;
 use App\Http\Controllers\User\UserProfileController;
@@ -19,9 +20,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [UserHomeController::class, 'home'])->name('home');
 
 /** ajax response for categories, cities and post titles */
-Route::any('categories', [UserSearchController::class, 'ajaxCategory'])->name('ajax.categories');
-Route::any('cities', [UserSearchController::class, 'ajaxcities'])->name('ajax.cities');
-Route::any('titles', [UserSearchController::class, 'ajaxPostsTitle'])->name('ajax.post.titles');
+Route::any('categories', [UserAjaxController::class, 'ajaxCategory'])->name('ajax.categories');
+Route::any('cities', [UserAjaxController::class, 'ajaxcities'])->name('ajax.cities');
+Route::any('titles', [UserAjaxController::class, 'ajaxPostsTitle'])->name('ajax.post.titles');
+Route::any('categories/{id}', [UserAjaxController::class, 'categories']);
+Route::any('cities/{id}', [UserAjaxController::class, 'cities']);
 
 /** manual signup*/
 Route::get('/signup', [UserRegisterController::class, 'showRegistrationForm'])->name('signup');
@@ -85,11 +88,6 @@ Route::get('{location}_g{locationId}', [UserSearchController::class, 'locationSe
 Route::get('{location}_g{locationId}/{category}_c{categoryId}', [UserSearchController::class, 'locationCategorySearch'])->name('search.location.category');
 Route::get('{location}_g{locationId}/{locality}', [UserSearchController::class, 'localitySearch'])->name('search.locality');
 Route::get('{location}_g{locationId}/{locality}/{category}_c{categoryId}', [UserSearchController::class, 'localityCategorySearch'])->name('search.locality.category');
-
-/** ajax */
-Route::get('ajax/locations', [UserSearchController::class, 'ajaxLocation'])->name('ajax.location'); //need to rework
-Route::get('ajax/categories/{id}', [UserPostController::class, 'categories']);
-Route::get('ajax/cities/{id}', [UserPostController::class, 'cities']);
 
 /** Message requests by user */
 Route::post('send/message/{postId}', [UserMessageController::class, 'store'])->name('user.send.message');
