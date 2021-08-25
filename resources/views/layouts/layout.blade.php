@@ -54,9 +54,6 @@
     <script src="{{ asset('js/script.js') }}"></script>
     <script>
         $(document).on('ready', function() {
-            ajaxCategories();
-            ajaxCities();
-
             function switcher() {
                 let locale = $('#language-switcher').val();
                 $.ajax({

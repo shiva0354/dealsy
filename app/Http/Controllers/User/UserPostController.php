@@ -196,11 +196,13 @@ class UserPostController extends Controller
     {
         $image = PostImage::findOrFail($imageId);
 
-        $response = Gate::inspect('post_image', $post, $image);
-        if (!$response->allowed()) return back()->with('error', $response->message());
+        $response = Gate::inspect('post', $post);
+        if (!$response->allowed()) return response()->json($response->message());
 
-        $post->deleteImage($image);
-        return response()->json(['Image deleted successfully', 200]);
+        if (!$post->id === $image->post_id) return response()->json('Image doesn\'t belongs to this post.');
+
+        $image->delete();
+        return response()->json('Image deleted successfully.');
     }
 
     /**

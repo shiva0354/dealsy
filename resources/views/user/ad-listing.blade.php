@@ -189,9 +189,12 @@
                     <fieldset class="border p-4 my-5 seller-information bg-gray">
                         <div class="row">
                             @foreach ($post->postImages as $image)
-                                <div class="col-md-3">
+                                <div class="col-md-3 mb-2" id="image{{ $image->id }}">
                                     <img src="{{ asset('uploads/posts/' . $image->image) }}" alt="" class="w-100"
                                         style="height: 150px;">
+                                    <span class="badge-lg" style="position: absolute;top: -8px;right: 5px;"
+                                        onclick="deleteImage({{ $post->id }},{{ $image->id }}); return false;"
+                                        title="Delete Image"><i class="fas fa-times-circle fa-lg text-danger"></i></span>
                                 </div>
                             @endforeach
                         </div>
@@ -281,5 +284,24 @@
                 });
             });
         });
+
+        function deleteImage(postId, imageId) {
+            $.ajax({
+                type: "POST",
+                url: `/posts/${postId}/images/${imageId}`,
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                },
+                success: function(response) {
+                    $('#image' + imageId).hide();
+                    alert(response);
+                },
+                error: function(jqXHR) {
+                    msg = JSON.parse(jqXHR.responseText).message;
+                    alert(msg);
+                }
+            });
+
+        }
     </script>
 @stop
