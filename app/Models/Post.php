@@ -111,4 +111,12 @@ class Post extends Model
     {
         return $this->hasOne(PostImage::class);
     }
+
+    /**
+     * Defining that post has many messages
+     */
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Events\PostMessageEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MessageRequest;
 use App\Models\Message;
@@ -10,12 +11,10 @@ use App\Models\User;
 
 class UserMessageController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth')->only(['authStore']);
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -28,14 +27,16 @@ class UserMessageController extends Controller
     {
         $post = Post::findOrFail($postId);
 
-        Message::create([
+        $message =  Message::create([
             'post_id' => $post->id,
             'user_id' => $post->user->id,
             'name' => $request->input('name'),
             'mobile' => $request->input('mobile'),
             'email' => $request->input('email'),
         ]);
-        //generate event
+
+        PostMessageEvent::dispatch($message);
+
         return redirect()->intended()->with('success', 'Message request sent successfully');
     }
 
@@ -54,13 +55,15 @@ class UserMessageController extends Controller
             return back()->with('info', 'You can\'t send message request to yourself');
         }
 
-        Message::create([
+        $message =  Message::create([
             'post_id' => $post->id,
             'user_id' => $post->user->id,
             'name' => $user->name,
             'mobile' => $user->mobile,
             'email' => $user->email,
         ]);
+
+        PostMessageEvent::dispatch($message);
 
         return redirect()->intended()->with('success', 'Message request sent successfully');
     }

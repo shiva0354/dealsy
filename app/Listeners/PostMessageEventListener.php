@@ -3,12 +3,14 @@
 namespace App\Listeners;
 
 use App\Events\PostMessageEvent;
+use App\Notifications\UserMessageNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
 class PostMessageEventListener implements ShouldQueue
 {
     use InteractsWithQueue;
+
     /**
      * Create the event listener.
      *
@@ -16,7 +18,6 @@ class PostMessageEventListener implements ShouldQueue
      */
     public function __construct()
     {
-        //
     }
 
     /**
@@ -27,6 +28,8 @@ class PostMessageEventListener implements ShouldQueue
      */
     public function handle(PostMessageEvent $event)
     {
-        
+        $message = $event->message;
+        $user = $message->post->user;
+        $user->notify(new UserMessageNotification($message->post));
     }
 }

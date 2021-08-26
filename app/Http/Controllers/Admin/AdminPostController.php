@@ -63,7 +63,16 @@ class AdminPostController extends Controller
 
         $post = Post::findOrFail($postId);
         $post->setStatus($status);
-        PostEvent::dispatch($status, $post);
+        
+        $type = '';
+        if ($status = 'ACTIVE') {
+            $type = 'post.published';
+        } elseif ($status = 'SOLD') {
+            $type = 'post.sold';
+        } elseif ($status = 'REJECTED') {
+            $type = 'post.rejected';
+        }
+        PostEvent::dispatch($type, $post);
 
         return redirect()->route('admin.posts.index')->with('success', "Status set to '$status' successfully");
     }
