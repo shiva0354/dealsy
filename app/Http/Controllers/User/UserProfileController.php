@@ -72,17 +72,12 @@ class UserProfileController extends Controller
     public function changePicture(ProfileImageRequest $request)
     {
         $user = User::current();
-        $dir = "/uploads/users/";
-        $destinationPath = public_path($dir);
 
         if ($request->hasFile('avatar')) {
             $file = $request->file('avatar');
             if ($file->isValid()) {
-                $ext = $file->getClientOriginalExtension();
-                $fileName = Str::random(30) . "." . $ext;
-                $file->move($destinationPath, $fileName);
-                $path = $dir . $fileName;
-                $user->update(['avatar' => $path]);
+                $path = $file->store('uploads/users/', 'public');
+                $user->update(['avatar' => 'storage/' . $path]);
                 return redirect()->route('user.profile')->with('success', 'Profile image updated successfully');
             }
             return back()->with('error', 'Invalid file uploaded');

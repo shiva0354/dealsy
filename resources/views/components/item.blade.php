@@ -5,7 +5,7 @@
             <div class="thumb-content">
                 <div class="price">₹ {{ $post->price }}</div>
                 <a href="{{ route('posts.show', [$post, strtolower(str_replace(' ', '-', $post->title))]) }}">
-                    <img class=" card-img-top img-fluid" src="{{ asset('uploads/posts/' . $post->firstImage->image) }}" alt="{{ $post->title }}" style="height: 200px;">
+                    <img class=" card-img-top img-fluid" src="{{ asset($post->firstImage->image)}}" alt="{{ $post->title }}" style="height: 200px;">
                 </a>
             </div>
             <span class="wishlist" id="addToWishlist" data-data="{{ $post->id }}" ><i class="fa fa-heart fa-lg text-white"

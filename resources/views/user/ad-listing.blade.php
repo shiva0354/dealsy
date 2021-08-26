@@ -190,8 +190,7 @@
                         <div class="row">
                             @foreach ($post->postImages as $image)
                                 <div class="col-md-3 mb-2" id="image{{ $image->id }}">
-                                    <img src="{{ asset('uploads/posts/' . $image->image) }}" alt="" class="w-100"
-                                        style="height: 150px;">
+                                    <img src="{{ asset($image->image) }}" alt="" class="w-100" style="height: 150px;">
                                     <span class="badge-lg" style="position: absolute;top: -8px;right: 5px;"
                                         onclick="deleteImage({{ $post->id }},{{ $image->id }}); return false;"
                                         title="Delete Image"><i class="fas fa-times-circle fa-lg text-danger"></i></span>

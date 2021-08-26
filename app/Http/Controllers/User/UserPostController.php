@@ -10,7 +10,6 @@ use App\Models\Post;
 use App\Models\PostImage;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Str;
 
 class UserPostController extends Controller
 {
@@ -148,11 +147,7 @@ class UserPostController extends Controller
 
     private function getInput($request, $userId)
     {
-        if (!empty($request->input('sub_category'))) {
-            $category = $request->input('sub_category');
-        } else {
-            $category = $request->input('category');
-        }
+        $category = $request->filled('sub_category') ? $request->input('sub_category') : $request->input('category');
 
         $input = $request->only([
             'title',
@@ -176,9 +171,8 @@ class UserPostController extends Controller
     {
         if ($request->hasfile('images')) {
             foreach ($request->file('images') as $file) {
-                $name = Str::random(60) . '.' . $file->extension();
-                $file->move(public_path('uploads/posts/'), $name);
-                $images[] = $name;
+                $path = $file->store('uploads/posts/', 'public');
+                $images[] = 'storage/' . $path;
             }
         }
         return $images;

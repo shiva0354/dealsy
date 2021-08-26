@@ -23,22 +23,22 @@
                         <!-- Dashboard Links -->
                         <div class="widget user-dashboard-menu">
                             <ul>
-                                <li @if (Route::is('user.dashboard')) class="active" @endif><a
-                                        href="{{ route('user.dashboard') }}"><i class="fa fa-user"></i> My Ads</a></li>
-                                <li @if (Route::is('user.saved.ads')) class="active" @endif><a
-                                        href="{{ route('user.saved.ads') }}"><i class="far fa-bookmark"></i> Favourite
+                                <li @if (Route::is('user.dashboard')) class="active" @endif><a href="{{ route('user.dashboard') }}"><i
+                                            class="fa fa-user"></i> My Ads</a></li>
+                                <li @if (Route::is('user.saved.ads')) class="active" @endif><a href="{{ route('user.saved.ads') }}"><i
+                                            class="far fa-bookmark"></i> Favourite
                                         Ads</a></li>
-                                <li @if (Route::is('user.pending.ads')) class="active" @endif><a
-                                        href="{{ route('user.pending.ads') }}"><i class="fas fa-bolt"></i> Pending
+                                <li @if (Route::is('user.pending.ads')) class="active" @endif><a href="{{ route('user.pending.ads') }}"><i
+                                            class="fas fa-bolt"></i> Pending
                                         Approval</a></li>
-                                <li @if (Route::is('user.rejected.ads')) class="active" @endif><a
-                                        href="{{ route('user.rejected.ads') }}"><i class="fas fa-bolt"></i> Rejected </a>
+                                <li @if (Route::is('user.rejected.ads')) class="active" @endif><a href="{{ route('user.rejected.ads') }}"><i
+                                            class="fas fa-bolt"></i> Rejected </a>
                                 </li>
-                                <li @if (Route::is('user.archive.ads')) class="active" @endif><a
-                                        href="{{ route('user.archive.ads') }}"><i class="far fa-file-archive"></i>Archived
+                                <li @if (Route::is('user.archive.ads')) class="active" @endif><a href="{{ route('user.archive.ads') }}"><i
+                                            class="far fa-file-archive"></i>Archived
                                         Ads</a></li>
-                                <li @if (Route::is('user.messages')) class="active" @endif><a
-                                        href="{{ route('user.messages') }}"><i class="fa fa-envelope"></i> Message
+                                <li @if (Route::is('user.messages')) class="active" @endif><a href="{{ route('user.messages') }}"><i
+                                            class="fa fa-envelope"></i> Message
                                         Requests</a></li>
                                 <li><a href="{{ route('logout') }}"><i class="fas fa-cog"></i> Logout</a></li>
                                 {{-- <li><a href="#" data-toggle="modal" data-target="#deleteaccount"><i class="fa fa-power-off"></i>Delete
@@ -96,8 +96,7 @@
                                 @foreach ($posts as $post)
                                     <tr>
                                         <td class="product-thumb">
-                                            <img width="80px"
-                                                src="{{ asset('uploads/posts/' . $post->postImages->first()->image) }}"
+                                            <img width="80px" src="{{ asset($post->firstImage->image ?? '') }}"
                                                 height="auto" src="" alt="image description">
                                         </td>
                                         <td class="product-details">
@@ -158,7 +157,6 @@
                         {{ $posts->links('pagination::bootstrap-4') }}
                     </div>
                     <!-- pagination -->
-
                 </div>
             </div>
             <!-- Row End -->
