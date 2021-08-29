@@ -2,9 +2,11 @@
 
 namespace App\Exceptions;
 
+use App\Jobs\ErrorReportingJob;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Validation\UnauthorizedException;
 use Throwable;
 
@@ -51,5 +53,22 @@ class Handler extends ExceptionHandler
         // }
 
         return parent::render($request, $e);
+    }
+
+    public function report(Throwable $e)
+    {
+        if ($this->shouldReport($e)) {
+            try {
+                $url = URL::full();
+                $inputs = request()->input();
+                $message = $e->getMessage();
+                $stacktrace = $e->getTraceAsString();
+                $stacktrace = substr($stacktrace, 0, 1000);
+                ErrorReportingJob::dispatch($message, $stacktrace, $url, $inputs);
+            } catch (Throwable $e) {
+            }
+        }
+
+        parent::report($e);
     }
 }
