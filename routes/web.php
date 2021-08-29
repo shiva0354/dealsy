@@ -102,3 +102,7 @@ Route::get('{page}', [UserPageController::class, 'page'])
 
 /** Admin routes */
 require __DIR__ . '/admin.php';
+
+Route::fallback(function () {
+    return view('errors.fallback');
+});

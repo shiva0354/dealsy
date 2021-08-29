@@ -25,6 +25,7 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     <!-- CUSTOM CSS -->
     <link href="{!! asset('css/style.css') !!}" rel="stylesheet">
+    <title>@yield('title')</title>
 </head>
 
 <body class="body-wrapper">
