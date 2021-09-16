@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <form action="{{ $action }}" method="GET">
+                <form action="{{ route('search') }}" method="GET">
                     <div class="row">
                         <div class=" col-md-3">
                             <div class="form-group">
@@ -101,7 +101,7 @@
                     return {
                         results: $.map(response, function(item) {
                             return {
-                                text:item.text,
+                                text: item.text,
                                 id: item.text
                             }
                         }),
