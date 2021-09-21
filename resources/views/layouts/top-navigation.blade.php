@@ -6,10 +6,10 @@
                     <a class="navbar-brand" href="{{ route('home') }}">
                         <img src="{!! asset('images/dealsy-logo.png') !!}" width="140px" height="40px" alt="">
                     </a>
-                    <select class="" style="border: 2px solid #dedede !important;" id="language-switcher">
+                    {{-- <select class="" style="border: 2px solid #dedede !important;" id="language-switcher">
                         <option value="en" @if (($_COOKIE['lang'] ?? '') == 'en') selected @endif>English</option>
                         <option value="hi" @if (($_COOKIE['lang'] ?? '') == 'hi') selected @endif>हिंदी</option>
-                    </select>
+                    </select> --}}
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
