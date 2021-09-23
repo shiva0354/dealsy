@@ -98,7 +98,7 @@ Route::get('posts/wishlist/{post}', [UserWishlistController::class, 'wishlist'])
 Route::post('contact', [UserContactController::class, 'store']);
 Route::get('{page}', [UserPageController::class, 'page'])
     ->name('pages')
-    ->where('page', 'contact|about|terms|privacy|sitemap|pricing|404');
+    ->where('page', 'contact|about|terms|privacy|sitemap|pricing');
 
 /** Admin routes */
 require __DIR__ . '/admin.php';
