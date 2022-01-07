@@ -26,6 +26,18 @@
     <!-- CUSTOM CSS -->
     <link href="{!! asset('css/style.css') !!}" rel="stylesheet">
     <title>@yield('title')</title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QP4S2VPV8G"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-QP4S2VPV8G');
+    </script>
 </head>
 
 <body class="body-wrapper">
